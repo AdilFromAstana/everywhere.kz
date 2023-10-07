@@ -1,0 +1,25 @@
+.slick-prev,
+.slick-next {
+  border-color: #acacac;
+  position: absolute;
+  top: 50%;
+  z-index: 1;
+}
+
+.slick-next {
+  right: 35px;
+  svg {
+    transform: rotate(180deg);
+  }
+}
+
+.slick-prev::before,
+.slick-next::before {
+  content: '';
+}
+
+.leisureCategorieList {
+  ::-webkit-scrollbar {
+    display: none;
+  }
+}

@@ -2,10 +2,12 @@ import { Metadata } from 'next';
 import * as React from 'react';
 
 import '@/styles/globals.css';
-// !STARTERCONF This is for demo purposes, remove @/styles/colors.css import immediately
 import '@/styles/colors.css';
 
 import { siteConfig } from '@/constant/config';
+import ReduxProvider from '@/app/components/ReduxProvider/ReduxProvider';
+import Header from '@/app/components/Header/Header';
+import Footer from '@/app/components/Footer/Footer';
 
 // !STARTERCONF Change these default meta
 // !STARTERCONF Look at @/constant/config to change them
@@ -54,8 +56,17 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html>
-      <body>{children}</body>
+    <html lang='en' translate='no'>
+      <head>
+        <script src='https://widget.cloudpayments.ru/bundles/cloudpayments.js'></script>
+      </head>
+      <ReduxProvider>
+        <body className='mx-4 block min-h-screen flex-col justify-between lg:mx-20 lg:flex'>
+          <Header />
+          {children}
+          <Footer />
+        </body>
+      </ReduxProvider>
     </html>
   );
 }
