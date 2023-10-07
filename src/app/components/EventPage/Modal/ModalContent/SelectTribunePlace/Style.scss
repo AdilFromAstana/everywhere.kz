@@ -1,0 +1,97 @@
+.seatIcon {
+  width: 32px;
+  height: 32px;
+  margin: 0.5rem 0.25rem;
+}
+
+.place {
+  cursor: pointer;
+}
+
+#tribuneTooltip {
+  width: 0;
+  height: 0;
+  opacity: 0;
+  background: #ffffff;
+  box-shadow: 0 0 16px 0 rgb(0 0 0 / 8%), 0 0 6px -4px rgb(0 0 0 / 12%),
+    0 0 28px 8px rgb(0 0 0 / 5%);
+  border: 1px solid #b5b5b5;
+  z-index: -10;
+  color: #000;
+  font-weight: bold;
+  font-size: 13px;
+  border-radius: 4px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+
+  .ant-select,
+  .ant-input-number {
+    width: 100%;
+  }
+
+  #tooltip_row,
+  #tooltip_column {
+    font-weight: 400;
+  }
+}
+
+#info_tooltip[data-show] {
+  width: 8rem !important;
+  gap: 5px !important;
+}
+
+#arrow,
+#arrow::before {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  background: inherit;
+}
+
+#arrow {
+  visibility: hidden;
+}
+
+#arrow::before {
+  visibility: visible;
+  z-index: 9999 !important;
+  content: '';
+  transform: rotate(45deg);
+}
+
+#info_tooltip[data-show],
+#tribuneTooltip[data-show],
+#tooltip[data-show] {
+  cursor: pointer;
+  width: auto;
+  padding: 10px;
+  height: auto;
+  z-index: 10000 !important;
+  opacity: 1 !important;
+}
+
+#info_tooltip[data-popper-placement^='top'] > #arrow,
+#tribuneTooltip[data-popper-placement^='top'] > #arrow,
+#tooltip[data-popper-placement^='top'] > #arrow {
+  bottom: -4px;
+}
+
+#info_tooltip[data-popper-placement^='bottom'] > #arrow,
+#tribuneTooltip[data-popper-placement^='bottom'] > #arrow,
+#tooltip[data-popper-placement^='bottom'] > #arrow {
+  top: -4px;
+}
+
+#info_tooltip[data-popper-placement^='left'] > #arrow,
+#tribuneTooltip[data-popper-placement^='left'] > #arrow,
+#tooltip[data-popper-placement^='left'] > #arrow {
+  right: -4px;
+}
+
+#info_tooltip[data-popper-placement^='right'] > #arrow,
+#tribuneTooltip[data-popper-placement^='right'] > #arrow,
+#tooltip[data-popper-placement^='right'] > #arrow {
+  left: -4px;
+}

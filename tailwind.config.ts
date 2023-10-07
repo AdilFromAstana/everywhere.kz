@@ -8,6 +8,9 @@ export default {
       fontFamily: {
         primary: ['Inter', ...defaultTheme.fontFamily.sans],
       },
+      backgroundImage: {
+        'check-mark': "url('../icons/checkMark.svg')",
+      },
       colors: {
         primary: {
           // Customize it on globals.css :root
