@@ -288,14 +288,6 @@ This changelog is manually generated and not accurate with the package.json, onl
 
 Snippets such as React import, useState, useEffect, React Component. [View more](/.vscode/typescriptreact.code-snippets)
 
-- #### Husky, Prettier, Lint, and Commitlint Configured
-
-    3 Husky hooks including:
-
-    1. pre-commit, running `next lint` and format the code using prettier
-    2. commit-msg, running commitlint to ensure the use of [Conventional Commit](https://theodorusclarence.com/library/conventional-commit-readme) for commit messages
-    3. post-merge, running `yarn` every `git pull` or after merge to ensure all new packages are installed and ready to go
-
 - #### Default Favicon Declaration
 
     Use [Favicon Generator](https://www.favicon-generator.org/) and then overwrite the files in `/public/favicon`

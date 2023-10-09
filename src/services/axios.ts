@@ -1,49 +1,42 @@
 import axios, { AxiosInstance } from 'axios';
 
 function createAxiosInstance(baseURL: string): AxiosInstance {
-  const instance = axios.create({
-    baseURL,
-  });
+    const instance = axios.create({
+        baseURL,
+    });
 
-  instance.defaults.withCredentials = true;
+    instance.defaults.withCredentials = true;
 
-  const userLang = document.cookie.replace(
-    /(?:(?:^|.*;\s*)userLang\s*\=\s*([^;]*).*$)|^.*$/,
-    '$1'
-  );
+    const userLang = document.cookie.replace(/(?:(?:^|.*;\s*)userLang\s*=\s*([^;]*).*$)|^.*$/, '$1');
 
-  switch (userLang ?? '') {
-    case 'kz':
-      instance.defaults.headers.common['accept-language'] = 'kz-KZ';
-      break;
-    case 'en':
-      instance.defaults.headers.common['accept-language'] = 'en-US';
-      break;
-    default:
-      instance.defaults.headers.common['accept-language'] = 'ru-RU';
-      break;
-  }
-  instance.defaults.headers.common['Authorization'] =
-    'Bearer eyJhbGciOiJSUzI1NiIsImtpZCI6IjM0ODIzMjdENzM5MDE4RUJGODVDQTE1NDBCOUMzQTI1IiwidHlwIjoiYXQrand0In0.eyJuYmYiOjE2OTUzMTM4MzQsImV4cCI6MTcyNjg0OTgzNCwiaXNzIjoiaHR0cHM6Ly9kZXYtYXV0aC5rYXp0aWNrZXQua3oiLCJjbGllbnRfaWQiOiJLYXp0aWNrZXQuQ29tbWVyY2lhbC5XZWIiLCJjbGllbnRfSXNNYXJrZXRQbGFjZSI6InRydWUiLCJpYXQiOjE2OTUzMTM4MzQsInNjb3BlIjpbIk1hcmtldFBsYWNlIl19.ft7MBGsO9CD4i73matb5e9ObGu_VSKJepd1rvHTR8FOAzycvrZGPz38GjPP_WMkBUc18UqJZXmbkK7NBCXstUOY_nQnfVvDYPemB4Nyx1DjZCowGfJbhOwQyO8gLYXvtPLoyP5qnQpoJsloEZu_GOYLAJrKcUac45gjNPRFvQZKtBYfT9NbP_PSSmtF5apT7IqYuak9Jr7vBlNaaeErIJ8hmlH3cDURbt495tk3W6Q5PGWHMogkMh2lB-X4XiJRSmk90COG6iBQAJ3uou9y_B4_KeD3bEFR5_JV_ymD8Qe8PHd63lxm0y9U9r3ogjJtEMsLnhYzWSPs4pbOl90_hvQ';
+    switch (userLang ?? '') {
+        case 'kz':
+            instance.defaults.headers.common['accept-language'] = 'kz-KZ';
+            break;
+        case 'en':
+            instance.defaults.headers.common['accept-language'] = 'en-US';
+            break;
+        default:
+            instance.defaults.headers.common['accept-language'] = 'ru-RU';
+            break;
+    }
+    instance.defaults.headers.common['Authorization'] =
+        'Bearer eyJhbGciOiJSUzI1NiIsImtpZCI6IjI2RjYxOUU3RkEzQ0IwRjY0NzZGNzA5RjQxNTlBMjM3IiwidHlwIjoiYXQrand0In0.eyJuYmYiOjE2OTY4NDY5MzcsImV4cCI6MTcyODM4MjkzNywiaXNzIjoiaHR0cHM6Ly9kZXYtYXV0aC5rYXp0aWNrZXQua3oiLCJjbGllbnRfaWQiOiJLYXp0aWNrZXQuQ29tbWVyY2lhbC5XZWIiLCJjbGllbnRfSXNNYXJrZXRQbGFjZSI6InRydWUiLCJpYXQiOjE2OTY4NDY5MzcsInNjb3BlIjpbIk1hcmtldFBsYWNlIl19.eubKeXVGEJiT4jVWp2VpWy4OeDxvj7zcgRiec8M30Psr1c5emXq203yLA1RTooFxZrBOn47pawp4h7ERXUKhr77MN2p8UtKwFRz2iEFnNB04BoYOVxPPkfvFknouNzizVH57sMbsIMCHPNJzZXc3aFJg8Odp3FgLJT4IqhBWJpDPMETMrTnSjHs2hM9B3rX9thcouz9tDOwCRpbTx6dOyF-cFH8cx2dfxXfO9hKkDfbfD0vE7fE2tUbgZZQFLr-_5tRf_aFIyhOzAfrEvSHqTcC8fl7OZ8fT2x0wiYy0HGzUm_qITnoYQsrQyGAM-Z0ljlt7n81MXWIkdtGup0uWHg';
 
-  return instance;
+    return instance;
 }
 
 export function Events() {
-  const baseURL =
-    process.env.API_URL || 'https://dev-api.kazticket.kz/events/commercial/'; // Provide a default value of ''
-  return createAxiosInstance(baseURL);
+    const baseURL = process.env.API_URL || 'https://dev-api.kazticket.kz/events/commercial/'; // Provide a default value of ''
+    return createAxiosInstance(baseURL);
 }
 
 export function Orders() {
-  const baseURL =
-    process.env.ORDERS_API || 'https://dev-api.kazticket.kz/orders/commercial/'; // Provide a default value of ''
-  return createAxiosInstance(baseURL);
+    const baseURL = process.env.ORDERS_API || 'https://dev-api.kazticket.kz/orders/commercial/'; // Provide a default value of ''
+    return createAxiosInstance(baseURL);
 }
 
 export function Managment() {
-  const baseURL =
-    process.env.MANAGMENT_API ||
-    'https://dev-api.kazticket.kz/management/console/'; // Provide a default value of ''
-  return createAxiosInstance(baseURL);
+    const baseURL = process.env.MANAGMENT_API || 'https://dev-api.kazticket.kz/management/console/'; // Provide a default value of ''
+    return createAxiosInstance(baseURL);
 }
