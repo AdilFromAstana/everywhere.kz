@@ -1,131 +1,126 @@
-# Next.js + Tailwind CSS + TypeScript Starter and Boilerplate
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/26466516/141659551-d7ba5630-7200-46fe-863b-87818dae970a.png" alt="Next.js TypeScript Starter">
+</p>
+
+<br />
+
+<div align="center"><strong>Non-opinionated TypeScript starter for Next.js</strong></div>
+<div align="center">Highly scalable foundation with the best DX. All the tools you need to build your next project.</div>
+
+<br />
 
 <div align="center">
-  <h2>🔋 ts-nextjs-tailwind-starter</h2>
-  <p>Next.js + Tailwind CSS + TypeScript starter packed with useful development features.</p>
-  <p>Made by <a href="https://theodorusclarence.com">Theodorus Clarence</a></p>
+  <img src="https://img.shields.io/static/v1?label=PRs&message=welcome&style=flat-square&color=5e17eb&labelColor=000000" alt="PRs welcome!" />
 
-[![GitHub Repo stars](https://img.shields.io/github/stars/theodorusclarence/ts-nextjs-tailwind-starter)](https://github.com/theodorusclarence/ts-nextjs-tailwind-starter/stargazers)
-[![Depfu](https://badges.depfu.com/badges/fc6e730632ab9dacaf7df478a08684a7/overview.svg)](https://depfu.com/github/theodorusclarence/ts-nextjs-tailwind-starter?project_id=30160)
-[![Last Update](https://img.shields.io/badge/deps%20update-every%20sunday-blue.svg)](https://shields.io/)
+  <img alt="License" src="https://img.shields.io/github/license/jpedroschmitz/typescript-nextjs-starter?style=flat-square&color=5e17eb&labelColor=000000">
 
+  <a href="https://twitter.com/intent/follow?screen_name=jpedroschmitz">
+    <img src="https://img.shields.io/twitter/follow/jpedroschmitz?style=flat-square&color=5e17eb&labelColor=000000" alt="Follow @jpedroschmitz" />
+  </a>
 </div>
+
+<div align="center">
+  <sub>Created by <a href="https://twitter.com/jpedroschmitz">João Pedro</a> with the help of many <a href="https://github.com/jpedroschmitz/typescript-nextjs-starter/graphs/contributors">wonderful contributors</a>.</sub>
+</div>
+
+<br />
 
 ## Features
 
-This repository is 🔋 battery packed with:
-
--   ⚡️ Next.js 13 with App Router
+-   ⚡️ Next.js 13 (App Router)
 -   ⚛️ React 18
--   ✨ TypeScript
--   💨 Tailwind CSS 3 — Configured with CSS Variables to extend the **primary** color
--   💎 Pre-built Components — Components that will **automatically adapt** with your brand color, [check here for the demo](https://tsnext-tw.thcl.dev/components)
--   🃏 Jest — Configured for unit testing
--   📈 Absolute Import and Path Alias — Import components using `@/` prefix
--   📏 ESLint — Find and fix problems in your code, also will **auto sort** your imports
--   💖 Prettier — Format your code consistently
--   🤖 Conventional Commit Lint — Make sure you & your teammates follow conventional commit
--   ⏰ Release Please — Generate your changelog by activating the `release-please` workflow
--   👷 Github Actions — Lint your code on PR
--   🚘 Automatic Branch and Issue Autolink — Branch will be automatically created on issue **assign**, and auto linked on PR
--   🔥 Snippets — A collection of useful snippets
--   👀 Open Graph Helper Function — Awesome open graph generated using [og](https://github.com/theodorusclarence/og), fork it and deploy!
--   🗺 Site Map — Automatically generate sitemap.xml
--   📦 Expansion Pack — Easily install common libraries, additional components, and configs.
+-   ⛑ TypeScript
+-   📏 ESLint — To find and fix problems in your code
+-   💖 Prettier — Code Formatter for consistent style
+-   🐶 Husky — For running scripts before committing
+-   🚓 Commitlint — To make sure your commit messages follow the convention
+-   🖌 Renovate — To keep your dependencies up to date
+-   🚫 lint-staged — Run ESLint and Prettier against staged Git files
+-   👷 PR Workflow — Run Type Check & Linters on Pull Requests
+-   ⚙️ EditorConfig - Consistent coding styles across editors and IDEs
+-   🗂 Path Mapping — Import components or images using the `@` prefix
 
-See the 👉 [feature details and changelog](https://github.com/theodorusclarence/ts-nextjs-tailwind-starter/blob/main/CHANGELOG.md) 👈 for more.
+## Quick Start
 
-You can also check all of the **details and demos** on my blog post:
+The best way to start with this template is using [Create Next App](https://nextjs.org/docs/api-reference/create-next-app).
 
--   [One-stop Starter to Maximize Efficiency on Next.js & Tailwind CSS Projects](https://theodorusclarence.com/blog/one-stop-starter)
-
-## Getting Started
-
-### 1. Clone this template using one of the three ways:
-
-1. Use this repository as template
-
-    **Disclosure:** by using this repository as a template, there will be an attribution on your repository.
-
-    I'll appreciate if you do, so this template can be known by others too 😄
-
-    ![Use as template](https://user-images.githubusercontent.com/55318172/129183039-1a61e68d-dd90-4548-9489-7b3ccbb35810.png)
-
-2. Using `create-next-app`
-
-    ```bash
-    npx create-next-app -e https://github.com/theodorusclarence/ts-nextjs-tailwind-starter project-name
-    ```
-
-    If you still want to use **pages directory** (_is not actively maintained_) you can use this command
-
-    ```bash
-    npx create-next-app -e https://github.com/theodorusclarence/ts-nextjs-tailwind-starter/tree/pages-directory project-name
-    ```
-
-3. Using `degit`
-
-    ```bash
-    npx degit theodorusclarence/ts-nextjs-tailwind-starter YOUR_APP_NAME
-    ```
-
-4. Deploy to Vercel
-
-    [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/git/external?repository-url=https%3A%2F%2Fgithub.com%2Ftheodorusclarence%2Fts-nextjs-tailwind-starter)
-
-### 2. Install dependencies
-
-It is encouraged to use **yarn** so the husky hooks can work properly.
-
-```bash
-yarn install
+```
+# yarn
+yarn create next-app -e https://github.com/jpedroschmitz/typescript-nextjs-starter
+# npm
+npx create-next-app -e https://github.com/jpedroschmitz/typescript-nextjs-starter
+# pnpm
+pnpm create next-app -e https://github.com/jpedroschmitz/typescript-nextjs-starter
 ```
 
-### 3. Run the development server
+### Development
 
-You can start the server using this command:
+To start the project locally, run:
 
 ```bash
-yarn dev
+pnpm dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result. You can start editing the page by modifying `src/pages/index.tsx`.
+Open `http://localhost:3000` with your browser to see the result.
 
-### 4. Change defaults
+## Testimonials
 
-There are some things you need to change including title, urls, favicons, etc.
+> [**“This starter is by far the best TypeScript starter for Next.js. Feature packed but un-opinionated at the same time!”**](https://github.com/jpedroschmitz/typescript-nextjs-starter/issues/87#issue-789642190)<br>
+> — Arafat Zahan
 
-Find all comments with !STARTERCONF, then follow the guide.
+> [**“I can really recommend the Next.js Typescript Starter repo as a solid foundation for your future Next.js projects.”**](https://corfitz.medium.com/create-a-custom-create-next-project-command-2a6b35a1c8e6)<br>
+> — Corfitz
 
-Don't forget to change the package name in package.json
+> [**“Brilliant work!”**](https://github.com/jpedroschmitz/typescript-nextjs-starter/issues/87#issuecomment-769314539)<br>
+> — Soham Dasgupta
 
-### 5. Commit Message Convention
+## Showcase
 
-This starter is using [conventional commits](https://www.conventionalcommits.org/en/v1.0.0/), it is mandatory to use it to commit changes.
+List of websites that started off with Next.js TypeScript Starter:
 
-## Projects using ts-nextjs-tailwind-starter
+-   [hygraph.com](https://hygraph.com)
+-   [rocketseat.com.br](https://www.rocketseat.com.br)
+-   [unfork.vercel.app](https://unfork.vercel.app)
+-   [cryptools.dev](https://cryptools.dev)
+-   [Add yours](https://github.com/jpedroschmitz/typescript-nextjs-starter/edit/main/README.md)
 
-<!--
-TEMPLATE
-- [sitename](https://sitelink.com) ([Source](https://github.com/githublink))
-- [sitename](https://sitelink.com)
--->
+## Documentation
 
--   [theodorusclarence.com](https://theodorusclarence.com) ([Source](https://github.com/theodorusclarence/theodorusclarence.com))
--   [Notiolink](https://notiolink.thcl.dev/) ([Source](https://github.com/theodorusclarence/notiolink))
+### Requirements
 
-Are you using this starter? Please add your page (and repo) to the end of the list via a [Pull Request](https://github.com/theodorusclarence/ts-nextjs-tailwind-starter/edit/main/README.md). 😃
+-   Node.js >= 16
+-   pnpm 8
 
-## Expansion Pack 📦
+### Directory Structure
 
-This starter is now equipped with an [expansion pack](https://github.com/theodorusclarence/expansion-pack).
+-   [`.github`](.github) — GitHub configuration including the CI workflow.<br>
+-   [`.husky`](.husky) — Husky configuration and hooks.<br>
+-   [`public`](./public) — Static assets such as robots.txt, images, and favicon.<br>
+-   [`src`](./src) — Application source code, including pages, components, styles.
 
-You can easily add expansion such as React Hook Form + Components, Storybook, and more just using a single command line.
+### Scripts
 
-https://user-images.githubusercontent.com/55318172/146631994-e1cac137-1664-4cfe-950b-a96decc1eaa6.mp4
+-   `pnpm dev` — Starts the application in development mode at `http://localhost:3000`.
+-   `pnpm build` — Creates an optimized production build of your application.
+-   `pnpm start` — Starts the application in production mode.
+-   `pnpm type-check` — Validate code using TypeScript compiler.
+-   `pnpm lint` — Runs ESLint for all files in the `src` directory.
+-   `pnpm format` — Runs Prettier for all files in the `src` directory.
 
-Check out the [expansion pack repository](https://github.com/theodorusclarence/expansion-pack) for the commands
+### Path Mapping
 
-### App Router Update
+TypeScript are pre-configured with custom path mappings. To import components or files, use the `@` prefix.
 
-Due to App Router update, the expansion pack is currently **outdated**. It will be updated in the future. You can still use them by copy and pasting the files.
+```tsx
+import { Button } from '@/components/Button';
+// To import images or other files from the public folder
+import avatar from '@/public/avatar.png';
+```
+
+### Switch to Yarn/npm
+
+This starter uses pnpm by default, but this choice is yours. If you'd like to switch to Yarn/npm, delete the `pnpm-lock.yaml` file, install the dependencies with Yarn/npm, change the CI workflow, and Husky Git hooks to use Yarn/npm commands.
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for more information.
