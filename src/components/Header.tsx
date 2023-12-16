@@ -108,7 +108,13 @@ const Header = () => {
 
                 setCookie('token', token, { maxAge: 60 * 60 * 24 * 365 });
 
-                const citiesData = isEmpty(intitialCities) ? await GetCities() : intitialCities;
+                const citiesData = (isEmpty(intitialCities) ? await GetCities() : intitialCities)?.sort(
+                    (cityA: Dropdown, cityB: Dropdown) => {
+                        const a = cityA?.text as any;
+                        const b = cityB?.text as any;
+                        return a - b;
+                    }
+                );
                 setCities(citiesData);
                 localStorage.setItem('CitiesData', JSON.stringify(citiesData));
 
