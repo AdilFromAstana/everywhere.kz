@@ -105,8 +105,19 @@ export default async function EventPage({ params }: Props) {
                     <div
                         className="bg-cover bg-center absolute w-full h-full rounded-xl lg:rounded-3xl top-0 left-0 -z-20"
                         style={{
+                            filter: 'blur(2px)',
                             backgroundImage: `linear-gradient(rgba(22, 29, 94, 0.6) 10.02%, rgba(0, 0, 0, 0.6) 77.2%, rgba(7, 11, 48, 0.6) 98.34%), url("${data.posterFileUrl}")`,
                         }}
+                    />
+                    <div
+                        style={{
+                            height: '100%',
+                            backgroundPosition: 'center',
+                            backgroundRepeat: 'no-repeat',
+                            backgroundSize: 'contain',
+                            backgroundImage: `linear-gradient(rgba(22, 29, 94, 0.6) 10.02%, rgba(0, 0, 0, 0.6) 77.2%, rgba(7, 11, 48, 0.6) 98.34%), url("${data.posterFileUrl}")`,
+                        }}
+                        className="lg:-mx-40 -mx-10 absolute -z-20 top-0 w-full h-full object-contain rounded-xl lg:rounded-3xl"
                     />
                 </div>
                 <div className="my-6 w-full text-3xl text-black dark:text-white">{locale.EventPage.AboutDesc}</div>
