@@ -246,12 +246,12 @@ const Header = () => {
                     <div className="hidden lg:flex lg:gap-x-12 lg:items-center lg:justify-end">
                         <Link
                             className="text-gray-900 dark:text-white flex gap-x-2 items-center"
-                            href="tel:+7-708-143-74-69"
+                            href="tel:+7-708-08-08-999"
                             target="_blank"
                         >
                             <PhoneIcon className="h-7 w-7" />
                             <div className="flex flex-col">
-                                <span className="text-base leading-5 font-semibold">+7-708-143-74-69</span>
+                                <span className="text-base leading-5 font-semibold">+7-708-08-08-999</span>
                                 <span className="leading-5 text-gray-400 font-normal">Служба поддержки</span>
                             </div>
                         </Link>
@@ -293,7 +293,7 @@ const Header = () => {
                                                 key={city.key}
                                                 onClick={() => handleSelectCity(city)}
                                                 className={`group cursor-pointer relative flex items-center gap-x-6 rounded-lg p-3 text-sm leading-6 hover:bg-gray-50 ${
-                                                    city === selectedCity ? 'bg-indigo-100' : ''
+                                                    city.key === selectedCity?.key ? 'bg-indigo-200' : ''
                                                 }`}
                                             >
                                                 <div className="flex h-6 w-6 flex-none items-center justify-center rounded-lg bg-gray-50 group-hover:bg-white">
@@ -336,15 +336,9 @@ const Header = () => {
                                                 key={lang.key}
                                                 onClick={() => handleSelectLang(lang)}
                                                 className={`group cursor-pointer relative flex items-center gap-x-6 rounded-lg p-3 text-sm leading-6 hover:bg-gray-50 ${
-                                                    lang === selectedLang ? 'bg-indigo-100' : ''
+                                                    lang.key === selectedLang?.key ? 'bg-indigo-200' : ''
                                                 }`}
                                             >
-                                                {/* <div className="flex h-6 w-6 flex-none items-center justify-center rounded-lg bg-gray-50 group-hover:bg-white">
-                                                    <LanguageIcon
-                                                        className="h-5 w-5 text-gray-600 group-hover:text-indigo-600"
-                                                        aria-hidden="true"
-                                                    />
-                                                </div> */}
                                                 <div className="flex-auto">
                                                     <div className="block font-semibold text-gray-900">
                                                         {lang.text}
@@ -416,7 +410,7 @@ const Header = () => {
                                                 key={city.key}
                                                 onClick={() => handleSelectCity(city)}
                                                 className={`group cursor-pointer relative flex items-center gap-x-6 rounded-lg p-3 text-sm leading-6 hover:bg-gray-50 ${
-                                                    city === selectedCity ? 'bg-indigo-100' : ''
+                                                    city.key === selectedCity?.key ? 'bg-indigo-200' : ''
                                                 }`}
                                             >
                                                 <div className="flex h-6 w-6 flex-none items-center justify-center rounded-lg bg-gray-50 group-hover:bg-white">
@@ -459,7 +453,7 @@ const Header = () => {
                                                 key={lang.key}
                                                 onClick={() => handleSelectLang(lang)}
                                                 className={`group cursor-pointer relative flex items-center gap-x-6 rounded-lg p-3 text-sm leading-6 hover:bg-gray-50 ${
-                                                    lang === selectedLang ? 'bg-indigo-100' : ''
+                                                    lang.key === selectedLang?.key ? 'bg-indigo-200' : ''
                                                 }`}
                                             >
                                                 {/* <div className="flex h-6 w-6 flex-none items-center justify-center rounded-lg bg-gray-50 group-hover:bg-white">
@@ -527,7 +521,7 @@ const Header = () => {
                         leaveFrom="translate-x-0"
                         leaveTo="translate-x-full"
                     >
-                        <Dialog.Panel className="top-16 fixed inset-y-0 right-0 z-0 w-full overflow-y-auto bg-white px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
+                        <Dialog.Panel className="top-16 fixed inset-y-0 right-0 z-0 w-full overflow-y-auto bg-white dark:bg-black px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
                             {/* <div className="flex items-center justify-between">
                                 <Link href="/">
                                     <Image
@@ -551,12 +545,12 @@ const Header = () => {
                                     <div className="flex flex-col py-4 gap-y-5">
                                         <Link
                                             className="text-base leading-6 text-gray-900 dark:text-white flex gap-x-2 items-center"
-                                            href="tel:+7-708-143-74-69"
+                                            href="tel:+7-708-08-08-999"
                                             target="_blank"
                                         >
                                             <PhoneIcon className="h-7 w-7" />
                                             <div className="flex flex-col">
-                                                <span className="font-semibold">+7-708-143-74-69</span>
+                                                <span className="font-semibold">+7-708-08-08-999</span>
                                                 <span className="text-gray-400 font-normal">Служба поддержки</span>
                                             </div>
                                         </Link>
@@ -594,6 +588,21 @@ const Header = () => {
                                                 />
                                             </svg>
                                             Наш TikTok
+                                        </Link>
+                                        <Link
+                                            className="text-base font-semibold leading-6 text-gray-900 dark:text-white flex gap-x-2 items-center"
+                                            href="https://www.linkedin.com/company/kazticket-kz"
+                                            target="_blank"
+                                        >
+                                            <svg
+                                                className="w-7 h-7"
+                                                aria-hidden="true"
+                                                fill="currentColor"
+                                                viewBox="0 0 24 24"
+                                            >
+                                                <path d="M20.5 2h-17A1.5 1.5 0 002 3.5v17A1.5 1.5 0 003.5 22h17a1.5 1.5 0 001.5-1.5v-17A1.5 1.5 0 0020.5 2zM8 19H5v-9h3zM6.5 8.25A1.75 1.75 0 118.3 6.5a1.78 1.78 0 01-1.8 1.75zM19 19h-3v-4.74c0-1.42-.6-1.93-1.38-1.93A1.74 1.74 0 0013 14.19a.66.66 0 000 .14V19h-3v-9h2.9v1.3a3.11 3.11 0 012.7-1.4c1.55 0 3.36.86 3.36 3.66z"></path>
+                                            </svg>
+                                            LinkedIn
                                         </Link>
                                     </div>
                                     <div className="flex flex-col py-4 gap-y-5">

@@ -93,7 +93,7 @@ export default async function EventPage({ params }: Props) {
     } else {
         return (
             <>
-                <div className="lg:h-128 h-64 relative rounded-xl lg:rounded-3xl lg:p-40 p-10 flex flex-col justify-between">
+                <div className="lg:h-128 h-64 relative rounded-xl lg:rounded-3xl lg:p-40 p-10 flex flex-col justify-between -mx-2">
                     <span className="-z-10 lg:text-6xl text-3xl text-white font-bold">{data.name}</span>
                     <button
                         data-event-id={data.id}
@@ -113,7 +113,7 @@ export default async function EventPage({ params }: Props) {
                 <div className="EventDescription my-6 w-full invert-0 dark:invert z-0">
                     <div dangerouslySetInnerHTML={{ __html: data.description }}></div>
                 </div>
-                <Script src="http://localhost:3005/build/iframe.js" />
+                <Script src={process.env.NEXT_PUBLIC_WIDGET_URL} />
             </>
         );
     }
