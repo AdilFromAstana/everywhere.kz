@@ -632,19 +632,23 @@ const Header = () => {
 export default Header;
 
 async function GetCities() {
-    const token = await GetToken();
-    const res = await fetch(process.env.NEXT_PUBLIC_MANAGEMENT_URL + 'console/cities/dropdown', {
-        headers: {
-            'Accept-Language': 'ru-RU',
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${token}`,
-        },
-    });
+    try {
+        const token = await GetToken();
+        const res = await fetch(process.env.NEXT_PUBLIC_MANAGEMENT_URL + 'console/cities/dropdown', {
+            headers: {
+                'Accept-Language': 'ru-RU',
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${token}`,
+            },
+        });
 
-    if (!res.ok) {
-        // This will activate the closest `error.js` Error Boundary
-        throw new Error('Failed to fetch data');
+        if (!res.ok) {
+            throw new Error(`Failed to fetch data. Status: ${res.status}`);
+        }
+
+        return await res.json();
+    } catch (error) {
+        console.error('Error fetching cities - method "GetCities":', error);
+        return [];
     }
-
-    return res.json();
 }
