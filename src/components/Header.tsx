@@ -19,7 +19,6 @@ import WhiteMonoLogo from '@/assets/kazticket-logo-white-mono.svg';
 import Logo from '@/assets/kazticket-logo.svg';
 import transitions from '@/constants/transtitions';
 import { isEmpty } from '@/functions';
-import { GetToken } from '@/functions/AxiosHandlers';
 import { City } from '@/types/City';
 import { Dropdown } from '@/types/Dropdown';
 

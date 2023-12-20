@@ -10,6 +10,42 @@ import { Dropdown } from '@/types/Dropdown';
 import Footer from './Footer';
 import Header from './Header';
 
+async function GetCities() {
+    try {
+        const UserLang = getCookie('UserLang', { cookies });
+        let acceptLanguage = 'ru-RU';
+        switch (UserLang?.toLocaleLowerCase()) {
+            case 'kz':
+                acceptLanguage = 'kz-KZ';
+                break;
+            case 'en':
+                acceptLanguage = 'en-US';
+                break;
+        }
+
+        const token = await GetToken();
+        const res = await fetch(process.env.NEXT_PUBLIC_MANAGEMENT_URL + 'commercial/cities', {
+            headers: {
+                'Accept-Language': acceptLanguage,
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${token}`,
+            },
+        });
+
+        if (!res.ok) {
+            throw new Error(`Failed to fetch data. Status: ${res.status}`);
+        }
+
+        const cities: City[] = await res.json();
+
+        return cities;
+    } catch (error) {
+        console.error('Error fetching cities - method "GetCities":', error);
+        const cities: City[] = [];
+        return cities;
+    }
+}
+
 const langs = [
     {
         key: 'Ru',
@@ -89,41 +125,5 @@ const PageLayout: React.FC<PageLayoutProps> = async ({ children }) => {
         </div>
     );
 };
-
-async function GetCities() {
-    try {
-        const UserLang = getCookie('UserLang', { cookies });
-        let acceptLanguage = 'ru-RU';
-        switch (UserLang?.toLocaleLowerCase()) {
-            case 'kz':
-                acceptLanguage = 'kz-KZ';
-                break;
-            case 'en':
-                acceptLanguage = 'en-US';
-                break;
-        }
-
-        const token = await GetToken();
-        const res = await fetch(process.env.NEXT_PUBLIC_MANAGEMENT_URL + 'commercial/cities', {
-            headers: {
-                'Accept-Language': acceptLanguage,
-                'Content-Type': 'application/json',
-                Authorization: `Bearer ${token}`,
-            },
-        });
-
-        if (!res.ok) {
-            throw new Error(`Failed to fetch data. Status: ${res.status}`);
-        }
-
-        const cities: City[] = await res.json();
-
-        return cities;
-    } catch (error) {
-        console.error('Error fetching cities - method "GetCities":', error);
-        const cities: City[] = [];
-        return cities;
-    }
-}
 
 export default PageLayout;
