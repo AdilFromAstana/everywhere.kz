@@ -30,9 +30,9 @@ export default async function Home() {
                     })
                     .map((x: EventInList) => {
                         return (
-                            <div key={x.code} className="w-full md:w-1/2 lg:w-1/3 p-2 transition duration-200 ">
+                            <div key={x.id} className="w-full md:w-1/2 lg:w-1/3 p-2 transition duration-200 ">
                                 <Link href={'/event/' + x.code}>
-                                    <div className="cursor-pointer w-full h-auto hover:shadow-xl transition duration-300 rounded-md">
+                                    <div className="cursor-pointer w-full h-auto hover:shadow-xl hover:scale-105 transition duration-300 rounded-md">
                                         <div className="w-full relative rounded-md -z-10">
                                             {isEmpty(x.posterFileUrl) ? (
                                                 <>
@@ -81,7 +81,11 @@ export default async function Home() {
                                             {x.name}
                                         </span>
                                         <p className="text-coolGray-500 font-medium px-2 dark:text-white">
-                                            {moment(x.beginDate).locale('ru-RU').format('Do MMMM YYYY')}
+                                            {`${moment(x.beginDate).locale('ru-RU').format('Do MMMM')} ${
+                                                moment(x.beginDate).format('YYYY') === moment().format('YYYY')
+                                                    ? ''
+                                                    : moment(x.beginDate).format('YYYY')
+                                            }`}
                                         </p>
                                     </div>
                                 </Link>

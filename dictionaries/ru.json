@@ -1,6 +1,33 @@
 {
+    "Header": {
+        "Language": "Язык",
+        "Support": "Служба поддержки",
+        "City": "Город"
+    },
     "EventPage": {
         "AboutDesc": "О мероприятии",
         "BuyTicket": "Купить билет"
+    },
+    "Contacts": {
+        "ContactsAndDetails": "Контакты и реквизиты",
+        "OrganizationOfEvents": "Организация мероприятий",
+        "ForQuestionsAboutOrganizing": "По вопросам организации мероприятий",
+        "PurchaseAndReturn": "Покупка и возврат",
+        "ForQuestionsRegardingThePurchase": "По вопросам покупки и возвратов билетов",
+        "LLP": "ТОО “KAZTICKET.KZ”",
+        "JSC": "АО “ForteBank”",
+        "BIN": "БИН",
+        "BIC": "БИК",
+        "CurrentAccountNo": "Расчетный счет №",
+        "Address": "Республика Казахстан, 010000, Астана, проспект Рақымжан Қошқарбаев, здание 27",
+        "Call": "Позвонить"
+    },
+    "Footer": {
+        "Contract": "Договор оферты",
+        "PrivacyPolicy": "Политика конфиденциальности",
+        "Contacts": "Контакты",
+        "AboutUs": "О нас",
+        "PaymentSecurity": "Безопасность онлайн платежей",
+        "AllRightsReserved": "Все права защищены"
     }
 }

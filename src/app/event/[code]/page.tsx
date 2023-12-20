@@ -94,11 +94,11 @@ export default async function EventPage({ params }: Props) {
         return (
             <>
                 <div className="lg:h-128 h-64 relative rounded-xl lg:rounded-3xl lg:p-40 p-10 flex flex-col justify-between -mx-2">
-                    <span className="-z-10 lg:text-6xl text-3xl text-white font-bold">{data.name}</span>
+                    <span className="-z-10 lg:text-6xl text-3xl text-white font-bold ">{data.name}</span>
                     <button
                         data-event-id={data.id}
                         data-event-code={data.code}
-                        className="kazticket-widget-button z-0 cursor-pointer bg-sky-500 lg:w-48 w-full px-2 py-2 lg:px-6 lg:py-4 rounded-xl text-base lg:text-xl font-bold text-white transition duration-500 hover:shadow-2xl"
+                        className="kazticket-widget-button z-0 cursor-pointer bg-sky-500 lg:w-56 w-full px-2 py-2 lg:px-6 lg:py-4 rounded-xl text-base lg:text-xl font-bold text-white transition duration-500 hover:shadow-2xl"
                     >
                         {locale.EventPage.BuyTicket}
                     </button>
@@ -115,7 +115,7 @@ export default async function EventPage({ params }: Props) {
                             backgroundPosition: 'center',
                             backgroundRepeat: 'no-repeat',
                             backgroundSize: 'contain',
-                            backgroundImage: `linear-gradient(rgba(22, 29, 94, 0.6) 10.02%, rgba(0, 0, 0, 0.6) 77.2%, rgba(7, 11, 48, 0.6) 98.34%), url("${data.posterFileUrl}")`,
+                            backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.0) 10.02%, rgba(0, 0, 0, 0.0) 77.2%, rgba(0, 0, 0, 0.0) 98.34%), url("${data.posterFileUrl}")`,
                         }}
                         className="lg:-mx-40 -mx-10 absolute -z-20 top-0 w-full h-full object-contain rounded-xl lg:rounded-3xl"
                     />
