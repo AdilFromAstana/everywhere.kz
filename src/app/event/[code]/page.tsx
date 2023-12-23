@@ -115,7 +115,7 @@ export default async function EventPage({ params }: Props) {
                             backgroundPosition: 'center',
                             backgroundRepeat: 'no-repeat',
                             backgroundSize: 'contain',
-                            backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.0) 10.02%, rgba(0, 0, 0, 0.0) 77.2%, rgba(0, 0, 0, 0.0) 98.34%), url("${data.posterFileUrl}")`,
+                            backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.5) 10.02%, rgba(0, 0, 0, 0.5) 77.2%, rgba(0, 0, 0, 0.5) 98.34%), url("${data.posterFileUrl}")`,
                         }}
                         className="lg:-mx-40 -mx-10 absolute -z-20 top-0 w-full h-full object-contain rounded-xl lg:rounded-3xl"
                     />
