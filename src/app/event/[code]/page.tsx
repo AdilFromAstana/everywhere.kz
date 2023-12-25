@@ -1,6 +1,7 @@
 import { getCookie } from 'cookies-next';
 import { getDictionary } from 'dictionaries';
 import { cookies } from 'next/headers';
+import Image from 'next/image';
 import Link from 'next/link';
 import Script from 'next/script';
 
@@ -93,33 +94,42 @@ export default async function EventPage({ params }: Props) {
     } else {
         return (
             <>
-                <div className="lg:h-128 h-64 relative rounded-xl lg:rounded-3xl lg:p-40 p-10 flex flex-col justify-between -mx-2">
-                    <span className="-z-10 lg:text-6xl text-3xl text-white font-bold ">{data.name}</span>
-                    <button
-                        data-event-id={data.id}
-                        data-event-code={data.code}
-                        className="kazticket-widget-button z-0 cursor-pointer bg-sky-500 lg:w-56 w-full px-2 py-2 lg:px-6 lg:py-4 rounded-xl text-base lg:text-xl font-bold text-white transition duration-500 hover:shadow-2xl"
-                    >
-                        {locale.EventPage.BuyTicket}
-                    </button>
+                <div className="lg:h-128 h-64 relative rounded-xl lg:rounded-3xl lg:p-10 p-2 flex flex-col justify-center -mx-2 items-center content-center">
                     <div
                         className="bg-cover bg-center absolute w-full h-full rounded-xl lg:rounded-3xl top-0 left-0 -z-20"
                         style={{
-                            filter: 'blur(2px)',
-                            backgroundImage: `linear-gradient(rgba(22, 29, 94, 0.6) 10.02%, rgba(0, 0, 0, 0.6) 77.2%, rgba(7, 11, 48, 0.6) 98.34%), url("${data.posterFileUrl}")`,
+                            filter: 'blur(4px)',
+                            backgroundImage: `url("${data.posterFileUrl}")`,
                         }}
                     />
-                    <div
+                    {/* <div
                         style={{
-                            height: '100%',
-                            backgroundPosition: 'center',
+                            margin: '1rem 0',
+                            height: 'calc(100% - 2rem)',
+                            backgroundPosition: 'center center',
                             backgroundRepeat: 'no-repeat',
                             backgroundSize: 'contain',
-                            backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.5) 10.02%, rgba(0, 0, 0, 0.5) 77.2%, rgba(0, 0, 0, 0.5) 98.34%), url("${data.posterFileUrl}")`,
+                            backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.0) 10.02%, rgba(0, 0, 0, 0.0) 77.2%, rgba(0, 0, 0, 0.0) 98.34%), url("${data.posterFileUrl}")`,
                         }}
-                        className="lg:-mx-40 -mx-10 absolute -z-20 top-0 w-full h-full object-contain rounded-xl lg:rounded-3xl"
+                        className="absolute -z-20 top-0 left-0 w- object-contain rounded-xl lg:rounded-3xl"
+                    /> */}
+                    <Image
+                        src={data.posterFileUrl}
+                        width={1000}
+                        priority
+                        height={1000}
+                        alt="Poster"
+                        className="lg:h-full lg:w-fit rounded-xl"
                     />
                 </div>
+                <div className="-z-10 lg:text-6xl text-3xl text-black dark:text-white font-bold my-4">{data.name}</div>
+                <button
+                    data-event-id={data.id}
+                    data-event-code={data.code}
+                    className="kazticket-widget-button z-0 cursor-pointer bg-sky-500 lg:w-56 w-full px-2 py-2 lg:px-6 lg:py-4 rounded-xl text-base lg:text-xl font-bold text-white transition duration-500 hover:shadow-2xl"
+                >
+                    {locale.EventPage.BuyTicket}
+                </button>
                 <div className="my-6 w-full text-3xl text-black dark:text-white">{locale.EventPage.AboutDesc}</div>
                 <div className="EventDescription my-6 w-full invert-0 dark:invert z-0">
                     <div dangerouslySetInnerHTML={{ __html: data.description }}></div>

@@ -4,7 +4,7 @@ import { getDictionary } from 'dictionaries';
 import { cookies } from 'next/headers';
 import { ReactNode } from 'react';
 
-import { GetToken } from '@/functions/AxiosHandlers';
+import { CheckToken } from '@/functions/AxiosHandlers';
 import { City } from '@/types/City';
 import { Dropdown } from '@/types/Dropdown';
 import Footer from './Footer';
@@ -23,7 +23,7 @@ async function GetCities() {
                 break;
         }
 
-        const token = await GetToken();
+        const token = await CheckToken();
         const res = await fetch(process.env.NEXT_PUBLIC_MANAGEMENT_URL + 'commercial/cities', {
             headers: {
                 'Accept-Language': acceptLanguage,

@@ -11,17 +11,23 @@ import { isEmpty } from '@/functions';
 import { EventInList } from '@/types/EventInList';
 
 import 'moment/locale/ru';
+import 'moment/locale/kk';
 
 import Link from 'next/link';
 
+import LeisureCategories from '@/components/LeisureCategories';
 import { CheckToken } from '@/functions/AxiosHandlers';
+import { LeisureCategory } from '@/types/LeisureCategory';
 
 export default async function Home() {
     const EventsData = await GetEvents();
+    const leisureCategories = await GetLeisureCategories();
+    const UserLang = getCookie('UserLang', { cookies });
 
     return (
         <PageLayout>
-            <div className="flex flex-wrap -mx-4">
+            <LeisureCategories leisureCategories={leisureCategories} />
+            <div className="flex flex-wrap -mx-4 pt-6">
                 {EventsData?.items
                     ?.sort((eventA: any, eventB: any) => {
                         const dateA = new Date(eventA?.beginDate) as any;
@@ -47,16 +53,11 @@ export default async function Home() {
                                             ) : (
                                                 <>
                                                     <div
-                                                        className="w-full h-full rounded-md"
+                                                        className="w-full h-full rounded-md -z-10 relative bg-cover bg-no-repeat bg-center"
                                                         style={{
                                                             backgroundImage: `url("${x.posterFileUrl ?? ''}")`,
                                                             filter: 'blur(2px)',
                                                             height: '100%',
-                                                            backgroundPosition: 'center',
-                                                            backgroundRepeat: 'no-repeat',
-                                                            backgroundSize: 'cover',
-                                                            position: 'relative',
-                                                            zIndex: '-10',
                                                         }}
                                                     >
                                                         <img
@@ -81,7 +82,9 @@ export default async function Home() {
                                             {x.name}
                                         </span>
                                         <p className="text-coolGray-500 font-medium px-2 dark:text-white">
-                                            {`${moment(x.beginDate).locale('ru-RU').format('Do MMMM')} ${
+                                            {`${moment(x.beginDate)
+                                                .locale(UserLang?.toLocaleLowerCase() ?? '')
+                                                .format('Do MMMM')} ${
                                                 moment(x.beginDate).format('YYYY') === moment().format('YYYY')
                                                     ? ''
                                                     : moment(x.beginDate).format('YYYY')
@@ -162,4 +165,40 @@ async function GetEvents() {
     }
 
     return res.json();
+}
+
+async function GetLeisureCategories() {
+    try {
+        const UserLang = getCookie('UserLang', { cookies });
+        let acceptLanguage = 'ru-RU';
+        switch (UserLang?.toLocaleLowerCase()) {
+            case 'kz':
+                acceptLanguage = 'kz-KZ';
+                break;
+            case 'en':
+                acceptLanguage = 'en-US';
+                break;
+        }
+
+        const token = await CheckToken();
+        const res = await fetch(process.env.NEXT_PUBLIC_MANAGEMENT_URL + 'commercial/leisureCategories', {
+            headers: {
+                'Accept-Language': acceptLanguage,
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${token}`,
+            },
+        });
+
+        if (!res.ok) {
+            throw new Error(`Failed to fetch data. Status: ${res.status}`);
+        }
+
+        const leisureCategories: LeisureCategory[] = await res.json();
+
+        return leisureCategories;
+    } catch (error) {
+        console.error('Error fetching leisure categories - method "GetLeisureCategories": ', error);
+        const leisureCategories: LeisureCategory[] = [];
+        return leisureCategories;
+    }
 }
