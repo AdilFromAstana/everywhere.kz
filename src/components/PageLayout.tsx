@@ -111,7 +111,7 @@ const PageLayout: React.FC<PageLayoutProps> = async ({ children }) => {
     ];
 
     return (
-        <div className="container mx-auto xl:px-10">
+        <div className="container mx-auto">
             <Header
                 langs={langs}
                 locale={locale}

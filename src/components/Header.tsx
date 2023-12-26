@@ -104,11 +104,6 @@ const Header = ({ locale, selectedCity, cities, langs, selectedLang, pages }: He
                         <>
                             <Transition
                                 className="Animation"
-                                // beforeEnter={() => {
-                                //     setTimeout(() => {
-                                //         setIsLogoAnimationOn(false);
-                                //     }, 4000);
-                                // }}
                                 appear={true}
                                 show={isLogoAnimationOn}
                                 {...randomTransition}

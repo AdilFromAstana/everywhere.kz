@@ -1,4 +1,4 @@
 export interface LeisureCategory {
-    id: string;
+    id: number;
     name: string;
 }

@@ -4,14 +4,16 @@ import { CheckToken } from '@/functions/AxiosHandlers';
 import { EventInList } from '@/types/EventInList';
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-    const Events = await GetEvents();
-
-    return Events.map((x: EventInList) => {
-        return {
-            url: 'https://kazticket.kz/event/' + x.code,
+    return [
+        {
+            url: process.env.NEXT_PUBLIC_APP_URL,
+            priority: 1,
+        },
+        ...(await GetEvents()).items.map((x: EventInList) => ({
+            url: `${process.env.NEXT_PUBLIC_APP_URL}/event/${x.code}`,
             lastModified: new Date(),
-        };
-    });
+        })),
+    ];
 }
 
 async function GetEvents() {

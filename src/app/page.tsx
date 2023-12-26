@@ -23,11 +23,19 @@ export default async function Home() {
     const EventsData = await GetEvents();
     const leisureCategories = await GetLeisureCategories();
     const UserLang = getCookie('UserLang', { cookies });
+    const UserCategoryId = getCookie('UserCategoryId', { cookies });
+    const selectedCategory = leisureCategories.find((x: LeisureCategory) => {
+        if (UserCategoryId) {
+            return x.id === parseInt(UserCategoryId);
+        } else {
+            return x.id === 0;
+        }
+    }) ?? { id: 0, name: 'Все' };
 
     return (
         <PageLayout>
-            <LeisureCategories leisureCategories={leisureCategories} />
-            <div className="flex flex-wrap -mx-4 pt-6">
+            <LeisureCategories leisureCategories={leisureCategories} selectedCategory={selectedCategory} />
+            <div className="flex flex-wrap -mx-4">
                 {EventsData?.items
                     ?.sort((eventA: any, eventB: any) => {
                         const dateA = new Date(eventA?.beginDate) as any;
@@ -38,7 +46,7 @@ export default async function Home() {
                         return (
                             <div key={x.id} className="w-full md:w-1/2 lg:w-1/3 p-2 transition duration-200 ">
                                 <Link href={'/event/' + x.code}>
-                                    <div className="cursor-pointer w-full h-auto hover:shadow-xl hover:scale-105 transition duration-300 rounded-md">
+                                    <div className="cursor-pointer w-full h-auto md:hover:shadow-xl md:hover:scale-105 transition duration-300 rounded-md">
                                         <div className="w-full relative rounded-md -z-10">
                                             {isEmpty(x.posterFileUrl) ? (
                                                 <>
@@ -150,7 +158,15 @@ async function GetEvents() {
     }
 
     const UserCityId = getCookie('UserCityId', { cookies });
-    const res = await fetch(EVENTS_URL + 'commercial/Events?CityId=' + (UserCityId ?? 1), {
+    const UserCategoryId = getCookie('UserCategoryId', { cookies });
+
+    const url =
+        EVENTS_URL +
+        'commercial/Events' +
+        `?CityId=${UserCityId ? (parseInt(UserCityId) === 0 ? '' : UserCityId) : ''}` +
+        `&LeisureCategoryId=${UserCategoryId ? (parseInt(UserCategoryId) === 0 ? '' : UserCategoryId) : ''}`;
+
+    const res = await fetch(url, {
         headers: {
             'Accept-Language': acceptLanguage,
             'Content-Type': 'application/json',
@@ -194,8 +210,9 @@ async function GetLeisureCategories() {
         }
 
         const leisureCategories: LeisureCategory[] = await res.json();
+        const defaultCategory: LeisureCategory = { id: 0, name: 'Все' };
 
-        return leisureCategories;
+        return [defaultCategory, ...leisureCategories];
     } catch (error) {
         console.error('Error fetching leisure categories - method "GetLeisureCategories": ', error);
         const leisureCategories: LeisureCategory[] = [];
