@@ -64,6 +64,7 @@ const LeisureCategories = ({ leisureCategories, selectedCategory }: LeisureCateg
                     <div className="scroll-arrow">
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
+                            className="stroke-black dark:stroke-white"
                             height="24"
                             viewBox="0 0 24 24"
                             width="24"
@@ -104,6 +105,7 @@ const LeisureCategories = ({ leisureCategories, selectedCategory }: LeisureCateg
                             height="24"
                             viewBox="0 0 24 24"
                             width="24"
+                            className="stroke-black dark:stroke-white"
                             focusable="false"
                             style={{ pointerEvents: 'none', display: 'block', width: '100%', height: '100%' }}
                         >

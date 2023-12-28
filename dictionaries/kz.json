@@ -1,8 +1,16 @@
 {
+    "Errors": {
+        "ToMain": "Басты бетке",
+        "PageNotFound": "Бет табылмады"
+    },
     "Header": {
         "Language": "Тіл",
         "Support": "Қолдау қызметі",
+        "AllCities": "All cities",
         "City": "Қала"
+    },
+    "EventListPage": {
+        "All": "All"
     },
     "EventPage": {
         "AboutDesc": "Іс-шара туралы",
@@ -29,5 +37,17 @@
         "AboutUs": "Біз туралы",
         "PaymentSecurity": "Онлайн төлем қауіпсіздігі",
         "AllRightsReserved": "Барлық құқықтар сақталған"
+    },
+    "OrderPage": {
+        "Tickets": "Билеттер",
+        "OrderNumber": "Тапсырыс нөмірі",
+        "TotalCost": "Жалпы құны",
+        "Event": "Іс-шара",
+        "StartOfSession": "Сеанстың басталуы",
+        "EndOfSession": "Сеанстың аяқталуы",
+        "Address": "Мекен-жай",
+        "Location": "Орын",
+        "Hall": "Зал",
+        "Sector": "Сектор"
     }
 }

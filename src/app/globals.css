@@ -19,6 +19,7 @@ a {
   text-decoration: none;
 }
 
+.kazticket-buy-button,
 .kazticket-widget-button {
   animation-name: blinker;
   animation-iteration-count: infinite;
@@ -54,6 +55,10 @@ a {
   }
 }
 
+.EventDescription iframe {
+  width: 100% !important;
+}
+
 html.dark .EventDescription img {
   filter: invert(1) !important;
 }
@@ -72,6 +77,11 @@ html.dark .EventDescription img {
 #right-arrow .scroll-arrow {
   z-index: 1;
   background-color: #fff;
+}
+
+html.dark #left-arrow .scroll-arrow,
+html.dark #right-arrow .scroll-arrow {
+  background-color: #000;
 }
 
 #left-arrow {
@@ -95,4 +105,12 @@ html.dark .EventDescription img {
   width: 25px;
   content: "";
   background: linear-gradient(to right, #fff 20%, rgba(255, 255, 255, 0) 80%);
+}
+
+html.dark #right-arrow::before {
+  background: linear-gradient(to left, #000 20%, rgba(255, 255, 255, 0) 80%);
+}
+
+html.dark #left-arrow::after {
+  background: linear-gradient(to right, #000 20%, rgba(255, 255, 255, 0) 80%);
 }

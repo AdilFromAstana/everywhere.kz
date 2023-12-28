@@ -1,8 +1,16 @@
 {
+    "Errors": {
+        "ToMain": "To the main page",
+        "PageNotFound": "Page not found"
+    },
     "Header": {
         "Language": "Language",
         "Support": "Support",
+        "AllCities": "All cities",
         "City": "City"
+    },
+    "EventListPage": {
+        "All": "All"
     },
     "EventPage": {
         "AboutDesc": "About the event",
@@ -29,5 +37,17 @@
         "AboutUs": "About Us",
         "PaymentSecurity": "Online payment security",
         "AllRightsReserved": "All rights reserved"
+    },
+    "OrderPage": {
+        "Tickets": "Tickets",
+        "OrderNumber": "Order Number",
+        "TotalCost": "Total Cost",
+        "Event": "Event",
+        "StartOfSession": "Start of Session",
+        "EndOfSession": "End of Session",
+        "Address": "Address",
+        "Location": "Location",
+        "Hall": "Hall",
+        "Sector": "Sector"
     }
 }

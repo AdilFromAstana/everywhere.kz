@@ -1,35 +1,18 @@
 import { getCookie } from 'cookies-next';
 import { getDictionary } from 'dictionaries';
 import { cookies } from 'next/headers';
-import Image from 'next/image';
 import Link from 'next/link';
 import Script from 'next/script';
 
-import { CheckToken } from '@/functions/AxiosHandlers';
+import EventumButton from '@/components/EventumButton';
 
 import type { Metadata, Viewport } from 'next';
 
 async function GetEventData(code: string) {
-    const { EVENTS_URL = '' } = process.env;
-
-    const token = await CheckToken();
-
-    const UserLang = getCookie('UserLang', { cookies });
-    let acceptLanguage = 'ru-RU';
-    switch (UserLang?.toLocaleLowerCase()) {
-        case 'kz':
-            acceptLanguage = 'kz-KZ';
-            break;
-        case 'en':
-            acceptLanguage = 'en-US';
-            break;
-    }
-
-    const res = await fetch(EVENTS_URL + 'commercial/Events/' + code, {
+    process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
+    const res = await fetch(process.env.NEXT_PUBLIC_EVENTUM_TEMP_URL + 'eventum/once/' + code, {
         headers: {
-            'Accept-Language': acceptLanguage,
             'Content-Type': 'application/json',
-            Authorization: `Bearer ${token}`,
         },
     });
 
@@ -39,7 +22,8 @@ async function GetEventData(code: string) {
         return null;
     }
 
-    return res.json();
+    const data = await res.json();
+    return data.data;
 }
 
 type Props = {
@@ -56,12 +40,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
         };
     } else {
         return {
-            title: `${data.name} - Купить билеты на Kazticket.kz`,
+            title: `${data.NameRu} - Купить билеты на Kazticket.kz`,
             openGraph: {
-                images: data.posterFileUrl,
+                images: data.Poster,
             },
-            description: data.description
-                ?.replace('<p>', '')
+            description: data.DescriptionRu?.replace('<p>', '')
                 ?.replace('</p>', '')
                 ?.replace(/<strong [^>]*>/g, '')
                 ?.replace(/<\/strong>/g, '')
@@ -115,41 +98,40 @@ export default async function EventPage({ params }: Props) {
                         className="bg-cover bg-center absolute w-full h-full rounded-xl lg:rounded-3xl top-0 left-0 -z-20"
                         style={{
                             filter: 'blur(4px)',
-                            backgroundImage: `url("${data.posterFileUrl}")`,
+                            backgroundImage: `url("${data.Poster}")`,
                         }}
                     />
-                    {/* <div
-                        style={{
-                            margin: '1rem 0',
-                            height: 'calc(100% - 2rem)',
-                            backgroundPosition: 'center center',
-                            backgroundRepeat: 'no-repeat',
-                            backgroundSize: 'contain',
-                            backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.0) 10.02%, rgba(0, 0, 0, 0.0) 77.2%, rgba(0, 0, 0, 0.0) 98.34%), url("${data.posterFileUrl}")`,
-                        }}
-                        className="absolute -z-20 top-0 left-0 w- object-contain rounded-xl lg:rounded-3xl"
-                    /> */}
-                    <Image
-                        src={data.posterFileUrl}
+                    <img src={data.Poster} className="lg:h-full h-full lg:w-fit rounded-xl" />
+                    {/* <Image
+                        src={data.Poster}
                         width={1000}
                         height={1000}
                         alt="Poster"
                         className="lg:h-full lg:w-fit rounded-xl"
-                    />
+                    /> */}
                 </div>
-                <div className="-z-10 lg:text-6xl text-3xl text-black dark:text-white font-bold my-4">{data.name}</div>
-                <button
-                    data-event-id={data.id}
-                    data-event-code={data.code}
-                    className="kazticket-widget-button z-0 cursor-pointer bg-sky-500 lg:w-56 w-full px-2 py-2 lg:px-6 lg:py-4 rounded-xl text-base lg:text-xl font-bold text-white transition duration-500 hover:shadow-2xl"
-                >
-                    {locale.EventPage.BuyTicket}
-                </button>
+                <div className="-z-10 lg:text-6xl text-3xl text-black dark:text-white font-bold my-4">
+                    {UserLang?.toLocaleLowerCase() === 'ru'
+                        ? data.NameRu
+                        : UserLang?.toLocaleLowerCase() === 'kz'
+                          ? data.NameKz
+                          : data.NameEn}
+                </div>
+                <EventumButton data={data} locale={locale} />
                 <div className="my-6 w-full text-3xl text-black dark:text-white">{locale.EventPage.AboutDesc}</div>
                 <div className="EventDescription my-6 w-full invert-0 dark:invert z-0">
-                    <div dangerouslySetInnerHTML={{ __html: data.description }}></div>
+                    <div
+                        dangerouslySetInnerHTML={{
+                            __html:
+                                UserLang?.toLocaleLowerCase() === 'ru'
+                                    ? data.DescriptionRu
+                                    : UserLang?.toLocaleLowerCase() === 'kz'
+                                      ? data.DescriptionKz
+                                      : data.DescriptionEn,
+                        }}
+                    ></div>
                 </div>
-                <Script src={process.env.NEXT_PUBLIC_WIDGET_URL} />
+                <Script src={process.env.NEXT_PUBLIC_EVENTUM_WIDGET_URL} />
             </>
         );
     }

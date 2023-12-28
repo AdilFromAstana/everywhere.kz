@@ -13,6 +13,7 @@ import Header from './Header';
 async function GetCities() {
     try {
         const UserLang = getCookie('UserLang', { cookies });
+        const locale = await getDictionary(UserLang?.toLocaleLowerCase() ?? 'ru');
         let acceptLanguage = 'ru-RU';
         switch (UserLang?.toLocaleLowerCase()) {
             case 'kz':
@@ -36,9 +37,10 @@ async function GetCities() {
             throw new Error(`Failed to fetch data. Status: ${res.status}`);
         }
 
+        const allCities: City = { id: 0, name: locale.Header.AllCities };
         const cities: City[] = await res.json();
 
-        return cities;
+        return [allCities, ...cities];
     } catch (error) {
         console.error('Error fetching cities - method "GetCities":', error);
         const cities: City[] = [];
@@ -70,17 +72,16 @@ interface PageLayoutProps {
 const PageLayout: React.FC<PageLayoutProps> = async ({ children }) => {
     const UserLang = getCookie('UserLang', { cookies });
     const selectedLang = langs.find((x: Dropdown) => x.key === UserLang) ?? langs[0];
+    const locale = await getDictionary(UserLang?.toLocaleLowerCase() ?? 'ru');
     const UserCityId = getCookie('UserCityId', { cookies });
     const cities = await GetCities();
     const selectedCity = cities.find((x: City) => {
         if (UserCityId) {
             return x.id === parseInt(UserCityId);
         } else {
-            return x.id === 1;
+            return x.id === 0;
         }
-    }) ?? { id: 1, name: 'Astana' };
-
-    const locale = await getDictionary(UserLang?.toLocaleLowerCase() ?? 'ru');
+    }) ?? { id: 0, name: locale.Header.AllCities };
 
     const pages = [
         {
