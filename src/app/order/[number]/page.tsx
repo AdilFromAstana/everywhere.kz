@@ -167,7 +167,7 @@ export default async function OrderPage({ params }: Props) {
                         });
                     });
                 } else {
-                    let services: any = [];
+                    const services: any = [];
                     element.forEach((el: any) => {
                         services.push(`${el.sessionServiceTitle} - ${el.serviceCount}`);
                     });
