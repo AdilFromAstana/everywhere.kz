@@ -1,17 +1,13 @@
 import { getCookie } from 'cookies-next';
+import { getDictionary } from 'dictionaries';
 import groupArray from 'group-array';
-import moment from 'moment';
+import dynamic from 'next/dynamic';
 // import { getDictionary } from 'dictionaries';
 import { cookies } from 'next/headers';
 import Link from 'next/link';
 
+import OrderDateTimeProperty from '@/components/OrderDateTimeProperty';
 import { isEmpty } from '@/functions';
-
-import 'moment/locale/ru';
-import 'moment/locale/kk';
-
-import { getDictionary } from 'dictionaries';
-import dynamic from 'next/dynamic';
 
 import type { Metadata, Viewport } from 'next';
 
@@ -88,7 +84,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     const orderNumber = params.number;
     const data = await GetOrderData(orderNumber);
     return {
-        title: `Билеты ${data.eventNameRu} - Kazticket.kz`,
+        title: `Билеты ${data.eventName} - Kazticket.kz`,
         openGraph: {
             images: data.posterFileUrl,
         },
@@ -110,7 +106,7 @@ export default async function OrderPage({ params }: Props) {
             return (
                 <div className="flex flex-row justify-between gap-2 w-full">
                     <div className="text-[#00000080] dark:text-white lg:text-2xl text-base">{name}</div>
-                    <div className="lg:text-2xl text-base flex flex-col dark:text-white">
+                    <div className="lg:text-2xl text-base flex flex-col jus dark:text-white">
                         {value.map((x: any) => (
                             <div key={x}>{x}</div>
                         ))}
@@ -171,9 +167,9 @@ export default async function OrderPage({ params }: Props) {
                         });
                     });
                 } else {
-                    let services = '';
+                    const services: any = [];
                     element.forEach((el: any) => {
-                        services += `${el.sessionServiceTitle} - ${el.serviceCount}`;
+                        services.push(`${el.sessionServiceTitle} - ${el.serviceCount}`);
                     });
 
                     result.push({
@@ -212,17 +208,13 @@ export default async function OrderPage({ params }: Props) {
                         </div>
                         <div className="flex flex-col w-full gap-1">
                             <Property name={locale.OrderPage.Event} value={data.eventName} />
-                            <Property
-                                name={locale.OrderPage.StartOfSession}
-                                value={moment(data.sessionBeginDateTime)
-                                    .locale(UserLang?.toLocaleLowerCase() ?? '')
-                                    .format('Do MMMM HH:mm')}
+                            <OrderDateTimeProperty
+                                fieldName={locale.OrderPage.StartOfSession}
+                                date={data.sessionBeginDateTime}
                             />
-                            <Property
-                                name={locale.OrderPage.EndOfSession}
-                                value={moment(data.sessionBeginDateTime)
-                                    .locale(UserLang?.toLocaleLowerCase() ?? '')
-                                    .format('Do MMMM HH:mm')}
+                            <OrderDateTimeProperty
+                                fieldName={locale.OrderPage.EndOfSession}
+                                date={data.sessionEndDateTime}
                             />
                             <Property
                                 name={locale.OrderPage.Address}

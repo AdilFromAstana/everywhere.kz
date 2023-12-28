@@ -101,7 +101,12 @@ export default async function EventPage({ params }: Props) {
                             backgroundImage: `url("${data.Poster}")`,
                         }}
                     />
-                    <img src={data.Poster} className="lg:h-full h-full lg:w-fit rounded-xl" />
+                    <img
+                        alt="poster"
+                        title="poster"
+                        src={data.Poster}
+                        className="lg:h-full h-full lg:w-fit rounded-xl"
+                    />
                     {/* <Image
                         src={data.Poster}
                         width={1000}

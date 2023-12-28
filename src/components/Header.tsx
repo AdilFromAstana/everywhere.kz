@@ -7,7 +7,9 @@ import {
     ChevronDownIcon,
     LanguageIcon,
     MapPinIcon,
+    MoonIcon,
     PhoneIcon,
+    SunIcon,
     XMarkIcon,
 } from '@heroicons/react/24/outline';
 import { deleteCookie, getCookie, setCookie } from 'cookies-next';
@@ -429,7 +431,7 @@ const Header = ({ locale, selectedCity, cities, langs, selectedLang, pages }: He
             </nav>
             <Transition show={isMobileMenuOpen} appear as={Fragment}>
                 <Dialog as="div" className="lg:hidden" onClose={() => setMobileMenuOpen(false)}>
-                    <Transition.Child
+                    {/* <Transition.Child
                         as={Fragment}
                         // enter="ease-out duration-300"
                         // enterFrom="opacity-0"
@@ -439,7 +441,7 @@ const Header = ({ locale, selectedCity, cities, langs, selectedLang, pages }: He
                         // leaveTo="opacity-0"
                     >
                         <div className="fixed inset-0 z-10 top-16" />
-                    </Transition.Child>
+                    </Transition.Child> */}
                     <Transition.Child
                         as={Fragment}
                         enter="transform transition ease-in-out duration-500 sm:duration-700"
@@ -449,7 +451,7 @@ const Header = ({ locale, selectedCity, cities, langs, selectedLang, pages }: He
                         leaveFrom="translate-x-0"
                         leaveTo="translate-x-full"
                     >
-                        <Dialog.Panel className="top-16 fixed inset-y-0 right-0 z-0 w-full overflow-y-auto bg-white dark:bg-black px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
+                        <Dialog.Panel className="top-20 fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-white dark:bg-black px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
                             {/* <div className="flex items-center justify-between">
                                 <Link href="/">
                                     <Image
@@ -471,6 +473,14 @@ const Header = ({ locale, selectedCity, cities, langs, selectedLang, pages }: He
                             <div className=" flow-root">
                                 <div className="divide-y divide-gray-500/10">
                                     <div className="flex flex-col py-4 gap-y-5">
+                                        <button
+                                            className="text-base font-semibold leading-6 text-gray-900 dark:text-white flex gap-x-2 items-center"
+                                            onClick={() => swithTheme()}
+                                        >
+                                            <SunIcon className="dark:hidden h-7 w-7" />
+                                            <MoonIcon className="hidden dark:block h-7 w-7" />
+                                            {locale?.Header?.SwithTheme}
+                                        </button>
                                         <Link
                                             className="text-base leading-6 text-gray-900 dark:text-white flex gap-x-2 items-center"
                                             href="tel:+7-708-08-08-999"
