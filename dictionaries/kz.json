@@ -4,6 +4,7 @@
         "PageNotFound": "Бет табылмады"
     },
     "Header": {
+        "SwithTheme": "Тақырыпты өзгерту",
         "Language": "Тіл",
         "Support": "Қолдау қызметі",
         "AllCities": "All cities",

@@ -7,7 +7,9 @@ import {
     ChevronDownIcon,
     LanguageIcon,
     MapPinIcon,
+    MoonIcon,
     PhoneIcon,
+    SunIcon,
     XMarkIcon,
 } from '@heroicons/react/24/outline';
 import { deleteCookie, getCookie, setCookie } from 'cookies-next';
@@ -429,7 +431,7 @@ const Header = ({ locale, selectedCity, cities, langs, selectedLang, pages }: He
             </nav>
             <Transition show={isMobileMenuOpen} appear as={Fragment}>
                 <Dialog as="div" className="lg:hidden" onClose={() => setMobileMenuOpen(false)}>
-                    <Transition.Child
+                    {/* <Transition.Child
                         as={Fragment}
                         // enter="ease-out duration-300"
                         // enterFrom="opacity-0"
@@ -439,7 +441,7 @@ const Header = ({ locale, selectedCity, cities, langs, selectedLang, pages }: He
                         // leaveTo="opacity-0"
                     >
                         <div className="fixed inset-0 z-10 top-16" />
-                    </Transition.Child>
+                    </Transition.Child> */}
                     <Transition.Child
                         as={Fragment}
                         enter="transform transition ease-in-out duration-500 sm:duration-700"
@@ -449,7 +451,7 @@ const Header = ({ locale, selectedCity, cities, langs, selectedLang, pages }: He
                         leaveFrom="translate-x-0"
                         leaveTo="translate-x-full"
                     >
-                        <Dialog.Panel className="top-16 fixed inset-y-0 right-0 z-0 w-full overflow-y-auto bg-white dark:bg-black px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
+                        <Dialog.Panel className="top-20 fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-white dark:bg-black px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
                             {/* <div className="flex items-center justify-between">
                                 <Link href="/">
                                     <Image
@@ -470,41 +472,15 @@ const Header = ({ locale, selectedCity, cities, langs, selectedLang, pages }: He
                             </div> */}
                             <div className=" flow-root">
                                 <div className="divide-y divide-gray-500/10">
-                                    <label className="relative cursor-pointer p-2">
-                                        <svg
-                                            onClick={() => swithTheme()}
-                                            className="dark:hidden"
-                                            width="16"
-                                            height="16"
-                                            xmlns="http://www.w3.org/2000/svg"
-                                        >
-                                            <path
-                                                className="fill-slate-300"
-                                                d="M7 0h2v2H7zM12.88 1.637l1.414 1.415-1.415 1.413-1.413-1.414zM14 7h2v2h-2zM12.95 14.433l-1.414-1.413 1.413-1.415 1.415 1.414zM7 14h2v2H7zM2.98 14.364l-1.413-1.415 1.414-1.414 1.414 1.415zM0 7h2v2H0zM3.05 1.706 4.463 3.12 3.05 4.535 1.636 3.12z"
-                                            />
-                                            <path
-                                                className="fill-slate-400"
-                                                d="M8 4C5.8 4 4 5.8 4 8s1.8 4 4 4 4-1.8 4-4-1.8-4-4-4Z"
-                                            />
-                                        </svg>
-                                        <svg
-                                            onClick={() => swithTheme()}
-                                            className="hidden dark:block"
-                                            width="16"
-                                            height="16"
-                                            xmlns="http://www.w3.org/2000/svg"
-                                        >
-                                            <path
-                                                className="fill-slate-400"
-                                                d="M6.2 1C3.2 1.8 1 4.6 1 7.9 1 11.8 4.2 15 8.1 15c3.3 0 6-2.2 6.9-5.2C9.7 11.2 4.8 6.3 6.2 1Z"
-                                            />
-                                            <path
-                                                className="fill-slate-500"
-                                                d="M12.5 5a.625.625 0 0 1-.625-.625 1.252 1.252 0 0 0-1.25-1.25.625.625 0 1 1 0-1.25 1.252 1.252 0 0 0 1.25-1.25.625.625 0 1 1 1.25 0c.001.69.56 1.249 1.25 1.25a.625.625 0 1 1 0 1.25c-.69.001-1.249.56-1.25 1.25A.625.625 0 0 1 12.5 5Z"
-                                            />
-                                        </svg>
-                                    </label>
                                     <div className="flex flex-col py-4 gap-y-5">
+                                        <button
+                                            className="text-base font-semibold leading-6 text-gray-900 dark:text-white flex gap-x-2 items-center"
+                                            onClick={() => swithTheme()}
+                                        >
+                                            <SunIcon className="dark:hidden h-7 w-7" />
+                                            <MoonIcon className="hidden dark:block h-7 w-7" />
+                                            {locale?.Header?.SwithTheme}
+                                        </button>
                                         <Link
                                             className="text-base leading-6 text-gray-900 dark:text-white flex gap-x-2 items-center"
                                             href="tel:+7-708-08-08-999"
