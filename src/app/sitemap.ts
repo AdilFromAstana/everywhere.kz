@@ -13,8 +13,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
             url: `${process.env.NEXT_PUBLIC_APP_URL}/event/${x.code}`,
             lastModified: new Date(),
         })),
-        ...(await GetEventumEvents()).map((x: EventInList) => ({
-            url: `${process.env.NEXT_PUBLIC_APP_URL}/e/${x.code}`,
+        ...(await GetEventumEvents()).map((x: any) => ({
+            url: `${process.env.NEXT_PUBLIC_APP_URL}/e/${x.Code}`,
             lastModified: new Date(),
         })),
     ];

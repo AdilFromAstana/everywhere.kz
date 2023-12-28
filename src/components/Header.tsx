@@ -148,14 +148,14 @@ const Header = ({ locale, selectedCity, cities, langs, selectedLang, pages }: He
                                     }}
                                     src={isDarkMode ? WhiteMonoLogo : Logo}
                                     alt="Kazticket.kz Logo"
-                                    className="h-10 w-auto cursor-pointer"
+                                    className="h-14 w-auto cursor-pointer"
                                     priority
                                 />
                             </Transition>
                             {/* <Image
                                 src={isDarkMode ? WhiteMonoLogo : Logo}
                                 alt="Kazticket.kz Logo"
-                                className="h-10 w-auto opacity-0"
+                                className="h-14 w-auto opacity-0"
                                 priority
                             /> */}
                         </>
@@ -163,7 +163,7 @@ const Header = ({ locale, selectedCity, cities, langs, selectedLang, pages }: He
                         <Image
                             src={isDarkMode ? WhiteMonoLogo : Logo}
                             alt="Kazticket.kz Logo"
-                            className="h-10 w-auto"
+                            className="h-14 w-auto"
                             priority
                         />
                     )}
