@@ -88,7 +88,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     const orderNumber = params.number;
     const data = await GetOrderData(orderNumber);
     return {
-        title: `Билеты ${data.eventNameRu} - Kazticket.kz`,
+        title: `Билеты ${data.eventName} - Kazticket.kz`,
         openGraph: {
             images: data.posterFileUrl,
         },
