@@ -1,11 +1,17 @@
+import { getCookie } from 'cookies-next';
+import { getDictionary } from 'dictionaries';
+import { cookies } from 'next/headers';
 import Link from 'next/link';
 
 export default async function ContactsPage() {
+    const UserLang = getCookie('UserLang', { cookies });
+    const locale = await getDictionary(UserLang?.toLocaleLowerCase() ?? 'ru');
+
     return (
         <section className="py-12 bg-white overflow-hidden">
             {/* <div className="relative container px-4 mx-auto"> */}
             <h2 className="mb-5 text-5xl md:text-6xl xl:text-6xl text-center font-bold font-heading tracking-px-n leading-none">
-                Контакты и реквизиты
+                {locale.Contacts.ContactsAndDetails}
             </h2>
             <div className="flex flex-wrap -m-3">
                 <div className="w-full md:w-1/3 p-3">
@@ -27,13 +33,17 @@ export default async function ContactsPage() {
                                 />
                             </svg>
                         </div>
-                        <h3 className="mb-3 text-xl font-bold font-heading leading-snug">Организация мероприятий</h3>
-                        <p className="font-medium text-gray-600">По вопросам организации мероприятий</p>
-                        <p className="font-medium leading-relaxed">+7 708 143 74 69</p>
-                        <Link className="my-2" href="tel:+77081437469">
-                            <div className="text-white mt-2 rounded-md bg-sky-500 px-3 py-2 ">Позвонить</div>
+                        <h3 className="mb-3 text-xl font-bold font-heading leading-snug">
+                            {locale.Contacts.OrganizationOfEvents}
+                        </h3>
+                        <p className="font-medium text-gray-600">{locale.Contacts.ForQuestionsAboutOrganizing}</p>
+                        <p className="font-medium leading-relaxed">+7-708-08-08-999</p>
+                        <Link className="my-2" href="tel:+77080808999">
+                            <div className="text-white mt-2 rounded-md bg-sky-500 px-3 py-2 ">
+                                {locale.Contacts.Call}
+                            </div>
                         </Link>
-                        <Link className="my-2" target="_blank" href="https://wa.me/77081437469">
+                        <Link className="my-2" target="_blank" href="https://wa.me/77080808999">
                             <div className="text-white mt-2 rounded-md bg-emerald-500 px-3 py-2 ">WhatsApp</div>
                         </Link>
                     </div>
@@ -57,11 +67,15 @@ export default async function ContactsPage() {
                                 />
                             </svg>
                         </div>
-                        <h3 className="mb-3 text-xl font-bold font-heading leading-snug">Покупка и возврат</h3>
-                        <p className="font-medium text-gray-600">По вопросам покупки и возврата билетов</p>
+                        <h3 className="mb-3 text-xl font-bold font-heading leading-snug">
+                            {locale.Contacts.PurchaseAndReturn}
+                        </h3>
+                        <p className="font-medium text-gray-600">{locale.Contacts.ForQuestionsRegardingThePurchase}</p>
                         <p className="font-medium leading-relaxed">+7-771-247-67-48</p>
                         <Link className="my-2" href="tel:+77712476748">
-                            <div className="text-white mt-2 rounded-md bg-sky-500 px-3 py-2 ">Позвонить</div>
+                            <div className="text-white mt-2 rounded-md bg-sky-500 px-3 py-2 ">
+                                {locale.Contacts.Call}
+                            </div>
                         </Link>
                         <Link className="my-2" target="_blank" href="https://wa.me/77712476748">
                             <div className="text-white mt-2 rounded-md bg-emerald-500 px-3 py-2 ">WhatsApp</div>
@@ -94,14 +108,14 @@ export default async function ContactsPage() {
                                 />
                             </svg>
                         </div>
-                        <h3 className="mb-3 text-xl font-bold font-heading leading-snug">ТОО «KAZTICKET.KZ»</h3>
-                        <p className="font-medium mx-auto leading-relaxed">БИН 220140006265</p>
-                        <p className="font-medium mx-auto leading-relaxed">БИК IRTYKZKA</p>
-                        <p className="font-medium mx-auto leading-relaxed">АО«ForteBank»</p>
-                        <p className="font-medium mx-auto leading-relaxed">Расчетный счет № KZ3096503F0010868398</p>
+                        <h3 className="mb-3 text-xl font-bold font-heading leading-snug">{locale.Contacts.LLP}</h3>
+                        <p className="font-medium mx-auto leading-relaxed">{locale.Contacts.BIN} 220140006265</p>
+                        <p className="font-medium mx-auto leading-relaxed">{locale.Contacts.BIC} IRTYKZKA</p>
+                        <p className="font-medium mx-auto leading-relaxed">{locale.Contacts.JSC}</p>
                         <p className="font-medium mx-auto leading-relaxed">
-                            Республика Казахстан, 010000, г. Астана, Проспект Рақымжан Қошқарбаев, здание 27
+                            {locale.Contacts.CurrentAccountNo} KZ3096503F0010868398
                         </p>
+                        <p className="font-medium mx-auto leading-relaxed">{locale.Contacts.Address}</p>
                     </div>
                 </div>
             </div>

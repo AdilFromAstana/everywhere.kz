@@ -1,0 +1,53 @@
+{
+    "Errors": {
+        "ToMain": "Басты бетке",
+        "PageNotFound": "Бет табылмады"
+    },
+    "Header": {
+        "Language": "Тіл",
+        "Support": "Қолдау қызметі",
+        "AllCities": "All cities",
+        "City": "Қала"
+    },
+    "EventListPage": {
+        "All": "All"
+    },
+    "EventPage": {
+        "AboutDesc": "Іс-шара туралы",
+        "BuyTicket": "Билет сатып алу"
+    },
+    "Contacts": {
+        "ContactsAndDetails": "Байланыстар мен мәліметтер",
+        "OrganizationOfEvents": "Іс-шараларды ұйымдастыру",
+        "ForQuestionsAboutOrganizing": "Іс-шараларды ұйымдастыруға қатысты сұрақтар үшін",
+        "PurchaseAndReturn": "Сатып алу және қайтару",
+        "ForQuestionsRegardingThePurchase": "Билеттерді сатып алуға және қайтаруға қатысты сұрақтар бойынша",
+        "LLP": "“KAZTICKET.KZ” ЖШС",
+        "JSC": "“ForteBank” АҚ",
+        "BIN": "БСН",
+        "BIC": "БСК",
+        "CurrentAccountNo": "Ағымдағы шот №",
+        "Address": "Қазақстан Республикасы, 010000, Астана қаласы, Рақымжан Қошқарбаев даңғылы, 27 ғимарат",
+        "Call": "Қоңырау"
+    },
+    "Footer": {
+        "Contract": "Келісімшарт бойынша ұсыныс",
+        "PrivacyPolicy": "Құпиялылық саясаты",
+        "Contacts": "Контактілер",
+        "AboutUs": "Біз туралы",
+        "PaymentSecurity": "Онлайн төлем қауіпсіздігі",
+        "AllRightsReserved": "Барлық құқықтар сақталған"
+    },
+    "OrderPage": {
+        "Tickets": "Билеттер",
+        "OrderNumber": "Тапсырыс нөмірі",
+        "TotalCost": "Жалпы құны",
+        "Event": "Іс-шара",
+        "StartOfSession": "Сеанстың басталуы",
+        "EndOfSession": "Сеанстың аяқталуы",
+        "Address": "Мекен-жай",
+        "Location": "Орын",
+        "Hall": "Зал",
+        "Sector": "Сектор"
+    }
+}

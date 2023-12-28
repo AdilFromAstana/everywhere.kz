@@ -19,7 +19,7 @@ const nextConfig = {
     },
     experimental: {
         serverActions: {
-            allowedOrigins: ['localhost', 'dev-v2.kazticket.kz', 'kazticket.kz', 'new.kazticket.kz']
+            allowedOrigins: ['localhost', 'dev-v2.kazticket.kz', 'eventum.kazticket.kz', 'kazticket.kz', 'new.kazticket.kz']
         }
     }
 };

@@ -1,37 +1,13 @@
-import { ChatBubbleLeftRightIcon, DocumentTextIcon, UserGroupIcon } from '@heroicons/react/24/outline';
 import moment from 'moment';
 import Link from 'next/link';
 import React from 'react';
 
-const Footer: React.FC = () => {
-    const pages = [
-        {
-            label: 'Договор оферты',
-            url: '/offer_contract',
-            icon: DocumentTextIcon,
-        },
-        {
-            label: 'Безопасность онлайн-платежей',
-            url: '/payment_security',
-            icon: DocumentTextIcon,
-        },
-        {
-            label: 'Политика конфиденциальности',
-            url: '/security_policy',
-            icon: DocumentTextIcon,
-        },
-        {
-            label: 'Контакты',
-            url: '/contacts',
-            icon: ChatBubbleLeftRightIcon,
-        },
-        {
-            label: 'О нас',
-            url: '/about_us',
-            icon: UserGroupIcon,
-        },
-    ];
+interface FooterProps {
+    locale: any;
+    pages: any[];
+}
 
+const Footer = ({ pages, locale }: FooterProps) => {
     return (
         <footer className="bg-white dark:bg-black">
             <div className="max-w-screen-xl px-4 py-12 mx-auto space-y-8 overflow-hidden sm:px-6 lg:px-8">
@@ -41,9 +17,9 @@ const Footer: React.FC = () => {
                             <div key={x.url} className="px-5 py-2">
                                 <Link
                                     href={x.url}
-                                    className="text-base leading-6 text-gray-500 hover:text-gray-900 dark:text-white flex flex-row items-center"
+                                    className="text-base leading-6 text-gray-500 hover:text-gray-900 gap-2 dark:text-white flex flex-row items-center"
                                 >
-                                    <x.icon className="w-6 h-6 mx-1" />
+                                    {x.icon}
                                     {x.label}
                                 </Link>
                             </div>
@@ -97,7 +73,7 @@ const Footer: React.FC = () => {
                         </a> */}
                 </div>
                 <p className="mt-8 text-base leading-6 text-center text-gray-400 dark:text-white">
-                    © {moment().format('YYYY')} Kazticket.kz. All rights reserved.
+                    © {moment().format('YYYY')} Kazticket.kz. {locale.Footer.AllRightsReserved}.
                 </p>
             </div>
         </footer>

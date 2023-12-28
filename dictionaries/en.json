@@ -1,6 +1,53 @@
 {
+    "Errors": {
+        "ToMain": "To the main page",
+        "PageNotFound": "Page not found"
+    },
+    "Header": {
+        "Language": "Language",
+        "Support": "Support",
+        "AllCities": "All cities",
+        "City": "City"
+    },
+    "EventListPage": {
+        "All": "All"
+    },
     "EventPage": {
         "AboutDesc": "About the event",
         "BuyTicket": "Buy ticket"
+    },
+    "Contacts": {
+        "ContactsAndDetails": "Contacts and details",
+        "OrganizationOfEvents": "Organization of events",
+        "ForQuestionsAboutOrganizing": "For questions about organizing events",
+        "PurchaseAndReturn": "Purchase and return",
+        "ForQuestionsRegardingThePurchase": "For questions regarding the purchase and return of tickets",
+        "LLP": "LLP “KAZTICKET.KZ”",
+        "JSC": "JSC “ForteBank”",
+        "BIN": "BIN",
+        "BIC": "BIC",
+        "CurrentAccountNo": "Current account no.",
+        "Address": "Republic of Kazakhstan, 010000, Astana, Rakymzhan Koshkarbaev Avenue, building 27",
+        "Call": "Call"
+    },
+    "Footer": {
+        "Contract": "Contract offer",
+        "PrivacyPolicy": "Privacy Policy",
+        "Contacts": "Contacts",
+        "AboutUs": "About Us",
+        "PaymentSecurity": "Online payment security",
+        "AllRightsReserved": "All rights reserved"
+    },
+    "OrderPage": {
+        "Tickets": "Tickets",
+        "OrderNumber": "Order Number",
+        "TotalCost": "Total Cost",
+        "Event": "Event",
+        "StartOfSession": "Start of Session",
+        "EndOfSession": "End of Session",
+        "Address": "Address",
+        "Location": "Location",
+        "Hall": "Hall",
+        "Sector": "Sector"
     }
 }

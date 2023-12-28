@@ -4,150 +4,57 @@ import { Dialog, Popover, Transition } from '@headlessui/react';
 import {
     Bars3Icon,
     BuildingOffice2Icon,
-    ChatBubbleLeftRightIcon,
     ChevronDownIcon,
-    DocumentTextIcon,
     LanguageIcon,
     MapPinIcon,
     PhoneIcon,
-    UserGroupIcon,
     XMarkIcon,
 } from '@heroicons/react/24/outline';
-import { getCookie, setCookie } from 'cookies-next';
+import { deleteCookie, getCookie, setCookie } from 'cookies-next';
 import Image from 'next/image';
 import Link from 'next/link';
+import { usePathname, useRouter } from 'next/navigation';
 import { Fragment, useEffect, useState } from 'react';
+import Snowfall from 'react-snowfall';
 
 import WhiteMonoLogo from '@/assets/kazticket-logo-white-mono.svg';
-import Logo from '@/assets/kazticket-logo.svg';
+import Logo from '@/assets/kazticket-logo-winter.svg';
+// import Logo from '@/assets/kazticket-logo.svg';
+import SnowImage from '@/assets/show.png';
 import transitions from '@/constants/transtitions';
 import { isEmpty } from '@/functions';
-import { GetToken } from '@/functions/AxiosHandlers';
+import { City } from '@/types/City';
 import { Dropdown } from '@/types/Dropdown';
 
-const pages = [
-    {
-        label: 'Договор оферты',
-        url: '/offer_contract',
-        icon: DocumentTextIcon,
-    },
-    {
-        label: 'Безопасность онлайн-платежей',
-        url: '/payment_security',
-        icon: DocumentTextIcon,
-    },
-    {
-        label: 'Политика конфиденциальности',
-        url: '/security_policy',
-        icon: DocumentTextIcon,
-    },
-    {
-        label: 'Контакты',
-        url: '/contacts',
-        icon: ChatBubbleLeftRightIcon,
-    },
-    {
-        label: 'О нас',
-        url: '/about_us',
-        icon: UserGroupIcon,
-    },
-];
+interface HeaderProps {
+    cities: City[];
+    langs: Dropdown[];
+    selectedCity: City;
+    selectedLang: Dropdown;
+    locale: any;
+    pages: any[];
+}
 
-const langs = [
-    {
-        key: 'Ru',
-        text: 'Русский',
-        value: 'Ru',
-    },
-    {
-        key: 'Kz',
-        text: 'Қазақша',
-        value: 'Kz',
-    },
-    {
-        key: 'En',
-        text: 'English',
-        value: 'En',
-    },
-];
-
-const Header = () => {
+const Header = ({ locale, selectedCity, cities, langs, selectedLang, pages }: HeaderProps) => {
     const [isMobileMenuOpen, setMobileMenuOpen] = useState<boolean>(false);
     const [randomTransition, setRandomTransition] = useState({});
     const [isLogoAnimationOn, setIsLogoAnimationOn] = useState<boolean>(true);
-    const [cities, setCities] = useState<any[]>([]);
-    const [selectedCity, setSelectedCity] = useState<Dropdown | null>();
-    const [selectedLang, setSelectedLang] = useState<Dropdown | null>();
     const [isDarkMode, setIsDarkMode] = useState<boolean>(false);
-
-    useEffect(() => {
-        const UserLang = getCookie('UserLang');
-        if (!isEmpty(UserLang)) {
-            const UserLangData = langs.find(
-                (x: Dropdown) => `${x.value}`.toLowerCase() === `${UserLang}`.toLowerCase()
-            );
-            if (!isEmpty(UserLangData)) {
-                setSelectedLang(UserLangData);
-            }
-        } else {
-            handleSelectLang(langs[0]);
-        }
-
-        let cachedCities = {};
-
-        if (localStorage.getItem('CitiesData')) {
-            const data = localStorage.getItem('CitiesData');
-            if (data) {
-                cachedCities = JSON.parse(data);
-            }
-        }
-
-        const fetchCities = async (intitialCities: any = null) => {
-            try {
-                const token = await GetToken();
-
-                setCookie('token', token, { maxAge: 60 * 60 * 24 * 365 });
-
-                const citiesData = (isEmpty(intitialCities) ? await GetCities() : intitialCities)?.sort(
-                    (cityA: Dropdown, cityB: Dropdown) => {
-                        const a = cityA?.text as any;
-                        const b = cityB?.text as any;
-                        return a - b;
-                    }
-                );
-                setCities(citiesData);
-                localStorage.setItem('CitiesData', JSON.stringify(citiesData));
-
-                const UserCityId = getCookie('UserCityId');
-                if (!isEmpty(UserCityId)) {
-                    const UserCityData = citiesData.find((x: Dropdown) => `${x.value}` === `${UserCityId}`);
-                    if (!isEmpty(UserCityData)) {
-                        setSelectedCity(UserCityData);
-                    }
-                } else {
-                    setCookie('UserCityId', citiesData[0].value, {
-                        maxAge: 60 * 60 * 24 * 365,
-                    });
-                    setSelectedCity(citiesData[0]);
-                }
-
-                if (!isEmpty(intitialCities)) {
-                    const newCities = await GetCities();
-                    setCities(newCities);
-                    localStorage.setItem('CitiesData', JSON.stringify(newCities));
-                }
-            } catch (error) {
-                console.error('Failed to fetch cities:', error);
-            }
-        };
-
-        fetchCities(cachedCities);
-    }, []);
+    const router = useRouter();
+    const pathname = usePathname();
+    const [snowflake, setSnowflake] = useState<any>();
+    const snowImages = [snowflake];
 
     useEffect(() => {
         const randomTransitionIndex = Math.floor(Math.random() * transitions.length);
         const random = transitions[randomTransitionIndex];
         setRandomTransition(random);
+
+        const snowflakeImg = document?.createElement('img');
+        if (snowflakeImg) {
+            snowflakeImg.src = SnowImage.src;
+        }
+        setSnowflake(snowflakeImg);
     }, [!isEmpty(randomTransition)]);
 
     useEffect(() => {
@@ -171,12 +78,11 @@ const Header = () => {
         }
     }, [!isDarkMode]);
 
-    const handleSelectCity = (city: Dropdown) => {
-        if (selectedCity?.key !== city.key) {
-            setCookie('UserCityId', city.value, {
+    const handleSelectCity = (city: City) => {
+        if (selectedCity?.id !== city.id) {
+            setCookie('UserCityId', city.id, {
                 maxAge: 60 * 60 * 24 * 365,
             });
-            setSelectedCity(city);
             location.reload();
         }
     };
@@ -186,9 +92,7 @@ const Header = () => {
             setCookie('UserLang', lang.value, {
                 maxAge: 60 * 60 * 24 * 365,
             });
-            setSelectedLang(lang);
             location.reload();
-            console.log('selectedLang: ', selectedLang);
         }
     };
 
@@ -208,41 +112,57 @@ const Header = () => {
 
     return (
         <header className="bg-white dark:bg-black">
-            <nav className="mx-auto flex items-center justify-between p-6 px-2 lg:px-8" aria-label="Global">
+            <Snowfall
+                style={{
+                    zIndex: 99999,
+                    position: 'fixed',
+                    width: '100vw',
+                    height: '100vh',
+                }}
+                snowflakeCount={350}
+                speed={[0.5, 1]}
+                rotationSpeed={[-2, 2]}
+                wind={[-1, 1]}
+                images={snowImages}
+                radius={[3, 10]}
+            />
+            <nav className="mx-auto flex items-center justify-between my-6 px-2 lg:px-8" aria-label="Global">
                 <div className="flex lg:flex-1 z-50">
                     {!isEmpty(randomTransition) ? (
                         <>
                             <Transition
-                                className="Animation"
-                                beforeEnter={() => {
-                                    setTimeout(() => {
-                                        setIsLogoAnimationOn(false);
-                                    }, 4000);
-                                }}
+                                className="Animation w-auto"
                                 appear={true}
                                 show={isLogoAnimationOn}
                                 {...randomTransition}
                             >
-                                <Link href="/">
-                                    <Image
-                                        src={isDarkMode ? WhiteMonoLogo : Logo}
-                                        alt="Next.js Logo"
-                                        className="h-10 w-auto"
-                                        priority
-                                    />
-                                </Link>
+                                <Image
+                                    onClick={() => {
+                                        if (pathname === '/') {
+                                            deleteCookie('UserCategoryId');
+                                            window.location.reload();
+                                        } else {
+                                            deleteCookie('UserCategoryId');
+                                            router.push('/');
+                                        }
+                                    }}
+                                    src={isDarkMode ? WhiteMonoLogo : Logo}
+                                    alt="Kazticket.kz Logo"
+                                    className="h-10 w-auto cursor-pointer"
+                                    priority
+                                />
                             </Transition>
-                            <Image
+                            {/* <Image
                                 src={isDarkMode ? WhiteMonoLogo : Logo}
-                                alt="Next.js Logo"
+                                alt="Kazticket.kz Logo"
                                 className="h-10 w-auto opacity-0"
                                 priority
-                            />
+                            /> */}
                         </>
                     ) : (
                         <Image
                             src={isDarkMode ? WhiteMonoLogo : Logo}
-                            alt="Next.js Logo"
+                            alt="Kazticket.kz Logo"
                             className="h-10 w-auto"
                             priority
                         />
@@ -258,10 +178,10 @@ const Header = () => {
                             <PhoneIcon className="h-7 w-7" />
                             <div className="flex flex-col">
                                 <span className="text-base leading-5 font-semibold">+7-708-08-08-999</span>
-                                <span className="leading-5 text-gray-400 font-normal">Служба поддержки</span>
+                                <span className="leading-5 text-gray-400 font-normal">{locale.Header.Support}</span>
                             </div>
                         </Link>
-                        <Link
+                        {/* <Link
                             className="text-base font-semibold leading-6 text-gray-900 dark:text-white flex gap-x-1 items-center"
                             href="https://www.instagram.com/kazticket.kz"
                             target="_blank"
@@ -276,11 +196,11 @@ const Header = () => {
                                 <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
                             </svg>
                             Наш Instagram
-                        </Link>
+                        </Link> */}
                         <Popover className="relative">
                             <Popover.Button className="flex items-center gap-x-1 text-base font-semibold leading-6 text-gray-900 dark:text-white">
                                 <MapPinIcon className="h-5 w-5" />
-                                {isEmpty(selectedCity) ? 'Город' : selectedCity?.text}
+                                {isEmpty(selectedCity) ? locale?.Header?.City : selectedCity?.name}
                                 <ChevronDownIcon className="h-5 w-5 flex-none text-gray-400" aria-hidden="true" />
                             </Popover.Button>
 
@@ -294,12 +214,12 @@ const Header = () => {
                             >
                                 <Popover.Panel className="absolute z-50 -right-8 top-full mt-3 w-screen max-w-xs max-h-96 overflow-auto rounded-2xl bg-white shadow-lg ring-1 ring-gray-900/5">
                                     <div className="p-0">
-                                        {cities.map((city: Dropdown) => (
+                                        {cities.map((city: City) => (
                                             <div
-                                                key={city.key}
+                                                key={city.id}
                                                 onClick={() => handleSelectCity(city)}
                                                 className={`group cursor-pointer relative flex items-center gap-x-6 rounded-lg p-3 text-sm leading-6 hover:bg-gray-50 ${
-                                                    city.key === selectedCity?.key ? 'bg-indigo-200' : ''
+                                                    city.id === selectedCity?.id ? 'bg-indigo-200' : ''
                                                 }`}
                                             >
                                                 <div className="flex h-6 w-6 flex-none items-center justify-center rounded-lg bg-gray-50 group-hover:bg-white">
@@ -310,7 +230,7 @@ const Header = () => {
                                                 </div>
                                                 <div className="flex-auto">
                                                     <div className="block font-semibold text-gray-900">
-                                                        {city.text}
+                                                        {city.name}
                                                         <span className="absolute z-50 inset-0" />
                                                     </div>
                                                 </div>
@@ -397,7 +317,9 @@ const Header = () => {
                         <Popover className="relative">
                             <Popover.Button className="flex items-center gap-x-1 text-base font-semibold leading-6 text-gray-900 dark:text-white">
                                 <MapPinIcon className="h-5 w-5" />{' '}
-                                {isEmpty(selectedCity) ? 'Город' : selectedCity?.text}
+                                <div className="w-max">
+                                    {isEmpty(selectedCity) ? locale?.Header?.City : selectedCity?.name}
+                                </div>
                                 <ChevronDownIcon className="h-5 w-5 flex-none text-gray-400" aria-hidden="true" />
                             </Popover.Button>
 
@@ -411,12 +333,12 @@ const Header = () => {
                             >
                                 <Popover.Panel className="absolute z-50 -right-8 top-full mt-3 w-screen max-w-xs max-h-96 overflow-auto rounded-2xl bg-white shadow-lg ring-1 ring-gray-900/5">
                                     <div className="p-0">
-                                        {cities.map((city: Dropdown) => (
+                                        {cities.map((city: City) => (
                                             <div
-                                                key={city.key}
+                                                key={`${city.id}-mobile`}
                                                 onClick={() => handleSelectCity(city)}
                                                 className={`group cursor-pointer relative flex items-center gap-x-6 rounded-lg p-3 text-sm leading-6 hover:bg-gray-50 ${
-                                                    city.key === selectedCity?.key ? 'bg-indigo-200' : ''
+                                                    city.id === selectedCity?.id ? 'bg-indigo-200' : ''
                                                 }`}
                                             >
                                                 <div className="flex h-6 w-6 flex-none items-center justify-center rounded-lg bg-gray-50 group-hover:bg-white">
@@ -427,7 +349,7 @@ const Header = () => {
                                                 </div>
                                                 <div className="flex-auto">
                                                     <div className="block font-semibold text-gray-900">
-                                                        {city.text}
+                                                        {city.name}
                                                         <span className="absolute z-50 inset-0" />
                                                     </div>
                                                 </div>
@@ -456,7 +378,7 @@ const Header = () => {
                                     <div className="p-0">
                                         {langs.map((lang: Dropdown) => (
                                             <div
-                                                key={lang.key}
+                                                key={`${lang.key}-mobile`}
                                                 onClick={() => handleSelectLang(lang)}
                                                 className={`group cursor-pointer relative flex items-center gap-x-6 rounded-lg p-3 text-sm leading-6 hover:bg-gray-50 ${
                                                     lang.key === selectedLang?.key ? 'bg-indigo-200' : ''
@@ -532,7 +454,7 @@ const Header = () => {
                                 <Link href="/">
                                     <Image
                                         src={isDarkMode ? WhiteMonoLogo : Logo}
-                                        alt="Next.js Logo"
+                                        alt="Kazticket.kz Logo"
                                         className="h-8 w-auto"
                                         priority
                                     />
@@ -574,7 +496,7 @@ const Header = () => {
                                             >
                                                 <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
                                             </svg>
-                                            Наш Instagram
+                                            Instagram
                                         </Link>
                                         <Link
                                             className="text-base font-semibold leading-6 text-gray-900 dark:text-white flex gap-x-2 items-center"
@@ -593,7 +515,7 @@ const Header = () => {
                                                     d="M19.589 6.686a4.793 4.793 0 0 1-3.77-4.245V2h-3.445v13.672a2.896 2.896 0 0 1-5.201 1.743l-.002-.001.002.001a2.895 2.895 0 0 1 3.183-4.51v-3.5a6.329 6.329 0 0 0-5.394 10.692 6.33 6.33 0 0 0 10.857-4.424V8.687a8.182 8.182 0 0 0 4.773 1.526V6.79a4.831 4.831 0 0 1-1.003-.104z"
                                                 />
                                             </svg>
-                                            Наш TikTok
+                                            TikTok
                                         </Link>
                                         <Link
                                             className="text-base font-semibold leading-6 text-gray-900 dark:text-white flex gap-x-2 items-center"
@@ -619,7 +541,7 @@ const Header = () => {
                                                     key={x.url}
                                                     className="text-base font-semibold leading-6 text-gray-900 dark:text-white flex gap-x-2 items-center"
                                                 >
-                                                    <x.icon className="h-5 w-5" />
+                                                    {x.icon}
                                                     {x.label}
                                                 </Link>
                                             );
@@ -636,25 +558,3 @@ const Header = () => {
 };
 
 export default Header;
-
-async function GetCities() {
-    try {
-        const token = await GetToken();
-        const res = await fetch(process.env.NEXT_PUBLIC_MANAGEMENT_URL + 'console/cities/dropdown', {
-            headers: {
-                'Accept-Language': 'ru-RU',
-                'Content-Type': 'application/json',
-                Authorization: `Bearer ${token}`,
-            },
-        });
-
-        if (!res.ok) {
-            throw new Error(`Failed to fetch data. Status: ${res.status}`);
-        }
-
-        return await res.json();
-    } catch (error) {
-        console.error('Error fetching cities - method "GetCities":', error);
-        return [];
-    }
-}
