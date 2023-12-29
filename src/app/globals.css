@@ -96,7 +96,7 @@ html.dark #right-arrow .scroll-arrow {
 #right-arrow::before {
     height: 100%;
     width: 25px;
-    content: '';
+    content: "";
     background: linear-gradient(to left, #fff 20%, rgba(255, 255, 255, 0) 80%);
 }
 
@@ -104,7 +104,7 @@ html.dark #right-arrow .scroll-arrow {
     z-index: 1;
     height: 100%;
     width: 25px;
-    content: '';
+    content: "";
     background: linear-gradient(to right, #fff 20%, rgba(255, 255, 255, 0) 80%);
 }
 
@@ -114,4 +114,9 @@ html.dark #right-arrow::before {
 
 html.dark #left-arrow::after {
     background: linear-gradient(to right, #000 20%, rgba(255, 255, 255, 0) 80%);
+}
+
+#QRcodeImage,
+#QRcodeCanvas canvas {
+    background-color: #fff !important;
 }
