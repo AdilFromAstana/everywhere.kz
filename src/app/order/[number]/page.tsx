@@ -1,46 +1,15 @@
 import { getCookie } from 'cookies-next';
 import { getDictionary } from 'dictionaries';
 import groupArray from 'group-array';
-import dynamic from 'next/dynamic';
 // import { getDictionary } from 'dictionaries';
 import { cookies } from 'next/headers';
 import Link from 'next/link';
+import QRCodeLib from 'qrcode';
 
 import OrderDateTimeProperty from '@/components/OrderDateTimeProperty';
 import { isEmpty } from '@/functions';
 
 import type { Metadata, Viewport } from 'next';
-
-const QRcode = dynamic(() => import('@/components/QRcode'), {
-    ssr: false,
-    loading: () => (
-        <div className="relative items-center h-64 block max-w-sm p-6 bg-white border border-gray-100 rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-800 dark:hover:bg-gray-700">
-            <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white opacity-20">
-                Loading QR Code
-            </h5>
-            <p className="font-normal text-gray-700 dark:text-gray-400 opacity-20">Please wait...</p>
-            <div role="status" className="absolute -translate-x-1/2 -translate-y-1/2 top-2/4 left-1/2">
-                <svg
-                    aria-hidden="true"
-                    className="w-8 h-8 text-gray-200 animate-spin dark:text-gray-600 fill-blue-600"
-                    viewBox="0 0 100 101"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                >
-                    <path
-                        d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z"
-                        fill="currentColor"
-                    />
-                    <path
-                        d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z"
-                        fill="currentFill"
-                    />
-                </svg>
-                <span className="sr-only">Loading...</span>
-            </div>
-        </div>
-    ),
-});
 
 async function GetOrderData(orderNumber: string) {
     const { ORDERS_API_URL = '' } = process.env;
@@ -53,6 +22,10 @@ async function GetOrderData(orderNumber: string) {
             break;
         case 'en':
             acceptLanguage = 'en-US';
+            break;
+        case 'ru':
+        default:
+            acceptLanguage = 'ru-RU';
             break;
     }
 
@@ -96,17 +69,37 @@ export const viewport: Viewport = {
     userScalable: false,
 };
 
+const GenerateQRCode = async (orderNumber: number) => {
+    try {
+        const url = await QRCodeLib.toDataURL(`${orderNumber}`, {
+            color: {
+                dark: '#000000', // Тёмные точки QR-кода
+                light: '#ffffff', // Фон QR-кода
+            },
+            width: 300,
+            margin: 2,
+            // Другие опции стилизации...
+        });
+
+        return url;
+    } catch (err) {
+        console.log('Ошибка при генерации QR-кода:', err);
+        return '';
+    }
+};
+
 export default async function OrderPage({ params }: Props) {
     const data = await GetOrderData(params.number);
     const UserLang = getCookie('UserLang', { cookies });
     const locale = await getDictionary(UserLang?.toLocaleLowerCase() ?? 'ru');
+    const QRcodeData = await GenerateQRCode(data.orderNumber);
 
     const Property = ({ name, value }: { name: string; value: any }) => {
         if (Array.isArray(value)) {
             return (
                 <div className="flex flex-row justify-between gap-2 w-full">
                     <div className="text-[#00000080] dark:text-white lg:text-2xl text-base">{name}</div>
-                    <div className="lg:text-2xl text-base flex flex-col jus dark:text-white">
+                    <div className="lg:text-2xl text-base flex flex-col text-right dark:text-white">
                         {value.map((x: any) => (
                             <div key={x}>{x}</div>
                         ))}
@@ -189,8 +182,10 @@ export default async function OrderPage({ params }: Props) {
                 <div className="text-4xl text-center">{locale.OrderPage.Tickets}</div>
                 <div className="lg:max-w-4xl max-w-full mx-auto mb-4 lg:px-10 px-4 py-4 bg-white dark:bg-[#ffffff0d] rounded-lg shadow-2xl">
                     <div className="flex flex-col items-center justify-center gap-4">
-                        <div className="w-full">
-                            <QRcode orderNumber={data.orderNumber} />
+                        <div className="w-full flex flex-col items-center">
+                            {QRcodeData && (
+                                <img id="QRcodeImage" className="rounded-lg" src={QRcodeData} alt="QR Code" />
+                            )}
                         </div>
                         <div className="flex flex-col items-center gap-1">
                             <div className="flex flex-row gap-2">

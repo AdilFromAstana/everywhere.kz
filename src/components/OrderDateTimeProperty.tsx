@@ -16,8 +16,6 @@ const OrderDateTimeProperty = ({ fieldName, date }: OrderPropertyProps) => {
     const [formatedDate, setFormatedDate] = useState('');
     const UserLang = getCookie('UserLang');
 
-    console.log('UserLang: ', UserLang);
-
     useEffect(() => {
         if (date) {
             setFormatedDate(

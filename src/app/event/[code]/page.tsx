@@ -118,17 +118,6 @@ export default async function EventPage({ params }: Props) {
                             backgroundImage: `url("${data.posterFileUrl}")`,
                         }}
                     />
-                    {/* <div
-                        style={{
-                            margin: '1rem 0',
-                            height: 'calc(100% - 2rem)',
-                            backgroundPosition: 'center center',
-                            backgroundRepeat: 'no-repeat',
-                            backgroundSize: 'contain',
-                            backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.0) 10.02%, rgba(0, 0, 0, 0.0) 77.2%, rgba(0, 0, 0, 0.0) 98.34%), url("${data.posterFileUrl}")`,
-                        }}
-                        className="absolute -z-20 top-0 left-0 w- object-contain rounded-xl lg:rounded-3xl"
-                    /> */}
                     <Image
                         src={data.posterFileUrl}
                         width={1000}
