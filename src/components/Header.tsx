@@ -68,6 +68,15 @@ const Header = ({ locale, selectedCity, cities, langs, selectedLang, pages }: He
     }, [isLogoAnimationOn]);
 
     useEffect(() => {
+        const UserLang = getCookie('UserLang');
+        if (isEmpty(UserLang)) {
+            setCookie('UserLang', 'Ru', {
+                maxAge: 60 * 60 * 24 * 365,
+            });
+        }
+    }, []);
+
+    useEffect(() => {
         if (
             getCookie('theme') === 'dark' ||
             (isEmpty(getCookie('theme')) && window.matchMedia('(prefers-color-scheme: dark)').matches)
