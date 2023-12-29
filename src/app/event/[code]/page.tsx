@@ -120,10 +120,11 @@ export default async function EventPage({ params }: Props) {
                     />
                     <Image
                         src={data.posterFileUrl}
+                        priority
                         width={1000}
                         height={1000}
                         alt="Poster"
-                        className="lg:h-full lg:w-fit rounded-xl"
+                        className="lg:h-full h-full lg:w-fit rounded-xl"
                     />
                 </div>
                 <div className="-z-10 lg:text-6xl text-3xl text-black dark:text-white font-bold my-4">{data.name}</div>

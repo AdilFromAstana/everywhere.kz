@@ -1,7 +1,6 @@
 'use server';
 
 import { getCookie } from 'cookies-next';
-import moment from 'moment';
 import { cookies } from 'next/headers';
 import Image from 'next/image';
 
@@ -20,11 +19,14 @@ import Link from 'next/link';
 
 import EventDateInfo from '@/components/EventDateInfo';
 import LeisureCategories from '@/components/LeisureCategories';
+import Posters from '@/components/Posters';
 import { CheckToken } from '@/functions/AxiosHandlers';
+import { City } from '@/types/City';
 import { LeisureCategory } from '@/types/LeisureCategory';
 
 export default async function Home() {
     const EventsData = await GetEvents();
+    const PostersData = await GetPosters();
     const EventumEventsData = await GetEventumEvents();
     const leisureCategories = await GetLeisureCategories();
     const UserCityId = getCookie('UserCityId', { cookies });
@@ -38,6 +40,7 @@ export default async function Home() {
             return x.id === 0;
         }
     }) ?? { id: 0, name: locale.EventListPage.All };
+    const cities = await GetCities();
 
     //TODO: TEMP
     const isWinterModeEventCode = 'Rixos-President-Astana';
@@ -45,6 +48,7 @@ export default async function Home() {
     return (
         <PageLayout>
             <LeisureCategories leisureCategories={leisureCategories} selectedCategory={selectedCategory} />
+            <Posters posters={PostersData} />
             <div className="flex flex-wrap -mx-4">
                 {EventsData?.map((x: EventInList) => {
                     return (
@@ -117,6 +121,7 @@ export default async function Home() {
                     const dateB = new Date(eventB?.Date) as any;
                     return dateA - dateB;
                 }).map((x: any) => {
+                    const city = cities.find((y) => y.id === x.CityId);
                     return (
                         <div key={x.Id} className="w-full md:w-1/2 lg:w-1/3 p-2 transition duration-200 ">
                             <Link href={'/e/' + x.Code}>
@@ -165,13 +170,12 @@ export default async function Home() {
                                               : x.NameRu}
                                     </span>
                                     <p className="text-coolGray-500 font-medium px-2 dark:text-white">
-                                        {`${moment(x.Date)
-                                            .locale(UserLang?.toLocaleLowerCase() ?? '')
-                                            .format('Do MMMM')} ${
-                                            moment(x.Date).format('YYYY') === moment().format('YYYY')
-                                                ? ''
-                                                : moment(x.Date).format('YYYY')
-                                        }`}
+                                        <EventDateInfo date={x.Date} />
+                                        {isEmpty(UserCityId) || parseInt(UserCityId ?? '0') === 0 ? (
+                                            <b> - {city?.name}</b>
+                                        ) : (
+                                            ''
+                                        )}
                                     </p>
                                 </div>
                             </Link>
@@ -300,6 +304,31 @@ async function GetEventumEvents() {
     return res.json();
 }
 
+async function GetPosters() {
+    // const UserCityId = getCookie('UserCityId', { cookies });
+    // const UserCategoryId = getCookie('UserCategoryId', { cookies });
+
+    process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
+
+    const url = process.env.NEXT_PUBLIC_EVENTUM_TEMP_URL + 'posters/forCommerce';
+    // `?CityId=${UserCityId ? (parseInt(UserCityId) === 0 ? '' : UserCityId) : ''}` +
+    // `&LeisureCategoryId=${UserCategoryId ? (parseInt(UserCategoryId) === 0 ? '' : UserCategoryId) : ''}`;
+
+    const res = await fetch(url, {
+        headers: {
+            'Content-Type': 'application/json',
+        },
+    });
+
+    if (!res.ok) {
+        console.log('res: ', res);
+        // This will activate the closest `error.js` Error Boundary
+        return [];
+    }
+
+    return res.json();
+}
+
 async function GetLeisureCategories() {
     try {
         const UserLang = getCookie('UserLang', { cookies });
@@ -334,5 +363,43 @@ async function GetLeisureCategories() {
     } catch (error) {
         const leisureCategories: LeisureCategory[] = [];
         return leisureCategories;
+    }
+}
+
+async function GetCities() {
+    try {
+        const UserLang = getCookie('UserLang', { cookies });
+        const locale = await getDictionary(UserLang?.toLocaleLowerCase() ?? 'ru');
+        let acceptLanguage = 'ru-RU';
+        switch (UserLang?.toLocaleLowerCase()) {
+            case 'kz':
+                acceptLanguage = 'kz-KZ';
+                break;
+            case 'en':
+                acceptLanguage = 'en-US';
+                break;
+        }
+
+        const token = await CheckToken();
+        const res = await fetch(process.env.NEXT_PUBLIC_MANAGEMENT_URL + 'commercial/cities', {
+            headers: {
+                'Accept-Language': acceptLanguage,
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${token}`,
+            },
+        });
+
+        if (!res.ok) {
+            throw new Error(`Failed to fetch data. Status: ${res.status}`);
+        }
+
+        const allCities: City = { id: 0, name: locale.Header.AllCities };
+        const cities: City[] = await res.json();
+
+        return [allCities, ...cities];
+    } catch (error) {
+        console.error('Error fetching cities - method "GetCities":', error);
+        const cities: City[] = [];
+        return cities;
     }
 }
