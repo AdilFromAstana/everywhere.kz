@@ -158,11 +158,11 @@ export default async function Home() {
                                         </div>
                                     </div>
                                     <span className="mb-4 md:text-2xl px-2 leading-tight font-bold text-black dark:text-white">
-                                        {UserLang?.toLocaleLowerCase() === 'ru'
-                                            ? x.NameRu
+                                        {UserLang?.toLocaleLowerCase() === 'en'
+                                            ? x.NameEn
                                             : UserLang?.toLocaleLowerCase() === 'kz'
                                               ? x.NameKz
-                                              : x.NameEn}
+                                              : x.NameRu}
                                     </span>
                                     <p className="text-coolGray-500 font-medium px-2 dark:text-white">
                                         {`${moment(x.Date)
@@ -190,8 +190,8 @@ export default async function Home() {
                                 Добро пожаловать на Kazticket.kz!
                             </h2>
                             <p className="text-gray-600 text-center text-lg leading-relaxed">
-                                Лучшая система онлайн покупки билетов на концерты, выставки, кино, культурные и
-                                спортивные мероприятия в Казахстане:
+                                Система онлайн покупки билетов на концерты, выставки, кино, культурные и спортивные
+                                мероприятия в Казахстане:
                             </p>
                             <ul className="mt-4 text-gray-600 text-center text-base leading-relaxed">
                                 <li className="mb-2">
