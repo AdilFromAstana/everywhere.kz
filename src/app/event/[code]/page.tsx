@@ -5,6 +5,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import Script from 'next/script';
 
+import KazticketButton from '@/components/KazticketButton';
 import { CheckToken } from '@/functions/AxiosHandlers';
 
 import type { Metadata, Viewport } from 'next';
@@ -128,18 +129,19 @@ export default async function EventPage({ params }: Props) {
                     />
                 </div>
                 <div className="-z-10 lg:text-6xl text-3xl text-black dark:text-white font-bold my-4">{data.name}</div>
-                <button
+                <KazticketButton locale={locale} eventCode={data.code} eventId={data.id} />
+                {/* <button
                     data-event-id={data.id}
                     data-event-code={data.code}
                     className="kazticket-widget-button z-0 cursor-pointer bg-sky-500 lg:w-56 w-full px-2 py-2 lg:px-6 lg:py-4 rounded-xl text-base lg:text-xl font-bold text-white transition duration-500 hover:shadow-2xl"
                 >
                     {locale.EventPage.BuyTicket}
-                </button>
+                </button> */}
                 <div className="my-6 w-full text-3xl text-black dark:text-white">{locale.EventPage.AboutDesc}</div>
                 <div className="EventDescription my-6 w-full invert-0 dark:invert z-0">
                     <div dangerouslySetInnerHTML={{ __html: data.description }}></div>
                 </div>
-                <Script src={process.env.NEXT_PUBLIC_WIDGET_URL} />
+                <Script src={`${process.env.NEXT_PUBLIC_WIDGET_URL}?time=${new Date().getMilliseconds()}`} />
             </>
         );
     }

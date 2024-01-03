@@ -140,7 +140,7 @@ export default async function Home() {
                                         ) : (
                                             <>
                                                 <div
-                                                    className="w-full h-full rounded-md -z-10 relative bg-cover bg-no-repeat bg-center"
+                                                    className="flex flex-col items-center w-full h-full rounded-md -z-10 relative bg-cover bg-no-repeat bg-center"
                                                     style={{
                                                         backgroundImage: `url("${x.Poster ?? ''}")`,
                                                         filter: 'blur(2px)',
