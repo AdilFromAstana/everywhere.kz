@@ -123,20 +123,22 @@ const Header = ({ locale, selectedCity, cities, langs, selectedLang, pages }: He
 
     return (
         <header className="bg-white dark:bg-black">
-            <Snowfall
-                style={{
-                    zIndex: 99999,
-                    position: 'fixed',
-                    width: '100vw',
-                    height: '100vh',
-                }}
-                snowflakeCount={350}
-                speed={[0.5, 1]}
-                rotationSpeed={[-2, 2]}
-                wind={[-1, 1]}
-                images={snowImages}
-                radius={[3, 10]}
-            />
+            {!pathname.includes('order') && (
+                <Snowfall
+                    style={{
+                        zIndex: 99999,
+                        position: 'fixed',
+                        width: '100vw',
+                        height: '100vh',
+                    }}
+                    snowflakeCount={350}
+                    speed={[0.5, 1]}
+                    rotationSpeed={[-2, 2]}
+                    wind={[-1, 1]}
+                    images={snowImages}
+                    radius={[3, 10]}
+                />
+            )}
             <nav className="mx-auto flex items-center justify-between my-6 px-2 lg:px-8" aria-label="Global">
                 <div className="flex lg:flex-1 z-50">
                     {!isEmpty(randomTransition) ? (
