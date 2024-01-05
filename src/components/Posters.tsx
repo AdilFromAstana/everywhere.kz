@@ -27,7 +27,7 @@ const Posters = ({ posters }: PostersProps) => {
                     delay: 7000,
                 }}
                 loop={true}
-                className="lg:h-96 h-56 rounded-xl mb-2 -mx-4 shadow-lg"
+                className="lg:h-96 h-64 rounded-xl mb-2 -mx-4 shadow-lg"
                 navigation={true}
                 modules={[Autoplay, Navigation]}
             >
