@@ -36,14 +36,28 @@ const Posters = ({ posters }: PostersProps) => {
                         <SwiperSlide key={x.Id}>
                             <Link href={x.URL} target="_blank">
                                 <div className="cursor-pointer h-full flex flex-col items-center">
-                                    <img
-                                        className="h-full block lg:hidden w-full object-cover"
-                                        src={x.MobileImageURL}
-                                    />
-                                    <img
-                                        className="h-full hidden lg:block w-full object-cover"
-                                        src={x.ComputerImageURL}
-                                    />
+                                    <div className="flex flex-col justify-center lg:hidden h-full">
+                                        <div
+                                            className="bg-cover bg-center absolute w-full h-full rounded-xl lg:rounded-3xl top-0 left-0 -z-20"
+                                            style={{
+                                                backgroundImage: `url("${x.MobileImageURL ?? ''}")`,
+                                                filter: 'blur(2px)',
+                                                height: '100%',
+                                            }}
+                                        />
+                                        <img alt={x.Name} className="h-full rounded-xl" src={x.MobileImageURL} />
+                                    </div>
+                                    <div className="lg:flex flex-col justify-center hidden h-full">
+                                        <div
+                                            className="bg-cover bg-center absolute w-full h-full rounded-xl top-0 left-0 -z-20"
+                                            style={{
+                                                backgroundImage: `url("${x.ComputerImageURL ?? ''}")`,
+                                                filter: 'blur(2px)',
+                                                height: '100%',
+                                            }}
+                                        />
+                                        <img className="h-fit w-full" src={x.ComputerImageURL} />
+                                    </div>
                                 </div>
                             </Link>
                         </SwiperSlide>
