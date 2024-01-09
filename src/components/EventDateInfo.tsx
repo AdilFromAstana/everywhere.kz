@@ -18,18 +18,18 @@ const EventDateInfo = ({ date }: EventDateProps) => {
 
     useEffect(() => {
         if (!UserLang) {
-            setData(moment(date).locale('ru_Ru').format('Do MMMM'));
+            setData(moment(date).locale('ru_Ru').format('Do MMMM HH:mm'));
         } else {
             switch (UserLang.toLocaleLowerCase()) {
                 case 'kz':
-                    setData(`${moment(date).locale('kz').format('Do MMMM')}`);
+                    setData(`${moment(date).locale('kz').format('Do MMMM HH:mm')}`);
                     break;
                 case 'en':
-                    setData(`${moment(date).locale('en').format('Do MMMM')}`);
+                    setData(`${moment(date).locale('en').format('Do MMMM HH:mm')}`);
                     break;
                 case 'ru':
                 default:
-                    setData(`${moment(date).locale('ru_Ru').format('Do MMMM')}`);
+                    setData(`${moment(date).locale('ru_Ru').format('Do MMMM HH:mm')}`);
                     break;
             }
         }
