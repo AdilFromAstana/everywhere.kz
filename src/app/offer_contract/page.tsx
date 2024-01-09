@@ -186,10 +186,20 @@ export default async function OfferContractPage() {
                     возврат билетов состоялся по желанию клиента не менее чем за 72 часа до начала мероприятия.
                     Исключением являются мероприятия, в описании которых указано: Билеты на данное мероприятия подлежат
                     возврату только в случае отмены мероприятия. <br />
-                    6.2. При отмене, замене или переносе Мероприятия по инициативе Организатора возврат осуществляется
-                    Исполнителем по адресу: г. Астана, Проспект Рақымжан Қошқарбаев, здание 27. При осуществлении
-                    возврата билета на отмененные мероприятия производится возврат номинальной стоимости возвращенного
-                    билета, за минусом сервисного сбора, если он применялся, а также стоимость доставки не возвращается.
+                    6.2. Возврат Билета, купленного Клиентом на концерты и прочие Зрелищные, Спортивные, Гастрольные,
+                    Туристические мероприятия. При запросе Покупателем возврата купленного ранее Билета, оператор имеет
+                    право отказать Покупателю, если осталось менее 72 (семидесяти двух) часов до начала Мероприятия.
+                    Если иного не предусмотрено Организаторами мероприятия.
+                    <br />
+                    6.2.1 Удерживаемая компенсационная выплата при возврате Билета, приобретенного на любые категории
+                    мероприятий по номинальной стоимости, составляет 5,5% (2,5% - сервисный сбор, 3% банковский
+                    эквайринг) от номинальной стоимости Билета или минимально 250 тенге. В случае, если Билеты на
+                    мероприятия были приобретены Покупателем с применением Сервисного сбора Оператора, то при возврате
+                    Билета удерживается полная сумма сервисного сбора.
+                    <br />
+                    6.2.2 При возврате стоимости Билета, приобретенного на любые категории мероприятий, на банковскую
+                    карту Клиента, возврат денежных средств осуществляется в течение 3-х (трёх) рабочих дней с момента
+                    получения Пользователем уведомления об успешном осуществлении отмены заказа Электронного билета.
                     <br />
                     6.3. При отмене, замене или переносе Мероприятия по инициативе Организатора возврат денег
                     осуществляется Исполнителю, зарегистрированному в заказе{' '}
@@ -506,11 +516,18 @@ export default async function OfferContractPage() {
                     are events, which description states: Tickets for this event are subject to refund only in case of
                     cancellation of the event.
                     <br />
-                    6.2 In case of cancellation, replacement or postponement of the Event on the initiative of the
-                    Organizer the return shall be made by the Contractor at: Astana City, Rakymzhan Koshkarbayev Avenue,
-                    building 27. In the implementation of the return of the ticket for the cancelled events the refund
-                    of the nominal value of the returned ticket, minus the service charge, if applicable, as well as the
-                    cost of delivery is not refunded.
+                    6.2 Refund of the Ticket purchased by the Client for concerts and other Entertainment, Sports,
+                    Touring, Tourist events. When the Buyer requests a refund of a previously purchased Ticket, the
+                    operator has the right to refuse the Buyer if there are less than 72 (seventy-two) hours left before
+                    the start of the Event. Unless otherwise provided by the organizers of the event.
+                    <br />
+                    6.2.1 The Service fee charged for the return of the Ticket purchased for any event category shall be
+                    5%(2,5% - service fee, 3% - bank acquiring) of the nominal value of the Ticket or 250 tenge, if the
+                    deduction amount is less than 250 tenge.
+                    <br />
+                    6.2.2 When returning the Ticket purchased for any categories of events to the Customer's bank card,
+                    the refund shall be made within three (3) working days. If there is a service fee for the concert
+                    event, the service fee amount is withheld when returning the Ticket.
                     <br />
                     6.3 In case of the cancellation, replacement or postponement of the Event on the initiative of the
                     Organizer, the refund shall be made to the Executive registered in the order https://kazticket.kz/
@@ -842,10 +859,18 @@ export default async function OfferContractPage() {
                     алым қайтарылмайды. Ерекшелік сипаттамасында көрсетілген іс-шаралар: Осы іс-шараға билеттер іс-шара
                     тоқтатылған жағдайда ғана қайтарылуға жатады.
                     <br />
-                    6.2. Ұйымның бастамасы бойынша Іс-шараның күшін жою, ауыстыру немесе ауыстыру кезінде қайтаруды
-                    Астана қаласы, Рахымжан Қошқарбаев даңғылы, 27 ғимарат мекенжайы бойынша Орындаушы жүзеге асырады.
-                    Тоқтатылған іс-шараларға билетті беру кезінде қайтарылған билеттің номиналды құны, егер ол көрінсе,
-                    сервистік алымды шегергені үшін қайтарылады, сондай-ақ қол жеткізу құны қайтарылмайды.
+                    6.2 Клиент сатып алған билетті концерттерге және басқа да ойын-сауық, спорттық, гастрольдік,
+                    туристік іс-шараларға қайтару. Сатып алушы бұрын сатып алынған билетті қайтаруды сұраған кезде, Егер
+                    іс-шара басталғанға дейін 72 (жетпіс екі) сағаттан аз уақыт қалса, оператор Сатып алушыдан бас
+                    тартуға құқылы. Егер іс-шараны ұйымдастырушылар басқа ережелер қолданбаса.
+                    <br />
+                    6.2.1 іс-шаралардың кез келген санатына сатып алынған билетті қайтарған кезде ұсталатын сервистік
+                    алым билеттің номиналды құнының 5% - ын(2,5% - қызмет ақысы, 3% - банк эквайрингі) немесе ұстап қалу
+                    сомасы 250 теңгеден кем болған жағдайда 250 теңгені құрайды.
+                    <br />
+                    6.2.2 Іс-шаралардың кез келген санатына сатып алынған билетті клиенттің банк картасына қайтарған
+                    кезде ақша қаражатын қайтару 3 (үш) жұмыс күні ішінде жүзеге асырылады. Егер концерттік іс-шараға
+                    сервистік алым қолданылатын болса, онда билетті қайтару кезінде сервистік алым сомасы ұсталады.
                     <br />
                     6.3. Ұйымдастырушының бастамасы бойынша Іс-шараның күші жойылған, алмастырылған немесе ауыстырылған
                     кезде ақшаны қайтару https://kazticket.kz/ тапсырысында тіркелген Тапсырыс берушінің жазбаша өтініші
