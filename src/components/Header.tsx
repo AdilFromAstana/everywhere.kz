@@ -27,6 +27,7 @@ import transitions from '@/constants/transtitions';
 import { isEmpty } from '@/functions';
 import { City } from '@/types/City';
 import { Dropdown } from '@/types/Dropdown';
+import PushNotificationRequest from './PushNotificationRequest';
 
 interface HeaderProps {
     cities: City[];
@@ -594,6 +595,7 @@ const Header = ({ locale, selectedCity, cities, langs, selectedLang, pages }: He
                     </Transition.Child>
                 </Dialog>
             </Transition>
+            <PushNotificationRequest />
         </header>
     );
 };
