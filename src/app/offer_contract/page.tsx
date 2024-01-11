@@ -178,58 +178,44 @@ export default async function OfferContractPage() {
                 </div>
                 <div className="text-base my-2">
                     6. Порядок и условия возврата денег <br />
-                    6.1.Стоимость билетов приобретенных у Исполнителя посредством сайта:{' '}
-                    <a href="https://kazticket.kz/" className="text-sky-500" target="_blank">
-                        https://kazticket.kz
-                    </a>{' '}
-                    осуществляется за минусом 3% от номинальной стоимости, сервисный сбор не возвращается, если обмен и
-                    возврат билетов состоялся по желанию клиента не менее чем за 72 часа до начала мероприятия.
-                    Исключением являются мероприятия, в описании которых указано: Билеты на данное мероприятия подлежат
-                    возврату только в случае отмены мероприятия. <br />
-                    6.2. Возврат Билета, купленного Клиентом на концерты и прочие Зрелищные, Спортивные, Гастрольные,
+                    6.1. Возврат Билета, купленного Клиентом на концерты и прочие Зрелищные, Спортивные, Гастрольные,
                     Туристические мероприятия. При запросе Покупателем возврата купленного ранее Билета, оператор имеет
                     право отказать Покупателю, если осталось менее 72 (семидесяти двух) часов до начала Мероприятия.
                     Если иного не предусмотрено Организаторами мероприятия.
                     <br />
-                    6.2.1 Удерживаемая компенсационная выплата при возврате Билета, приобретенного на любые категории
+                    6.1.1. Удерживаемая компенсационная выплата при возврате Билета, приобретенного на любые категории
                     мероприятий по номинальной стоимости, составляет 5,5% (2,5% - сервисный сбор, 3% банковский
                     эквайринг) от номинальной стоимости Билета или минимально 250 тенге. В случае, если Билеты на
                     мероприятия были приобретены Покупателем с применением Сервисного сбора Оператора, то при возврате
-                    Билета удерживается полная сумма сервисного сбора.
-                    <br />
-                    6.2.2 При возврате стоимости Билета, приобретенного на любые категории мероприятий, на банковскую
+                    Билета удерживается полная сумма сервисного сбора. <br />
+                    6.1.2. При возврате стоимости Билета, приобретенного на любые категории мероприятий, на банковскую
                     карту Клиента, возврат денежных средств осуществляется в течение 3-х (трёх) рабочих дней с момента
                     получения Пользователем уведомления об успешном осуществлении отмены заказа Электронного билета.
                     <br />
-                    6.3. При отмене, замене или переносе Мероприятия по инициативе Организатора возврат денег
+                    6.2. При отмене, замене или переносе Мероприятия по инициативе Организатора возврат денег
                     осуществляется Исполнителю, зарегистрированному в заказе{' '}
                     <a href="https://kazticket.kz/" target="_blank">
                         https://kazticket.kz/
                     </a>{' '}
                     по предъявлению документа удостоверяющего личность и билета, на основании письменного заявления
                     Заказчика. Срок рассмотрения такого заявления 10 (Десять) рабочих дней с момента получения
-                    заявления.
-                    <br />
-                    6.4. При переносе Мероприятия, Заказчик принимает и соглашается с тем, что деньги подлежат возврату
+                    заявления. <br />
+                    6.3. При переносе Мероприятия, Заказчик принимает и соглашается с тем, что деньги подлежат возврату
                     лишь в случае, если они не были перечислены ранее Организатору, возврат осуществляется за минусом
                     10% от номинальной стоимости Билета, сервисный сбор, если применялся, не возвращается. Стоимость
                     доставки также не возвращается. Если Заказчик перечислил деньги Организатору, ответственность по
                     возврату денежных средств Заказчику, переходит к Организатору Мероприятия, при этом Организатор
                     имеет права не возвращать деньги Заказчику, если им уже оплачены все расходы по подготовке
                     предстоящего Мероприятия, при этом он гарантирует проведение Мероприятия на перенесенный срок, ранее
-                    купленные билеты являются действительными.
-                    <br />
-                    6.6. Частичный возврат за минусом 30% от номинальной стоимости билета производится в случаях: <br />
-                    6.6.1. за один час до начала Мероприятия; <br />
-                    6.6.2. Полный возврат номинальной стоимости билета за минусом сервисного сбора и доставки Заказчику,
-                    согласно п.6.5. возможен без каких либо объяснений со стороны Исполнителя, в случае полной отмены
-                    Мероприятия Организатором. <br />
-                    6.7. Билеты не подлежат возврату: <br />
-                    6.7.1. После проведения валидации билета; <br />
-                    6.7.2. Частичный возврат при покупке двух и более билетов из одного IP адреса (аккаунта); <br />
-                    6.7.3. После начала сеанса/мероприятия; <br />
-                    6.7.4. Если возврат не предусмотрен правилами Мероприятия; <br />
-                    6.7.5. Обмен билета на другой билет; <br />
+                    купленные билеты являются действительными. <br />
+                    6.4. Частичный возврат за минусом 30% от номинальной стоимости билета производится в случаях: <br />
+                    6.4.1. за один час до начала Мероприятия; <br />
+                    6.5. Билеты не подлежат возврату: <br />
+                    6.5.1. После проведения валидации билета; <br />
+                    6.5.2. Частичный возврат при покупке двух и более билетов из одного IP адреса (аккаунта); <br />
+                    6.5.3. После начала сеанса/мероприятия; <br />
+                    6.5.4. Если возврат не предусмотрен правилами Мероприятия; <br />
+                    6.5.5. Обмен билета на другой билет; <br />
                 </div>
                 <div className="text-base my-2">
                     7. Ограничение ответственности <br />
@@ -505,64 +491,38 @@ export default async function OfferContractPage() {
                     5.2.4 Demand proper execution of this Agreement by the Executor.
                 </div>
                 <div className="text-base my-2">
-                    6. Refund procedure and conditions
-                    <br />
-                    6.1 Tickets purchased from Executor through the site:{' '}
-                    <a href="https://kazticket.kz/" className="text-sky-500" target="_blank">
-                        https://kazticket.kz
-                    </a>{' '}
-                    are refunded minus 3% of the face value, the service charge is not refundable, if the exchange and
-                    return of tickets took place at least 72 hours before the event by the client's request. Exceptions
-                    are events, which description states: Tickets for this event are subject to refund only in case of
-                    cancellation of the event.
-                    <br />
-                    6.2 Refund of the Ticket purchased by the Client for concerts and other Entertainment, Sports,
+                    6. Refund procedure and conditions <br />
+                    6.1. Refund of the Ticket purchased by the Client for concerts and other Entertainment, Sports,
                     Touring, Tourist events. When the Buyer requests a refund of a previously purchased Ticket, the
                     operator has the right to refuse the Buyer if there are less than 72 (seventy-two) hours left before
-                    the start of the Event. Unless otherwise provided by the organizers of the event.
-                    <br />
-                    6.2.1 The Service fee charged for the return of the Ticket purchased for any event category shall be
-                    5%(2,5% - service fee, 3% - bank acquiring) of the nominal value of the Ticket or 250 tenge, if the
-                    deduction amount is less than 250 tenge.
-                    <br />
-                    6.2.2 When returning the Ticket purchased for any categories of events to the Customer's bank card,
+                    the start of the Event. Unless otherwise provided by the organizers of the event. <br />
+                    6.1.1. The Service fee charged for the return of the Ticket purchased for any event category shall
+                    be 5,5% (2,5% - service fee, 3% - bank acquiring) of the nominal value of the Ticket or 250 tenge,
+                    if the deduction amount is less than 250 tenge. <br />
+                    6.1.2. When returning the Ticket purchased for any categories of events to the Customer's bank card,
                     the refund shall be made within three (3) working days. If there is a service fee for the concert
-                    event, the service fee amount is withheld when returning the Ticket.
-                    <br />
-                    6.3 In case of the cancellation, replacement or postponement of the Event on the initiative of the
+                    event, the service fee amount is withheld when returning the Ticket. <br />
+                    6.2. In case of the cancellation, replacement or postponement of the Event on the initiative of the
                     Organizer, the refund shall be made to the Executive registered in the order https://kazticket.kz/
                     on presentation of the identification document and the ticket, on the basis of a written application
                     of the Customer. The period of consideration of such an application shall be 10 (Ten) working days
-                    from the date of receipt of the application.
-                    <br />
-                    6.4 When postponing the Event, the Customer accepts and agrees that the money is refundable only if
+                    from the date of receipt of the application. <br />
+                    6.3. When postponing the Event, the Customer accepts and agrees that the money is refundable only if
                     it has not been previously transferred to the Organizer, the refund is made minus 10% of the nominal
                     value of the Ticket, the service charge, if applicable, is not refundable. The delivery fee is not
                     refunded either. If the Customer has transferred the money to the Organizer, the responsibility to
                     return the money to the Customer shall pass to the Event Organizer, and the Organizer shall have the
                     right not to return the money to the Customer if he has already paid all the expenses for the
                     preparation of the upcoming Event, and he guarantees to hold the Event for the postponed period, the
-                    previously purchased tickets shall be valid.
-                    <br />
-                    6.6. A partial refund less than 30% of the nominal ticket price is made in the following cases:
-                    <br />
-                    6.6.1. one hour before the Event starts;
-                    <br />
-                    6.6.2 Full refund of the ticket's nominal value minus the service fee and delivery to the Customer,
-                    according to clause 6.5 is possible without any explanations from the Organizer, in case of complete
-                    cancellation of the Event by the Organizer.
-                    <br />
-                    6.7. Tickets are non-refundable:
-                    <br />
-                    6.7.1. After the валидацииticket has been validated;
-                    <br />
-                    6.7.2. Partial refund when purchasing two or more tickets from the same IP address (account);
-                    <br />
-                    6.7.3. After the session/event starts;
-                    <br />
-                    6.7.4. If the refund is not provided for in the Event rules;
-                    <br />
-                    6.7.5. Exchange of a ticket for another ticket;
+                    previously purchased tickets shall be valid. <br />
+                    6.4. A partial refund less than 30% of the nominal ticket price is made in the following cases:
+                    6.4.1. one hour before the Event starts; <br />
+                    6.5. Tickets are non-refundable: <br />
+                    6.5.1. After the валидацииticket has been validated; <br />
+                    6.5.2. Partial refund when purchasing two or more tickets from the same IP address (account); <br />
+                    6.5.3. After the session/event starts; <br />
+                    6.5.4. If the refund is not provided for in the Event rules; <br />
+                    6.5.5. Exchange of a ticket for another ticket;
                     <br />
                 </div>
                 <div className="text-base my-2">
@@ -848,65 +808,40 @@ export default async function OfferContractPage() {
                     5.2.4. Требовать надлежащего исполнения настоящего договора Исполнителем.
                 </div>
                 <div className="text-base my-2">
-                    6. Ақшаны қайтару тәртібі мен шарттары
-                    <br />
-                    6.1.Сайт арқылы Орындаушыдан сатып алынған билеттердің құны:{' '}
-                    <a href="https://kazticket.kz/" className="text-sky-500" target="_blank">
-                        https://kazticket.kz
-                    </a>{' '}
-                    номиналды құнының 3% алып тастағанда жүзеге асырылады, егер билеттерді айырбастау және қайтару
-                    клиенттің қалауы бойынша іс-шара басталғанға дейін кемінде 72 сағат бұрын болған болса, сервистік
-                    алым қайтарылмайды. Ерекшелік сипаттамасында көрсетілген іс-шаралар: Осы іс-шараға билеттер іс-шара
-                    тоқтатылған жағдайда ғана қайтарылуға жатады.
-                    <br />
-                    6.2 Клиент сатып алған билетті концерттерге және басқа да ойын-сауық, спорттық, гастрольдік,
+                    6. Ақшаны қайтару тәртібі мен шарттары <br />
+                    6.1. Клиент сатып алған билетті концерттерге және басқа да ойын-сауық, спорттық, гастрольдік,
                     туристік іс-шараларға қайтару. Сатып алушы бұрын сатып алынған билетті қайтаруды сұраған кезде, Егер
                     іс-шара басталғанға дейін 72 (жетпіс екі) сағаттан аз уақыт қалса, оператор Сатып алушыдан бас
-                    тартуға құқылы. Егер іс-шараны ұйымдастырушылар басқа ережелер қолданбаса.
-                    <br />
-                    6.2.1 іс-шаралардың кез келген санатына сатып алынған билетті қайтарған кезде ұсталатын сервистік
-                    алым билеттің номиналды құнының 5% - ын(2,5% - қызмет ақысы, 3% - банк эквайрингі) немесе ұстап қалу
-                    сомасы 250 теңгеден кем болған жағдайда 250 теңгені құрайды.
-                    <br />
-                    6.2.2 Іс-шаралардың кез келген санатына сатып алынған билетті клиенттің банк картасына қайтарған
+                    тартуға құқылы. Егер іс-шараны ұйымдастырушылар басқа ережелер қолданбаса. <br />
+                    6.1.1. іс-шаралардың кез келген санатына сатып алынған билетті қайтарған кезде ұсталатын сервистік
+                    алым билеттің номиналды құнының 5,5% - ын(2,5% - қызмет ақысы, 3% - банк эквайрингі) немесе ұстап
+                    қалу сомасы 250 теңгеден кем болған жағдайда 250 теңгені құрайды. <br />
+                    6.1.2. Іс-шаралардың кез келген санатына сатып алынған билетті клиенттің банк картасына қайтарған
                     кезде ақша қаражатын қайтару 3 (үш) жұмыс күні ішінде жүзеге асырылады. Егер концерттік іс-шараға
-                    сервистік алым қолданылатын болса, онда билетті қайтару кезінде сервистік алым сомасы ұсталады.
+                    сервистік алым қолданылатын болса, онда билетті қайтару кезінде сервистік алым сомасы ұсталады.{' '}
                     <br />
-                    6.3. Ұйымдастырушының бастамасы бойынша Іс-шараның күші жойылған, алмастырылған немесе ауыстырылған
+                    6.2. Ұйымдастырушының бастамасы бойынша Іс-шараның күші жойылған, алмастырылған немесе ауыстырылған
                     кезде ақшаны қайтару https://kazticket.kz/ тапсырысында тіркелген Тапсырыс берушінің жазбаша өтініші
                     негізінде жеке басын куәландыратын құжатты және билетті ұсыну бойынша Орындаушыға жүзеге асырылады.
-                    Мұндай өтінішті қарау мерзімі өтінішті алған сәттен бастап 10 (он) жұмыс күні болып саналады.
-                    <br />
-                    6.4. Іс-шараны ауыстырған кезде Тапсырыс беруші ақша, егер ол бұрын Ұйымдастырушыға аударылмаған
+                    Мұндай өтінішті қарау мерзімі өтінішті алған сәттен бастап 10 (он) жұмыс күні болып саналады. <br />
+                    6.3. Іс-шараны ауыстырған кезде Тапсырыс беруші ақша, егер ол бұрын Ұйымдастырушыға аударылмаған
                     жағдайда ғана қайтарылуға жататынын қабылдайды және келіседі, қайтару Билеттің номиналды құнының 10%
                     шегере отырып жүзеге асырылады, егер сервистік алым қолданылған болса, қайтарылмайды. Жеткізу құны
                     да қайтарылмайды. Егер Тапсырыс беруші ұйымдастырушыға ақша аударса, Тапсырыс берушіге ақшалай
                     қаражатты қайтару бойынша жауапкершілік іс-шараны Ұйымдастырушыға өтеді, бұл ретте ұйымдастырушы
                     алдағы Іс-шараны дайындау бойынша барлық шығыстар төленген болса, Тапсырыс берушіге ақшаны
                     қайтармауға құқылы, бұл ретте ол Іс-шараны кейінге қалдырылған мерзімге өткізуге кепілдік береді,
-                    бұрын сатып алынған билеттер жарамды болып табылады.
-                    <br />
-                    6.6. Билеттің номиналдық құнының 30% шегеріле отырып, ішінара қайтару келесі жағдайларда жүзеге
-                    асырылады:
-                    <br />
-                    6.6.1. іс-шараның басталуына бір сағат қалғанда;
-                    <br />
-                    6.6.2. 6.5-тармаққа сәйкес Тапсырыс берушіге сервистік алым мен жеткізуді шегергендегі билеттің
-                    номиналды құнын толық қайтару Ұйымдастырушы Іс-шараны толығымен жойған жағдайда, Орындаушы тарапынан
-                    ешқандай түсіндірмесіз мүмкін болады.
-                    <br />
-                    6.7. Билеттер қайтаруға жатпайды:
-                    <br />
-                    6.7.1. Кейін өткізу мерзімдері валидациялар билет;
-                    <br />
-                    6.7.2. Бір билеттен екі немесе одан да көп билет сатып алған жағдайда ішінара қайтару IP мекенжайлар
-                    (есептік жазба);
-                    <br />
-                    6.7.3. Сессия/іс-шара басталғаннан кейін;
-                    <br />
-                    6.7.4. Егер қайтару Іс-шара ережелерінде көзделмесе;
-                    <br />
-                    6.7.5. Билетті басқа билетке айырбастау;
+                    бұрын сатып алынған билеттер жарамды болып табылады. <br />
+                    6.4. Билеттің номиналдық құнының 30% шегеріле отырып, ішінара қайтару келесі жағдайларда жүзеге
+                    асырылады: <br />
+                    6.4.1. іс-шараның басталуына бір сағат қалғанда; <br />
+                    6.5. Билеттер қайтаруға жатпайды: <br />
+                    6.5.1. Кейін өткізу мерзімдері валидациялар билет; <br />
+                    6.5.2. Бір билеттен екі немесе одан да көп билет сатып алған жағдайда ішінара қайтару IP мекенжайлар
+                    (есептік жазба); <br />
+                    6.5.3. Сессия/іс-шара басталғаннан кейін; <br />
+                    6.5.4. Егер қайтару Іс-шара ережелерінде көзделмесе; <br />
+                    6.5.5. Билетті басқа билетке айырбастау;
                     <br />
                 </div>
                 <div className="text-base my-2">

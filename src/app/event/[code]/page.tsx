@@ -62,20 +62,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
                 images: data.posterFileUrl,
             },
             description: data.description
-                ?.replace('<p>', '')
-                ?.replace('</p>', '')
-                ?.replace(/<strong [^>]*>/g, '')
-                ?.replace(/<\/strong>/g, '')
-                ?.replace(/<h2 [^>]*>/g, '')
-                ?.replace(/<\/h2>/g, '')
-                ?.replace(/<div [^>]*>/g, '')
-                ?.replace(/<\/div>/g, '')
-                ?.replace(/<span [^>]*>/g, '')
-                ?.replace(/<\/span>/g, '')
-                ?.replace('<strong>', '')
-                ?.replace('</strong>', '')
-                ?.replace('&nbsp;', '')
-                ?.replace('&quot;', '')
+                ?.replace(/<[^>]*>?/gm, ' ')
+                ?.replace(/&nbsp;/gi, ' ')
                 ?.replace(/\s+/g, ' '),
         };
     }
