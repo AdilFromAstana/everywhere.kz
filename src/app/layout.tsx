@@ -1,6 +1,7 @@
 import { Metadata, Viewport } from 'next';
 
 import './globals.css';
+import '../assets/fonts/Gilroy/stylesheet.css';
 
 import { Inter } from 'next/font/google';
 import Script from 'next/script';

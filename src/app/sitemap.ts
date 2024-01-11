@@ -4,6 +4,15 @@ import { CheckToken } from '@/functions/AxiosHandlers';
 import { EventInList } from '@/types/EventInList';
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+    const staticPages = [
+        '/offer_contract',
+        '/payment_security',
+        '/security_policy',
+        '/contacts',
+        '/offer',
+        '/about_us',
+    ];
+
     return [
         {
             url: process.env.NEXT_PUBLIC_APP_URL,
@@ -15,6 +24,10 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         })),
         ...(await GetEventumEvents()).map((x: any) => ({
             url: `${process.env.NEXT_PUBLIC_APP_URL}/e/${x.Code}`,
+            lastModified: new Date(),
+        })),
+        ...staticPages.map((x) => ({
+            url: `${process.env.NEXT_PUBLIC_APP_URL}/${x}`,
             lastModified: new Date(),
         })),
     ];

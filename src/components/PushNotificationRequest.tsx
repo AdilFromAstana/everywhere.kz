@@ -79,6 +79,7 @@ const PushNotificationRequest = ({}: PushNotificationProps) => {
                 setCookie('IsSubcribed', true, {
                     maxAge: 60 * 60 * 24 * 365,
                 });
+                setIsCanceled(true);
                 console.log('Подписка успешно отправлена на сервер');
             })
             .catch((err: Error) => {
@@ -116,7 +117,12 @@ const PushNotificationRequest = ({}: PushNotificationProps) => {
                                 Разрешить
                             </div>
                             <div
-                                onClick={() => setIsCanceled(true)}
+                                onClick={() => {
+                                    setIsCanceled(true);
+                                    setCookie('IsSubcribed', true, {
+                                        maxAge: 60 * 60 * 24 * 1,
+                                    });
+                                }}
                                 className="text-white cursor-pointer lg:text-lg text-sm rounded-lg underline"
                             >
                                 Нет, спасибо

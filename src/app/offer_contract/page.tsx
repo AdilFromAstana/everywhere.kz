@@ -497,8 +497,8 @@ export default async function OfferContractPage() {
                     operator has the right to refuse the Buyer if there are less than 72 (seventy-two) hours left before
                     the start of the Event. Unless otherwise provided by the organizers of the event. <br />
                     6.1.1. The Service fee charged for the return of the Ticket purchased for any event category shall
-                    be 5% (2,5% - service fee, 3% - bank acquiring) of the nominal value of the Ticket or 250 tenge, if
-                    the deduction amount is less than 250 tenge. <br />
+                    be 5,5% (2,5% - service fee, 3% - bank acquiring) of the nominal value of the Ticket or 250 tenge,
+                    if the deduction amount is less than 250 tenge. <br />
                     6.1.2. When returning the Ticket purchased for any categories of events to the Customer's bank card,
                     the refund shall be made within three (3) working days. If there is a service fee for the concert
                     event, the service fee amount is withheld when returning the Ticket. <br />
@@ -814,8 +814,8 @@ export default async function OfferContractPage() {
                     іс-шара басталғанға дейін 72 (жетпіс екі) сағаттан аз уақыт қалса, оператор Сатып алушыдан бас
                     тартуға құқылы. Егер іс-шараны ұйымдастырушылар басқа ережелер қолданбаса. <br />
                     6.1.1. іс-шаралардың кез келген санатына сатып алынған билетті қайтарған кезде ұсталатын сервистік
-                    алым билеттің номиналды құнының 5% - ын(2,5% - қызмет ақысы, 3% - банк эквайрингі) немесе ұстап қалу
-                    сомасы 250 теңгеден кем болған жағдайда 250 теңгені құрайды. <br />
+                    алым билеттің номиналды құнының 5,5% - ын(2,5% - қызмет ақысы, 3% - банк эквайрингі) немесе ұстап
+                    қалу сомасы 250 теңгеден кем болған жағдайда 250 теңгені құрайды. <br />
                     6.1.2. Іс-шаралардың кез келген санатына сатып алынған билетті клиенттің банк картасына қайтарған
                     кезде ақша қаражатын қайтару 3 (үш) жұмыс күні ішінде жүзеге асырылады. Егер концерттік іс-шараға
                     сервистік алым қолданылатын болса, онда билетті қайтару кезінде сервистік алым сомасы ұсталады.{' '}

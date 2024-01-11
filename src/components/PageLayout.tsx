@@ -1,4 +1,4 @@
-import { ChatBubbleLeftRightIcon, DocumentTextIcon, UserGroupIcon } from '@heroicons/react/24/outline';
+import { ChatBubbleLeftRightIcon, DocumentTextIcon, UserGroupIcon, UsersIcon } from '@heroicons/react/24/outline';
 import { getCookie } from 'cookies-next';
 import { getDictionary } from 'dictionaries';
 import { cookies } from 'next/headers';
@@ -103,6 +103,11 @@ const PageLayout: React.FC<PageLayoutProps> = async ({ children }) => {
             label: locale.Footer.Contacts,
             url: '/contacts',
             icon: <ChatBubbleLeftRightIcon className="h-5 w-5" />,
+        },
+        {
+            label: 'Организаторам',
+            url: '/offer',
+            icon: <UsersIcon className="h-5 w-5" />,
         },
         {
             label: locale.Footer.AboutUs,
