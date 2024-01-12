@@ -626,9 +626,7 @@ export default async function OfferPage() {
                 </svg>
 
                 <div className="font-['Gilroy'] w-full h-80 flex lg:flex-row flex-col justify-between items-center bg-[#F4F9FF] lg:rounded-[75px] rounded-[25px]">
-                    <div className="lg:text-5xl text-2xl font-bold lg:mx-20 mx-0 lg:my-0 my-10">
-                        Оставить заявку на КП
-                    </div>
+                    <div className="lg:text-5xl text-2xl font-bold lg:mx-20 mx-0 lg:my-0 my-10">Стать партнером</div>
                     <div className="lg:h-80 h-96 bg-[#0490C3] lg:w-2/5 w-full lg:rounded-[75px] rounded-[25px] flex flex-col justify-center items-center">
                         <OfferForm />
                     </div>
