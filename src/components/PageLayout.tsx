@@ -1,4 +1,4 @@
-import { ChatBubbleLeftRightIcon, DocumentTextIcon, UserGroupIcon, UsersIcon } from '@heroicons/react/24/outline';
+import { ChatBubbleLeftRightIcon, DocumentTextIcon, UsersIcon } from '@heroicons/react/24/outline';
 import { getCookie } from 'cookies-next';
 import { getDictionary } from 'dictionaries';
 import { cookies } from 'next/headers';
