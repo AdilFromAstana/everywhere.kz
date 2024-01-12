@@ -109,11 +109,11 @@ const PageLayout: React.FC<PageLayoutProps> = async ({ children }) => {
             url: '/offer',
             icon: <UsersIcon className="h-5 w-5" />,
         },
-        {
-            label: locale.Footer.AboutUs,
-            url: '/about_us',
-            icon: <UserGroupIcon className="h-5 w-5" />,
-        },
+        // {
+        //     label: locale.Footer.AboutUs,
+        //     url: '/about_us',
+        //     icon: <UserGroupIcon className="h-5 w-5" />,
+        // },
     ];
 
     return (
