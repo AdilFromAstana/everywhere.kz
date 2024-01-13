@@ -5,6 +5,9 @@ import '../assets/fonts/Gilroy/stylesheet.css';
 
 import { Inter } from 'next/font/google';
 import Script from 'next/script';
+import { Suspense } from 'react';
+
+import { MetaScriptEvents } from '@/components/MetaScriptEvents';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -61,7 +64,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                     </div>
                 </noscript>
             </head>
-            <body className={inter.className + ' dark:bg-black'}>{children}</body>
+            <body className={inter.className + ' dark:bg-black'}>
+                {children}
+                <Suspense fallback={null}>
+                    <MetaScriptEvents />
+                </Suspense>
+            </body>
         </html>
     );
 }
