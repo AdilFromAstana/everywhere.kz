@@ -12,7 +12,7 @@ const KazticketButton = ({ eventId, eventCode, locale }: ButtonProps) => {
     const buyTicketFromKazticket = () => {
         if (eventId && eventCode) {
             //@ts-expect-error: Frontend
-            kztw.create(eventId, eventCode);
+            window.kztw.create(eventId, eventCode);
         }
     };
     return (
