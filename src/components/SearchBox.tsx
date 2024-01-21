@@ -58,7 +58,7 @@ const SearchBox = ({ cities, locale }: SearchBoxProps) => {
                     leaveTo="opacity-0"
                     afterLeave={() => setFilteredEvents([])}
                 >
-                    <Combobox.Options className="absolute mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black/5 focus:outline-none sm:text-sm">
+                    <Combobox.Options className="absolute mt-1 max-h-96 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black/5 focus:outline-none sm:text-sm">
                         {!IsLoaded ? (
                             <>
                                 <div className="w-full flex justify-center py-5" role="status">
@@ -93,20 +93,19 @@ const SearchBox = ({ cities, locale }: SearchBoxProps) => {
                                 >
                                     <Combobox.Option
                                         key={event.id}
-                                        className={`relative cursor-pointer select-none py-2 px-4 text-gray-900 hover:bg-[#0000000d]`}
+                                        className={`relative border-b-2 border-b-[#d9d9d9] cursor-pointer select-none py-2 px-4 text-gray-900 hover:bg-[#0000000d]`}
                                         value={event.name}
                                     >
-                                        <div className="flex flex-row justify-between">
-                                            <span className="flex lg:flex-row flex-col gap-2 items-center">
-                                                <span className="text-base lg:text-xl">{event.name}</span>
+                                        <div className="flex flex-col gap-2">
+                                            <span className="text-base lg:text-xl text-center">{event.name}</span>
+                                            <span className="flex flex-row gap-2 justify-between">
                                                 <span className="text-xs">
                                                     <EventDateInfo date={event.beginDate} />
-                                                    {/* {moment().format('Do MMM HH:mm')} */}
                                                 </span>
-                                            </span>
-                                            <span className="lg:text-xl text-xs font-normal items-center flex flex-row">
-                                                <MapPinIcon className="w-4" />
-                                                <span>{event.cityName}</span>
+                                                <span className="lg:text-xl text-xs font-normal items-center flex flex-row">
+                                                    <MapPinIcon className="w-4" />
+                                                    <span>{event.cityName}</span>
+                                                </span>
                                             </span>
                                         </div>
                                     </Combobox.Option>
