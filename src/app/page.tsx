@@ -222,7 +222,7 @@ export default async function Home() {
 }
 
 async function GetEvents() {
-    const { EVENTS_URL = '' } = process.env;
+    const { NEXT_PUBLIC_EVENTS_URL = '' } = process.env;
     const token = await CheckToken();
 
     const UserLang = getCookie('UserLang', { cookies });
@@ -240,7 +240,7 @@ async function GetEvents() {
     const UserCategoryId = getCookie('UserCategoryId', { cookies });
 
     const url =
-        EVENTS_URL +
+        NEXT_PUBLIC_EVENTS_URL +
         'commercial/Events' +
         `?CityId=${UserCityId ? (parseInt(UserCityId) === 0 ? '' : UserCityId) : ''}` +
         `&LeisureCategoryId=${UserCategoryId ? (parseInt(UserCategoryId) === 0 ? '' : UserCategoryId) : ''}`;

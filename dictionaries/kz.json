@@ -3,6 +3,9 @@
         "ToMain": "Басты бетке",
         "PageNotFound": "Бет табылмады"
     },
+    "Search": {
+        "NotFound": "Еш нәрсе табылмады"
+    },
     "Header": {
         "SwithTheme": "Тақырыпты өзгерту",
         "Language": "Тіл",

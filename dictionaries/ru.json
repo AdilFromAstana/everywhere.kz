@@ -3,6 +3,9 @@
         "ToMain": "На главную",
         "PageNotFound": "Страница не найдена"
     },
+    "Search": {
+        "NotFound": "Ничего не найдено"
+    },
     "Header": {
         "SwithTheme": "Сменить тему",
         "Language": "Язык",

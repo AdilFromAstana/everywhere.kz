@@ -34,10 +34,10 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 }
 
 async function GetEvents() {
-    const { EVENTS_URL = '' } = process.env;
+    const { NEXT_PUBLIC_EVENTS_URL = '' } = process.env;
     const token = await CheckToken();
 
-    const res = await fetch(EVENTS_URL + 'commercial/Events', {
+    const res = await fetch(NEXT_PUBLIC_EVENTS_URL + 'commercial/Events', {
         headers: {
             'Accept-Language': 'ru-RU',
             'Content-Type': 'application/json',

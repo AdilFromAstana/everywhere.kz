@@ -3,6 +3,9 @@
         "ToMain": "To the main page",
         "PageNotFound": "Page not found"
     },
+    "Search": {
+        "NotFound": "Nothing found"
+    },
     "Header": {
         "SwithTheme": "Swith theme",
         "Language": "Language",
