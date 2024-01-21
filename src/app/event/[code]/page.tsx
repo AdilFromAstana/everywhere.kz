@@ -5,13 +5,14 @@ import Image from 'next/image';
 import Link from 'next/link';
 import Script from 'next/script';
 
+import EmptyPoster from '@/assets/empty-poster.svg';
 import KazticketButton from '@/components/KazticketButton';
 import { CheckToken } from '@/functions/AxiosHandlers';
 
 import type { Metadata, Viewport } from 'next';
 
 async function GetEventData(code: string) {
-    const { EVENTS_URL = '' } = process.env;
+    const { NEXT_PUBLIC_EVENTS_URL = '' } = process.env;
 
     const token = await CheckToken();
 
@@ -26,7 +27,7 @@ async function GetEventData(code: string) {
             break;
     }
 
-    const res = await fetch(EVENTS_URL + 'commercial/Events/' + code, {
+    const res = await fetch(NEXT_PUBLIC_EVENTS_URL + 'commercial/Events/' + code, {
         headers: {
             'Accept-Language': acceptLanguage,
             'Content-Type': 'application/json',
@@ -36,7 +37,7 @@ async function GetEventData(code: string) {
 
     if (!res.ok) {
         // This will activate the closest `error.js` Error Boundary
-        console.log('res: ', res);
+        console.log('GetEventData Error: ', res);
         return null;
     }
 
@@ -105,11 +106,11 @@ export default async function EventPage({ params }: Props) {
                         className="bg-cover bg-center absolute w-full h-full rounded-xl lg:rounded-3xl top-0 left-0 -z-20"
                         style={{
                             filter: 'blur(4px)',
-                            backgroundImage: `url("${data.posterFileUrl}")`,
+                            backgroundImage: `url("${data.posterFileUrl ?? EmptyPoster}")`,
                         }}
                     />
                     <Image
-                        src={data.posterFileUrl}
+                        src={data.posterFileUrl ?? EmptyPoster}
                         priority
                         width={1000}
                         height={1000}

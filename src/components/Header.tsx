@@ -6,6 +6,7 @@ import {
     BuildingOffice2Icon,
     ChevronDownIcon,
     LanguageIcon,
+    MagnifyingGlassIcon,
     MapPinIcon,
     MoonIcon,
     PhoneIcon,
@@ -20,14 +21,15 @@ import { Fragment, useEffect, useState } from 'react';
 import Snowfall from 'react-snowfall';
 
 import WhiteMonoLogo from '@/assets/kazticket-logo-white-mono.svg';
-import Logo from '@/assets/kazticket-logo-winter.svg';
-// import Logo from '@/assets/kazticket-logo.svg';
+// import Logo from '@/assets/kazticket-logo-winter.svg';
+import Logo from '@/assets/kazticket-logo.svg';
 import SnowImage from '@/assets/show.png';
 import transitions from '@/constants/transtitions';
 import { isEmpty } from '@/functions';
 import { City } from '@/types/City';
 import { Dropdown } from '@/types/Dropdown';
 import PushNotificationRequest from './PushNotificationRequest';
+import SearchBox from './SearchBox';
 
 interface HeaderProps {
     cities: City[];
@@ -40,6 +42,7 @@ interface HeaderProps {
 
 const Header = ({ locale, selectedCity, cities, langs, selectedLang, pages }: HeaderProps) => {
     const [isMobileMenuOpen, setMobileMenuOpen] = useState<boolean>(false);
+    const [isSearchMenuOpen, setSearchMenuOpen] = useState<boolean>(false);
     const [randomTransition, setRandomTransition] = useState({});
     const [isLogoAnimationOn, setIsLogoAnimationOn] = useState<boolean>(true);
     const [isDarkMode, setIsDarkMode] = useState<boolean>(false);
@@ -141,7 +144,7 @@ const Header = ({ locale, selectedCity, cities, langs, selectedLang, pages }: He
                 />
             )}
             <nav className="mx-auto flex items-center justify-between my-6 px-2 lg:px-8" aria-label="Global">
-                <div className="flex lg:flex-1 z-50">
+                <div className="flex z-50">
                     {!isEmpty(randomTransition) ? (
                         <>
                             <Transition
@@ -181,6 +184,9 @@ const Header = ({ locale, selectedCity, cities, langs, selectedLang, pages }: He
                             priority
                         />
                     )}
+                </div>
+                <div className="hidden lg:flex lg:flex-1 lg:mx-5 mx-1">
+                    <SearchBox locale={locale} cities={cities} />
                 </div>
                 <div className="flex z-50">
                     <div className="hidden lg:flex lg:gap-x-12 lg:items-center lg:justify-end">
@@ -327,7 +333,20 @@ const Header = ({ locale, selectedCity, cities, langs, selectedLang, pages }: He
                         </label>
                     </div>
                     {/* Для мобилки */}
-                    <div className="flex gap-2 lg:hidden z-50">
+                    <div className="flex gap-3 lg:hidden z-50">
+                        <div className="flex flex-row justify-center ml-2">
+                            <button
+                                type="button"
+                                className="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-700"
+                                onClick={() => {
+                                    window.scrollTo({ top: 0 });
+                                    setSearchMenuOpen(true);
+                                }}
+                            >
+                                <span className="sr-only">Open search</span>
+                                <MagnifyingGlassIcon className="h-6 w-6" aria-hidden="true" />
+                            </button>
+                        </div>
                         <Popover className="relative">
                             <Popover.Button className="flex items-center gap-x-1 text-base font-semibold leading-6 text-gray-900 dark:text-white">
                                 <MapPinIcon className="h-5 w-5" />{' '}
@@ -590,6 +609,33 @@ const Header = ({ locale, selectedCity, cities, langs, selectedLang, pages }: He
                                         })}
                                     </div>
                                 </div>
+                            </div>
+                        </Dialog.Panel>
+                    </Transition.Child>
+                </Dialog>
+            </Transition>
+            <Transition show={isSearchMenuOpen} appear as={Fragment}>
+                <Dialog as="div" className="lg:hidden" onClose={() => setMobileMenuOpen(false)}>
+                    <Transition.Child
+                        as={Fragment}
+                        enter="transform transition ease-in-out duration-500 sm:duration-700"
+                        enterFrom="translate-x-full"
+                        enterTo="translate-x-0"
+                        leave="transform transition ease-in-out duration-500 sm:duration-700"
+                        leaveFrom="translate-x-0"
+                        leaveTo="translate-x-full"
+                    >
+                        <Dialog.Panel className="top-0 fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-white dark:bg-black px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
+                            <div className="flex flex-row w-full">
+                                <SearchBox locale={locale} cities={cities} />
+                                <button
+                                    type="button"
+                                    className="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-700"
+                                    onClick={() => setSearchMenuOpen(false)}
+                                >
+                                    <span className="sr-only">Open main menu</span>
+                                    <XMarkIcon className="h-6 w-6" aria-hidden="true" />
+                                </button>
                             </div>
                         </Dialog.Panel>
                     </Transition.Child>
