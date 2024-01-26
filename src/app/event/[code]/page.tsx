@@ -1,7 +1,7 @@
 import { getCookie } from 'cookies-next';
 import { getDictionary } from 'dictionaries';
 import { cookies } from 'next/headers';
-import Image from 'next/image';
+// import Image from 'next/image';
 import Link from 'next/link';
 import Script from 'next/script';
 
