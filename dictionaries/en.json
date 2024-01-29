@@ -43,7 +43,7 @@
         "AllRightsReserved": "All rights reserved"
     },
     "OrderPage": {
-        "ShowQR": "Show the QR code to the controller",
+        "ShowQR": "Show QR-code to the Controller",
         "Tickets": "Tickets",
         "OrderNumber": "Order Number",
         "TotalCost": "Total Cost",
