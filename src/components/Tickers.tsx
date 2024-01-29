@@ -47,7 +47,7 @@ const Tickers = ({ tickers, adsIsClosed }: TickersProps) => {
                             >
                                 {[...tickers, ...tickers, ...tickers].map((x, index) => {
                                     return (
-                                        <Link href={x.URL}>
+                                        <Link key={index} href={x.URL}>
                                             <img
                                                 key={index}
                                                 className="mt-2 cursor-pointer hover:scale-110 hover:shadow-lg w-[400px] h-[80px] rounded duration-200"
