@@ -43,6 +43,7 @@
         "AllRightsReserved": "Барлық құқықтар сақталған"
     },
     "OrderPage": {
+        "ShowQR": "Контроллерге QR кодты көрсетіңіз",
         "Tickets": "Билеттер",
         "OrderNumber": "Тапсырыс нөмірі",
         "TotalCost": "Жалпы құны",

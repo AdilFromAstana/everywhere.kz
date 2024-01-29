@@ -189,6 +189,11 @@ export default async function OrderPage({ params }: Props) {
                         </div>
                         <div className="flex flex-col items-center gap-1">
                             <div className="flex flex-row gap-2">
+                                <div className="font-medium text-[#000000db] dark:text-white">
+                                    {locale.OrderPage.ShowQR}
+                                </div>
+                            </div>
+                            <div className="flex flex-row gap-2">
                                 <div className="font-medium text-[#00000080] dark:text-white">
                                     {locale.OrderPage.OrderNumber}
                                 </div>

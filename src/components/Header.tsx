@@ -18,12 +18,9 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import { Fragment, useEffect, useState } from 'react';
-import Snowfall from 'react-snowfall';
 
 import WhiteMonoLogo from '@/assets/kazticket-logo-white-mono.svg';
-// import Logo from '@/assets/kazticket-logo-winter.svg';
 import Logo from '@/assets/kazticket-logo.svg';
-import SnowImage from '@/assets/show.png';
 import transitions from '@/constants/transtitions';
 import { isEmpty } from '@/functions';
 import { City } from '@/types/City';
@@ -48,19 +45,11 @@ const Header = ({ locale, selectedCity, cities, langs, selectedLang, pages }: He
     const [isDarkMode, setIsDarkMode] = useState<boolean>(false);
     const router = useRouter();
     const pathname = usePathname();
-    const [snowflake, setSnowflake] = useState<any>();
-    const snowImages = [snowflake];
 
     useEffect(() => {
         const randomTransitionIndex = Math.floor(Math.random() * transitions.length);
         const random = transitions[randomTransitionIndex];
         setRandomTransition(random);
-
-        const snowflakeImg = document?.createElement('img');
-        if (snowflakeImg) {
-            snowflakeImg.src = SnowImage.src;
-        }
-        setSnowflake(snowflakeImg);
     }, [!isEmpty(randomTransition)]);
 
     useEffect(() => {
@@ -127,22 +116,6 @@ const Header = ({ locale, selectedCity, cities, langs, selectedLang, pages }: He
 
     return (
         <header className="bg-white dark:bg-black">
-            {!pathname.includes('order') && (
-                <Snowfall
-                    style={{
-                        zIndex: 99999,
-                        position: 'fixed',
-                        width: '100vw',
-                        height: '100vh',
-                    }}
-                    snowflakeCount={350}
-                    speed={[0.5, 1]}
-                    rotationSpeed={[-2, 2]}
-                    wind={[-1, 1]}
-                    images={snowImages}
-                    radius={[3, 10]}
-                />
-            )}
             <nav className="mx-auto flex items-center justify-between my-6 px-2 lg:px-8" aria-label="Global">
                 <div className="flex z-50">
                     {!isEmpty(randomTransition) ? (
