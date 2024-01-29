@@ -34,7 +34,7 @@ const Posters = ({ posters }: PostersProps) => {
                 {posters.map((x) => {
                     return (
                         <SwiperSlide key={x.Id}>
-                            <Link href={x.URL} target="_blank">
+                            <Link href={x.URL}>
                                 <div className="cursor-pointer h-full flex flex-col items-center">
                                     <div className="flex flex-col justify-center lg:hidden h-full">
                                         <div
