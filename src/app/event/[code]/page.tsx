@@ -1,7 +1,7 @@
 import { getCookie } from 'cookies-next';
 import { getDictionary } from 'dictionaries';
 import { cookies } from 'next/headers';
-import Image from 'next/image';
+// import Image from 'next/image';
 import Link from 'next/link';
 import Script from 'next/script';
 
@@ -109,12 +109,10 @@ export default async function EventPage({ params }: Props) {
                             backgroundImage: `url("${data.posterFileUrl ?? EmptyPoster}")`,
                         }}
                     />
-                    <Image
+                    <img
+                        alt="poster"
+                        title="poster"
                         src={data.posterFileUrl ?? EmptyPoster}
-                        priority
-                        width={1000}
-                        height={1000}
-                        alt="Poster"
                         className="lg:h-full h-full lg:w-fit rounded-xl"
                     />
                 </div>
