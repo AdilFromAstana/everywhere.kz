@@ -43,6 +43,7 @@
         "AllRightsReserved": "Все права защищены"
     },
     "OrderPage": {
+        "ShowQR": "Покажите QR-код контролеру",
         "Tickets": "Билеты",
         "OrderNumber": "Номер заказа",
         "TotalCost": "Общая стоимость",
