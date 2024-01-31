@@ -1,6 +1,5 @@
 import { getCookie } from 'cookies-next';
 import { getDictionary } from 'dictionaries';
-import groupArray from 'group-array';
 // import { getDictionary } from 'dictionaries';
 import { cookies } from 'next/headers';
 import Link from 'next/link';
