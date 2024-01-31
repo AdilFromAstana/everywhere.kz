@@ -43,6 +43,8 @@
         "AllRightsReserved": "Все права защищены"
     },
     "OrderPage": {
+        "Entrance": "Вход",
+        "Services": "Услуги",
         "ShowQR": "Покажите QR-код контролеру",
         "Tickets": "Билеты",
         "OrderNumber": "Номер заказа",

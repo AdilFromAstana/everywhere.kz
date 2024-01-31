@@ -43,6 +43,8 @@
         "AllRightsReserved": "Барлық құқықтар сақталған"
     },
     "OrderPage": {
+        "Entrance": "Қызметтер",
+        "Services": "Услуги",
         "ShowQR": "QR-кодын Контроллерге көрсетіңіз",
         "Tickets": "Билеттер",
         "OrderNumber": "Тапсырыс нөмірі",

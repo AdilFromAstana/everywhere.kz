@@ -106,13 +106,13 @@ export default async function EventPage({ params }: Props) {
                         className="bg-cover bg-center absolute w-full h-full rounded-xl lg:rounded-3xl top-0 left-0 -z-20"
                         style={{
                             filter: 'blur(4px)',
-                            backgroundImage: `url("${data.posterFileUrl ?? EmptyPoster}")`,
+                            backgroundImage: `url("${data.posterFileUrl ?? EmptyPoster.src}")`,
                         }}
                     />
                     <img
                         alt="poster"
                         title="poster"
-                        src={data.posterFileUrl ?? EmptyPoster}
+                        src={data.posterFileUrl ?? EmptyPoster.src}
                         className="lg:h-full h-full lg:w-fit rounded-xl"
                     />
                 </div>
