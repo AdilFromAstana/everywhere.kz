@@ -59,8 +59,13 @@ type Props = {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
     const orderNumber = params.number;
     const data = await GetOrderData(orderNumber);
+    if (isEmpty(data)) {
+        return {
+            title: `Билет - Kazticket.kz`,
+        };
+    }
     return {
-        title: `Билеты ${data.details.eventName} - Kazticket.kz`,
+        title: `Билеты ${data?.details?.eventName} - Kazticket.kz`,
     };
 }
 
@@ -70,20 +75,24 @@ export const viewport: Viewport = {
 };
 
 const GenerateQRCode = async (orderNumber: number) => {
-    try {
-        const url = await QRCodeLib.toDataURL(`${orderNumber}`, {
-            color: {
-                dark: '#000000', // Тёмные точки QR-кода
-                light: '#ffffff', // Фон QR-кода
-            },
-            width: 300,
-            margin: 2,
-            // Другие опции стилизации...
-        });
+    if (!isEmpty(orderNumber)) {
+        try {
+            const url = await QRCodeLib.toDataURL(`${orderNumber}`, {
+                color: {
+                    dark: '#000000', // Тёмные точки QR-кода
+                    light: '#ffffff', // Фон QR-кода
+                },
+                width: 300,
+                margin: 2,
+                // Другие опции стилизации...
+            });
 
-        return url;
-    } catch (err) {
-        console.log('Ошибка при генерации QR-кода:', err);
+            return url;
+        } catch (err) {
+            console.log('Ошибка при генерации QR-кода:', err);
+            return '';
+        }
+    } else {
         return '';
     }
 };
@@ -92,7 +101,7 @@ export default async function OrderPage({ params }: Props) {
     const data = await GetOrderData(params.number);
     const UserLang = getCookie('UserLang', { cookies });
     const locale = await getDictionary(UserLang?.toLocaleLowerCase() ?? 'ru');
-    const QRcodeData = await GenerateQRCode(data.orderNumber);
+    const QRcodeData = await GenerateQRCode(data?.orderNumber);
 
     const Property = ({ name, value }: { name: string; value: any }) => {
         if (Array.isArray(value)) {
@@ -152,10 +161,12 @@ export default async function OrderPage({ params }: Props) {
                                 fieldName={locale.OrderPage.StartOfSession}
                                 date={data.details.sessionBeginDateTime}
                             />
-                            <OrderDateTimeProperty
-                                fieldName={locale.OrderPage.EndOfSession}
-                                date={data.details.sessionEndDateTime}
-                            />
+                            {!isEmpty(data.details.sessionEndDateTime) && (
+                                <OrderDateTimeProperty
+                                    fieldName={locale.OrderPage.EndOfSession}
+                                    date={data.details.sessionEndDateTime}
+                                />
+                            )}
                             <Property name={locale.OrderPage.Address} value={data.details.address} />
                             <Property name={locale.OrderPage.Location} value={data.details.location} />
                             <Property name={locale.OrderPage.Sector} value={data.details.sectorName} />
@@ -230,13 +241,10 @@ export default async function OrderPage({ params }: Props) {
     } else {
         return (
             <>
-                <div className="max-w-4xl mx-auto px-10 py-4 bg-white rounded-lg shadow-2xl">
+                <div className="max-w-4xl mx-auto my-24 px-10 py-4 bg-white rounded-lg shadow-xl">
                     <div className="flex flex-col items-center justify-center py-12">
-                        <h2 className="text-3xl font-semibold mb-2 text-center">Добро пожаловать на Kazticket.kz!</h2>
-                        <p className="text-gray-600 text-center text-lg leading-relaxed">
-                            Лучшая система онлайн покупки билетов на концерты, выставки, кино, культурные и спортивные
-                            мероприятия в Казахстане:
-                        </p>
+                        <h2 className="text-3xl font-semibold mb-2 text-center">К сожалению Ваш заказ не найден!</h2>
+                        <p className="text-gray-600 text-center text-lg leading-relaxed">Пожалуйста свяжитесь с нами</p>
                         <Link href="/contacts" target="_blank">
                             <button className="mt-6 px-6 py-2 bg-blue-500 text-white rounded-md shadow-md hover:bg-blue-600">
                                 Связатся с нами
