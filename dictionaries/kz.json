@@ -56,5 +56,9 @@
         "Location": "Орын",
         "Hall": "Зал",
         "Sector": "Сектор"
+    },
+    "SelectionsPage": {
+        "MainPage": "Басты бет",
+        "SelectionOfEvents": "Оқиғалар таңдауы"
     }
 }

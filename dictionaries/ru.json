@@ -56,5 +56,9 @@
         "Location": "Локация",
         "Hall": "Зал",
         "Sector": "Сектор"
+    },
+    "SelectionsPage": {
+        "MainPage": "Главная страница",
+        "SelectionOfEvents": "Подборка мероприятий"
     }
 }

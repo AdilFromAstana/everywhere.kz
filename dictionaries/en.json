@@ -56,5 +56,9 @@
         "Location": "Location",
         "Hall": "Hall",
         "Sector": "Sector"
+    },
+    "SelectionsPage": {
+        "MainPage": "Main page",
+        "SelectionOfEvents": "Selection of events"
     }
 }
