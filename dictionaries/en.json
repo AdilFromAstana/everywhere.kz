@@ -43,6 +43,8 @@
         "AllRightsReserved": "All rights reserved"
     },
     "OrderPage": {
+        "Services": "Services",
+        "Entrance": "Entrance",
         "ShowQR": "Show QR-code to the Controller",
         "Tickets": "Tickets",
         "OrderNumber": "Order Number",

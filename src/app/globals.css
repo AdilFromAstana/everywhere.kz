@@ -20,7 +20,7 @@ a {
 }
 
 .kazticket-buy-button,
-.kazticket-widget-button {
+.buy-button {
     animation-name: blinker;
     animation-iteration-count: infinite;
     /* animation-timing-function: cubic-bezier(1, 2, 0, 1); */

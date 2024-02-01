@@ -239,6 +239,7 @@ async function GetEvents() {
             acceptLanguage = 'en-US';
             break;
     }
+    // process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
 
     const UserCityId = getCookie('UserCityId', { cookies });
     const UserCategoryId = getCookie('UserCategoryId', { cookies });
@@ -258,7 +259,7 @@ async function GetEvents() {
     });
 
     if (!res.ok) {
-        console.log('res: ', res);
+        console.log('Error in GetEvents: ', res);
         // This will activate the closest `error.js` Error Boundary
         return [];
     }

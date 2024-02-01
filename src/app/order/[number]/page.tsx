@@ -1,12 +1,13 @@
 import { getCookie } from 'cookies-next';
 import { getDictionary } from 'dictionaries';
-import groupArray from 'group-array';
 // import { getDictionary } from 'dictionaries';
 import { cookies } from 'next/headers';
 import Link from 'next/link';
 import QRCodeLib from 'qrcode';
 
 import OrderDateTimeProperty from '@/components/OrderDateTimeProperty';
+import EventSources from '@/constants/EventSources.json';
+import SectorTypes from '@/constants/SectorTypes.json';
 import { isEmpty } from '@/functions';
 
 import type { Metadata, Viewport } from 'next';
@@ -28,8 +29,9 @@ async function GetOrderData(orderNumber: string) {
             acceptLanguage = 'ru-RU';
             break;
     }
+    // process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
 
-    const res = await fetch(ORDERS_API_URL + orderNumber, {
+    const res = await fetch(`${ORDERS_API_URL}${orderNumber}/ticket`, {
         headers: {
             'Accept-Language': acceptLanguage,
             'Content-Type': 'application/json',
@@ -37,15 +39,16 @@ async function GetOrderData(orderNumber: string) {
     });
 
     if (!res.ok) {
+        console.log('res: ', res);
         // This will activate the closest `error.js` Error Boundary
         return null;
     }
 
     const data = await res.json();
 
-    const groupedServices = groupArray(!isEmpty(data.serviceGroups) ? data.serviceGroups : [], 'serviceGroupName');
+    // const groupedServices = groupArray(!isEmpty(data.serviceGroups) ? data.serviceGroups : [], 'serviceGroupName');
 
-    return { ...data, groupedServices };
+    return data;
 }
 
 type Props = {
@@ -56,11 +59,13 @@ type Props = {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
     const orderNumber = params.number;
     const data = await GetOrderData(orderNumber);
+    if (isEmpty(data)) {
+        return {
+            title: `Билет - Kazticket.kz`,
+        };
+    }
     return {
-        title: `Билеты ${data.eventName} - Kazticket.kz`,
-        openGraph: {
-            images: data.posterFileUrl,
-        },
+        title: `Билеты ${data?.details?.eventName} - Kazticket.kz`,
     };
 }
 
@@ -70,20 +75,24 @@ export const viewport: Viewport = {
 };
 
 const GenerateQRCode = async (orderNumber: number) => {
-    try {
-        const url = await QRCodeLib.toDataURL(`${orderNumber}`, {
-            color: {
-                dark: '#000000', // Тёмные точки QR-кода
-                light: '#ffffff', // Фон QR-кода
-            },
-            width: 300,
-            margin: 2,
-            // Другие опции стилизации...
-        });
+    if (!isEmpty(orderNumber)) {
+        try {
+            const url = await QRCodeLib.toDataURL(`${orderNumber}`, {
+                color: {
+                    dark: '#000000', // Тёмные точки QR-кода
+                    light: '#ffffff', // Фон QR-кода
+                },
+                width: 300,
+                margin: 2,
+                // Другие опции стилизации...
+            });
 
-        return url;
-    } catch (err) {
-        console.log('Ошибка при генерации QR-кода:', err);
+            return url;
+        } catch (err) {
+            console.log('Ошибка при генерации QR-кода:', err);
+            return '';
+        }
+    } else {
         return '';
     }
 };
@@ -92,7 +101,7 @@ export default async function OrderPage({ params }: Props) {
     const data = await GetOrderData(params.number);
     const UserLang = getCookie('UserLang', { cookies });
     const locale = await getDictionary(UserLang?.toLocaleLowerCase() ?? 'ru');
-    const QRcodeData = await GenerateQRCode(data.orderNumber);
+    const QRcodeData = await GenerateQRCode(data?.orderNumber);
 
     const Property = ({ name, value }: { name: string; value: any }) => {
         if (Array.isArray(value)) {
@@ -114,66 +123,6 @@ export default async function OrderPage({ params }: Props) {
                 </div>
             );
         }
-    };
-
-    const ForEachGroupedServices = (groupedServices: any) => {
-        const result: any = [];
-
-        for (const key in groupedServices) {
-            if (Object.hasOwnProperty.call(groupedServices, key)) {
-                const element = groupedServices[key];
-
-                const checkTribuneSeats = () => {
-                    for (let i = 0; i < element.length; i++) {
-                        if (element[i].tribuneSeats !== null) {
-                            return true;
-                        }
-                    }
-                    return false;
-                };
-                if (checkTribuneSeats()) {
-                    const services: any = {
-                        sessionServiceGroupId: element[0].sessionServiceGroupId,
-                        serviceGroupName: element[0].serviceGroupName,
-                        serviceCount: 0,
-                        serviceList: [],
-                    };
-
-                    for (const service of element) {
-                        services.serviceCount += service.serviceCount;
-                        service.tribuneSeats.forEach((t: any) => {
-                            services.serviceList.push({
-                                ...t,
-                                sessionServiceTitle: service.sessionServiceTitle,
-                            });
-                        });
-                    }
-                    result.push({
-                        name: services.serviceGroupName,
-                        value: `${services.serviceCount} шт.`,
-                    });
-
-                    services.serviceList.forEach((el: any) => {
-                        result.push({
-                            name: el.sessionServiceTitle,
-                            value: `Ряд ${el.trubuneSeatRowNumber} Место ${el.trubuneSeatNumber}`,
-                        });
-                    });
-                } else {
-                    const services: any = [];
-                    element.forEach((el: any) => {
-                        services.push(`${el.sessionServiceTitle} - ${el.serviceCount}`);
-                    });
-
-                    result.push({
-                        name: key,
-                        value: services,
-                    });
-                }
-            }
-        }
-
-        return result;
     };
 
     if (!isEmpty(data)) {
@@ -207,28 +156,82 @@ export default async function OrderPage({ params }: Props) {
                             </div>
                         </div>
                         <div className="flex flex-col w-full gap-1">
-                            <Property name={locale.OrderPage.Event} value={data.eventName} />
+                            <Property name={locale.OrderPage.Event} value={data.details.eventName} />
                             <OrderDateTimeProperty
                                 fieldName={locale.OrderPage.StartOfSession}
-                                date={data.sessionBeginDateTime}
+                                date={data.details.sessionBeginDateTime}
                             />
-                            <OrderDateTimeProperty
-                                fieldName={locale.OrderPage.EndOfSession}
-                                date={data.sessionEndDateTime}
-                            />
-                            <Property
-                                name={locale.OrderPage.Address}
-                                value={data.homeNumber ? `${data.address}, ${data.homeNumber}` : `${data.address}`}
-                            />
-                            {data.haveMoreThanOneSector && (
-                                <>
-                                    <Property name={locale.OrderPage.Location} value={data.locationTitle} />
-                                    <Property name={locale.OrderPage.Hall} value={data.hallTitle} />
-                                    <Property name={locale.OrderPage.Sector} value={data.sectorName} />
-                                </>
+                            {!isEmpty(data.details.sessionEndDateTime) && (
+                                <OrderDateTimeProperty
+                                    fieldName={locale.OrderPage.EndOfSession}
+                                    date={data.details.sessionEndDateTime}
+                                />
                             )}
-                            {ForEachGroupedServices(data.groupedServices).map((x: any) => {
-                                return <Property key={x.name} name={x.name} value={x.value} />;
+                            <Property name={locale.OrderPage.Address} value={data.details.address} />
+                            <Property name={locale.OrderPage.Location} value={data.details.location} />
+                            <Property name={locale.OrderPage.Sector} value={data.details.sectorName} />
+                        </div>
+                        <div className="flex flex-col w-full gap-1">
+                            <div className="flex flex-row gap-2 justify-center">
+                                <div className="font-medium text-[#000000db] dark:text-white">
+                                    {locale.OrderPage.Services}
+                                </div>
+                            </div>
+                            {data.details?.items?.map((item: any) => {
+                                switch (data.details.eventProvider) {
+                                    case EventSources.EventumOne: {
+                                        switch (data.details.sectorType) {
+                                            case SectorTypes.StandingPlaces: {
+                                                return (
+                                                    <Property
+                                                        key={`${item.sessionServiceGroupId}-${item.id}`}
+                                                        name={''}
+                                                        value={item.priceCategoryName}
+                                                    />
+                                                );
+                                            }
+                                            case SectorTypes.Tribune: {
+                                                return (
+                                                    <Property
+                                                        key={`${item.sessionServiceGroupId}-${item.id}`}
+                                                        name={`${item.priceCategoryName}`}
+                                                        value={`Ряд ${item.row} Место ${item.number}`}
+                                                    />
+                                                );
+                                            }
+                                            default:
+                                                return <></>;
+                                        }
+                                    }
+                                    case EventSources.KazticketExclusive: {
+                                        return item?.services?.map((service: any, index: number) => {
+                                            switch (data.details.sectorType) {
+                                                case SectorTypes.StandingPlaces: {
+                                                    return (
+                                                        <Property
+                                                            key={`${item.sessionServiceGroupId}-${index}`}
+                                                            name={`${item.serviceGroupName}`}
+                                                            value={`${service.sessionServiceTitle}`}
+                                                        />
+                                                    );
+                                                }
+                                                case SectorTypes.Tribune: {
+                                                    return (
+                                                        <Property
+                                                            key={`${item.sessionServiceGroupId}-${index}`}
+                                                            name={`${item.serviceGroupName} ${service.sessionServiceTitle}`}
+                                                            value={`Ряд ${service.trubuneSeatRowNumber} Место ${service.trubuneSeatNumber}`}
+                                                        />
+                                                    );
+                                                }
+                                                default:
+                                                    return <></>;
+                                            }
+                                        });
+                                    }
+                                    default:
+                                        break;
+                                }
                             })}
                         </div>
                     </div>
@@ -238,13 +241,10 @@ export default async function OrderPage({ params }: Props) {
     } else {
         return (
             <>
-                <div className="max-w-4xl mx-auto px-10 py-4 bg-white rounded-lg shadow-2xl">
+                <div className="max-w-4xl mx-auto my-24 px-10 py-4 bg-white rounded-lg shadow-xl">
                     <div className="flex flex-col items-center justify-center py-12">
-                        <h2 className="text-3xl font-semibold mb-2 text-center">Добро пожаловать на Kazticket.kz!</h2>
-                        <p className="text-gray-600 text-center text-lg leading-relaxed">
-                            Лучшая система онлайн покупки билетов на концерты, выставки, кино, культурные и спортивные
-                            мероприятия в Казахстане:
-                        </p>
+                        <h2 className="text-3xl font-semibold mb-2 text-center">К сожалению Ваш заказ не найден!</h2>
+                        <p className="text-gray-600 text-center text-lg leading-relaxed">Пожалуйста свяжитесь с нами</p>
                         <Link href="/contacts" target="_blank">
                             <button className="mt-6 px-6 py-2 bg-blue-500 text-white rounded-md shadow-md hover:bg-blue-600">
                                 Связатся с нами
