@@ -140,7 +140,7 @@ export default async function EventSelectionPage({ params }: Props) {
         return (
             <div>
                 <nav className="flex my-2" aria-label="Breadcrumb">
-                    <ol className="inline-flex items-center space-x-1 md:space-x-2 rtl:space-x-reverse">
+                    <ol className="flex lg:flex-row lg:items-center flex-col items-start lg:space-x-1 md:space-x-2 rtl:space-x-reverse">
                         <li className="inline-flex items-center">
                             <Link
                                 href="/"
