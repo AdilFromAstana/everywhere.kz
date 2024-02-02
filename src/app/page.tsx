@@ -247,7 +247,7 @@ async function GetEvents() {
     const url =
         NEXT_PUBLIC_EVENTS_URL +
         'commercial/Events' +
-        `?CityId=${UserCityId ? (parseInt(UserCityId) === 0 ? '' : UserCityId) : ''}` +
+        `?Top=100&CityId=${UserCityId ? (parseInt(UserCityId) === 0 ? '' : UserCityId) : ''}` +
         `&LeisureCategoryId=${UserCategoryId ? (parseInt(UserCategoryId) === 0 ? '' : UserCategoryId) : ''}`;
 
     const res = await fetch(url, {
