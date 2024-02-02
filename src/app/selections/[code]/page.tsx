@@ -74,7 +74,7 @@ async function GetEvents(selectionId: string) {
         }
         // process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
 
-        const res = await fetch(`${NEXT_PUBLIC_EVENTS_URL}/commercial/events?SelectionId=${selectionId}`, {
+        const res = await fetch(`${NEXT_PUBLIC_EVENTS_URL}/commercial/events?Top=100&SelectionId=${selectionId}`, {
             headers: {
                 'Accept-Language': acceptLanguage,
                 'Content-Type': 'application/json',
