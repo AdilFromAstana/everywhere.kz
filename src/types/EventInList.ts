@@ -8,4 +8,6 @@ export interface EventInList {
     cityName: string;
     beginDate: string;
     posterFileUrl: string;
+    createdAt: string;
+    updatedAt: string;
 }
