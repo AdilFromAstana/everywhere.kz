@@ -124,66 +124,71 @@ export default async function Home() {
                     const dateB = new Date(eventB?.Date) as any;
                     return dateA - dateB;
                 }).map((x: any) => {
-                    const city = cities.find((y) => y.id === x.CityId);
-                    return (
-                        <div key={x.Id} className="w-full md:w-1/2 lg:w-1/3 p-2 transition duration-200 ">
-                            <Link href={'/e/' + x.Code}>
-                                <div className="cursor-pointer w-full h-auto md:hover:shadow-xl md:hover:scale-105 transition duration-300 rounded-md">
-                                    <div className="w-full relative rounded-md -z-10">
-                                        {isEmpty(x.Poster) ? (
-                                            <>
-                                                <Image
-                                                    src={EmptyPoster}
-                                                    alt={x.name}
-                                                    className="w-full h-64 object-cover -z-10 rounded-md"
-                                                    width="100"
-                                                    height="100"
-                                                />
-                                            </>
-                                        ) : (
-                                            <>
-                                                <div
-                                                    className="flex flex-col items-center w-full h-full rounded-md -z-10 relative bg-cover bg-no-repeat bg-center"
-                                                    style={{
-                                                        backgroundImage: `url("${x.Poster ?? ''}")`,
-                                                        filter: 'blur(2px)',
-                                                        height: '100%',
-                                                    }}
-                                                >
-                                                    <img className="h-64 object-contain rounded-md" src={x.Poster} />
-                                                </div>
-                                                <img
-                                                    className="p-1 absolute -z-10 top-0 w-full h-64 object-contain rounded-md"
-                                                    src={x.Poster}
-                                                />
-                                            </>
-                                        )}
-                                        <div className="bg-white px-2 font-medium absolute left-3 bottom-3 rounded-md text-black dark:bg-black dark:text-white">
-                                            от {x.MinCost} тг.
+                    if (x) {
+                        const city = cities.find((y) => y.id === x?.CityId);
+                        return (
+                            <div key={x.Id} className="w-full md:w-1/2 lg:w-1/3 p-2 transition duration-200 ">
+                                <Link href={'/e/' + x.Code}>
+                                    <div className="cursor-pointer w-full h-auto md:hover:shadow-xl md:hover:scale-105 transition duration-300 rounded-md">
+                                        <div className="w-full relative rounded-md -z-10">
+                                            {isEmpty(x.Poster) ? (
+                                                <>
+                                                    <Image
+                                                        src={EmptyPoster}
+                                                        alt={x.name}
+                                                        className="w-full h-64 object-cover -z-10 rounded-md"
+                                                        width="100"
+                                                        height="100"
+                                                    />
+                                                </>
+                                            ) : (
+                                                <>
+                                                    <div
+                                                        className="flex flex-col items-center w-full h-full rounded-md -z-10 relative bg-cover bg-no-repeat bg-center"
+                                                        style={{
+                                                            backgroundImage: `url("${x.Poster ?? ''}")`,
+                                                            filter: 'blur(2px)',
+                                                            height: '100%',
+                                                        }}
+                                                    >
+                                                        <img
+                                                            className="h-64 object-contain rounded-md"
+                                                            src={x.Poster}
+                                                        />
+                                                    </div>
+                                                    <img
+                                                        className="p-1 absolute -z-10 top-0 w-full h-64 object-contain rounded-md"
+                                                        src={x.Poster}
+                                                    />
+                                                </>
+                                            )}
+                                            <div className="bg-white px-2 font-medium absolute left-3 bottom-3 rounded-md text-black dark:bg-black dark:text-white">
+                                                от {x.MinCost} тг.
+                                            </div>
+                                            <div className="bg-white px-2 font-medium absolute right-3 bottom-3 rounded-md text-black dark:bg-black dark:text-white">
+                                                {x.AgeLimit}+
+                                            </div>
                                         </div>
-                                        <div className="bg-white px-2 font-medium absolute right-3 bottom-3 rounded-md text-black dark:bg-black dark:text-white">
-                                            {x.AgeLimit}+
-                                        </div>
+                                        <span className="mb-4 md:text-2xl px-2 leading-tight font-bold text-black dark:text-white">
+                                            {UserLang?.toLocaleLowerCase() === 'en'
+                                                ? x.NameEn
+                                                : UserLang?.toLocaleLowerCase() === 'kz'
+                                                  ? x.NameKz
+                                                  : x.NameRu}
+                                        </span>
+                                        <p className="text-coolGray-500 font-medium px-2 dark:text-white">
+                                            <EventDateInfo date={x.Date} />
+                                            {isEmpty(UserCityId) || parseInt(UserCityId ?? '0') === 0 ? (
+                                                <b> - {city?.name}</b>
+                                            ) : (
+                                                ''
+                                            )}
+                                        </p>
                                     </div>
-                                    <span className="mb-4 md:text-2xl px-2 leading-tight font-bold text-black dark:text-white">
-                                        {UserLang?.toLocaleLowerCase() === 'en'
-                                            ? x.NameEn
-                                            : UserLang?.toLocaleLowerCase() === 'kz'
-                                              ? x.NameKz
-                                              : x.NameRu}
-                                    </span>
-                                    <p className="text-coolGray-500 font-medium px-2 dark:text-white">
-                                        <EventDateInfo date={x.Date} />
-                                        {isEmpty(UserCityId) || parseInt(UserCityId ?? '0') === 0 ? (
-                                            <b> - {city?.name}</b>
-                                        ) : (
-                                            ''
-                                        )}
-                                    </p>
-                                </div>
-                            </Link>
-                        </div>
-                    );
+                                </Link>
+                            </div>
+                        );
+                    }
                 })}
                 {EventsData?.length === 0 && EventumEventsData.length === 0 && (
                     <div className="max-w-4xl mx-auto px-10 py-4 bg-white rounded-lg shadow-lg">
