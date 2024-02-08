@@ -165,12 +165,12 @@ const Header = ({ locale, selectedCity, cities, langs, selectedLang, pages }: He
                     <div className="hidden lg:flex lg:gap-x-12 lg:items-center lg:justify-end">
                         <Link
                             className="text-gray-900 dark:text-white flex gap-x-2 items-center"
-                            href="tel:+7-708-08-08-999"
+                            href="tel:+7-708-595-67-27"
                             target="_blank"
                         >
                             <PhoneIcon className="h-7 w-7" />
                             <div className="flex flex-col">
-                                <span className="text-base leading-5 font-semibold">+7-708-08-08-999</span>
+                                <span className="text-base leading-5 font-semibold">+7-708-595-67-27</span>
                                 <span className="leading-5 text-gray-400 font-normal">{locale.Header.Support}</span>
                             </div>
                         </Link>
@@ -487,12 +487,12 @@ const Header = ({ locale, selectedCity, cities, langs, selectedLang, pages }: He
                                         </button>
                                         <Link
                                             className="text-base leading-6 text-gray-900 dark:text-white flex gap-x-2 items-center"
-                                            href="tel:+7-708-08-08-999"
+                                            href="tel:+7-708-595-67-27"
                                             target="_blank"
                                         >
                                             <PhoneIcon className="h-7 w-7" />
                                             <div className="flex flex-col">
-                                                <span className="font-semibold">+7-708-08-08-999</span>
+                                                <span className="font-semibold">+7-708-595-67-27</span>
                                                 <span className="text-gray-400 font-normal">Служба поддержки</span>
                                             </div>
                                         </Link>
