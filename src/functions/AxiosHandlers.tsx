@@ -4,11 +4,11 @@ import { getCookie } from 'cookies-next';
 import { cookies } from 'next/headers';
 
 export const GetToken = async () => {
-    const { AUTH_URL = '', CLIENT_ID = '', CLIENT_SECRET = '' } = process.env;
+    const { AUTH_URL = '', NEXT_PUBLIC_CLIENT_ID = '', NEXT_PUBLIC_CLIENT_SECRET = '' } = process.env;
     let token = '';
 
-    const AuthData = `client_id=${encodeURIComponent(CLIENT_ID)}&client_secret=${encodeURIComponent(
-        CLIENT_SECRET
+    const AuthData = `client_id=${encodeURIComponent(NEXT_PUBLIC_CLIENT_ID)}&client_secret=${encodeURIComponent(
+        NEXT_PUBLIC_CLIENT_SECRET
     )}&grant_type=client_credentials&scope=MarketPlace`;
 
     await fetch(`${AUTH_URL}/token`, {

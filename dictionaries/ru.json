@@ -3,6 +3,9 @@
         "ToMain": "На главную",
         "PageNotFound": "Страница не найдена"
     },
+    "Search": {
+        "NotFound": "Ничего не найдено"
+    },
     "Header": {
         "SwithTheme": "Сменить тему",
         "Language": "Язык",
@@ -40,6 +43,9 @@
         "AllRightsReserved": "Все права защищены"
     },
     "OrderPage": {
+        "Entrance": "Вход",
+        "Services": "Услуги",
+        "ShowQR": "Покажите QR-код контролеру",
         "Tickets": "Билеты",
         "OrderNumber": "Номер заказа",
         "TotalCost": "Общая стоимость",
@@ -50,5 +56,9 @@
         "Location": "Локация",
         "Hall": "Зал",
         "Sector": "Сектор"
+    },
+    "SelectionsPage": {
+        "MainPage": "Главная страница",
+        "SelectionOfEvents": "Подборка мероприятий"
     }
 }

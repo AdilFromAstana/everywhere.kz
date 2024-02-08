@@ -5,6 +5,9 @@ export interface EventInList {
     minCost: number;
     ageLimit: number;
     leisureCategoryId: number;
+    cityName: string;
     beginDate: string;
     posterFileUrl: string;
+    createdAt: string;
+    updatedAt: string;
 }

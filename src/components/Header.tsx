@@ -6,6 +6,7 @@ import {
     BuildingOffice2Icon,
     ChevronDownIcon,
     LanguageIcon,
+    MagnifyingGlassIcon,
     MapPinIcon,
     MoonIcon,
     PhoneIcon,
@@ -17,16 +18,15 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import { Fragment, useEffect, useState } from 'react';
-import Snowfall from 'react-snowfall';
 
 import WhiteMonoLogo from '@/assets/kazticket-logo-white-mono.svg';
-import Logo from '@/assets/kazticket-logo-winter.svg';
-// import Logo from '@/assets/kazticket-logo.svg';
-import SnowImage from '@/assets/show.png';
+import Logo from '@/assets/kazticket-logo.svg';
 import transitions from '@/constants/transtitions';
 import { isEmpty } from '@/functions';
 import { City } from '@/types/City';
 import { Dropdown } from '@/types/Dropdown';
+import PushNotificationRequest from './PushNotificationRequest';
+import SearchBox from './SearchBox';
 
 interface HeaderProps {
     cities: City[];
@@ -39,24 +39,17 @@ interface HeaderProps {
 
 const Header = ({ locale, selectedCity, cities, langs, selectedLang, pages }: HeaderProps) => {
     const [isMobileMenuOpen, setMobileMenuOpen] = useState<boolean>(false);
+    const [isSearchMenuOpen, setSearchMenuOpen] = useState<boolean>(false);
     const [randomTransition, setRandomTransition] = useState({});
     const [isLogoAnimationOn, setIsLogoAnimationOn] = useState<boolean>(true);
     const [isDarkMode, setIsDarkMode] = useState<boolean>(false);
     const router = useRouter();
     const pathname = usePathname();
-    const [snowflake, setSnowflake] = useState<any>();
-    const snowImages = [snowflake];
 
     useEffect(() => {
         const randomTransitionIndex = Math.floor(Math.random() * transitions.length);
         const random = transitions[randomTransitionIndex];
         setRandomTransition(random);
-
-        const snowflakeImg = document?.createElement('img');
-        if (snowflakeImg) {
-            snowflakeImg.src = SnowImage.src;
-        }
-        setSnowflake(snowflakeImg);
     }, [!isEmpty(randomTransition)]);
 
     useEffect(() => {
@@ -66,6 +59,15 @@ const Header = ({ locale, selectedCity, cities, langs, selectedLang, pages }: He
             }, 1000);
         }
     }, [isLogoAnimationOn]);
+
+    useEffect(() => {
+        const UserLang = getCookie('UserLang');
+        if (isEmpty(UserLang)) {
+            setCookie('UserLang', 'Ru', {
+                maxAge: 60 * 60 * 24 * 365,
+            });
+        }
+    }, []);
 
     useEffect(() => {
         if (
@@ -114,22 +116,8 @@ const Header = ({ locale, selectedCity, cities, langs, selectedLang, pages }: He
 
     return (
         <header className="bg-white dark:bg-black">
-            <Snowfall
-                style={{
-                    zIndex: 99999,
-                    position: 'fixed',
-                    width: '100vw',
-                    height: '100vh',
-                }}
-                snowflakeCount={350}
-                speed={[0.5, 1]}
-                rotationSpeed={[-2, 2]}
-                wind={[-1, 1]}
-                images={snowImages}
-                radius={[3, 10]}
-            />
             <nav className="mx-auto flex items-center justify-between my-6 px-2 lg:px-8" aria-label="Global">
-                <div className="flex lg:flex-1 z-50">
+                <div className="flex z-50">
                     {!isEmpty(randomTransition) ? (
                         <>
                             <Transition
@@ -169,6 +157,9 @@ const Header = ({ locale, selectedCity, cities, langs, selectedLang, pages }: He
                             priority
                         />
                     )}
+                </div>
+                <div className="hidden lg:flex lg:flex-1 lg:mx-5 mx-1">
+                    <SearchBox locale={locale} cities={cities} />
                 </div>
                 <div className="flex z-50">
                     <div className="hidden lg:flex lg:gap-x-12 lg:items-center lg:justify-end">
@@ -315,7 +306,20 @@ const Header = ({ locale, selectedCity, cities, langs, selectedLang, pages }: He
                         </label>
                     </div>
                     {/* Для мобилки */}
-                    <div className="flex gap-2 lg:hidden z-50">
+                    <div className="flex gap-3 lg:hidden z-50">
+                        <div className="flex flex-row justify-center ml-2">
+                            <button
+                                type="button"
+                                className="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-700"
+                                onClick={() => {
+                                    window.scrollTo({ top: 0 });
+                                    setSearchMenuOpen(true);
+                                }}
+                            >
+                                <span className="sr-only">Open search</span>
+                                <MagnifyingGlassIcon className="h-6 w-6" aria-hidden="true" />
+                            </button>
+                        </div>
                         <Popover className="relative">
                             <Popover.Button className="flex items-center gap-x-1 text-base font-semibold leading-6 text-gray-900 dark:text-white">
                                 <MapPinIcon className="h-5 w-5" />{' '}
@@ -510,6 +514,16 @@ const Header = ({ locale, selectedCity, cities, langs, selectedLang, pages }: He
                                         </Link>
                                         <Link
                                             className="text-base font-semibold leading-6 text-gray-900 dark:text-white flex gap-x-2 items-center"
+                                            href="https://t.me/kazticketkz"
+                                            target="_blank"
+                                        >
+                                            <svg className="h-7 w-7" viewBox="0 0 24 24" fill="currentColor">
+                                                <path d="M18.384,22.779c0.322,0.228 0.737,0.285 1.107,0.145c0.37,-0.141 0.642,-0.457 0.724,-0.84c0.869,-4.084 2.977,-14.421 3.768,-18.136c0.06,-0.28 -0.04,-0.571 -0.26,-0.758c-0.22,-0.187 -0.525,-0.241 -0.797,-0.14c-4.193,1.552 -17.106,6.397 -22.384,8.35c-0.335,0.124 -0.553,0.446 -0.542,0.799c0.012,0.354 0.25,0.661 0.593,0.764c2.367,0.708 5.474,1.693 5.474,1.693c0,0 1.452,4.385 2.209,6.615c0.095,0.28 0.314,0.5 0.603,0.576c0.288,0.075 0.596,-0.004 0.811,-0.207c1.216,-1.148 3.096,-2.923 3.096,-2.923c0,0 3.572,2.619 5.598,4.062Zm-11.01,-8.677l1.679,5.538l0.373,-3.507c0,0 6.487,-5.851 10.185,-9.186c0.108,-0.098 0.123,-0.262 0.033,-0.377c-0.089,-0.115 -0.253,-0.142 -0.376,-0.064c-4.286,2.737 -11.894,7.596 -11.894,7.596Z" />
+                                            </svg>
+                                            Telegram
+                                        </Link>
+                                        <Link
+                                            className="text-base font-semibold leading-6 text-gray-900 dark:text-white flex gap-x-2 items-center"
                                             href="https://www.tiktok.com/@kazticket.kz"
                                             target="_blank"
                                         >
@@ -542,6 +556,16 @@ const Header = ({ locale, selectedCity, cities, langs, selectedLang, pages }: He
                                             </svg>
                                             LinkedIn
                                         </Link>
+                                        <Link
+                                            className="text-base font-semibold leading-6 text-gray-900 dark:text-white flex gap-x-2 items-center"
+                                            href="https://www.linkedin.com/company/kazticket-kz"
+                                            target="_blank"
+                                        >
+                                            <svg className="w-7 h-7" fill="currentColor" viewBox="0 0 24 24">
+                                                <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm.25 16.996h-2.134c-1.205 0-1.409-.687-2.401-1.679-.897-.897-1.395-.209-1.374 1.068.006.339-.161.611-.566.611-1.264 0-3.08.178-4.918-1.806-1.883-2.033-3.857-6.111-3.857-6.513 0-.237.196-.344.524-.344h2.17c.574 0 .623.284.783.649.667 1.521 2.265 4.574 2.69 2.87.244-.978.344-3.245-.703-3.44-.594-.11.452-.746 1.968-.746.377 0 .786.041 1.205.137.769.179.771.523.761 1.026-.039 1.903-.269 3.184.233 3.507.479.31 1.739-1.717 2.403-3.281.183-.433.219-.722.734-.722h2.654c1.39 0-.182 1.997-1.383 3.557-.968 1.255-.916 1.28.209 2.324.803.744 1.75 1.76 1.75 2.336.002.272-.21.446-.748.446z" />
+                                            </svg>
+                                            ВКонтакте
+                                        </Link>
                                     </div>
                                     <div className="flex flex-col py-4 gap-y-5">
                                         {pages.map((x) => {
@@ -563,6 +587,34 @@ const Header = ({ locale, selectedCity, cities, langs, selectedLang, pages }: He
                     </Transition.Child>
                 </Dialog>
             </Transition>
+            <Transition show={isSearchMenuOpen} appear as={Fragment}>
+                <Dialog as="div" className="lg:hidden" onClose={() => setMobileMenuOpen(false)}>
+                    <Transition.Child
+                        as={Fragment}
+                        enter="transform transition ease-in-out duration-500 sm:duration-700"
+                        enterFrom="translate-x-full"
+                        enterTo="translate-x-0"
+                        leave="transform transition ease-in-out duration-500 sm:duration-700"
+                        leaveFrom="translate-x-0"
+                        leaveTo="translate-x-full"
+                    >
+                        <Dialog.Panel className="top-0 fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-white dark:bg-black px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
+                            <div className="flex flex-row w-full">
+                                <SearchBox locale={locale} cities={cities} />
+                                <button
+                                    type="button"
+                                    className="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-700"
+                                    onClick={() => setSearchMenuOpen(false)}
+                                >
+                                    <span className="sr-only">Open main menu</span>
+                                    <XMarkIcon className="h-6 w-6" aria-hidden="true" />
+                                </button>
+                            </div>
+                        </Dialog.Panel>
+                    </Transition.Child>
+                </Dialog>
+            </Transition>
+            <PushNotificationRequest />
         </header>
     );
 };

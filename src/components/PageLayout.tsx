@@ -1,4 +1,4 @@
-import { ChatBubbleLeftRightIcon, DocumentTextIcon, UserGroupIcon } from '@heroicons/react/24/outline';
+import { ChatBubbleLeftRightIcon, DocumentTextIcon, UsersIcon } from '@heroicons/react/24/outline';
 import { getCookie } from 'cookies-next';
 import { getDictionary } from 'dictionaries';
 import { cookies } from 'next/headers';
@@ -105,14 +105,19 @@ const PageLayout: React.FC<PageLayoutProps> = async ({ children }) => {
             icon: <ChatBubbleLeftRightIcon className="h-5 w-5" />,
         },
         {
-            label: locale.Footer.AboutUs,
-            url: '/about_us',
-            icon: <UserGroupIcon className="h-5 w-5" />,
+            label: 'Организаторам',
+            url: '/offer',
+            icon: <UsersIcon className="h-5 w-5" />,
         },
+        // {
+        //     label: locale.Footer.AboutUs,
+        //     url: '/about_us',
+        //     icon: <UserGroupIcon className="h-5 w-5" />,
+        // },
     ];
 
     return (
-        <div className="container mx-auto">
+        <div className="container mx-auto px-2">
             <Header
                 langs={langs}
                 locale={locale}
@@ -121,7 +126,7 @@ const PageLayout: React.FC<PageLayoutProps> = async ({ children }) => {
                 selectedCity={selectedCity}
                 selectedLang={selectedLang}
             />
-            <div className="px-4 md:px-0">{children}</div>
+            <div className="px-4">{children}</div>
             <Footer locale={locale} pages={pages} />
         </div>
     );

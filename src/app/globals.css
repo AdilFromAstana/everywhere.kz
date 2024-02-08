@@ -20,7 +20,7 @@ a {
 }
 
 .kazticket-buy-button,
-.kazticket-widget-button {
+.buy-button {
     animation-name: blinker;
     animation-iteration-count: infinite;
     /* animation-timing-function: cubic-bezier(1, 2, 0, 1); */
@@ -96,7 +96,7 @@ html.dark #right-arrow .scroll-arrow {
 #right-arrow::before {
     height: 100%;
     width: 25px;
-    content: '';
+    content: "";
     background: linear-gradient(to left, #fff 20%, rgba(255, 255, 255, 0) 80%);
 }
 
@@ -104,7 +104,7 @@ html.dark #right-arrow .scroll-arrow {
     z-index: 1;
     height: 100%;
     width: 25px;
-    content: '';
+    content: "";
     background: linear-gradient(to right, #fff 20%, rgba(255, 255, 255, 0) 80%);
 }
 
@@ -114,4 +114,61 @@ html.dark #right-arrow::before {
 
 html.dark #left-arrow::after {
     background: linear-gradient(to right, #000 20%, rgba(255, 255, 255, 0) 80%);
+}
+
+#QRcodeImage,
+#QRcodeCanvas canvas {
+    background-color: #fff !important;
+}
+
+@keyframes flipY {
+    0%,
+    100% {
+        transform: rotateY(0deg);
+    }
+    49.999% {
+        transform: rotateY(0deg);
+    }
+    50% {
+        transform: rotateY(180deg);
+    }
+    99.999% {
+        transform: rotateY(180deg);
+    }
+}
+
+.Rapper {
+    animation: flipY 2s infinite step-end;
+}
+
+.items-wrap:before,
+.items-wrap:after {
+    content: "";
+    height: 100%;
+    top: 0;
+    width: 10%;
+    position: absolute;
+    z-index: 1;
+    pointer-events: none;
+}
+.items-wrap:before {
+    left: 0;
+    background: linear-gradient(90deg, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0) 20%);
+}
+.items-wrap:after {
+    right: 0;
+    background: linear-gradient(90deg, rgba(255, 255, 255, 0) 80%, rgba(255, 255, 255, 1) 100%);
+}
+
+.items-wrap:hover .marquee {
+    animation-play-state: paused;
+}
+
+@keyframes scroll {
+    from {
+        transform: translateX(0);
+    }
+    to {
+        transform: translateX(calc(-100% - 20px));
+    }
 }

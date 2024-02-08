@@ -1,16 +1,18 @@
 import { getCookie } from 'cookies-next';
 import { getDictionary } from 'dictionaries';
 import { cookies } from 'next/headers';
-import Image from 'next/image';
+// import Image from 'next/image';
 import Link from 'next/link';
 import Script from 'next/script';
 
+import EmptyPoster from '@/assets/empty-poster.svg';
+import KazticketButton from '@/components/KazticketButton';
 import { CheckToken } from '@/functions/AxiosHandlers';
 
 import type { Metadata, Viewport } from 'next';
 
 async function GetEventData(code: string) {
-    const { EVENTS_URL = '' } = process.env;
+    const { NEXT_PUBLIC_EVENTS_URL = '' } = process.env;
 
     const token = await CheckToken();
 
@@ -25,7 +27,7 @@ async function GetEventData(code: string) {
             break;
     }
 
-    const res = await fetch(EVENTS_URL + 'commercial/Events/' + code, {
+    const res = await fetch(NEXT_PUBLIC_EVENTS_URL + 'commercial/Events/' + code, {
         headers: {
             'Accept-Language': acceptLanguage,
             'Content-Type': 'application/json',
@@ -35,7 +37,7 @@ async function GetEventData(code: string) {
 
     if (!res.ok) {
         // This will activate the closest `error.js` Error Boundary
-        console.log('res: ', res);
+        console.log('GetEventData Error: ', res);
         return null;
     }
 
@@ -61,20 +63,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
                 images: data.posterFileUrl,
             },
             description: data.description
-                ?.replace('<p>', '')
-                ?.replace('</p>', '')
-                ?.replace(/<strong [^>]*>/g, '')
-                ?.replace(/<\/strong>/g, '')
-                ?.replace(/<h2 [^>]*>/g, '')
-                ?.replace(/<\/h2>/g, '')
-                ?.replace(/<div [^>]*>/g, '')
-                ?.replace(/<\/div>/g, '')
-                ?.replace(/<span [^>]*>/g, '')
-                ?.replace(/<\/span>/g, '')
-                ?.replace('<strong>', '')
-                ?.replace('</strong>', '')
-                ?.replace('&nbsp;', '')
-                ?.replace('&quot;', '')
+                ?.replace(/<[^>]*>?/gm, ' ')
+                ?.replace(/&nbsp;/gi, ' ')
                 ?.replace(/\s+/g, ' '),
         };
     }
@@ -110,46 +100,35 @@ export default async function EventPage({ params }: Props) {
     } else {
         return (
             <>
+                <Script src={`${process.env.NEXT_PUBLIC_WIDGET_URL}?time=${new Date().getMilliseconds()}`} />
                 <div className="lg:h-128 h-64 relative rounded-xl lg:rounded-3xl lg:p-10 p-2 flex flex-col justify-center -mx-2 items-center content-center">
                     <div
                         className="bg-cover bg-center absolute w-full h-full rounded-xl lg:rounded-3xl top-0 left-0 -z-20"
                         style={{
                             filter: 'blur(4px)',
-                            backgroundImage: `url("${data.posterFileUrl}")`,
+                            backgroundImage: `url("${data.posterFileUrl ?? EmptyPoster.src}")`,
                         }}
                     />
-                    {/* <div
-                        style={{
-                            margin: '1rem 0',
-                            height: 'calc(100% - 2rem)',
-                            backgroundPosition: 'center center',
-                            backgroundRepeat: 'no-repeat',
-                            backgroundSize: 'contain',
-                            backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.0) 10.02%, rgba(0, 0, 0, 0.0) 77.2%, rgba(0, 0, 0, 0.0) 98.34%), url("${data.posterFileUrl}")`,
-                        }}
-                        className="absolute -z-20 top-0 left-0 w- object-contain rounded-xl lg:rounded-3xl"
-                    /> */}
-                    <Image
-                        src={data.posterFileUrl}
-                        width={1000}
-                        height={1000}
-                        alt="Poster"
-                        className="lg:h-full lg:w-fit rounded-xl"
+                    <img
+                        alt="poster"
+                        title="poster"
+                        src={data.posterFileUrl ?? EmptyPoster.src}
+                        className="lg:h-full h-full lg:w-fit rounded-xl"
                     />
                 </div>
                 <div className="-z-10 lg:text-6xl text-3xl text-black dark:text-white font-bold my-4">{data.name}</div>
-                <button
+                <KazticketButton locale={locale} eventCode={data.code} eventId={data.id} />
+                {/* <button
                     data-event-id={data.id}
                     data-event-code={data.code}
                     className="kazticket-widget-button z-0 cursor-pointer bg-sky-500 lg:w-56 w-full px-2 py-2 lg:px-6 lg:py-4 rounded-xl text-base lg:text-xl font-bold text-white transition duration-500 hover:shadow-2xl"
                 >
                     {locale.EventPage.BuyTicket}
-                </button>
+                </button> */}
                 <div className="my-6 w-full text-3xl text-black dark:text-white">{locale.EventPage.AboutDesc}</div>
                 <div className="EventDescription my-6 w-full invert-0 dark:invert z-0">
                     <div dangerouslySetInnerHTML={{ __html: data.description }}></div>
                 </div>
-                <Script src={process.env.NEXT_PUBLIC_WIDGET_URL} />
             </>
         );
     }

@@ -44,20 +44,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
             openGraph: {
                 images: data.Poster,
             },
-            description: data.DescriptionRu?.replace('<p>', '')
-                ?.replace('</p>', '')
-                ?.replace(/<strong [^>]*>/g, '')
-                ?.replace(/<\/strong>/g, '')
-                ?.replace(/<h2 [^>]*>/g, '')
-                ?.replace(/<\/h2>/g, '')
-                ?.replace(/<div [^>]*>/g, '')
-                ?.replace(/<\/div>/g, '')
-                ?.replace(/<span [^>]*>/g, '')
-                ?.replace(/<\/span>/g, '')
-                ?.replace('<strong>', '')
-                ?.replace('</strong>', '')
-                ?.replace('&nbsp;', '')
-                ?.replace('&quot;', '')
+            description: data.DescriptionRu?.replace(/<[^>]*>?/gm, ' ')
+                ?.replace(/&nbsp;/gi, ' ')
                 ?.replace(/\s+/g, ' '),
         };
     }
@@ -116,11 +104,11 @@ export default async function EventPage({ params }: Props) {
                     /> */}
                 </div>
                 <div className="-z-10 lg:text-6xl text-3xl text-black dark:text-white font-bold my-4">
-                    {UserLang?.toLocaleLowerCase() === 'ru'
-                        ? data.NameRu
+                    {UserLang?.toLocaleLowerCase() === 'en'
+                        ? data.NameEn
                         : UserLang?.toLocaleLowerCase() === 'kz'
                           ? data.NameKz
-                          : data.NameEn}
+                          : data.NameRu}
                 </div>
                 <EventumButton data={data} locale={locale} />
                 <div className="my-6 w-full text-3xl text-black dark:text-white">{locale.EventPage.AboutDesc}</div>
@@ -128,11 +116,11 @@ export default async function EventPage({ params }: Props) {
                     <div
                         dangerouslySetInnerHTML={{
                             __html:
-                                UserLang?.toLocaleLowerCase() === 'ru'
-                                    ? data.DescriptionRu
+                                UserLang?.toLocaleLowerCase() === 'en'
+                                    ? data.DescriptionEn
                                     : UserLang?.toLocaleLowerCase() === 'kz'
                                       ? data.DescriptionKz
-                                      : data.DescriptionEn,
+                                      : data.DescriptionRu,
                         }}
                     ></div>
                 </div>

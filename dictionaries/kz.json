@@ -3,11 +3,14 @@
         "ToMain": "Басты бетке",
         "PageNotFound": "Бет табылмады"
     },
+    "Search": {
+        "NotFound": "Еш нәрсе табылмады"
+    },
     "Header": {
         "SwithTheme": "Тақырыпты өзгерту",
         "Language": "Тіл",
         "Support": "Қолдау қызметі",
-        "AllCities": "All cities",
+        "AllCities": "Барлық қалалар",
         "City": "Қала"
     },
     "EventListPage": {
@@ -40,6 +43,9 @@
         "AllRightsReserved": "Барлық құқықтар сақталған"
     },
     "OrderPage": {
+        "Entrance": "Қызметтер",
+        "Services": "Услуги",
+        "ShowQR": "QR-кодын Контроллерге көрсетіңіз",
         "Tickets": "Билеттер",
         "OrderNumber": "Тапсырыс нөмірі",
         "TotalCost": "Жалпы құны",
@@ -50,5 +56,9 @@
         "Location": "Орын",
         "Hall": "Зал",
         "Sector": "Сектор"
+    },
+    "SelectionsPage": {
+        "MainPage": "Басты бет",
+        "SelectionOfEvents": "Оқиғалар таңдауы"
     }
 }
