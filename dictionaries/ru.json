@@ -4,6 +4,7 @@
         "PageNotFound": "Страница не найдена"
     },
     "Header": {
+        "SwithTheme": "Сменить тему",
         "Language": "Язык",
         "Support": "Служба поддержки",
         "AllCities": "Все города",

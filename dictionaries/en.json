@@ -4,6 +4,7 @@
         "PageNotFound": "Page not found"
     },
     "Header": {
+        "SwithTheme": "Swith theme",
         "Language": "Language",
         "Support": "Support",
         "AllCities": "All cities",
