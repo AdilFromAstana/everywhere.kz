@@ -71,13 +71,13 @@ export default async function ContactsPage() {
                             {locale.Contacts.PurchaseAndReturn}
                         </h3>
                         <p className="font-medium text-gray-600">{locale.Contacts.ForQuestionsRegardingThePurchase}</p>
-                        <p className="font-medium leading-relaxed">+7-708-595-67-27</p>
-                        <Link className="my-2" href="tel:+77085956727">
+                        <p className="font-medium leading-relaxed">+7-708-08-08-999</p>
+                        <Link className="my-2" href="tel:+77080808999">
                             <div className="text-white mt-2 rounded-md bg-sky-500 px-3 py-2 ">
                                 {locale.Contacts.Call}
                             </div>
                         </Link>
-                        <Link className="my-2" target="_blank" href="https://wa.me/77085956727">
+                        <Link className="my-2" target="_blank" href="https://wa.me/77080808999">
                             <div className="text-white mt-2 rounded-md bg-emerald-500 px-3 py-2 ">WhatsApp</div>
                         </Link>
                     </div>
