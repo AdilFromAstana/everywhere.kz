@@ -20,7 +20,6 @@ import Link from 'next/link';
 import EventDateInfo from '@/components/EventDateInfo';
 import LeisureCategories from '@/components/LeisureCategories';
 import Posters from '@/components/Posters';
-import Tickers from '@/components/Tickers';
 import { CheckToken } from '@/functions/AxiosHandlers';
 import { City } from '@/types/City';
 import { LeisureCategory } from '@/types/LeisureCategory';
@@ -28,11 +27,9 @@ import { LeisureCategory } from '@/types/LeisureCategory';
 export default async function Home() {
     const EventsData = await GetEvents();
     const PostersData = await GetPosters();
-    const TickersData = await GetTickers();
     const EventumEventsData = await GetEventumEvents();
     const leisureCategories = await GetLeisureCategories();
     const UserCityId = getCookie('UserCityId', { cookies });
-    const AdsIsClosed = getCookie('AdsIsClosed', { cookies });
     const UserLang = getCookie('UserLang', { cookies });
     const locale = await getDictionary(UserLang?.toLocaleLowerCase() ?? 'ru');
     const UserCategoryId = getCookie('UserCategoryId', { cookies });
@@ -225,7 +222,6 @@ export default async function Home() {
                     </div>
                 )}
             </div>
-            <Tickers adsIsClosed={AdsIsClosed} tickers={TickersData} />
         </PageLayout>
     );
 }
@@ -323,26 +319,6 @@ async function GetPosters() {
     const url = process.env.NEXT_PUBLIC_EVENTUM_TEMP_URL + 'posters/forCommerce';
     // `?CityId=${UserCityId ? (parseInt(UserCityId) === 0 ? '' : UserCityId) : ''}` +
     // `&LeisureCategoryId=${UserCategoryId ? (parseInt(UserCategoryId) === 0 ? '' : UserCategoryId) : ''}`;
-
-    const res = await fetch(url, {
-        headers: {
-            'Content-Type': 'application/json',
-        },
-    });
-
-    if (!res.ok) {
-        console.log('res: ', res);
-        // This will activate the closest `error.js` Error Boundary
-        return [];
-    }
-
-    return res.json();
-}
-
-async function GetTickers() {
-    process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
-
-    const url = process.env.NEXT_PUBLIC_EVENTUM_TEMP_URL + 'tickers/forCommerce';
 
     const res = await fetch(url, {
         headers: {
