@@ -43,7 +43,7 @@ const Tickers = ({ tickers, adsIsClosed }: TickersProps) => {
                         return (
                             <div
                                 key={y}
-                                className="items flex flex-shrink-0 justify-around items-end min-w-full gap-2 marquee animate-[scroll_30s_linear_infinite]"
+                                className="items flex flex-shrink-0 justify-around items-end min-w-full gap-2 marquee animate-[scroll_120s_linear_infinite]"
                             >
                                 {[...tickers, ...tickers, ...tickers].map((x, index) => {
                                     return (
