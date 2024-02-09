@@ -225,7 +225,7 @@ export default async function Home() {
                     </div>
                 )}
             </div>
-            <Tickers adsIsClosed={AdsIsClosed} tickers={TickersData} />
+            {/* <Tickers adsIsClosed={AdsIsClosed} tickers={TickersData} /> */}
         </PageLayout>
     );
 }
