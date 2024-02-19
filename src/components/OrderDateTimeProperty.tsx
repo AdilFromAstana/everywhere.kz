@@ -9,19 +9,26 @@ import 'moment/locale/kk';
 
 interface OrderPropertyProps {
     fieldName: string;
+    isKostyl?: boolean;
     date: string;
 }
 
-const OrderDateTimeProperty = ({ fieldName, date }: OrderPropertyProps) => {
+const OrderDateTimeProperty = ({ fieldName, date, isKostyl }: OrderPropertyProps) => {
     const [formatedDate, setFormatedDate] = useState('');
     const UserLang = getCookie('UserLang');
 
     useEffect(() => {
         if (date) {
             setFormatedDate(
-                moment(date)
-                    .locale(UserLang?.toLocaleLowerCase() ?? 'ru-RU')
-                    .format('Do MMMM HH:mm')
+                isKostyl
+                    ? moment(date)
+                          .utc()
+                          .add(6, 'h')
+                          .locale(UserLang?.toLocaleLowerCase() ?? 'ru-RU')
+                          .format('Do MMMM HH:mm')
+                    : moment(date)
+                          .locale(UserLang?.toLocaleLowerCase() ?? 'ru-RU')
+                          .format('Do MMMM HH:mm')
             );
         }
     }, [date]);
