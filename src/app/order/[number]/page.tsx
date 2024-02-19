@@ -158,6 +158,9 @@ export default async function OrderPage({ params }: Props) {
                         <div className="flex flex-col w-full gap-1">
                             <Property name={locale.OrderPage.Event} value={data.details.eventName} />
                             <OrderDateTimeProperty
+                                isKostyl={
+                                    data?.details?.eventName?.toLowerCase()?.includes('soundtrack') ? true : false
+                                }
                                 fieldName={locale.OrderPage.StartOfSession}
                                 date={data.details.sessionBeginDateTime}
                             />
