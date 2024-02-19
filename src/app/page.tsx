@@ -107,7 +107,10 @@ export default async function Home() {
                                         {x.name}
                                     </span>
                                     <p className="text-coolGray-500 font-medium px-2 dark:text-white">
-                                        <EventDateInfo date={x.beginDate} />
+                                        <EventDateInfo
+                                            isKostyl={x?.name?.toLowerCase()?.includes('soundtrack') ? true : false}
+                                            date={x.beginDate}
+                                        />
                                         {isEmpty(UserCityId) || parseInt(UserCityId ?? '0') === 0 ? (
                                             <b> - {x.cityName}</b>
                                         ) : (
