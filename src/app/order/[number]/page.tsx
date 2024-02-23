@@ -237,17 +237,6 @@ export default async function OrderPage({ params }: Props) {
                                 }
                             })}
                         </div>
-                        {data.details.eventName === 'BI Group' && (
-                            <div className="flex flex-col w-full gap-1">
-                                <div className="flex flex-col gap-2 justify-center items-center">
-                                    <div className="lg:text-2xl text-base dark:text-white">Внимание!</div>
-                                    {data.details.eventName}
-                                    <div className="lg:text-2xl text-base dark:text-white">
-                                        Вход со стороны пандуса Е2!
-                                    </div>
-                                </div>
-                            </div>
-                        )}
                     </div>
                 </div>
             </div>

@@ -20,7 +20,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
             lastModified: new Date(),
         })),
         ...(await GetSelections())?.eventSelections.map((x: any) => ({
-            url: `${process.env.NEXT_PUBLIC_APP_URL}/selections/${x.Code}`,
+            url: `${process.env.NEXT_PUBLIC_APP_URL}/selections/${x.code}`,
             lastModified: new Date(),
         })),
         ...staticPages.map((x) => ({
