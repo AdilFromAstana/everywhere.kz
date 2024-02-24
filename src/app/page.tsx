@@ -5,8 +5,6 @@ import { cookies } from 'next/headers';
 import Image from 'next/image';
 
 import EmptyPoster from '@/assets/empty-poster.svg';
-//TODO: TEMP
-import WinterHead from '@/assets/winter-head.png';
 import PageLayout from '@/components/PageLayout';
 import { isEmpty } from '@/functions';
 import { EventInList } from '@/types/EventInList';
@@ -45,23 +43,14 @@ export default async function Home() {
     }) ?? { id: 0, name: locale.EventListPage.All };
     const cities = await GetCities();
 
-    //TODO: TEMP
-    const isWinterModeEventCode = 'Rixos-President-Astana';
-
     return (
         <PageLayout>
             <LeisureCategories leisureCategories={leisureCategories} selectedCategory={selectedCategory} />
-            <Posters posters={PostersData} />
+            <Posters UserLang={UserLang ?? 'Ru'} posters={PostersData} />
             <div className="flex flex-wrap -mx-4">
                 {EventsData?.map((x: EventInList) => {
                     return (
                         <div key={x.id} className="w-full md:w-1/2 lg:w-1/3 p-2 transition duration-200 relative">
-                            {x.code === isWinterModeEventCode && (
-                                <img
-                                    src={WinterHead.src}
-                                    className="absolute lg:-top-8 lg:w-1/5 w-1/4 h-1/4 -right-1 -top-6 z-50"
-                                />
-                            )}
                             <Link href={'/event/' + x.code}>
                                 <div className="cursor-pointer w-full h-auto md:hover:shadow-xl md:hover:scale-105 transition duration-300 rounded-md">
                                     <div className="w-full relative rounded-md -z-10">
@@ -85,12 +74,12 @@ export default async function Home() {
                                                         height: '100%',
                                                     }}
                                                 >
-                                                    <img
-                                                        className="h-64 object-contain rounded-md"
-                                                        src={x.posterFileUrl}
-                                                    />
+                                                    <div className="h-64 object-contain rounded-md" />
                                                 </div>
-                                                <img
+                                                <Image
+                                                    alt={x.name}
+                                                    height={256}
+                                                    width={400}
                                                     className="p-1 absolute -z-10 top-0 w-full h-64 object-contain rounded-md"
                                                     src={x.posterFileUrl}
                                                 />
@@ -154,12 +143,18 @@ export default async function Home() {
                                                             height: '100%',
                                                         }}
                                                     >
-                                                        <img
+                                                        <Image
+                                                            alt={x.NameRu}
+                                                            height={256}
+                                                            width={400}
                                                             className="h-64 object-contain rounded-md"
                                                             src={x.Poster}
                                                         />
                                                     </div>
-                                                    <img
+                                                    <Image
+                                                        alt={x.NameRu}
+                                                        height={256}
+                                                        width={400}
                                                         className="p-1 absolute -z-10 top-0 w-full h-64 object-contain rounded-md"
                                                         src={x.Poster}
                                                     />

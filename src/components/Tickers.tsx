@@ -1,6 +1,7 @@
 'use client';
 
 import { setCookie } from 'cookies-next';
+import Image from 'next/image';
 import Link from 'next/link';
 import React, { useState } from 'react';
 
@@ -48,8 +49,11 @@ const Tickers = ({ tickers, adsIsClosed }: TickersProps) => {
                                 {[...tickers, ...tickers, ...tickers].map((x, index) => {
                                     return (
                                         <Link key={index} href={x.URL}>
-                                            <img
+                                            <Image
+                                                width={400}
+                                                height={80}
                                                 key={index}
+                                                alt={x.Name}
                                                 className="mt-2 cursor-pointer hover:scale-110 hover:shadow-lg w-[400px] h-[80px] rounded duration-200"
                                                 src={x.ImageURL}
                                             />
