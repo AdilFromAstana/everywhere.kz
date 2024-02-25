@@ -9,11 +9,12 @@ import 'moment/locale/kk';
 import { useEffect, useState } from 'react';
 
 interface EventDateProps {
+    cityTimeZone: number;
     date: any;
     isKostyl?: boolean;
 }
 
-const EventDateInfo = ({ date, isKostyl }: EventDateProps) => {
+const EventDateInfo = ({ date, isKostyl, cityTimeZone }: EventDateProps) => {
     const [data, setData] = useState('');
     const UserLang = getCookie('UserLang');
 
@@ -41,14 +42,14 @@ const EventDateInfo = ({ date, isKostyl }: EventDateProps) => {
             } else {
                 switch (UserLang.toLocaleLowerCase()) {
                     case 'kz':
-                        setData(`${moment(date).locale('kz').format('Do MMMM HH:mm')}`);
+                        setData(`${moment(date).utc().add(cityTimeZone, 'h').locale('kz').format('Do MMMM HH:mm')}`);
                         break;
                     case 'en':
-                        setData(`${moment(date).locale('en').format('Do MMMM HH:mm')}`);
+                        setData(`${moment(date).utc().add(cityTimeZone, 'h').locale('en').format('Do MMMM HH:mm')}`);
                         break;
                     case 'ru':
                     default:
-                        setData(`${moment(date).locale('ru_Ru').format('Do MMMM HH:mm')}`);
+                        setData(`${moment(date).utc().add(cityTimeZone, 'h').locale('ru_Ru').format('Do MMMM HH:mm')}`);
                         break;
                 }
             }

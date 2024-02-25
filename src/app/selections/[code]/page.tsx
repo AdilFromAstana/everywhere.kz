@@ -169,9 +169,9 @@ export default async function EventSelectionPage({ params }: Props) {
                                 >
                                     <path
                                         stroke="currentColor"
-                                        stroke-linecap="round"
-                                        stroke-linejoin="round"
-                                        stroke-width="2"
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                        strokeWidth="2"
                                         d="m1 9 4-4-4-4"
                                     />
                                 </svg>
@@ -191,9 +191,9 @@ export default async function EventSelectionPage({ params }: Props) {
                                 >
                                     <path
                                         stroke="currentColor"
-                                        stroke-linecap="round"
-                                        stroke-linejoin="round"
-                                        stroke-width="2"
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                        strokeWidth="2"
                                         d="m1 9 4-4-4-4"
                                     />
                                 </svg>
@@ -250,7 +250,7 @@ export default async function EventSelectionPage({ params }: Props) {
                                             {x.name}
                                         </span>
                                         <p className="text-coolGray-500 font-medium px-2 dark:text-white">
-                                            <EventDateInfo date={x.beginDate} />
+                                            <EventDateInfo cityTimeZone={x.cityTimeZone} date={x.beginDate} />
                                             {isEmpty(UserCityId) || parseInt(UserCityId ?? '0') === 0 ? (
                                                 <b> - {x.cityName}</b>
                                             ) : (

@@ -7,6 +7,8 @@ export interface EventInList {
     leisureCategoryId: number;
     cityName: string;
     beginDate: string;
+    cityTimeZone: number;
+    cityTimeZoneName: string;
     posterFileUrl: string;
     createdAt: string;
     updatedAt: string;

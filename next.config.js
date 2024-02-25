@@ -5,9 +5,8 @@ const nextConfig = {
         remotePatterns: [
             {
                 protocol: 'https',
-                hostname: 'devkazticket.blob.core.windows.net',
+                hostname: '**',
                 port: '',
-                pathname: '/**',
             },
             {
                 protocol: 'https',

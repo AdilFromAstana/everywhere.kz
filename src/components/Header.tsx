@@ -116,7 +116,7 @@ const Header = ({ locale, selectedCity, cities, langs, selectedLang, pages }: He
 
     return (
         <header className="bg-white dark:bg-black">
-            <nav className="mx-auto flex items-center justify-between my-6 px-2 lg:px-8" aria-label="Global">
+            <nav className="mx-auto flex items-center justify-between mt-3 mb-1 px-2 lg:px-8" aria-label="Global">
                 <div className="flex z-50">
                     {!isEmpty(randomTransition) ? (
                         <>
