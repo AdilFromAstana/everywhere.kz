@@ -222,3 +222,26 @@ html.dark #left-arrow::after {
         display: none !important;
     }
 }
+
+.swiper-slide a {
+    pointer-events: none !important;
+}
+
+.swiper-slide-active a {
+    pointer-events: all !important;
+}
+
+svg.ProgressedButton {
+    --progress: 0;
+    z-index: 10;
+    stroke-width: 15px;
+    stroke: #0490c3;
+    fill: none;
+    stroke-dashoffset: calc(660 * -1 * (1 - var(--progress)));
+    stroke-dasharray: 660;
+}
+
+svg.ProgressedButton path.Arrow {
+    stroke-dashoffset: 0;
+    stroke-dasharray: 0;
+}

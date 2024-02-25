@@ -47,19 +47,19 @@ export default async function Home() {
         <PageLayout>
             <LeisureCategories leisureCategories={leisureCategories} selectedCategory={selectedCategory} />
             <Posters UserLang={UserLang ?? 'Ru'} posters={PostersData} />
-            <div className="flex flex-wrap -mx-4">
+            <div className="flex flex-wrap -mx-4 md:gap-0 gap-3">
                 {EventsData?.map((x: EventInList) => {
                     return (
                         <div key={x.id} className="w-full md:w-1/2 lg:w-1/3 p-2 transition duration-200 relative">
                             <Link href={'/event/' + x.code}>
-                                <div className="cursor-pointer w-full h-auto md:hover:shadow-xl md:hover:scale-105 transition duration-300 rounded-md">
-                                    <div className="w-full relative rounded-md -z-10">
+                                <div className="flex flex-col gap-2 cursor-pointer w-full h-auto md:hover:shadow-xl md:hover:scale-105 transition duration-300 rounded-xl">
+                                    <div className="w-full relative rounded-xl -z-10 overflow-hidden">
                                         {isEmpty(x.posterFileUrl) ? (
                                             <>
                                                 <Image
                                                     src={EmptyPoster}
                                                     alt={x.name}
-                                                    className="w-full h-64 object-cover -z-10 rounded-md"
+                                                    className="w-full h-64 object-cover -z-10 rounded-xl"
                                                     width="100"
                                                     height="100"
                                                 />
@@ -67,45 +67,52 @@ export default async function Home() {
                                         ) : (
                                             <>
                                                 <div
-                                                    className="w-full h-full rounded-md -z-10 relative bg-cover bg-no-repeat bg-center"
+                                                    className="w-full h-full rounded-xl -z-10 relative bg-cover bg-no-repeat bg-center"
                                                     style={{
                                                         backgroundImage: `url("${x.posterFileUrl ?? ''}")`,
-                                                        filter: 'blur(2px)',
+                                                        filter: 'blur(3px)',
                                                         height: '100%',
                                                     }}
                                                 >
-                                                    <div className="h-64 object-contain rounded-md" />
+                                                    <div className="h-64 object-contain rounded-xl" />
                                                 </div>
                                                 <Image
                                                     alt={x.name}
                                                     height={256}
                                                     width={400}
-                                                    className="p-1 absolute -z-10 top-0 w-full h-64 object-contain rounded-md"
+                                                    className="p-1 absolute -z-10 top-0 w-full h-64 object-contain rounded-xl"
                                                     src={x.posterFileUrl}
                                                 />
                                             </>
                                         )}
-                                        <div className="bg-white px-2 font-medium absolute left-3 bottom-3 rounded-md text-black dark:bg-black dark:text-white">
-                                            от {x.minCost} тг.
+                                        <div className="bg-[#FFF] dark:bg-[#000000] shadow-md backdrop-blur-sm px-3 absolute left-3 bottom-3 rounded-md">
+                                            <span className="text-lg font-medium text-black dark:text-white">
+                                                от {x.minCost} тг.
+                                            </span>
                                         </div>
-                                        <div className="bg-white px-2 font-medium absolute right-3 bottom-3 rounded-md text-black dark:bg-black dark:text-white">
-                                            {x.ageLimit}+
+                                        <div className="bg-[#FFF] dark:bg-[#000000] shadow-md backdrop-blur-sm px-3 absolute right-3 bottom-3 rounded-md">
+                                            <span className="text-lg font-medium text-black dark:text-white">
+                                                {x.ageLimit}+
+                                            </span>
                                         </div>
                                     </div>
-                                    <span className="mb-4 md:text-2xl px-2 leading-tight font-bold text-black dark:text-white">
-                                        {x.name}
-                                    </span>
-                                    <p className="text-coolGray-500 font-medium px-2 dark:text-white">
-                                        <EventDateInfo
-                                            isKostyl={x?.name?.toLowerCase()?.includes('soundtrack') ? true : false}
-                                            date={x.beginDate}
-                                        />
-                                        {isEmpty(UserCityId) || parseInt(UserCityId ?? '0') === 0 ? (
-                                            <b> - {x.cityName}</b>
-                                        ) : (
-                                            ''
-                                        )}
-                                    </p>
+                                    <div>
+                                        <span className="mb-4 md:text-2xl text-xl leading-tight font-bold text-black dark:text-white">
+                                            {x.name}
+                                        </span>
+                                        <p className="text-[#00000073] font-medium dark:text-white">
+                                            <EventDateInfo
+                                                cityTimeZone={x.cityTimeZone}
+                                                isKostyl={x?.name?.toLowerCase()?.includes('soundtrack') ? true : false}
+                                                date={x.beginDate}
+                                            />
+                                            {isEmpty(UserCityId) || parseInt(UserCityId ?? '0') === 0 ? (
+                                                <> - {x.cityName}</>
+                                            ) : (
+                                                ''
+                                            )}
+                                        </p>
+                                    </div>
                                 </div>
                             </Link>
                         </div>
@@ -121,14 +128,14 @@ export default async function Home() {
                         return (
                             <div key={x.Id} className="w-full md:w-1/2 lg:w-1/3 p-2 transition duration-200 ">
                                 <Link href={'/e/' + x.Code}>
-                                    <div className="cursor-pointer w-full h-auto md:hover:shadow-xl md:hover:scale-105 transition duration-300 rounded-md">
-                                        <div className="w-full relative rounded-md -z-10">
+                                    <div className="cursor-pointer w-full h-auto md:hover:shadow-xl md:hover:scale-105 transition duration-300 rounded-xl">
+                                        <div className="w-full relative rounded-xl -z-10">
                                             {isEmpty(x.Poster) ? (
                                                 <>
                                                     <Image
                                                         src={EmptyPoster}
                                                         alt={x.name}
-                                                        className="w-full h-64 object-cover -z-10 rounded-md"
+                                                        className="w-full h-64 object-cover -z-10 rounded-xl"
                                                         width="100"
                                                         height="100"
                                                     />
@@ -136,7 +143,7 @@ export default async function Home() {
                                             ) : (
                                                 <>
                                                     <div
-                                                        className="flex flex-col items-center w-full h-full rounded-md -z-10 relative bg-cover bg-no-repeat bg-center"
+                                                        className="flex flex-col items-center w-full h-full rounded-xl -z-10 relative bg-cover bg-no-repeat bg-center"
                                                         style={{
                                                             backgroundImage: `url("${x.Poster ?? ''}")`,
                                                             filter: 'blur(2px)',
@@ -147,7 +154,7 @@ export default async function Home() {
                                                             alt={x.NameRu}
                                                             height={256}
                                                             width={400}
-                                                            className="h-64 object-contain rounded-md"
+                                                            className="h-64 object-contain rounded-xl"
                                                             src={x.Poster}
                                                         />
                                                     </div>
@@ -155,7 +162,7 @@ export default async function Home() {
                                                         alt={x.NameRu}
                                                         height={256}
                                                         width={400}
-                                                        className="p-1 absolute -z-10 top-0 w-full h-64 object-contain rounded-md"
+                                                        className="p-1 absolute -z-10 top-0 w-full h-64 object-contain rounded-xl"
                                                         src={x.Poster}
                                                     />
                                                 </>
@@ -175,7 +182,7 @@ export default async function Home() {
                                                   : x.NameRu}
                                         </span>
                                         <p className="text-coolGray-500 font-medium px-2 dark:text-white">
-                                            <EventDateInfo date={x.Date} />
+                                            <EventDateInfo cityTimeZone={6} date={x.Date} />
                                             {isEmpty(UserCityId) || parseInt(UserCityId ?? '0') === 0 ? (
                                                 <b> - {city?.name}</b>
                                             ) : (
