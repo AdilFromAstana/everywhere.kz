@@ -214,3 +214,11 @@ html.dark #left-arrow::after {
     border-radius: 1px;
     transform: translate3d(-105%, 0px, 0px);
 }
+
+/* Mobile */
+@media (max-width: 700px) {
+    .swiper-button-prev,
+    .swiper-button-next {
+        display: none !important;
+    }
+}
