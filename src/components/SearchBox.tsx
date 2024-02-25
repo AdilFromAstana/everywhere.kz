@@ -100,7 +100,10 @@ const SearchBox = ({ cities, locale }: SearchBoxProps) => {
                                             <span className="text-base lg:text-xl text-center">{event.name}</span>
                                             <span className="flex flex-row gap-2 justify-between">
                                                 <span className="text-xs">
-                                                    <EventDateInfo date={event.beginDate} />
+                                                    <EventDateInfo
+                                                        cityTimeZone={event.isEventum ? 6 : event.cityTimeZone}
+                                                        date={event.beginDate}
+                                                    />
                                                 </span>
                                                 <span className="lg:text-xl text-xs font-normal items-center flex flex-row">
                                                     <MapPinIcon className="w-4" />
