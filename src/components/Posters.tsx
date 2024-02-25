@@ -166,7 +166,7 @@ const Posters = ({ posters, UserLang }: PostersProps) => {
                     <Swiper
                         pagination={{
                             enabled: false,
-                            renderBullet: function (index, className) {
+                            renderBullet: function () {
                                 return `<div></div>`;
                             },
                         }}
@@ -201,71 +201,67 @@ const Posters = ({ posters, UserLang }: PostersProps) => {
                         {[...posters, ...posters].map((x) => {
                             return (
                                 <SwiperSlide key={x.Id} className="rounded-xl overflow-hidden">
-                                    {({ isActive }) => (
-                                        <Link href={x.URL} className="rounded-xl">
-                                            <div className="rounded-xl cursor-pointer h-full flex flex-col items-center">
+                                    <Link href={x.URL} className="rounded-xl">
+                                        <div className="rounded-xl cursor-pointer h-full flex flex-col items-center">
+                                            <div className={`lg:flex rounded-xl flex-col justify-center hidden h-full`}>
                                                 <div
-                                                    className={`lg:flex rounded-xl flex-col justify-center hidden h-full`}
-                                                >
-                                                    <div
-                                                        className="bg-cover bg-center absolute w-full h-full rounded-xl top-0 left-0 -z-20"
-                                                        style={{
-                                                            backgroundImage: `url("${x.ComputerImageURL ?? ''}")`,
-                                                            filter: 'blur(4px)',
-                                                            height: '100%',
-                                                        }}
-                                                    />
-                                                    <div className="bg-[#22182666] absolute rounded-xl w-full h-full top-0 left-0 z-20">
-                                                        <div className="absolute px-5 bottom-10 flex flex-col gap-1">
-                                                            <div className="flex flex-row items-center gap-2">
-                                                                <span className="text-2xl font-semibold text-white">
-                                                                    {UserLang?.toLocaleLowerCase() === 'en'
-                                                                        ? x.NameEn
-                                                                        : UserLang?.toLocaleLowerCase() === 'kz'
-                                                                          ? x.NameKz
-                                                                          : x.NameRu}
-                                                                </span>
-                                                            </div>
-                                                            {(!isEmpty(x.SublinesRu) ||
-                                                                !isEmpty(x.SublinesKz) ||
-                                                                !isEmpty(x.SublinesEn)) && (
-                                                                <div className="text-sm font-semibold text-white opacity-80">
-                                                                    <span>
-                                                                        {RenderSublines(
-                                                                            UserLang?.toLocaleLowerCase() === 'en'
-                                                                                ? x.SublinesEn
-                                                                                : UserLang?.toLocaleLowerCase() === 'kz'
-                                                                                  ? x.SublinesKz
-                                                                                  : x.SublinesRu
-                                                                        )}
-                                                                    </span>
-                                                                </div>
-                                                            )}
-                                                            {!isEmpty(x.MinCost) && (
-                                                                <span className="relative text-white text-sm rounded-sm opacity-80">
-                                                                    от {x.MinCost} тг
-                                                                </span>
-                                                            )}
+                                                    className="bg-cover bg-center absolute w-full h-full rounded-xl top-0 left-0 -z-20"
+                                                    style={{
+                                                        backgroundImage: `url("${x.ComputerImageURL ?? ''}")`,
+                                                        filter: 'blur(4px)',
+                                                        height: '100%',
+                                                    }}
+                                                />
+                                                <div className="bg-[#22182666] absolute rounded-xl w-full h-full top-0 left-0 z-20">
+                                                    <div className="absolute px-5 bottom-10 flex flex-col gap-1">
+                                                        <div className="flex flex-row items-center gap-2">
+                                                            <span className="text-2xl font-semibold text-white">
+                                                                {UserLang?.toLocaleLowerCase() === 'en'
+                                                                    ? x.NameEn
+                                                                    : UserLang?.toLocaleLowerCase() === 'kz'
+                                                                      ? x.NameKz
+                                                                      : x.NameRu}
+                                                            </span>
                                                         </div>
-                                                        {!isEmpty(x.AgeLimit) && (
-                                                            <div className="absolute right-3 top-3">
-                                                                <span className="font-bold text-white text-base">
-                                                                    {x.AgeLimit}+
+                                                        {(!isEmpty(x.SublinesRu) ||
+                                                            !isEmpty(x.SublinesKz) ||
+                                                            !isEmpty(x.SublinesEn)) && (
+                                                            <div className="text-sm font-semibold text-white opacity-80">
+                                                                <span>
+                                                                    {RenderSublines(
+                                                                        UserLang?.toLocaleLowerCase() === 'en'
+                                                                            ? x.SublinesEn
+                                                                            : UserLang?.toLocaleLowerCase() === 'kz'
+                                                                              ? x.SublinesKz
+                                                                              : x.SublinesRu
+                                                                    )}
                                                                 </span>
                                                             </div>
                                                         )}
+                                                        {!isEmpty(x.MinCost) && (
+                                                            <span className="relative text-white text-sm rounded-sm opacity-80">
+                                                                от {x.MinCost} тг
+                                                            </span>
+                                                        )}
                                                     </div>
-                                                    <Image
-                                                        width={2000}
-                                                        height={500}
-                                                        alt={x.Name}
-                                                        className="h-full w-fit z-0 rounded-xl object-contain"
-                                                        src={x.ComputerImageURL}
-                                                    />
+                                                    {!isEmpty(x.AgeLimit) && (
+                                                        <div className="absolute right-3 top-3">
+                                                            <span className="font-bold text-white text-base">
+                                                                {x.AgeLimit}+
+                                                            </span>
+                                                        </div>
+                                                    )}
                                                 </div>
+                                                <Image
+                                                    width={2000}
+                                                    height={500}
+                                                    alt={x.Name}
+                                                    className="h-full w-fit z-0 rounded-xl object-contain"
+                                                    src={x.ComputerImageURL}
+                                                />
                                             </div>
-                                        </Link>
-                                    )}
+                                        </div>
+                                    </Link>
                                 </SwiperSlide>
                             );
                         })}
