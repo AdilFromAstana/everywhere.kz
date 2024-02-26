@@ -125,6 +125,8 @@ export default async function OrderPage({ params }: Props) {
         }
     };
 
+    console.log('data: ', data);
+
     if (!isEmpty(data)) {
         return (
             <div className="flex flex-col h-min gap-2">
