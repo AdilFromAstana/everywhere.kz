@@ -8,12 +8,13 @@ import 'moment/locale/ru';
 import 'moment/locale/kk';
 
 interface OrderPropertyProps {
+    cityTimeZone: number;
     fieldName: string;
     isKostyl?: boolean;
     date: string;
 }
 
-const OrderDateTimeProperty = ({ fieldName, date, isKostyl }: OrderPropertyProps) => {
+const OrderDateTimeProperty = ({ fieldName, date, isKostyl, cityTimeZone }: OrderPropertyProps) => {
     const [formatedDate, setFormatedDate] = useState('');
     const UserLang = getCookie('UserLang');
 
@@ -27,6 +28,8 @@ const OrderDateTimeProperty = ({ fieldName, date, isKostyl }: OrderPropertyProps
                           .locale(UserLang?.toLocaleLowerCase() ?? 'ru-RU')
                           .format('Do MMMM HH:mm')
                     : moment(date)
+                          .utc()
+                          .add(cityTimeZone, 'h')
                           .locale(UserLang?.toLocaleLowerCase() ?? 'ru-RU')
                           .format('Do MMMM HH:mm')
             );
