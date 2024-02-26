@@ -12,6 +12,9 @@ module.exports = {
         extend: {
             height: {
                 '128': '32rem',
+            },
+            boxShadow: {
+                'header': '0px 0px 25px 0px #8E8E8E40',
             }
         },
     },

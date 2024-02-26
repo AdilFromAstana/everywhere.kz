@@ -67,8 +67,8 @@ html.dark .EventDescription img {
 #left-arrow,
 #right-arrow {
     position: absolute;
-    height: 100%;
-    top: 0;
+    height: 110%;
+    top: -2px;
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -86,11 +86,11 @@ html.dark #right-arrow .scroll-arrow {
 }
 
 #left-arrow {
-    left: 0;
+    left: -2px;
 }
 
 #right-arrow {
-    right: 0;
+    right: -2px;
 }
 
 #right-arrow::before {

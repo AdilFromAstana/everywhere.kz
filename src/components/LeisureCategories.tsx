@@ -51,7 +51,7 @@ const LeisureCategories = ({ leisureCategories, selectedCategory }: LeisureCateg
     };
 
     return (
-        <div id="leisureCategories" className="flex flex-row py-3 -mx-2">
+        <div id="leisureCategories" className="flex flex-row py-3 lg:px-2 container mx-auto">
             <div className="relative w-full">
                 {/* {canScrollLeft && ( */}
                 <div
