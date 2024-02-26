@@ -47,10 +47,13 @@ export default async function Home() {
         <PageLayout>
             <LeisureCategories leisureCategories={leisureCategories} selectedCategory={selectedCategory} />
             <Posters UserLang={UserLang ?? 'Ru'} posters={PostersData} />
-            <div className="flex flex-wrap -mx-4 md:gap-0 gap-3">
+            <div className="flex flex-wrap md:gap-0 gap-3 container mx-auto">
                 {EventsData?.map((x: EventInList) => {
                     return (
-                        <div key={x.id} className="w-full md:w-1/2 lg:w-1/3 p-2 transition duration-200 relative">
+                        <div
+                            key={x.id}
+                            className="w-full md:w-1/2 lg:w-1/3 lg:px-2 py-2 transition duration-200 relative"
+                        >
                             <Link href={'/event/' + x.code}>
                                 <div className="flex flex-col gap-2 cursor-pointer w-full h-auto md:hover:shadow-xl md:hover:scale-105 transition duration-300 rounded-xl">
                                     <div className="w-full relative rounded-xl -z-10 overflow-hidden">

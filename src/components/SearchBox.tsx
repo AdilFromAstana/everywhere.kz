@@ -42,14 +42,14 @@ const SearchBox = ({ cities, locale }: SearchBoxProps) => {
     return (
         <Combobox value={selectedPerson} onChange={setSelectedPerson}>
             <div className="relative w-full mx-2 z-50">
-                <div className="relative w-full flex flex-row items-center cursor-default overflow-hidden rounded-lg bg-[#0000000d] text-left shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-white/75 focus-visible:ring-offset-2 focus-visible:ring-offset-teal-300 sm:text-sm">
+                <div className="relative w-full flex flex-row border-[#EDEDED] border-solid border-[1px] items-center cursor-default overflow-hidden rounded-lg text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-white/75 focus-visible:ring-offset-2 focus-visible:ring-offset-teal-300 sm:text-sm">
+                    <MagnifyingGlassIcon className="h-7 w-7 px-1 text-gray-400" aria-hidden="true" />
                     <Combobox.Input
-                        placeholder=""
-                        className="bg-[#0000000d] w-full border-none py-2 pl-3 pr-10 text-sm leading-5 text-gray-900 focus-visible:outline-none"
+                        placeholder="Поиск по событиям"
+                        className="w-full border-none py-2 pr-10 text-sm leading-5 text-gray-900 focus-visible:outline-none"
                         displayValue={(event: any) => event.name}
                         onChange={async (event) => await GetEvents(event.target.value)}
                     />
-                    <MagnifyingGlassIcon className="h-7 w-7 px-1 text-gray-400" aria-hidden="true" />
                 </div>
                 <Transition
                     as={Fragment}

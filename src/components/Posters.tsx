@@ -172,7 +172,7 @@ const Posters = ({ posters, UserLang }: PostersProps) => {
                         }}
                         onSwiper={(s) => setSwiper(s)}
                         spaceBetween={20}
-                        slidesPerView={1.2}
+                        slidesPerView={1.25}
                         speed={500}
                         autoplay={{
                             delay: 5000,
@@ -190,8 +190,8 @@ const Posters = ({ posters, UserLang }: PostersProps) => {
                         allowSlideNext={true}
                         allowSlidePrev={true}
                         style={{
-                            marginLeft: '-0.5rem',
-                            marginRight: '-0.5rem',
+                            marginLeft: '-1rem',
+                            marginRight: '-1rem',
                         }}
                         className="lg:h-96 h-64 mb-2"
                         modules={[Autoplay]}
@@ -265,7 +265,7 @@ const Posters = ({ posters, UserLang }: PostersProps) => {
                                 </SwiperSlide>
                             );
                         })}
-                        <div className="absolute flex flex-row right-[10%] bottom-5 z-10">
+                        <div className="absolute flex flex-row right-[11%] bottom-5 z-10">
                             <svg
                                 onClick={() => swiper?.slidePrev()}
                                 width="200"

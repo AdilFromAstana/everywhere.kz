@@ -115,8 +115,11 @@ const Header = ({ locale, selectedCity, cities, langs, selectedLang, pages }: He
     };
 
     return (
-        <header className="bg-white dark:bg-black">
-            <nav className="mx-auto flex items-center justify-between mt-3 mb-1 px-2 lg:px-8" aria-label="Global">
+        <header className="bg-white dark:bg-black container mx-auto px-2">
+            <nav
+                className="flex items-center justify-between rounded-xl lg:shadow-header dark:shadow-none py-4 lg:my-2 lg:px-8 px-2"
+                aria-label="Global"
+            >
                 <div className="flex z-50">
                     {!isEmpty(randomTransition) ? (
                         <>
@@ -138,22 +141,16 @@ const Header = ({ locale, selectedCity, cities, langs, selectedLang, pages }: He
                                     }}
                                     src={isDarkMode ? WhiteMonoLogo : Logo}
                                     alt="Kazticket.kz Logo"
-                                    className="h-14 w-auto cursor-pointer"
+                                    className="h-10 w-auto cursor-pointer"
                                     priority
                                 />
                             </Transition>
-                            {/* <Image
-                                src={isDarkMode ? WhiteMonoLogo : Logo}
-                                alt="Kazticket.kz Logo"
-                                className="h-14 w-auto opacity-0"
-                                priority
-                            /> */}
                         </>
                     ) : (
                         <Image
                             src={isDarkMode ? WhiteMonoLogo : Logo}
                             alt="Kazticket.kz Logo"
-                            className="h-14 w-auto"
+                            className="h-10 w-auto"
                             priority
                         />
                     )}
