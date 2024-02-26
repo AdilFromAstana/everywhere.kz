@@ -125,8 +125,6 @@ export default async function OrderPage({ params }: Props) {
         }
     };
 
-    console.log('data: ', data);
-
     if (!isEmpty(data)) {
         return (
             <div className="flex flex-col h-min gap-2">
@@ -160,6 +158,7 @@ export default async function OrderPage({ params }: Props) {
                         <div className="flex flex-col w-full gap-1">
                             <Property name={locale.OrderPage.Event} value={data.details.eventName} />
                             <OrderDateTimeProperty
+                                cityTimeZone={data.cityTimeZone ?? 6}
                                 isKostyl={
                                     data?.details?.eventName?.toLowerCase()?.includes('soundtrack') ? true : false
                                 }
@@ -168,6 +167,7 @@ export default async function OrderPage({ params }: Props) {
                             />
                             {!isEmpty(data.details.sessionEndDateTime) && (
                                 <OrderDateTimeProperty
+                                    cityTimeZone={data.cityTimeZone ?? 6}
                                     fieldName={locale.OrderPage.EndOfSession}
                                     date={data.details.sessionEndDateTime}
                                 />
