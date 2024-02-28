@@ -1,0 +1,11 @@
+{
+    "Draft": 1,
+    "Moderate": 2,
+    "Approved": 3,
+    "Announce": 4,
+    "OnSale": 5,
+    "SalesFrozen": 6,
+    "SoldOut": 7,
+    "Canceled": 8,
+    "Completed": 9
+}

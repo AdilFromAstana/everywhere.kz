@@ -198,9 +198,9 @@ const Posters = ({ posters, UserLang }: PostersProps) => {
                         onAutoplayTimeLeft={onAutoplayTimeLeft}
                         onSlideChange={onSlideChange}
                     >
-                        {[...posters, ...posters].map((x) => {
+                        {[...posters, ...posters].map((x, index: number) => {
                             return (
-                                <SwiperSlide key={x.Id} className="rounded-xl overflow-hidden">
+                                <SwiperSlide key={`${x.Id}-${index}`} className="rounded-xl overflow-hidden">
                                     <Link href={x.URL} className="rounded-xl">
                                         <div className="rounded-xl cursor-pointer h-full flex flex-col items-center">
                                             <div className={`lg:flex rounded-xl flex-col justify-center hidden h-full`}>
@@ -297,9 +297,9 @@ const Posters = ({ posters, UserLang }: PostersProps) => {
                                         width="182.913"
                                         height="182.913"
                                         filterUnits="userSpaceOnUse"
-                                        color-interpolation-filters="sRGB"
+                                        colorInterpolationFilters="sRGB"
                                     >
-                                        <feFlood flood-opacity="0" result="BackgroundImageFix" />
+                                        <feFlood floodOpacity="0" result="BackgroundImageFix" />
                                         <feColorMatrix
                                             in="SourceAlpha"
                                             type="matrix"
@@ -344,7 +344,7 @@ const Posters = ({ posters, UserLang }: PostersProps) => {
                                     />
                                     <path
                                         d="M160.87 8.69568H39.1304C24.723 8.69568 13.0435 20.3752 13.0435 34.7826V156.522C13.0435 170.929 24.723 182.609 39.1304 182.609H160.87C175.277 182.609 186.956 170.929 186.956 156.522V34.7826C186.956 20.3752 175.277 8.69568 160.87 8.69568Z"
-                                        stroke-width="5"
+                                        strokeWidth="5"
                                     />
                                     <path
                                         className="Arrow"
@@ -363,9 +363,9 @@ const Posters = ({ posters, UserLang }: PostersProps) => {
                                         width="182.913"
                                         height="182.913"
                                         filterUnits="userSpaceOnUse"
-                                        color-interpolation-filters="sRGB"
+                                        colorInterpolationFilters="sRGB"
                                     >
-                                        <feFlood flood-opacity="0" result="BackgroundImageFix" />
+                                        <feFlood floodOpacity="0" result="BackgroundImageFix" />
                                         <feColorMatrix
                                             in="SourceAlpha"
                                             type="matrix"

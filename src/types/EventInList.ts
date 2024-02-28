@@ -2,6 +2,7 @@ export interface EventInList {
     id: string;
     code: string;
     name: string;
+    statusId: number;
     minCost: number;
     ageLimit: number;
     leisureCategoryId: number;
