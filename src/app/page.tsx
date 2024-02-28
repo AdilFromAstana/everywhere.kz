@@ -5,6 +5,7 @@ import { cookies } from 'next/headers';
 import Image from 'next/image';
 
 import EmptyPoster from '@/assets/empty-poster.svg';
+import SoldOut from '@/assets/soldout.svg';
 import PageLayout from '@/components/PageLayout';
 import { isEmpty } from '@/functions';
 import { EventInList } from '@/types/EventInList';
@@ -19,6 +20,7 @@ import EventDateInfo from '@/components/EventDateInfo';
 import LeisureCategories from '@/components/LeisureCategories';
 import Posters from '@/components/Posters';
 import Tickers from '@/components/Tickers';
+import EventStatuses from '@/constants/EventStatuses.json';
 import { CheckToken } from '@/functions/AxiosHandlers';
 import { City } from '@/types/City';
 import { LeisureCategory } from '@/types/LeisureCategory';
@@ -73,7 +75,7 @@ export default async function Home() {
                                                     className="w-full h-full rounded-xl -z-10 relative bg-cover bg-no-repeat bg-center"
                                                     style={{
                                                         backgroundImage: `url("${x.posterFileUrl ?? ''}")`,
-                                                        filter: 'blur(3px)',
+                                                        filter: 'blur(10px)',
                                                         height: '100%',
                                                     }}
                                                 >
@@ -87,6 +89,15 @@ export default async function Home() {
                                                     src={x.posterFileUrl}
                                                 />
                                             </>
+                                        )}
+                                        {x.statusId === EventStatuses.SoldOut && (
+                                            <Image
+                                                alt={x.name}
+                                                height={256}
+                                                width={400}
+                                                className="p-1 absolute z-10 top-0 w-full h-64 object-contain rounded-xl bg-[rgba(0,0,0,0.3)]"
+                                                src={SoldOut}
+                                            />
                                         )}
                                         <div className="bg-[#FFF] dark:bg-[#000000] shadow-md backdrop-blur-sm px-3 absolute left-3 bottom-3 rounded-md">
                                             <span className="text-lg font-medium text-black dark:text-white">

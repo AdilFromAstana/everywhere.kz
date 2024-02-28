@@ -2,10 +2,13 @@ import { getCookie } from 'cookies-next';
 import { getDictionary } from 'dictionaries';
 // import { getDictionary } from 'dictionaries';
 import { cookies } from 'next/headers';
+import Image from 'next/image';
 import Link from 'next/link';
 
 import EmptyPoster from '@/assets/empty-poster.svg';
+import SoldOut from '@/assets/soldout.svg';
 import EventDateInfo from '@/components/EventDateInfo';
+import EventStatuses from '@/constants/EventStatuses.json';
 import { isEmpty } from '@/functions';
 import { CheckToken } from '@/functions/AxiosHandlers';
 import { EventInList } from '@/types/EventInList';
@@ -139,7 +142,7 @@ export default async function EventSelectionPage({ params }: Props) {
     if (!isEmpty(EventsData)) {
         return (
             <div>
-                <nav className="flex my-2" aria-label="Breadcrumb">
+                <nav className="flex my-2 mx-auto" aria-label="Breadcrumb">
                     <ol className="flex lg:flex-row lg:items-center flex-col items-start lg:space-x-1 md:space-x-2 rtl:space-x-reverse">
                         <li className="inline-flex items-center">
                             <Link
@@ -204,46 +207,62 @@ export default async function EventSelectionPage({ params }: Props) {
                         </li>
                     </ol>
                 </nav>
-                <div className="flex flex-wrap -mx-4">
+                <div className="flex flex-wrap mx-auto">
                     {EventsData?.items?.map((x: EventInList) => {
                         return (
                             <div key={x.id} className="w-full md:w-1/2 lg:w-1/3 p-2 transition duration-200 relative">
                                 <Link href={'/event/' + x.code}>
                                     <div className="cursor-pointer w-full h-auto md:hover:shadow-xl md:hover:scale-105 transition duration-300 rounded-md">
-                                        <div className="w-full relative rounded-md -z-10">
+                                        <div className="w-full relative rounded-xl -z-10 overflow-hidden">
                                             {isEmpty(x.posterFileUrl) ? (
                                                 <>
-                                                    <img
-                                                        className="w-full h-64 object-cover -z-10 rounded-md"
-                                                        src={EmptyPoster.src}
+                                                    <Image
+                                                        src={EmptyPoster}
+                                                        alt={x.name}
+                                                        className="w-full h-64 object-cover -z-10 rounded-xl"
+                                                        width="100"
+                                                        height="100"
                                                     />
                                                 </>
                                             ) : (
                                                 <>
                                                     <div
-                                                        className="w-full h-full rounded-md -z-10 relative bg-cover bg-no-repeat bg-center"
+                                                        className="w-full h-full rounded-xl -z-10 relative bg-cover bg-no-repeat bg-center"
                                                         style={{
                                                             backgroundImage: `url("${x.posterFileUrl ?? ''}")`,
-                                                            filter: 'blur(2px)',
+                                                            filter: 'blur(10px)',
                                                             height: '100%',
                                                         }}
                                                     >
-                                                        <img
-                                                            className="h-64 object-contain rounded-md"
-                                                            src={x.posterFileUrl}
-                                                        />
+                                                        <div className="h-64 object-contain rounded-xl" />
                                                     </div>
-                                                    <img
-                                                        className="p-1 absolute -z-10 top-0 w-full h-64 object-contain rounded-md"
+                                                    <Image
+                                                        alt={x.name}
+                                                        height={256}
+                                                        width={400}
+                                                        className="p-1 absolute -z-10 top-0 w-full h-64 object-contain rounded-xl"
                                                         src={x.posterFileUrl}
                                                     />
                                                 </>
                                             )}
-                                            <div className="bg-white px-2 font-medium absolute left-3 bottom-3 rounded-md text-black dark:bg-black dark:text-white">
-                                                от {x.minCost} тг.
+                                            {x.statusId === EventStatuses.SoldOut && (
+                                                <Image
+                                                    alt={x.name}
+                                                    height={256}
+                                                    width={400}
+                                                    className="p-1 absolute z-10 top-0 w-full h-64 object-contain rounded-xl bg-[rgba(0,0,0,0.3)]"
+                                                    src={SoldOut}
+                                                />
+                                            )}
+                                            <div className="bg-[#FFF] dark:bg-[#000000] shadow-md backdrop-blur-sm px-3 absolute left-3 bottom-3 rounded-md">
+                                                <span className="text-lg font-medium text-black dark:text-white">
+                                                    от {x.minCost} тг.
+                                                </span>
                                             </div>
-                                            <div className="bg-white px-2 font-medium absolute right-3 bottom-3 rounded-md text-black dark:bg-black dark:text-white">
-                                                {x.ageLimit}+
+                                            <div className="bg-[#FFF] dark:bg-[#000000] shadow-md backdrop-blur-sm px-3 absolute right-3 bottom-3 rounded-md">
+                                                <span className="text-lg font-medium text-black dark:text-white">
+                                                    {x.ageLimit}+
+                                                </span>
                                             </div>
                                         </div>
                                         <span className="mb-4 md:text-2xl px-2 leading-tight font-bold text-black dark:text-white">

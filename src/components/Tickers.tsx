@@ -28,7 +28,7 @@ const Tickers = ({ tickers, adsIsClosed }: TickersProps) => {
         return (
             <div className="fixed bottom-0 left-0">
                 <svg
-                    className="m-3 p-1 h-7 w-7 bg-white rounded-full cursor-pointer"
+                    className="absolute z-10 lg:-top-14 -top-10 right-0 m-3 p-1 h-7 w-7 bg-white rounded-full cursor-pointer"
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 32 32"
                     fill="none"

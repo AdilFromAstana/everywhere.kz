@@ -46,7 +46,7 @@ const SearchBox = ({ cities, locale }: SearchBoxProps) => {
                     <MagnifyingGlassIcon className="h-7 w-7 px-1 text-gray-400" aria-hidden="true" />
                     <Combobox.Input
                         placeholder="Поиск по событиям"
-                        className="w-full border-none py-2 pr-10 text-sm leading-5 text-gray-900 focus-visible:outline-none"
+                        className="w-full border-none py-2 pr-10 bg-white dark:bg-black text-sm leading-5 text-gray-900 dark:text-white focus-visible:outline-none"
                         displayValue={(event: any) => event.name}
                         onChange={async (event) => await GetEvents(event.target.value)}
                     />

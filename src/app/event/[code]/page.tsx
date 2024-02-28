@@ -1,12 +1,15 @@
 import { getCookie } from 'cookies-next';
 import { getDictionary } from 'dictionaries';
 import { cookies } from 'next/headers';
+import Image from 'next/image';
 // import Image from 'next/image';
 import Link from 'next/link';
 import Script from 'next/script';
 
 import EmptyPoster from '@/assets/empty-poster.svg';
+import SoldOut from '@/assets/soldout.svg';
 import KazticketButton from '@/components/KazticketButton';
+import EventStatuses from '@/constants/EventStatuses.json';
 import { CheckToken } from '@/functions/AxiosHandlers';
 
 import type { Metadata, Viewport } from 'next';
@@ -99,25 +102,39 @@ export default async function EventPage({ params }: Props) {
         );
     } else {
         return (
-            <>
+            <div className="container mx-auto lg:py-2">
                 <Script src={`${process.env.NEXT_PUBLIC_WIDGET_URL}?time=${new Date().getMilliseconds()}`} />
-                <div className="mt-2 lg:h-128 h-64 relative rounded-xl lg:rounded-3xl lg:p-10 p-2 flex flex-col justify-center -mx-2 items-center content-center">
+                <div className="mt-2 lg:h-128 h-64 relative overflow-hidden rounded-xl lg:rounded-3xl lg:p-10 p-2 flex flex-col justify-center -mx-2 items-center content-center">
                     <div
                         className="bg-cover bg-center absolute w-full h-full rounded-xl lg:rounded-3xl top-0 left-0 -z-20"
                         style={{
-                            filter: 'blur(4px)',
+                            filter: 'blur(15px)',
                             backgroundImage: `url("${data.posterFileUrl ?? EmptyPoster.src}")`,
                         }}
                     />
-                    <img
-                        alt="poster"
-                        title="poster"
+                    <Image
+                        alt={data.name}
+                        title={data.name}
+                        height={432}
+                        width={756}
                         src={data.posterFileUrl ?? EmptyPoster.src}
                         className="lg:h-full h-full lg:w-fit rounded-xl"
                     />
+                    {data.statusId === EventStatuses.SoldOut && (
+                        <Image
+                            alt={data.name}
+                            title={data.name}
+                            height={432}
+                            width={756}
+                            src={SoldOut}
+                            className="lg:h-full h-full lg:w-fit rounded-xl z-10 absolute bg-[rgba(0,0,0,0.2)]"
+                        />
+                    )}
                 </div>
                 <div className="-z-10 lg:text-6xl text-3xl text-black dark:text-white font-bold my-4">{data.name}</div>
-                <KazticketButton locale={locale} eventCode={data.code} eventId={data.id} />
+                {data.statusId !== EventStatuses.SoldOut && (
+                    <KazticketButton locale={locale} eventCode={data.code} eventId={data.id} />
+                )}
                 {/* <button
                     data-event-id={data.id}
                     data-event-code={data.code}
@@ -129,7 +146,7 @@ export default async function EventPage({ params }: Props) {
                 <div className="EventDescription my-6 w-full invert-0 dark:invert z-0">
                     <div dangerouslySetInnerHTML={{ __html: data.description }}></div>
                 </div>
-            </>
+            </div>
         );
     }
 }

@@ -14,7 +14,7 @@ interface OrderPropertyProps {
     date: string;
 }
 
-const OrderDateTimeProperty = ({ fieldName, date, isKostyl }: OrderPropertyProps) => {
+const OrderDateTimeProperty = ({ fieldName, date, isKostyl, cityTimeZone }: OrderPropertyProps) => {
     const [formatedDate, setFormatedDate] = useState('');
     const UserLang = getCookie('UserLang');
 
@@ -29,7 +29,7 @@ const OrderDateTimeProperty = ({ fieldName, date, isKostyl }: OrderPropertyProps
                           .format('Do MMMM HH:mm')
                     : moment(date)
                           .utc()
-                          .add(6, 'h')
+                          .add(cityTimeZone, 'h')
                           .locale(UserLang?.toLocaleLowerCase() ?? 'ru-RU')
                           .format('Do MMMM HH:mm')
             );
