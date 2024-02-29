@@ -115,11 +115,7 @@ export default async function Home() {
                                             {x.name}
                                         </span>
                                         <p className="text-[#00000073] font-medium dark:text-white">
-                                            <EventDateInfo
-                                                cityTimeZone={x.cityTimeZone}
-                                                isKostyl={x?.name?.toLowerCase()?.includes('soundtrack') ? true : false}
-                                                date={x.beginDate}
-                                            />
+                                            <EventDateInfo cityTimeZone={x.cityTimeZone} date={x.beginDate} />
                                             {isEmpty(UserCityId) || parseInt(UserCityId ?? '0') === 0 ? (
                                                 <> - {x.cityName}</>
                                             ) : (
