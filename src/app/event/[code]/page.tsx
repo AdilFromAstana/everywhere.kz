@@ -118,7 +118,7 @@ export default async function EventPage({ params }: Props) {
                         height={432}
                         width={756}
                         src={data.posterFileUrl ?? EmptyPoster.src}
-                        className="lg:h-full h-full w-fit rounded-xl"
+                        className="lg:h-full h-full w-fit rounded-xl object-contain"
                     />
                     {data.statusId === EventStatuses.SoldOut && (
                         <Image
