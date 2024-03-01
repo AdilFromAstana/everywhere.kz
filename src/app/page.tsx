@@ -56,7 +56,7 @@ export default async function Home() {
                             key={x.id}
                             className="w-full md:w-1/2 lg:w-1/3 lg:px-2 py-2 transition duration-200 relative"
                         >
-                            <Link href={'/event/' + x.code}>
+                            <Link href={'/event/' + x.code} title={x.name}>
                                 <div className="flex flex-col gap-2 cursor-pointer w-full h-auto md:hover:shadow-xl md:hover:scale-105 transition duration-300 rounded-xl">
                                     <div className="w-full relative rounded-xl -z-10 overflow-hidden">
                                         {isEmpty(x.posterFileUrl) ? (
@@ -111,21 +111,17 @@ export default async function Home() {
                                         </div>
                                     </div>
                                     <div>
-                                        <span className="mb-4 md:text-2xl text-xl leading-tight font-bold text-black dark:text-white">
+                                        <h2 className="mb-1 md:text-2xl text-xl leading-tight font-bold text-black dark:text-white">
                                             {x.name}
-                                        </span>
-                                        <p className="text-[#00000073] font-medium dark:text-white">
-                                            <EventDateInfo
-                                                cityTimeZone={x.cityTimeZone}
-                                                isKostyl={x?.name?.toLowerCase()?.includes('soundtrack') ? true : false}
-                                                date={x.beginDate}
-                                            />
+                                        </h2>
+                                        <h3 className="text-[#00000073] font-medium dark:text-white">
+                                            <EventDateInfo cityTimeZone={x.cityTimeZone} date={x.beginDate} />
                                             {isEmpty(UserCityId) || parseInt(UserCityId ?? '0') === 0 ? (
                                                 <> - {x.cityName}</>
                                             ) : (
                                                 ''
                                             )}
-                                        </p>
+                                        </h3>
                                     </div>
                                 </div>
                             </Link>

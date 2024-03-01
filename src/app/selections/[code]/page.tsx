@@ -112,6 +112,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     }
     return {
         title: `${data?.nameRu} - Kazticket.kz`,
+        description: `Купить билеты - ${data?.nameRu}`,
     };
 }
 
@@ -141,7 +142,7 @@ export default async function EventSelectionPage({ params }: Props) {
 
     if (!isEmpty(EventsData)) {
         return (
-            <div>
+            <div className="mx-auto">
                 <nav className="flex my-2 mx-auto" aria-label="Breadcrumb">
                     <ol className="flex lg:flex-row lg:items-center flex-col items-start lg:space-x-1 md:space-x-2 rtl:space-x-reverse">
                         <li className="inline-flex items-center">
@@ -200,9 +201,9 @@ export default async function EventSelectionPage({ params }: Props) {
                                         d="m1 9 4-4-4-4"
                                     />
                                 </svg>
-                                <span className="ms-1 text-lg font-medium text-gray-500 md:ms-2 dark:text-gray-400">
+                                <h1 className="ms-1 text-lg font-medium text-gray-500 md:ms-2 dark:text-gray-400">
                                     {GetSelectionName()}
-                                </span>
+                                </h1>
                             </div>
                         </li>
                     </ol>
@@ -265,17 +266,19 @@ export default async function EventSelectionPage({ params }: Props) {
                                                 </span>
                                             </div>
                                         </div>
-                                        <span className="mb-4 md:text-2xl px-2 leading-tight font-bold text-black dark:text-white">
-                                            {x.name}
-                                        </span>
-                                        <p className="text-coolGray-500 font-medium px-2 dark:text-white">
-                                            <EventDateInfo cityTimeZone={x.cityTimeZone} date={x.beginDate} />
-                                            {isEmpty(UserCityId) || parseInt(UserCityId ?? '0') === 0 ? (
-                                                <b> - {x.cityName}</b>
-                                            ) : (
-                                                ''
-                                            )}
-                                        </p>
+                                        <div>
+                                            <h2 className="mb-1 md:text-2xl text-xl leading-tight font-bold text-black dark:text-white">
+                                                {x.name}
+                                            </h2>
+                                            <h3 className="text-[#00000073] font-medium dark:text-white">
+                                                <EventDateInfo cityTimeZone={x.cityTimeZone} date={x.beginDate} />
+                                                {isEmpty(UserCityId) || parseInt(UserCityId ?? '0') === 0 ? (
+                                                    <> - {x.cityName}</>
+                                                ) : (
+                                                    ''
+                                                )}
+                                            </h3>
+                                        </div>
                                     </div>
                                 </Link>
                             </div>

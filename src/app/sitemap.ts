@@ -3,33 +3,6 @@ import { MetadataRoute } from 'next';
 import { CheckToken } from '@/functions/AxiosHandlers';
 import { EventInList } from '@/types/EventInList';
 
-export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-    const staticPages = ['offer_contract', 'payment_security', 'security_policy', 'contacts', 'offer', 'about_us'];
-
-    return [
-        {
-            url: process.env.NEXT_PUBLIC_APP_URL,
-            priority: 1,
-        },
-        ...(await GetEvents()).items.map((x: EventInList) => ({
-            url: `${process.env.NEXT_PUBLIC_APP_URL}/event/${x.code}`,
-            lastModified: x.updatedAt,
-        })),
-        ...(await GetEventumEvents()).map((x: any) => ({
-            url: `${process.env.NEXT_PUBLIC_APP_URL}/e/${x.Code}`,
-            lastModified: new Date(),
-        })),
-        ...(await GetSelections())?.eventSelections.map((x: any) => ({
-            url: `${process.env.NEXT_PUBLIC_APP_URL}/selections/${x.code}`,
-            lastModified: new Date(),
-        })),
-        ...staticPages.map((x) => ({
-            url: `${process.env.NEXT_PUBLIC_APP_URL}/${x}`,
-            lastModified: new Date(),
-        })),
-    ];
-}
-
 async function GetEvents() {
     const { NEXT_PUBLIC_EVENTS_URL = '' } = process.env;
     const token = await CheckToken();
@@ -92,7 +65,34 @@ async function GetSelections() {
 
     const data = await res.json();
 
-    console.log('data: ', data);
+    console.log('GetSelections: ', data);
 
     return data;
+}
+
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+    const staticPages = ['offer_contract', 'payment_security', 'security_policy', 'contacts', 'offer', 'about_us'];
+
+    return [
+        {
+            url: process.env.NEXT_PUBLIC_APP_URL,
+            priority: 1,
+        },
+        ...(await GetEvents()).items.map((x: EventInList) => ({
+            url: `${process.env.NEXT_PUBLIC_APP_URL}/event/${x.code}`,
+            lastModified: x.updatedAt,
+            priority: 1,
+        })),
+        ...(await GetEventumEvents()).map((x: any) => ({
+            url: `${process.env.NEXT_PUBLIC_APP_URL}/e/${x.Code}`,
+            lastModified: new Date(),
+        })),
+        ...(await GetSelections())?.eventSelections.map((x: any) => ({
+            url: `${process.env.NEXT_PUBLIC_APP_URL}/selections/${x.code}`,
+            lastModified: x.updatedAt,
+        })),
+        ...staticPages.map((x) => ({
+            url: `${process.env.NEXT_PUBLIC_APP_URL}/${x}`,
+        })),
+    ];
 }
