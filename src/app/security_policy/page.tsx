@@ -6,8 +6,8 @@ export default async function SecurityPolicyPage() {
 
     const en = (
         <>
-            <div className="text-4xl my-6">Privacy Policy</div>
-            <div className="flex flex-col">
+            <div className="dark:text-white text-4xl my-6">Privacy Policy</div>
+            <div className="dark:text-white flex flex-col">
                 <div className="text-base">1. Definitions</div>
                 <div className="text-base">
                     Internet Project https://kazticket.kz (hereinafter referred to as URL, "we") takes seriously the
@@ -60,8 +60,8 @@ export default async function SecurityPolicyPage() {
 
     const ru = (
         <>
-            <div className="text-4xl my-6">Политика конфиденциальности</div>
-            <div className="flex flex-col">
+            <div className="dark:text-white text-4xl my-6">Политика конфиденциальности</div>
+            <div className="dark:text-white flex flex-col">
                 <div className="text-base">1. Определения</div>
                 <div className="text-base">
                     Интернет проект https://kazticket.kz (далее — URL, «мы») серьезно относится к вопросу
@@ -117,8 +117,8 @@ export default async function SecurityPolicyPage() {
 
     const kz = (
         <>
-            <div className="text-4xl my-6">Қауіпсіздік саясаты</div>
-            <div className="flex flex-col">
+            <div className="dark:text-white text-4xl my-6">Қауіпсіздік саясаты</div>
+            <div className="dark:text-white flex flex-col">
                 <div className="text-base">1. Анықтамалар</div>
                 <div className="text-base">
                     https://kazticket.kz интернет жобасы (бұдан әрі - URL, "біз") өз клиенттері мен https://kazticket.kz

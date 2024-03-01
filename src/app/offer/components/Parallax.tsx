@@ -1,13 +1,16 @@
 'use client';
 
+import { getCookie } from 'cookies-next';
 import { AnimatePresence, motion, Variants } from 'framer-motion';
 import Image from 'next/image';
 import Link from 'next/link';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
+import WhiteMonoLogo from '@/assets/kazticket-logo-white-mono.svg';
 import Logo from '@/assets/kazticket-logo.svg';
 import AboutImage from '@/assets/offer/about.png';
 import MainImage from '@/assets/offer/main.png';
+import { isEmpty } from '@/functions';
 
 const CardVariant: Variants = {
     offscreen: {
@@ -73,13 +76,28 @@ const AdditionalServicesVariants: Variants = {
 };
 
 const ParallaxComponent = () => {
+    const [isDarkMode, setIsDarkMode] = useState<boolean>(false);
+
+    useEffect(() => {
+        if (
+            getCookie('theme') === 'dark' ||
+            (isEmpty(getCookie('theme')) && window.matchMedia('(prefers-color-scheme: dark)').matches)
+        ) {
+            setIsDarkMode(true);
+            document.documentElement.classList.add('dark');
+        } else {
+            setIsDarkMode(false);
+            document.documentElement.classList.remove('dark');
+        }
+    }, [!isDarkMode]);
+
     return (
         <AnimatePresence>
-            <div className="lg:h-[120vh] h-[90vh] w-full flex flex-col justify-start mb-10 lg:gap-0 gap-10">
+            <div className="dark:text-white lg:h-[120vh] h-[90vh] w-full flex flex-col justify-start mb-10 lg:gap-0 gap-10">
                 <div className="flex flex-row justify-start lg:mx-20 mx-4 mt-10">
                     <Link href="/">
                         <Image
-                            src={Logo}
+                            src={isDarkMode ? WhiteMonoLogo : Logo}
                             alt="Kazticket.kz Logo"
                             className="h-14 w-auto z-10 cursor-pointer"
                             priority
@@ -271,7 +289,7 @@ const ParallaxComponent = () => {
                     <line y1="803.5" x2="1440" y2="803.5" stroke="#E8E8E8" />
                 </svg>
             </div>
-            <div className="h100 flex flex-col gap-10 mb-10">
+            <div className="dark:text-white h100 flex flex-col gap-10 mb-10">
                 <div className="text-4xl text-center font-['Gilroy'] font-bold">О Нас</div>
                 <div className="flex lg:flex-row flex-col items-center justify-center py-4">
                     <div className="lg:w-2/5 w-11/12 font-medium text-2xl lg:text-left text-center">
@@ -281,7 +299,7 @@ const ParallaxComponent = () => {
                     <img src={AboutImage.src} />
                 </div>
             </div>
-            <div className="h100 flex flex-col gap-10 mb-10">
+            <div className="dark:text-white h100 flex flex-col gap-10 mb-10">
                 <motion.div
                     className="card-container"
                     initial="offscreen"
@@ -407,7 +425,7 @@ const ParallaxComponent = () => {
                     </div>
                 </div>
             </div>
-            <div className="h100 flex flex-col gap-10 mb-10">
+            <div className="dark:text-white h100 flex flex-col gap-10 mb-10">
                 <motion.div
                     className="card-container"
                     initial="offscreen"
@@ -449,10 +467,10 @@ const ParallaxComponent = () => {
                                 variants={KeyBenefitsVariants}
                             >
                                 <div className="text-[#0590C2] font-['Gilroy'] text-4xl font-extrabold">01</div>
-                                <div className="text-black font-['Gilroy'] text-xl font-extrabold">
+                                <div className="dark:text-white text-black font-['Gilroy'] text-xl font-extrabold">
                                     ГЛУБОКОЕ ПОНИМАНИЕ АУДИТОРИИ
                                 </div>
-                                <div className="text-black font-['Gilroy'] text-xs ">
+                                <div className="dark:text-white text-black font-['Gilroy'] text-xs ">
                                     Экспертиза продвижения в области досугового времяпрепровождения позволяет нам
                                     эффективно продвигать продукты партнеров, создавая нестандартные рекламные кампании
                                     и маркетинговые активности
@@ -471,8 +489,10 @@ const ParallaxComponent = () => {
                                 variants={KeyBenefitsVariants}
                             >
                                 <div className="text-[#0590C2] font-['Gilroy'] text-4xl font-extrabold">02</div>
-                                <div className="text-black font-['Gilroy'] text-xl font-extrabold">КУЛЬТУРА ДАННЫХ</div>
-                                <div className="text-black font-['Gilroy'] text-xs ">
+                                <div className="dark:text-white text-black font-['Gilroy'] text-xl font-extrabold">
+                                    КУЛЬТУРА ДАННЫХ
+                                </div>
+                                <div className="dark:text-white text-black font-['Gilroy'] text-xs ">
                                     Аналитическая культура KAZTICKET.KZ позволяет находить креативные решения в
                                     неожиданных местах. Анализ данных и поиск решений для улучшения сервиса и
                                     максимизации прибыли важнейший приоритет нашей команды
@@ -493,10 +513,10 @@ const ParallaxComponent = () => {
                                 variants={KeyBenefitsVariants}
                             >
                                 <div className="text-[#0590C2] font-['Gilroy'] text-4xl font-extrabold">03</div>
-                                <div className="text-black font-['Gilroy'] text-xl font-extrabold">
+                                <div className="dark:text-white text-black font-['Gilroy'] text-xl font-extrabold">
                                     ПРОДУКТОВАЯ КОМАНДА
                                 </div>
-                                <div className="text-black font-['Gilroy'] text-xs ">
+                                <div className="dark:text-white text-black font-['Gilroy'] text-xs ">
                                     Налаженный процесс формирования гипотез и внедрение новых функций как для партнеров,
                                     так и для конечных пользователей.
                                 </div>
@@ -514,10 +534,10 @@ const ParallaxComponent = () => {
                                 variants={KeyBenefitsVariants}
                             >
                                 <div className="text-[#0590C2] font-['Gilroy'] text-4xl font-extrabold">04</div>
-                                <div className="text-black font-['Gilroy'] text-xl font-extrabold">
+                                <div className="dark:text-white text-black font-['Gilroy'] text-xl font-extrabold">
                                     ЭВОЛЮЦИЯ ПЛАТФОРМЫ
                                 </div>
-                                <div className="text-black font-['Gilroy'] text-xs ">
+                                <div className="dark:text-white text-black font-['Gilroy'] text-xs ">
                                     Многолетний опыт в event индустрии и возможности современных технологий позволяют
                                     нам создать лучший продукт. Мы обновляем все ресурсы платформы: веб-сайт,
                                     приложения, личный кабинет организатора.
@@ -527,7 +547,7 @@ const ParallaxComponent = () => {
                     </div>
                 </div>
             </div>
-            <div className="h100 flex flex-col gap-10 mb-10">
+            <div className="dark:text-white h100 flex flex-col gap-10 mb-10">
                 <motion.div
                     className="card-container"
                     initial="offscreen"
@@ -559,7 +579,7 @@ const ParallaxComponent = () => {
                             <div className="text-[#058EC0] text-2xl font-extrabold">01</div>
                         </div>
                         <div className="text-black font-['Gilroy'] text-xl font-semibold">Заявка</div>
-                        <div className="text-black font-['Gilroy'] text-xs text-center">
+                        <div className="dark:text-white text-black font-['Gilroy'] text-xs text-center">
                             <div>Свяжитесь с нами удобным для вас способом:</div>
                             <div className="underline">
                                 <Link href="tel:+77080808999">закажите обратный звонок или позвоните по номеру:</Link>
@@ -574,7 +594,7 @@ const ParallaxComponent = () => {
                             <div className="text-[#D8A933] text-2xl font-extrabold">02</div>
                         </div>
                         <div className="text-black font-['Gilroy'] text-xl font-semibold">Договор</div>
-                        <div className="text-black font-['Gilroy'] text-xs text-center">
+                        <div className="dark:text-white text-black font-['Gilroy'] text-xs text-center">
                             Заключаем договор на индивидуальных условиях
                         </div>
                     </div>
@@ -583,7 +603,7 @@ const ParallaxComponent = () => {
                             <div className="text-[#1E3F86] text-2xl font-extrabold">03</div>
                         </div>
                         <div className="text-black font-['Gilroy'] text-xl font-semibold">Организация продаж</div>
-                        <div className="text-black font-['Gilroy'] text-xs text-center">
+                        <div className="dark:text-white text-black font-['Gilroy'] text-xs text-center">
                             Реализация всех необходимых мероприятий по организации продаж
                         </div>
                     </div>
@@ -592,14 +612,14 @@ const ParallaxComponent = () => {
                             <div className="text-[#1D6387] text-2xl font-extrabold">04</div>
                         </div>
                         <div className="text-black font-['Gilroy'] text-xl font-semibold">Выплата средств</div>
-                        <div className="text-black font-['Gilroy'] text-xs text-center">
+                        <div className="dark:text-white text-black font-['Gilroy'] text-xs text-center">
                             После мероприятия мы подписываем акт сверки и выплачиваем заработанные вами средства в
                             течение трех дней.
                         </div>
                     </div>
                 </div>
             </div>
-            <div className="h100 flex flex-col gap-10 mb-10">
+            <div className="dark:text-white h100 flex flex-col gap-10 mb-10">
                 <motion.div
                     className="card-container"
                     initial="offscreen"

@@ -83,7 +83,7 @@ export default async function OfferPage() {
     return (
         <>
             <Parallax />
-            <div className="h100 flex flex-col gap-10 lg:px-20 px-5 mb-10 lg:overflow-x-hidden overflow-x-scroll">
+            <div className="dark:text-white h100 flex flex-col gap-10 lg:px-20 px-5 mb-10 lg:overflow-x-hidden overflow-x-scroll">
                 <table className="font-['Gilroy']  border-spacing-8 border-separate text-xs font-medium">
                     <thead>
                         <tr>

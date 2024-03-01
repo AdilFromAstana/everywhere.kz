@@ -6,8 +6,8 @@ export default async function PaymentSecurityPage() {
 
     const en = (
         <>
-            <div className="text-4xl my-6">Online Payment Security</div>
-            <div className="flex flex-col">
+            <div className="dark:text-white text-4xl my-6">Online Payment Security</div>
+            <div className="dark:text-white flex flex-col">
                 <div className="text-xl my-3 font-bold">Payments. Payment by bank card online</div>
                 <div className="text-base my-2">
                     Our site is connected to the Internet acquiring, and you can pay for the Service bank card Visa or
@@ -195,8 +195,8 @@ export default async function PaymentSecurityPage() {
 
     const ru = (
         <>
-            <div className="text-4xl my-6">Безопасность онлайн платежей</div>
-            <div className="flex flex-col">
+            <div className="dark:text-white text-4xl my-6">Безопасность онлайн платежей</div>
+            <div className="dark:text-white flex flex-col">
                 <div className="text-xl my-3 font-bold">Платежи. Оплата банковской картой онлайн</div>
                 <div className="text-base my-2">
                     Наш сайт подключен к интернет-эквайрингу, и Вы можете оплатить Услугу банковской картой Visa или
@@ -388,8 +388,8 @@ export default async function PaymentSecurityPage() {
 
     const kz = (
         <>
-            <div className="text-4xl my-6">Онлайн төлем қауіпсіздігі</div>
-            <div className="flex flex-col">
+            <div className="dark:text-white text-4xl my-6">Онлайн төлем қауіпсіздігі</div>
+            <div className="dark:text-white flex flex-col">
                 <div className="text-xl my-3 font-bold">Төлемдер. Банктік картамен онлайн төлеу</div>
                 <div className="text-base my-2">
                     Біздің сайт интернет-эквайрингке қосылған және Сіз қызметті Visa немесе Mastercard банк картасымен
