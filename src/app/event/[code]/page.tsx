@@ -1,10 +1,12 @@
 import { getCookie } from 'cookies-next';
 import { getDictionary } from 'dictionaries';
+import moment from 'moment';
 import { cookies } from 'next/headers';
 import Image from 'next/image';
 // import Image from 'next/image';
 import Link from 'next/link';
 import Script from 'next/script';
+import { Event, WithContext } from 'schema-dts';
 
 import EmptyPoster from '@/assets/empty-poster.svg';
 import SoldOut from '@/assets/soldout.svg';
@@ -64,6 +66,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
             title: `${data.name} - Купить билеты на Kazticket.kz`,
             openGraph: {
                 images: data.posterFileUrl,
+                type: 'website',
+                url: `${process.env.NEXT_PUBLIC_APP_URL}/event/${data.code}`,
             },
             description: data.description
                 ?.replace(/<[^>]*>?/gm, ' ')
@@ -101,8 +105,39 @@ export default async function EventPage({ params }: Props) {
             </main>
         );
     } else {
+        // JSON-LD микроразметка для страницы мероприятия
+        const jsonLdScript: WithContext<Event> = {
+            '@context': 'https://schema.org',
+            '@type': 'Event',
+            name: `${data.name} - Kazticket.kz`,
+            image: data.posterFileUrl ?? '',
+            description: data.description
+                ?.replace(/<[^>]*>?/gm, ' ')
+                ?.replace(/&nbsp;/gi, ' ')
+                ?.replace(/\s+/g, ' '),
+            startDate: moment(data.startDate).utc().add(data.cityTimeZone, 'h').format(), // Дата и время начала мероприятия
+            offers: {
+                '@type': 'Offer',
+                priceCurrency: 'KZT',
+                price: data.minCost, // Минимальная цена
+                availability: 'https://schema.org/InStock', // Наличие билетов (замените на соответствующий статус)
+            },
+            location: {
+                '@type': 'Place',
+                address: {
+                    '@type': 'PostalAddress',
+                    addressLocality: data.cityName, // Город
+                },
+            },
+        };
+
         return (
             <div className="container mx-auto lg:py-2">
+                <Script
+                    id="json-ld-microdata"
+                    type="application/ld+json"
+                    dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdScript) }}
+                />
                 <Script src={`${process.env.NEXT_PUBLIC_WIDGET_URL}?time=${new Date().getMilliseconds()}`} />
                 <div className="mt-2 lg:h-128 h-64 relative overflow-hidden rounded-xl lg:rounded-3xl lg:p-10 p-2 flex flex-col justify-center -mx-2 items-center content-center">
                     <div
@@ -131,17 +166,10 @@ export default async function EventPage({ params }: Props) {
                         />
                     )}
                 </div>
-                <div className="-z-10 lg:text-6xl text-3xl text-black dark:text-white font-bold my-4">{data.name}</div>
+                <h1 className="lg:text-6xl text-3xl text-black dark:text-white font-bold my-4">{data.name}</h1>
                 {data.statusId !== EventStatuses.SoldOut && (
                     <KazticketButton locale={locale} eventCode={data.code} eventId={data.id} />
                 )}
-                {/* <button
-                    data-event-id={data.id}
-                    data-event-code={data.code}
-                    className="kazticket-widget-button z-0 cursor-pointer bg-sky-500 lg:w-56 w-full px-2 py-2 lg:px-6 lg:py-4 rounded-xl text-base lg:text-xl font-bold text-white transition duration-500 hover:shadow-2xl"
-                >
-                    {locale.EventPage.BuyTicket}
-                </button> */}
                 <div className="my-6 w-full text-3xl text-black dark:text-white">{locale.EventPage.AboutDesc}</div>
                 <div className="EventDescription my-6 w-full invert-0 dark:invert z-0">
                     <div dangerouslySetInnerHTML={{ __html: data.description }}></div>
