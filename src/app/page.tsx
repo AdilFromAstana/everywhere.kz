@@ -287,7 +287,7 @@ async function GetEvents() {
     const data = await res.json();
 
     if (data.items) {
-        const exclusiveEvents = ['alau-massskating', 'the-concert-my-angel', 'retroconcert', 'pecha-kucha'];
+        const exclusiveEvents = ['alau-massskating', 'the-concert-my-angel', 'astana-irina-krug', 'pecha-kucha'];
 
         const sortedData = data.items?.sort((eventA: any, eventB: any) => {
             const dateA = new Date(eventA?.beginDate) as any;
