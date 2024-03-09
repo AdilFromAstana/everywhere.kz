@@ -297,6 +297,7 @@ async function GetEvents() {
 
         return [
             ...sortedData?.filter((x: EventInList) => exclusiveEvents.includes(x.code)),
+            ...sortedData?.filter((x: EventInList) => x.code === 'glavnaya-rol'),
             ...sortedData?.filter((x: EventInList) => !exclusiveEvents.includes(x.code)),
         ];
     }
