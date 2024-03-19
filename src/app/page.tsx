@@ -314,19 +314,27 @@ async function GetEventumEvents() {
         `?CityId=${UserCityId ? (parseInt(UserCityId) === 0 ? '' : UserCityId) : ''}` +
         `&LeisureCategoryId=${UserCategoryId ? (parseInt(UserCategoryId) === 0 ? '' : UserCategoryId) : ''}`;
 
-    const res = await fetch(url, {
-        headers: {
-            'Content-Type': 'application/json',
-        },
-    });
+    try {
+        const res = await fetch(url, {
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        });
 
-    if (!res.ok) {
-        console.log('res: ', res);
-        // This will activate the closest `error.js` Error Boundary
+        if (!res.ok) {
+            // Вместо вывода в консоль, обработка ошибки
+            console.error('Fetch response was not ok:', res);
+            // Возврат пустого массива или объекта ошибки
+            return [];
+        }
+
+        return await res.json();
+    } catch (error) {
+        // Логирование ошибки
+        console.error('Fetch failed:', error);
+        // Возврат пустого массива или объекта ошибки
         return [];
     }
-
-    return res.json();
 }
 
 async function GetPosters() {
@@ -338,20 +346,26 @@ async function GetPosters() {
     const url = process.env.NEXT_PUBLIC_EVENTUM_TEMP_URL + 'posters/forCommerce';
     // `?CityId=${UserCityId ? (parseInt(UserCityId) === 0 ? '' : UserCityId) : ''}` +
     // `&LeisureCategoryId=${UserCategoryId ? (parseInt(UserCategoryId) === 0 ? '' : UserCategoryId) : ''}`;
+    try {
+        const res = await fetch(url, {
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        });
 
-    const res = await fetch(url, {
-        headers: {
-            'Content-Type': 'application/json',
-        },
-    });
+        if (!res.ok) {
+            console.log('res: ', res);
+            // This will activate the closest `error.js` Error Boundary
+            return [];
+        }
 
-    if (!res.ok) {
-        console.log('res: ', res);
-        // This will activate the closest `error.js` Error Boundary
+        return res.json();
+    } catch (error) {
+        // Логирование ошибки
+        console.error('Fetch failed:', error);
+        // Возврат пустого массива или объекта ошибки
         return [];
     }
-
-    return res.json();
 }
 
 async function GetTickers() {
@@ -359,19 +373,26 @@ async function GetTickers() {
 
     const url = process.env.NEXT_PUBLIC_EVENTUM_TEMP_URL + 'tickers/forCommerce';
 
-    const res = await fetch(url, {
-        headers: {
-            'Content-Type': 'application/json',
-        },
-    });
+    try {
+        const res = await fetch(url, {
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        });
 
-    if (!res.ok) {
-        console.log('res: ', res);
-        // This will activate the closest `error.js` Error Boundary
+        if (!res.ok) {
+            console.log('res: ', res);
+            // This will activate the closest `error.js` Error Boundary
+            return [];
+        }
+
+        return res.json();
+    } catch (error) {
+        // Логирование ошибки
+        console.error('Fetch failed:', error);
+        // Возврат пустого массива или объекта ошибки
         return [];
     }
-
-    return res.json();
 }
 
 async function GetLeisureCategories() {
