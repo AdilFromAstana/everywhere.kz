@@ -64,7 +64,7 @@ const PushNotificationRequest = ({}: PushNotificationProps) => {
                     UserVisibleOnly: subscription?.options?.userVisibleOnly,
                 };
 
-                return fetch(process.env.NEXT_PUBLIC_EVENTUM_TEMP_URL + 'subscribers', {
+                return fetch(process.env.NEXT_PUBLIC_SERVICES_TEMP_URL + 'subscribers', {
                     method: 'POST',
                     body: JSON.stringify(data),
                     headers: {

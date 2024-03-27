@@ -10,7 +10,7 @@ import type { Metadata, Viewport } from 'next';
 
 async function GetEventData(code: string) {
     process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
-    const res = await fetch(process.env.NEXT_PUBLIC_EVENTUM_TEMP_URL + 'eventum/once/' + code, {
+    const res = await fetch(process.env.NEXT_PUBLIC_SERVICES_TEMP_URL + 'eventum/once/' + code, {
         headers: {
             'Content-Type': 'application/json',
         },

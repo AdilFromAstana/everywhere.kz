@@ -27,10 +27,8 @@ import { LeisureCategory } from '@/types/LeisureCategory';
 
 export default async function Home() {
     const EventsData = await GetEvents();
-    const PostersData: any = [];
-    const TickersData: any = [];
-    // const PostersData = await GetPosters();
-    // const TickersData = await GetTickers();
+    const PostersData = await GetPosters();
+    const TickersData = await GetTickers();
     const EventumEventsData = await GetEventumEvents();
     const leisureCategories = await GetLeisureCategories();
     const UserCityId = getCookie('UserCityId', { cookies });
@@ -312,7 +310,7 @@ async function GetEventumEvents() {
     process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
 
     const url =
-        process.env.NEXT_PUBLIC_EVENTUM_TEMP_URL +
+        process.env.NEXT_PUBLIC_SERVICES_TEMP_URL +
         'eventum/forCommerce' +
         `?CityId=${UserCityId ? (parseInt(UserCityId) === 0 ? '' : UserCityId) : ''}` +
         `&LeisureCategoryId=${UserCategoryId ? (parseInt(UserCategoryId) === 0 ? '' : UserCategoryId) : ''}`;
@@ -340,63 +338,63 @@ async function GetEventumEvents() {
     }
 }
 
-// async function GetPosters() {
-//     // const UserCityId = getCookie('UserCityId', { cookies });
-//     // const UserCategoryId = getCookie('UserCategoryId', { cookies });
+async function GetPosters() {
+    // const UserCityId = getCookie('UserCityId', { cookies });
+    // const UserCategoryId = getCookie('UserCategoryId', { cookies });
 
-//     process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
+    process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
 
-//     const url = process.env.NEXT_PUBLIC_EVENTUM_TEMP_URL + 'posters/forCommerce';
-//     // `?CityId=${UserCityId ? (parseInt(UserCityId) === 0 ? '' : UserCityId) : ''}` +
-//     // `&LeisureCategoryId=${UserCategoryId ? (parseInt(UserCategoryId) === 0 ? '' : UserCategoryId) : ''}`;
-//     try {
-//         const res = await fetch(url, {
-//             headers: {
-//                 'Content-Type': 'application/json',
-//             },
-//         });
+    const url = process.env.NEXT_PUBLIC_SERVICES_TEMP_URL + 'posters/forCommerce';
+    // `?CityId=${UserCityId ? (parseInt(UserCityId) === 0 ? '' : UserCityId) : ''}` +
+    // `&LeisureCategoryId=${UserCategoryId ? (parseInt(UserCategoryId) === 0 ? '' : UserCategoryId) : ''}`;
+    try {
+        const res = await fetch(url, {
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        });
 
-//         if (!res.ok) {
-//             console.log('res: ', res);
-//             // This will activate the closest `error.js` Error Boundary
-//             return [];
-//         }
+        if (!res.ok) {
+            console.log('res: ', res);
+            // This will activate the closest `error.js` Error Boundary
+            return [];
+        }
 
-//         return res.json();
-//     } catch (error) {
-//         // Логирование ошибки
-//         console.error('Fetch failed:', error);
-//         // Возврат пустого массива или объекта ошибки
-//         return [];
-//     }
-// }
+        return res.json();
+    } catch (error) {
+        // Логирование ошибки
+        console.error('Fetch failed:', error);
+        // Возврат пустого массива или объекта ошибки
+        return [];
+    }
+}
 
-// async function GetTickers() {
-//     process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
+async function GetTickers() {
+    process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
 
-//     const url = process.env.NEXT_PUBLIC_EVENTUM_TEMP_URL + 'tickers/forCommerce';
+    const url = process.env.NEXT_PUBLIC_SERVICES_TEMP_URL + 'tickers/forCommerce';
 
-//     try {
-//         const res = await fetch(url, {
-//             headers: {
-//                 'Content-Type': 'application/json',
-//             },
-//         });
+    try {
+        const res = await fetch(url, {
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        });
 
-//         if (!res.ok) {
-//             console.log('res: ', res);
-//             // This will activate the closest `error.js` Error Boundary
-//             return [];
-//         }
+        if (!res.ok) {
+            console.log('res: ', res);
+            // This will activate the closest `error.js` Error Boundary
+            return [];
+        }
 
-//         return res.json();
-//     } catch (error) {
-//         // Логирование ошибки
-//         console.error('Fetch failed:', error);
-//         // Возврат пустого массива или объекта ошибки
-//         return [];
-//     }
-// }
+        return res.json();
+    } catch (error) {
+        // Логирование ошибки
+        console.error('Fetch failed:', error);
+        // Возврат пустого массива или объекта ошибки
+        return [];
+    }
+}
 
 async function GetLeisureCategories() {
     try {

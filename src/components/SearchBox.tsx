@@ -143,7 +143,7 @@ async function GetEventsByName(eventName: string, cities: City[]) {
     process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
 
     const KazticketUrl = `${process.env.NEXT_PUBLIC_EVENTS_URL}commercial/Events?Name=${eventName ?? ''}`;
-    const EventumUrl = `${process.env.NEXT_PUBLIC_EVENTUM_TEMP_URL}eventum/forCommerce?Name=${eventName ?? ''}`;
+    const EventumUrl = `${process.env.NEXT_PUBLIC_SERVICES_TEMP_URL}eventum/forCommerce?Name=${eventName ?? ''}`;
 
     const kazticketEventsResponse = await fetch(KazticketUrl, {
         headers: {
