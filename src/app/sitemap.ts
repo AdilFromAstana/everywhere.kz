@@ -30,7 +30,7 @@ async function GetEvents() {
 async function GetEventumEvents() {
     process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
 
-    const res = await fetch(process.env.NEXT_PUBLIC_EVENTUM_TEMP_URL + 'eventum/forCommerce', {
+    const res = await fetch(process.env.NEXT_PUBLIC_SERVICES_TEMP_URL + 'eventum/forCommerce', {
         headers: {
             'Accept-Language': 'ru-RU',
             'Content-Type': 'application/json',

@@ -27,7 +27,7 @@ const OfferForm = ({}: OfferFormProps) => {
         e.stopPropagation();
         e.preventDefault();
 
-        await fetch(process.env.NEXT_PUBLIC_EVENTUM_TEMP_URL + 'commercial_offer_applications', {
+        await fetch(process.env.NEXT_PUBLIC_SERVICES_TEMP_URL + 'commercial_offer_applications', {
             method: 'POST',
             body: JSON.stringify(data),
             headers: {
