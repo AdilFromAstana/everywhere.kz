@@ -14,6 +14,27 @@ body {
     overflow-x: hidden;
 }
 
+/* width */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 5px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
 a {
     color: inherit;
     text-decoration: none;
@@ -234,10 +255,10 @@ html.dark #left-arrow::after {
 svg.ProgressedButton {
     --progress: 0;
     z-index: 10;
-    stroke-width: 15px;
+    stroke-width: 22px;
     stroke: #0490c3;
     fill: none;
-    stroke-dashoffset: calc(660 * -1 * (1 - var(--progress)));
+    stroke-dashoffset: calc(660 * (1 - var(--progress)));
     stroke-dasharray: 660;
 }
 

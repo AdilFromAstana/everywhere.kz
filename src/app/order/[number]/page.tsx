@@ -18,7 +18,7 @@ async function GetOrderData(orderNumber: string) {
     const UserLang = getCookie('UserLang', { cookies });
     let acceptLanguage = 'ru-RU';
     switch (UserLang?.toLocaleLowerCase()) {
-        case 'kz':
+        case 'kk':
             acceptLanguage = 'kz-KZ';
             break;
         case 'en':

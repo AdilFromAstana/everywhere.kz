@@ -21,7 +21,7 @@ async function GetSelectionData(selectionCode: string) {
     const UserLang = getCookie('UserLang', { cookies });
     let acceptLanguage = 'ru-RU';
     switch (UserLang?.toLocaleLowerCase()) {
-        case 'kz':
+        case 'kk':
             acceptLanguage = 'kz-KZ';
             break;
         case 'en':
@@ -64,7 +64,7 @@ async function GetEvents(selectionId: string) {
         const token = await CheckToken();
         let acceptLanguage = 'ru-RU';
         switch (UserLang?.toLocaleLowerCase()) {
-            case 'kz':
+            case 'kk':
                 acceptLanguage = 'kz-KZ';
                 break;
             case 'en':
@@ -130,7 +130,7 @@ export default async function EventSelectionPage({ params }: Props) {
 
     const GetSelectionName = () => {
         switch (UserLang?.toLocaleLowerCase()) {
-            case 'kz':
+            case 'kk':
                 return TargetSelection?.nameKz;
             case 'en':
                 return TargetSelection?.nameEn;
