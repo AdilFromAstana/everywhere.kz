@@ -3,13 +3,13 @@ import { Metadata, Viewport } from 'next';
 import './globals.css';
 import '../assets/fonts/Gilroy/stylesheet.css';
 
-import { Inter } from 'next/font/google';
-import Script from 'next/script';
+import { Rubik } from 'next/font/google';
+// import Script from 'next/script';
 import { Suspense } from 'react';
 
 import { MetaScriptEvents } from '@/components/MetaScriptEvents';
 
-const inter = Inter({ subsets: ['latin'] });
+const rubik = Rubik({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
     metadataBase: new URL('https://kazticket.kz'),
@@ -32,7 +32,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     return (
         <html className="h-full dark:bg-black" lang="en">
             <head>
-                <Script
+                {/* <Script
                     id="Metrika"
                     strategy="afterInteractive"
                     dangerouslySetInnerHTML={{
@@ -62,9 +62,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                             alt=""
                         />
                     </div>
-                </noscript>
+                </noscript> */}
             </head>
-            <body className={inter.className + ' dark:bg-black'}>
+            <body className={rubik.className + ' dark:bg-black'}>
                 {children}
                 <Suspense fallback={null}>
                     <MetaScriptEvents />

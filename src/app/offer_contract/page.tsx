@@ -1,5 +1,5 @@
 import { getCookie } from 'cookies-next';
-import moment from 'moment';
+import dayjs from 'dayjs';
 import { cookies } from 'next/headers';
 
 export default async function OfferContractPage() {
@@ -320,7 +320,7 @@ export default async function OfferContractPage() {
                     БИК IRTYKZKA
                     <br />
                     БИН 220140006265
-                    <br />© {moment().format('YYYY')} Kazticket.kz
+                    <br />© {dayjs().format('YYYY')} Kazticket.kz
                 </div>
             </div>
         </div>
@@ -636,7 +636,7 @@ export default async function OfferContractPage() {
                     BIС: IRTYKZKA
                     <br />
                     Business identification number (BIN) 220140006265
-                    <br />© {moment().format('YYYY')} Kazticket.kz
+                    <br />© {dayjs().format('YYYY')} Kazticket.kz
                 </div>
             </div>
         </div>
@@ -953,7 +953,7 @@ export default async function OfferContractPage() {
                     БИК IRTYKZKA
                     <br />
                     БИН 220140006265
-                    <br />© {moment().format('YYYY')} Kazticket.kz
+                    <br />© {dayjs().format('YYYY')} Kazticket.kz
                 </div>
             </div>
         </div>

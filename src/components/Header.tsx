@@ -2,10 +2,9 @@
 
 import { Dialog, Popover, Transition } from '@headlessui/react';
 import {
-    Bars3Icon,
-    BuildingOffice2Icon,
+    // Bars3Icon,
+    // BuildingOffice2Icon,
     ChevronDownIcon,
-    LanguageIcon,
     MagnifyingGlassIcon,
     MapPinIcon,
     MoonIcon,
@@ -13,15 +12,14 @@ import {
     SunIcon,
     XMarkIcon,
 } from '@heroicons/react/24/outline';
-import { deleteCookie, getCookie, setCookie } from 'cookies-next';
+import { getCookie, setCookie } from 'cookies-next';
 import Image from 'next/image';
 import Link from 'next/link';
-import { usePathname, useRouter } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import { Fragment, useEffect, useState } from 'react';
 
 import WhiteMonoLogo from '@/assets/kazticket-logo-white-mono.svg';
 import Logo from '@/assets/kazticket-logo.svg';
-import transitions from '@/constants/transtitions';
 import { isEmpty } from '@/functions';
 import { City } from '@/types/City';
 import { Dropdown } from '@/types/Dropdown';
@@ -38,27 +36,11 @@ interface HeaderProps {
 }
 
 const Header = ({ locale, selectedCity, cities, langs, selectedLang, pages }: HeaderProps) => {
+    const [isSupportMenuOpen, setSupportMenuOpen] = useState<boolean>(false);
     const [isMobileMenuOpen, setMobileMenuOpen] = useState<boolean>(false);
     const [isSearchMenuOpen, setSearchMenuOpen] = useState<boolean>(false);
-    const [randomTransition, setRandomTransition] = useState({});
-    const [isLogoAnimationOn, setIsLogoAnimationOn] = useState<boolean>(true);
     const [isDarkMode, setIsDarkMode] = useState<boolean>(false);
     const router = useRouter();
-    const pathname = usePathname();
-
-    useEffect(() => {
-        const randomTransitionIndex = Math.floor(Math.random() * transitions.length);
-        const random = transitions[randomTransitionIndex];
-        setRandomTransition(random);
-    }, [!isEmpty(randomTransition)]);
-
-    useEffect(() => {
-        if (!isLogoAnimationOn) {
-            setTimeout(() => {
-                setIsLogoAnimationOn(true);
-            }, 1000);
-        }
-    }, [isLogoAnimationOn]);
 
     useEffect(() => {
         const UserLang = getCookie('UserLang');
@@ -115,52 +97,28 @@ const Header = ({ locale, selectedCity, cities, langs, selectedLang, pages }: He
     };
 
     return (
-        <header className="bg-white dark:bg-black container mx-auto px-2">
+        <header className="container mx-auto lg:px-2 px-4 lg:py-0 py-2">
             <nav
-                className="flex items-center justify-between rounded-xl lg:shadow-header dark:shadow-none py-4 lg:my-2 lg:px-8 px-2"
+                className="flex items-center justify-between rounded-2xl shadow-header-mobile lg:shadow-header dark:shadow-none py-3 lg:my-4 lg:px-8 px-4 lg:py-4"
                 aria-label="Global"
             >
                 <div className="flex z-50">
-                    {!isEmpty(randomTransition) ? (
-                        <>
-                            <Transition
-                                className="Animation w-auto"
-                                appear={true}
-                                show={isLogoAnimationOn}
-                                {...randomTransition}
-                            >
-                                <Image
-                                    onClick={() => {
-                                        if (pathname === '/') {
-                                            deleteCookie('UserCategoryId');
-                                            window.location.reload();
-                                        } else {
-                                            deleteCookie('UserCategoryId');
-                                            router.push('/');
-                                        }
-                                    }}
-                                    src={isDarkMode ? WhiteMonoLogo : Logo}
-                                    alt="Kazticket.kz Logo"
-                                    className="h-10 w-auto cursor-pointer"
-                                    priority
-                                />
-                            </Transition>
-                        </>
-                    ) : (
-                        <Image
-                            src={isDarkMode ? WhiteMonoLogo : Logo}
-                            alt="Kazticket.kz Logo"
-                            className="h-10 w-auto"
-                            priority
-                        />
-                    )}
+                    <Image
+                        onClick={() => {
+                            router.push('/');
+                        }}
+                        src={isDarkMode ? WhiteMonoLogo : Logo}
+                        alt="Kazticket.kz Logo"
+                        className="lg:h-8 h-6 w-auto cursor-pointer"
+                        priority
+                    />
                 </div>
                 <div className="hidden lg:flex lg:flex-1 lg:mx-5 mx-1">
                     <SearchBox locale={locale} cities={cities} />
                 </div>
                 <div className="flex z-50">
                     <div className="hidden lg:flex lg:gap-x-12 lg:items-center lg:justify-end">
-                        <Link
+                        {/* <Link
                             className="text-gray-900 dark:text-white flex gap-x-2 items-center"
                             href="tel:+7-708-08-08-999"
                             target="_blank"
@@ -170,25 +128,9 @@ const Header = ({ locale, selectedCity, cities, langs, selectedLang, pages }: He
                                 <span className="text-base leading-5 font-semibold">+7-708-08-08-999</span>
                                 <span className="leading-5 text-gray-400 font-normal">{locale.Header.Support}</span>
                             </div>
-                        </Link>
-                        {/* <Link
-                            className="text-base font-semibold leading-6 text-gray-900 dark:text-white flex gap-x-1 items-center"
-                            href="https://www.instagram.com/kazticket.kz"
-                            target="_blank"
-                        >
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                className="h-5 w-5"
-                                fill="currentColor"
-                                style={{ color: '#c13584' }}
-                                viewBox="0 0 24 24"
-                            >
-                                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
-                            </svg>
-                            Наш Instagram
                         </Link> */}
                         <Popover className="relative">
-                            <Popover.Button className="flex items-center gap-x-1 text-base font-semibold leading-6 text-gray-900 dark:text-white">
+                            <Popover.Button className="flex items-center gap-x-1 text-base font-medium leading-6 text-gray-900 dark:text-white">
                                 <MapPinIcon className="h-5 w-5" />
                                 {isEmpty(selectedCity) ? locale?.Header?.City : selectedCity?.name}
                                 <ChevronDownIcon className="h-5 w-5 flex-none text-gray-400" aria-hidden="true" />
@@ -203,23 +145,17 @@ const Header = ({ locale, selectedCity, cities, langs, selectedLang, pages }: He
                                 leaveTo="opacity-0 translate-y-1"
                             >
                                 <Popover.Panel className="absolute z-50 -right-8 top-full mt-3 w-screen max-w-xs max-h-96 overflow-auto rounded-2xl bg-white shadow-lg ring-1 ring-gray-900/5">
-                                    <div className="p-0">
+                                    <div className="p-2">
                                         {cities.map((city: City) => (
                                             <div
                                                 key={city.id}
                                                 onClick={() => handleSelectCity(city)}
                                                 className={`group cursor-pointer relative flex items-center gap-x-6 rounded-lg p-3 text-sm leading-6 hover:bg-gray-50 ${
-                                                    city.id === selectedCity?.id ? 'bg-indigo-200' : ''
+                                                    city.id === selectedCity?.id ? 'bg-[#F5F5F5] text-[#0490C3]' : ''
                                                 }`}
                                             >
-                                                <div className="flex h-6 w-6 flex-none items-center justify-center rounded-lg bg-gray-50 group-hover:bg-white">
-                                                    <BuildingOffice2Icon
-                                                        className="h-5 w-5 text-gray-600 group-hover:text-indigo-600"
-                                                        aria-hidden="true"
-                                                    />
-                                                </div>
                                                 <div className="flex-auto">
-                                                    <div className="block font-semibold text-gray-900">
+                                                    <div className="block">
                                                         {city.name}
                                                         <span className="absolute z-50 inset-0" />
                                                     </div>
@@ -231,8 +167,22 @@ const Header = ({ locale, selectedCity, cities, langs, selectedLang, pages }: He
                             </Transition>
                         </Popover>
                         <Popover className="relative">
-                            <Popover.Button className="flex items-center gap-x-1 text-base font-semibold leading-6 text-gray-900 dark:text-white">
-                                <LanguageIcon className="h-5 w-5" />{' '}
+                            <Popover.Button className="flex items-center gap-x-1 text-base font-medium leading-6 text-gray-900 dark:text-white">
+                                {/* <LanguageIcon className="h-5 w-5" />{' '} */}
+                                <svg
+                                    width="22"
+                                    height="22"
+                                    viewBox="0 0 22 22"
+                                    fill="none"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                >
+                                    <path
+                                        d="M11 21C16.5228 21 21 16.5228 21 11C21 5.47715 16.5228 1 11 1M11 21C5.47715 21 1 16.5228 1 11C1 5.47715 5.47715 1 11 1M11 21C13.0083 21 14.6364 16.5228 14.6364 11C14.6364 5.47715 13.0083 1 11 1M11 21C8.99169 21 7.36364 16.5228 7.36364 11C7.36364 5.47715 8.99169 1 11 1M1.90909 7.36364H20.0909M1.90909 13.7273H20.0909"
+                                        stroke="#2F2F38"
+                                        strokeWidth="1.5"
+                                        strokeLinecap="round"
+                                    />
+                                </svg>
                                 {isEmpty(selectedLang) ? 'Язык' : selectedLang?.text}
                                 <ChevronDownIcon className="h-5 w-5 flex-none text-gray-400" aria-hidden="true" />
                             </Popover.Button>
@@ -246,17 +196,17 @@ const Header = ({ locale, selectedCity, cities, langs, selectedLang, pages }: He
                                 leaveTo="opacity-0 translate-y-1"
                             >
                                 <Popover.Panel className="absolute z-50 -right-8 top-full mt-3 w-screen max-w-xs max-h-96 overflow-auto rounded-2xl bg-white shadow-lg ring-1 ring-gray-900/5">
-                                    <div className="p-0">
+                                    <div className="p-2">
                                         {langs.map((lang: Dropdown) => (
                                             <div
                                                 key={lang.key}
                                                 onClick={() => handleSelectLang(lang)}
                                                 className={`group cursor-pointer relative flex items-center gap-x-6 rounded-lg p-3 text-sm leading-6 hover:bg-gray-50 ${
-                                                    lang.key === selectedLang?.key ? 'bg-indigo-200' : ''
+                                                    lang.key === selectedLang?.key ? 'bg-[#F5F5F5] text-[#0490C3]' : ''
                                                 }`}
                                             >
                                                 <div className="flex-auto">
-                                                    <div className="block font-semibold text-gray-900">
+                                                    <div className="block">
                                                         {lang.text}
                                                         <span className="absolute z-50 inset-0" />
                                                     </div>
@@ -317,116 +267,67 @@ const Header = ({ locale, selectedCity, cities, langs, selectedLang, pages }: He
                                 <MagnifyingGlassIcon className="h-6 w-6" aria-hidden="true" />
                             </button>
                         </div>
-                        <Popover className="relative">
-                            <Popover.Button className="flex items-center gap-x-1 text-base font-semibold leading-6 text-gray-900 dark:text-white">
-                                <MapPinIcon className="h-5 w-5" />{' '}
-                                <div className="w-max">
-                                    {isEmpty(selectedCity) ? locale?.Header?.City : selectedCity?.name}
-                                </div>
-                                <ChevronDownIcon className="h-5 w-5 flex-none text-gray-400" aria-hidden="true" />
-                            </Popover.Button>
-
-                            <Transition
-                                enter="transition ease-out duration-200"
-                                enterFrom="opacity-0 translate-y-1"
-                                enterTo="opacity-100 translate-y-0"
-                                leave="transition ease-in duration-150"
-                                leaveFrom="opacity-100 translate-y-0"
-                                leaveTo="opacity-0 translate-y-1"
+                        <button
+                            type="button"
+                            className="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-700"
+                            onClick={() => {
+                                window.scrollTo({ top: 0 });
+                                setMobileMenuOpen(true);
+                            }}
+                        >
+                            <span className="sr-only">Open main menu</span>
+                            <svg
+                                className="h-4 w-6"
+                                width="16"
+                                height="16"
+                                viewBox="0 0 16 16"
+                                fill="none"
+                                xmlns="http://www.w3.org/2000/svg"
                             >
-                                <Popover.Panel className="absolute z-50 -right-8 top-full mt-3 w-screen max-w-xs max-h-96 overflow-auto rounded-2xl bg-white shadow-lg ring-1 ring-gray-900/5">
-                                    <div className="p-0">
-                                        {cities.map((city: City) => (
-                                            <div
-                                                key={`${city.id}-mobile`}
-                                                onClick={() => handleSelectCity(city)}
-                                                className={`group cursor-pointer relative flex items-center gap-x-6 rounded-lg p-3 text-sm leading-6 hover:bg-gray-50 ${
-                                                    city.id === selectedCity?.id ? 'bg-indigo-200' : ''
-                                                }`}
-                                            >
-                                                <div className="flex h-6 w-6 flex-none items-center justify-center rounded-lg bg-gray-50 group-hover:bg-white">
-                                                    <BuildingOffice2Icon
-                                                        className="h-5 w-5 text-gray-600 group-hover:text-indigo-600"
-                                                        aria-hidden="true"
-                                                    />
-                                                </div>
-                                                <div className="flex-auto">
-                                                    <div className="block font-semibold text-gray-900">
-                                                        {city.name}
-                                                        <span className="absolute z-50 inset-0" />
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        ))}
-                                    </div>
-                                </Popover.Panel>
-                            </Transition>
-                        </Popover>
-                        <Popover className="relative">
-                            <Popover.Button className="flex items-center gap-x-0 text-base font-semibold leading-6 text-gray-900 dark:text-white">
-                                {/* <MapPinIcon className="h-5 w-5" />{' '} */}
-                                {isEmpty(selectedLang) ? 'Ru' : selectedLang?.value}
-                                <ChevronDownIcon className="h-5 w-5 flex-none text-gray-400" aria-hidden="true" />
-                            </Popover.Button>
+                                <g clip-path="url(#clip0_721_30841)">
+                                    <path
+                                        d="M0 1H16M0 8H8M0 15H16"
+                                        stroke="#2F2F38"
+                                        strokeOpacity="0.85"
+                                        strokeWidth="2"
+                                        strokeLinecap="round"
+                                    />
+                                </g>
+                                <defs>
+                                    <clipPath id="clip0_721_30841">
+                                        <rect width="16" height="16" fill="white" />
+                                    </clipPath>
+                                </defs>
+                            </svg>
 
-                            <Transition
-                                enter="transition ease-out duration-200"
-                                enterFrom="opacity-0 translate-y-1"
-                                enterTo="opacity-100 translate-y-0"
-                                leave="transition ease-in duration-150"
-                                leaveFrom="opacity-100 translate-y-0"
-                                leaveTo="opacity-0 translate-y-1"
-                            >
-                                <Popover.Panel className="absolute z-50 -right-8 top-full mt-3 w-screen max-w-xs max-h-96 overflow-auto rounded-2xl bg-white shadow-lg ring-1 ring-gray-900/5">
-                                    <div className="p-0">
-                                        {langs.map((lang: Dropdown) => (
-                                            <div
-                                                key={`${lang.key}-mobile`}
-                                                onClick={() => handleSelectLang(lang)}
-                                                className={`group cursor-pointer relative flex items-center gap-x-6 rounded-lg p-3 text-sm leading-6 hover:bg-gray-50 ${
-                                                    lang.key === selectedLang?.key ? 'bg-indigo-200' : ''
-                                                }`}
-                                            >
-                                                {/* <div className="flex h-6 w-6 flex-none items-center justify-center rounded-lg bg-gray-50 group-hover:bg-white">
-                                                    <BuildingOffice2Icon
-                                                        className="h-5 w-5 text-gray-600 group-hover:text-indigo-600"
-                                                        aria-hidden="true"
-                                                    />
-                                                </div> */}
-                                                <div className="flex-auto">
-                                                    <div className="block font-semibold text-gray-900">
-                                                        {lang.text}
-                                                        <span className="absolute z-50 inset-0" />
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        ))}
-                                    </div>
-                                </Popover.Panel>
-                            </Transition>
-                        </Popover>
-                        {isMobileMenuOpen ? (
+                            {/* <Bars3Icon className="h-6 w-6" aria-hidden="true" /> */}
+                        </button>
+                        <div className="flex flex-row justify-center ml-2">
                             <button
                                 type="button"
-                                className="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-700"
-                                onClick={() => setMobileMenuOpen(false)}
-                            >
-                                <span className="sr-only">Open main menu</span>
-                                <XMarkIcon className="h-6 w-6" aria-hidden="true" />
-                            </button>
-                        ) : (
-                            <button
-                                type="button"
-                                className="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-700"
+                                className="-m-2.5 inline-flex items-center justify-center rounded-md pr-2.5 text-gray-700"
                                 onClick={() => {
                                     window.scrollTo({ top: 0 });
-                                    setMobileMenuOpen(true);
+                                    setSupportMenuOpen(true);
                                 }}
                             >
-                                <span className="sr-only">Open main menu</span>
-                                <Bars3Icon className="h-6 w-6" aria-hidden="true" />
+                                <span className="sr-only">Open support menu</span>
+                                <svg
+                                    className="w-6 h-4"
+                                    width="16"
+                                    height="16"
+                                    viewBox="0 0 16 16"
+                                    fill="none"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                >
+                                    <path
+                                        d="M14.8544 6.72431C14.7943 6.69619 14.7556 6.63763 14.7541 6.57279C14.7541 2.94274 11.7296 0 7.99858 0C4.26759 0 1.24302 2.94274 1.24302 6.57279C1.24192 6.63788 1.20349 6.69691 1.14347 6.72569C0.465372 7.02014 0.0208316 7.66676 0 8.38895V10.4646C0.0702312 11.5767 1.04872 12.4259 2.19236 12.3672H3.85209C4.14664 12.3672 4.38542 12.1349 4.38542 11.8483V7.00521C4.38542 6.71862 4.14664 6.4863 3.85209 6.4863H2.86293C2.81359 6.48668 2.76636 6.46684 2.7328 6.43165C2.69949 6.39634 2.6823 6.34942 2.68516 6.30157C2.87387 3.58082 5.19724 1.46773 8 1.46773C10.8028 1.46773 13.1261 3.58082 13.3148 6.30157C13.3177 6.34942 13.3005 6.39634 13.2672 6.43165C13.2334 6.46656 13.1863 6.48634 13.1371 6.4863H12.1479C11.8534 6.4863 11.6146 6.71862 11.6146 7.00521V11.8483C11.6146 12.1349 11.8534 12.3672 12.1479 12.3672H12.8C12.8982 12.3672 12.9778 12.4447 12.9778 12.5402C12.9778 13.3044 12.341 13.9239 11.5556 13.9239H10.3893C10.3301 13.9239 10.2748 13.8954 10.2414 13.8478C9.89353 13.3408 9.24561 13.1151 8.646 13.2919C8.04639 13.4688 7.63636 14.0065 7.63636 14.6161C7.63636 15.2258 8.04639 15.7635 8.646 15.9404C9.24561 16.1172 9.89353 15.8915 10.2414 15.3845C10.2747 15.3367 10.33 15.308 10.3893 15.3077H11.5556C13.1265 15.3077 14.4 14.0686 14.4 12.5402V12.4191C14.3999 12.3433 14.4507 12.2762 14.5252 12.2537C15.3675 12.0376 15.966 11.3115 16 10.4646V8.38895C15.9788 7.66593 15.5334 7.01876 14.8544 6.72431Z"
+                                        fill="#2F2F38"
+                                        fill-opacity="0.85"
+                                    />
+                                </svg>
                             </button>
-                        )}
+                        </div>
                     </div>
                 </div>
             </nav>
@@ -452,25 +353,33 @@ const Header = ({ locale, selectedCity, cities, langs, selectedLang, pages }: He
                         leaveFrom="translate-x-0"
                         leaveTo="translate-x-full"
                     >
-                        <Dialog.Panel className="top-20 fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-white dark:bg-black px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
-                            {/* <div className="flex items-center justify-between">
-                                <Link href="/">
-                                    <Image
-                                        src={isDarkMode ? WhiteMonoLogo : Logo}
-                                        alt="Kazticket.kz Logo"
-                                        className="h-8 w-auto"
-                                        priority
-                                    />
-                                </Link>
+                        <Dialog.Panel className="top-0 fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-white dark:bg-black px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
+                            <div className="flex flex-row w-full">
                                 <button
                                     type="button"
-                                    className="-m-2.5 rounded-md p-2.5 text-gray-700"
+                                    className="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-700"
                                     onClick={() => setMobileMenuOpen(false)}
                                 >
-                                    <span className="sr-only">Close menu</span>
-                                    <XMarkIcon className="h-6 w-6" aria-hidden="true" />
+                                    <span className="sr-only">Open main menu</span>
+                                    <svg
+                                        width="24"
+                                        height="24"
+                                        viewBox="0 0 24 24"
+                                        fill="none"
+                                        xmlns="http://www.w3.org/2000/svg"
+                                    >
+                                        <path
+                                            d="M13.9998 6L8.70696 11.2929C8.31643 11.6834 8.31643 12.3166 8.70696 12.7071L13.9998 18"
+                                            stroke="black"
+                                            strokeWidth="2"
+                                            strokeLinecap="round"
+                                        />
+                                    </svg>
                                 </button>
-                            </div> */}
+                                <div className="flex w-full -ml-2.5">
+                                    <span className="text-center w-full font-medium">Меню</span>
+                                </div>
+                            </div>
                             <div className=" flow-root">
                                 <div className="divide-y divide-gray-500/10">
                                     <div className="flex flex-col py-4 gap-y-5">
@@ -606,6 +515,76 @@ const Header = ({ locale, selectedCity, cities, langs, selectedLang, pages }: He
                                     <span className="sr-only">Open main menu</span>
                                     <XMarkIcon className="h-6 w-6" aria-hidden="true" />
                                 </button>
+                            </div>
+                        </Dialog.Panel>
+                    </Transition.Child>
+                </Dialog>
+            </Transition>
+            <Transition show={isSupportMenuOpen} appear as={Fragment}>
+                <Dialog as="div" className="lg:hidden" onClose={() => setSupportMenuOpen(false)}>
+                    <Transition.Child
+                        as={Fragment}
+                        enter="transform transition ease-in-out duration-500 sm:duration-700"
+                        enterFrom="translate-x-full"
+                        enterTo="translate-x-0"
+                        leave="transform transition ease-in-out duration-500 sm:duration-700"
+                        leaveFrom="translate-x-0"
+                        leaveTo="translate-x-full"
+                    >
+                        <Dialog.Panel className="top-0 fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-white dark:bg-black px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
+                            <div className="flex flex-col w-full gap-5">
+                                <div className="flex flex-row w-full">
+                                    <button
+                                        type="button"
+                                        className="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-700"
+                                        onClick={() => setSupportMenuOpen(false)}
+                                    >
+                                        <span className="sr-only">Open main menu</span>
+                                        <svg
+                                            width="24"
+                                            height="24"
+                                            viewBox="0 0 24 24"
+                                            fill="none"
+                                            xmlns="http://www.w3.org/2000/svg"
+                                        >
+                                            <path
+                                                d="M13.9998 6L8.70696 11.2929C8.31643 11.6834 8.31643 12.3166 8.70696 12.7071L13.9998 18"
+                                                stroke="black"
+                                                strokeWidth="2"
+                                                strokeLinecap="round"
+                                            />
+                                        </svg>
+                                    </button>
+                                    <div className="flex w-full -ml-2.5">
+                                        <span className="text-center w-full font-medium">Служба поддержки</span>
+                                    </div>
+                                </div>
+                                <div className="flex flex-col w-full gap-2">
+                                    <Link
+                                        className="text-base leading-6 text-[#0490C3] dark:text-white flex gap-x-2 items-center"
+                                        href="tel:+7-708-08-08-999"
+                                        target="_blank"
+                                    >
+                                        <span>+7-708-08-08-999</span>
+                                    </Link>
+                                    <Link
+                                        className="text-base leading-6 text-[#0490C3] dark:text-white flex gap-x-2 items-center"
+                                        href="https://wa.me/77080808999"
+                                        target="_blank"
+                                    >
+                                        <span>WhatsApp</span>
+                                    </Link>
+                                    <div className="flex gap-1">
+                                        <span className="text-black dark:text-white">Почта: </span>
+                                        <Link
+                                            className="text-base leading-6 text-[#0490C3] dark:text-white flex gap-x-2 items-center"
+                                            href="mailto:support@kazticket.kz"
+                                            target="_blank"
+                                        >
+                                            <span>support@kazticket.kz</span>
+                                        </Link>
+                                    </div>
+                                </div>
                             </div>
                         </Dialog.Panel>
                     </Transition.Child>

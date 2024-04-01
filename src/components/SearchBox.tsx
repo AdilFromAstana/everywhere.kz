@@ -1,7 +1,7 @@
 'use client';
 
 import { Combobox, Transition } from '@headlessui/react';
-import { MagnifyingGlassIcon, MapPinIcon } from '@heroicons/react/24/outline';
+import { MapPinIcon } from '@heroicons/react/24/outline';
 import { getCookie } from 'cookies-next';
 import Link from 'next/link';
 import { Fragment, useState } from 'react';
@@ -42,8 +42,33 @@ const SearchBox = ({ cities, locale }: SearchBoxProps) => {
     return (
         <Combobox value={selectedPerson} onChange={setSelectedPerson}>
             <div className="relative w-full mx-2 z-50">
-                <div className="relative w-full flex flex-row border-[#EDEDED] border-solid border-[1px] items-center cursor-default overflow-hidden rounded-lg text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-white/75 focus-visible:ring-offset-2 focus-visible:ring-offset-teal-300 sm:text-sm">
-                    <MagnifyingGlassIcon className="h-7 w-7 px-1 text-gray-400" aria-hidden="true" />
+                <div className="relative w-full flex flex-row border-[#EDEDED] border-solid border-[1px] items-center cursor-default overflow-hidden rounded-xl text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-white/75 focus-visible:ring-offset-2 focus-visible:ring-offset-teal-300 sm:text-sm px-1">
+                    <svg
+                        width="20"
+                        height="20"
+                        className="mx-1"
+                        viewBox="0 0 20 20"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                    >
+                        <g clipPath="url(#clip0_200_1089)">
+                            <path
+                                d="M8.84236 15.684C10.3605 15.6837 11.8349 15.1755 13.0307 14.2403L16.7906 18L18 16.7907L14.2401 13.031C15.1758 11.8351 15.6844 10.3604 15.6847 8.84199C15.6847 5.06949 12.6151 2 8.84236 2C5.06965 2 2 5.06949 2 8.84199C2 12.6145 5.06965 15.684 8.84236 15.684ZM8.84236 3.7105C11.6725 3.7105 13.9741 6.01197 13.9741 8.84199C13.9741 11.672 11.6725 13.9735 8.84236 13.9735C6.01219 13.9735 3.71059 11.672 3.71059 8.84199C3.71059 6.01197 6.01219 3.7105 8.84236 3.7105Z"
+                                fill="#2F2F38"
+                                fillOpacity="0.45"
+                            />
+                            <path
+                                d="M10.05 7.6323C10.3742 7.95729 10.5529 8.38663 10.5529 8.84162H12.2635C12.2643 8.39213 12.1759 7.94694 12.0036 7.5318C11.8312 7.11665 11.5783 6.73978 11.2594 6.42298C9.9645 5.12984 7.71935 5.12984 6.42529 6.42298L7.63297 7.63401C8.28299 6.98573 9.40343 6.98744 10.05 7.6323Z"
+                                fill="#2F2F38"
+                                fillOpacity="0.45"
+                            />
+                        </g>
+                        <defs>
+                            <clipPath id="clip0_200_1089">
+                                <rect width="20" height="20" fill="white" />
+                            </clipPath>
+                        </defs>
+                    </svg>
                     <Combobox.Input
                         placeholder="Поиск по событиям"
                         className="w-full border-none py-2 pr-10 bg-white dark:bg-black text-sm leading-5 text-gray-900 dark:text-white focus-visible:outline-none"
@@ -133,7 +158,7 @@ async function GetEventsByName(eventName: string, cities: City[]) {
     const UserLang = getCookie('UserLang');
     let acceptLanguage = 'ru-RU';
     switch (UserLang?.toLocaleLowerCase()) {
-        case 'kz':
+        case 'kk':
             acceptLanguage = 'kz-KZ';
             break;
         case 'en':
@@ -194,7 +219,7 @@ async function GetEventsByName(eventName: string, cities: City[]) {
 
         let eventName = x.NameRu;
         switch (UserLang?.toLocaleLowerCase()) {
-            case 'kz':
+            case 'kk':
                 eventName = x.NameKz;
                 break;
             case 'en':
