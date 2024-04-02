@@ -1,9 +1,4 @@
-'use server';
-
-// import { setCookie } from 'cookies-next';
 import Link from 'next/link';
-
-// import { useEffect, useRef, useState } from 'react';
 
 import { LeisureCategory } from '@/types/LeisureCategory';
 
@@ -13,15 +8,6 @@ interface LeisureCategoriesProps {
 }
 
 const LeisureCategories = ({ leisureCategories, selectedCategory }: LeisureCategoriesProps) => {
-    // const handleSelectLeisureCategory = (category: LeisureCategory) => {
-    //     if (selectedCategory?.id !== category.id) {
-    //         setCookie('UserCategoryId', category.id, {
-    //             maxAge: 60,
-    //         });
-    //         location.reload();
-    //     }
-    // };
-
     return (
         <div id="leisureCategories" className="flex flex-row py-3 lg:px-2 container mx-auto">
             <div className="relative w-full flex justify-between">

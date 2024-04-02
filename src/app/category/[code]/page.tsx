@@ -85,7 +85,7 @@ export default async function CategoryPage({ params }: Props) {
                 <HorizontalCalendar />
                 <div className="grid lg:grid-cols-3 md:grid-cols-2 lg:gap-5 gap-3 container mx-auto content-center justify-items-center">
                     {EventsData?.map((x: EventInList) => {
-                        return <EventCard key={x.id} data={x} UserCityId={UserCityId} />;
+                        return <EventCard UserLang={UserLang} key={x.id} data={x} UserCityId={UserCityId} />;
                     })}
                     {EventsData?.length === 0 && (
                         <div className="max-w-4xl mx-auto px-10 py-4 bg-white rounded-lg shadow-lg">

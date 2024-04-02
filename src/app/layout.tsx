@@ -3,6 +3,7 @@ import { Metadata, Viewport } from 'next';
 import './globals.css';
 import '../assets/fonts/Gilroy/stylesheet.css';
 
+import { SpeedInsights } from '@vercel/speed-insights/next';
 import { Rubik } from 'next/font/google';
 // import Script from 'next/script';
 import { Suspense } from 'react';
@@ -66,6 +67,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             </head>
             <body className={rubik.className + ' dark:bg-black'}>
                 {children}
+                <SpeedInsights />
                 <Suspense fallback={null}>
                     <MetaScriptEvents />
                 </Suspense>

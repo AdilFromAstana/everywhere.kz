@@ -20,6 +20,7 @@ const SearchBox = ({ cities, locale }: SearchBoxProps) => {
     const [selectedPerson, setSelectedPerson] = useState('');
     const [filteredEvents, setFilteredEvents] = useState<any>([]);
     const [IsLoaded, SetIsLoaded] = useState<boolean>(true);
+    const UserLang = getCookie('UserLang');
 
     const GetEvents = async (eventName: string) => {
         if (eventName.length < 2) {
@@ -126,6 +127,7 @@ const SearchBox = ({ cities, locale }: SearchBoxProps) => {
                                             <span className="flex flex-row gap-2 justify-between">
                                                 <span className="text-xs">
                                                     <EventDateInfo
+                                                        UserLang={UserLang}
                                                         cityTimeZone={event.isEventum ? 6 : event.cityTimeZone}
                                                         date={event.beginDate}
                                                     />

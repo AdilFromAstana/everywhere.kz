@@ -1,19 +1,17 @@
+'use server';
+
 import { getCookie } from 'cookies-next';
 import { getDictionary } from 'dictionaries';
 // import { getDictionary } from 'dictionaries';
 import { cookies } from 'next/headers';
-import Image from 'next/image';
 import Link from 'next/link';
 
-import EmptyPoster from '@/assets/empty-poster.svg';
-import SoldOut from '@/assets/soldout.svg';
-import EventDateInfo from '@/components/EventDateInfo';
-import EventStatuses from '@/constants/EventStatuses.json';
+import EventCard from '@/components/EventsPage/EventCard';
 import { isEmpty } from '@/functions';
 import { CheckToken } from '@/functions/AxiosHandlers';
 import { EventInList } from '@/types/EventInList';
 
-import type { Metadata, Viewport } from 'next';
+import type { Metadata } from 'next';
 
 async function GetSelectionData(selectionCode: string) {
     const { NEXT_PUBLIC_EVENTS_URL = '' } = process.env;
@@ -116,11 +114,6 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     };
 }
 
-export const viewport: Viewport = {
-    width: 'device-width',
-    userScalable: false,
-};
-
 export default async function EventSelectionPage({ params }: Props) {
     const TargetSelection = await GetSelectionData(params.code);
     const EventsData = await GetEvents(TargetSelection?.id);
@@ -210,79 +203,7 @@ export default async function EventSelectionPage({ params }: Props) {
                 </nav>
                 <div className="flex flex-wrap mx-auto">
                     {EventsData?.items?.map((x: EventInList) => {
-                        return (
-                            <div key={x.id} className="w-full md:w-1/2 lg:w-1/3 p-2 transition duration-200 relative">
-                                <Link href={'/event/' + x.code}>
-                                    <div className="cursor-pointer w-full h-auto md:hover:shadow-xl md:hover:scale-105 transition duration-300 rounded-md">
-                                        <div className="w-full relative rounded-xl -z-10 overflow-hidden">
-                                            {isEmpty(x.posterFileUrl) ? (
-                                                <>
-                                                    <Image
-                                                        src={EmptyPoster}
-                                                        alt={x.name}
-                                                        className="w-full h-64 object-cover -z-10 rounded-xl"
-                                                        width="100"
-                                                        height="100"
-                                                    />
-                                                </>
-                                            ) : (
-                                                <>
-                                                    <div
-                                                        className="w-full h-full rounded-xl -z-10 relative bg-cover bg-no-repeat bg-center"
-                                                        style={{
-                                                            backgroundImage: `url("${x.posterFileUrl ?? ''}")`,
-                                                            filter: 'blur(10px)',
-                                                            height: '100%',
-                                                        }}
-                                                    >
-                                                        <div className="h-64 object-contain rounded-xl" />
-                                                    </div>
-                                                    <Image
-                                                        alt={x.name}
-                                                        height={256}
-                                                        width={400}
-                                                        className="p-1 absolute -z-10 top-0 w-full h-64 object-contain rounded-xl"
-                                                        src={x.posterFileUrl}
-                                                    />
-                                                </>
-                                            )}
-                                            {x.statusId === EventStatuses.SoldOut && (
-                                                <Image
-                                                    alt={x.name}
-                                                    height={256}
-                                                    width={400}
-                                                    className="p-1 absolute z-10 top-0 w-full h-64 object-contain rounded-xl bg-[rgba(0,0,0,0.3)]"
-                                                    src={SoldOut}
-                                                />
-                                            )}
-                                            <div className="bg-[#FFF] dark:bg-[#000000] shadow-md backdrop-blur-sm px-3 absolute left-3 bottom-3 rounded-md">
-                                                <span className="text-lg font-medium text-black dark:text-white">
-                                                    от {x.minCost} тг.
-                                                </span>
-                                            </div>
-                                            <div className="bg-[#FFF] dark:bg-[#000000] shadow-md backdrop-blur-sm px-3 absolute right-3 bottom-3 rounded-md">
-                                                <span className="text-lg font-medium text-black dark:text-white">
-                                                    {x.ageLimit}+
-                                                </span>
-                                            </div>
-                                        </div>
-                                        <div>
-                                            <h2 className="mb-1 md:text-2xl text-xl leading-tight font-bold text-black dark:text-white">
-                                                {x.name}
-                                            </h2>
-                                            <h3 className="text-[#00000073] font-medium dark:text-white">
-                                                <EventDateInfo cityTimeZone={x.cityTimeZone} date={x.beginDate} />
-                                                {isEmpty(UserCityId) || parseInt(UserCityId ?? '0') === 0 ? (
-                                                    <> - {x.cityName}</>
-                                                ) : (
-                                                    ''
-                                                )}
-                                            </h3>
-                                        </div>
-                                    </div>
-                                </Link>
-                            </div>
-                        );
+                        return <EventCard UserLang={UserLang} key={x.id} data={x} UserCityId={UserCityId} />;
                     })}
                 </div>
             </div>

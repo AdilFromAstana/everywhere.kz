@@ -335,7 +335,7 @@ export default async function Home({ searchParams }: Props) {
             <HorizontalCalendar startDate={startDate} period={period} />
             <div className="grid lg:grid-cols-3 md:grid-cols-2 lg:gap-5 gap-3 container mx-auto content-center justify-items-center">
                 {EventsData?.map((x: EventInList) => {
-                    return <EventCard key={x.id} data={x} UserCityId={UserCityId} />;
+                    return <EventCard UserLang={UserLang} key={x.id} data={x} UserCityId={UserCityId} />;
                 })}
                 {EventumEventsData?.sort((eventA: any, eventB: any) => {
                     const dateA = new Date(eventA?.Date) as any;
@@ -401,7 +401,7 @@ export default async function Home({ searchParams }: Props) {
                                                   : x.NameRu}
                                         </span>
                                         <p className="text-coolGray-500 font-medium px-2 dark:text-white">
-                                            <EventDateInfo cityTimeZone={6} date={x.Date} />
+                                            <EventDateInfo UserLang={UserLang} cityTimeZone={6} date={x.Date} />
                                             {isEmpty(UserCityId) || parseInt(UserCityId ?? '0') === 0 ? (
                                                 <b> - {city?.name}</b>
                                             ) : (

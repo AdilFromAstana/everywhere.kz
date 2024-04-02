@@ -188,8 +188,6 @@ export default async function EventPage({ params }: Props) {
             },
         };
 
-        console.log('data: ', data);
-
         return (
             <div className="px-2">
                 <Script
@@ -264,7 +262,7 @@ export default async function EventPage({ params }: Props) {
                             src={data.posterFileUrl}
                             height={500}
                             width={1900}
-                            className="lg:block hidden w-full object-contain max-h-[500px]"
+                            className="lg:block hidden w-full object-contain max-h-[550px]"
                         />
                     </div>
                 </div>

@@ -11,6 +11,7 @@ import { EventInList } from '@/types/EventInList';
 import EventDateInfo from '../EventDateInfo';
 
 interface EventCardProps {
+    UserLang: CookieValueTypes;
     data: EventInList;
     UserCityId: CookieValueTypes;
 }
@@ -25,7 +26,7 @@ const EmptyPlaceholder =
 //     },
 // });
 
-const EventCard = ({ data, UserCityId }: EventCardProps) => {
+const EventCard = ({ UserLang, data, UserCityId }: EventCardProps) => {
     return (
         <div key={data.id} className="w-full">
             <Link href={'/event/' + data.code} title={data.name}>
@@ -67,7 +68,7 @@ const EventCard = ({ data, UserCityId }: EventCardProps) => {
                             {data.name}
                         </h1>
                         <h3 className="text-[#00000073] font-medium dark:text-white flex items-center">
-                            <EventDateInfo cityTimeZone={data.cityTimeZone} date={data.beginDate} />
+                            <EventDateInfo UserLang={UserLang} cityTimeZone={data.cityTimeZone} date={data.beginDate} />
                             {isEmpty(UserCityId) || parseInt(UserCityId ?? '0') === 0 ? <> - {data.cityName}</> : ''}
                         </h3>
                     </div>

@@ -158,12 +158,14 @@ export default async function OrderPage({ params }: Props) {
                         <div className="flex flex-col w-full gap-1">
                             <Property name={locale.OrderPage.Event} value={data.details.eventName} />
                             <OrderDateTimeProperty
+                                UserLang={UserLang}
                                 cityTimeZone={data?.details?.cityTimeZone ?? 6}
                                 fieldName={locale.OrderPage.StartOfSession}
                                 date={data.details.sessionBeginDateTime}
                             />
                             {!isEmpty(data.details.sessionEndDateTime) && (
                                 <OrderDateTimeProperty
+                                    UserLang={UserLang}
                                     cityTimeZone={data?.details?.cityTimeZone ?? 6}
                                     fieldName={locale.OrderPage.EndOfSession}
                                     date={data.details.sessionEndDateTime}

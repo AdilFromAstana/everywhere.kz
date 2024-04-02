@@ -1,6 +1,4 @@
-'use server';
-
-import { getCookie } from 'cookies-next';
+import { CookieValueTypes } from 'cookies-next';
 import dayjs from 'dayjs';
 import React from 'react';
 
@@ -8,17 +6,15 @@ import 'dayjs/locale/ru';
 import 'dayjs/locale/kk';
 import 'dayjs/locale/en';
 
-import { cookies } from 'next/headers';
-
 interface OrderPropertyProps {
+    UserLang: CookieValueTypes;
     cityTimeZone: number;
     fieldName: string;
     date: string;
 }
 
-const OrderDateTimeProperty = ({ fieldName, date, cityTimeZone }: OrderPropertyProps) => {
-    const UserLang = getCookie('UserLang', { cookies }) || 'ru';
-    dayjs.locale(UserLang.toLowerCase());
+const OrderDateTimeProperty = ({ UserLang, fieldName, date, cityTimeZone }: OrderPropertyProps) => {
+    dayjs.locale(UserLang?.toLowerCase() || 'ru');
 
     return (
         <div className="flex flex-row justify-between gap-2 w-full">

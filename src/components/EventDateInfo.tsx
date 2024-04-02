@@ -1,23 +1,19 @@
-'use server';
-
-import { getCookie } from 'cookies-next';
 import dayjs from 'dayjs';
 
 import 'dayjs/locale/ru';
 import 'dayjs/locale/kk';
 import 'dayjs/locale/en';
 
-import { cookies } from 'next/headers';
+import { CookieValueTypes } from 'cookies-next';
 
 interface EventDateProps {
     cityTimeZone: number;
+    UserLang: CookieValueTypes;
     date: any;
 }
 
-const EventDateInfo = ({ date, cityTimeZone }: EventDateProps) => {
-    const UserLang = getCookie('UserLang', { cookies }) || 'ru';
-
-    dayjs.locale(UserLang.toLowerCase());
+const EventDateInfo = async ({ UserLang, date, cityTimeZone }: EventDateProps) => {
+    dayjs.locale(UserLang?.toLowerCase() ?? 'ru');
 
     return `${dayjs(
         dayjs(date)

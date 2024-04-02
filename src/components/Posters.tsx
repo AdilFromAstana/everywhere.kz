@@ -70,12 +70,12 @@ const Posters = ({ posters, UserLang }: PostersProps) => {
                             type: 'bullets',
                             clickable: true,
                             renderBullet: function (index, className) {
-                                return `<button class=${className}>
+                                return `<a class=${className}>
                                 <div class="bullet-indicator-container">
                                     <div class="bullet-indicator" style="transform: translate3d(-105%, 0px, 0px);">
                                     </div>
                                 </div>
-                            </button>`;
+                            </a>`;
                             },
                         }}
                         autoplay={{
@@ -93,7 +93,7 @@ const Posters = ({ posters, UserLang }: PostersProps) => {
                         onAutoplayTimeLeft={onAutoplayTimeLeft}
                         onSlideChange={onSlideChange}
                     >
-                        {posters.map((x) => {
+                        {posters.map((x, index: number) => {
                             return (
                                 <SwiperSlide key={x.Id}>
                                     <Link href={x.URL}>
@@ -141,6 +141,8 @@ const Posters = ({ posters, UserLang }: PostersProps) => {
                                             <Image
                                                 width={720}
                                                 height={480}
+                                                fetchPriority={0 === index ? 'high' : 'auto'}
+                                                priority={0 === index}
                                                 alt={x.NameRu}
                                                 className="h-fit w-full object-cover"
                                                 src={x.MobileImageURL}
@@ -237,7 +239,7 @@ const Posters = ({ posters, UserLang }: PostersProps) => {
                                                 <Image
                                                     width={2000}
                                                     height={500}
-                                                    alt={x.Name}
+                                                    alt={x.NameRu}
                                                     priority={[0, 1, posters.length - 1].includes(index)}
                                                     className=" z-0 rounded-xl object-contain"
                                                     src={x.ComputerImageURL}
