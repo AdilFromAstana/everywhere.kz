@@ -20,6 +20,7 @@ module.exports = {
                 'header': '0px 0px 25px 0px #8E8E8E40',
                 'header-mobile': '0px 8px 32px 0px #00000014, 0px 2px 20px 0px #0000000A',
                 'footer': '0px 0px 25px 0px #8E8E8E40',
+                'tabbar': '0px -2px 10px 0px #3D3F3E1A',
             }
         },
     },

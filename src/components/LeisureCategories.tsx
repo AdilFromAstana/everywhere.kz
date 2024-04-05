@@ -4,7 +4,7 @@ import { LeisureCategory } from '@/types/LeisureCategory';
 
 interface LeisureCategoriesProps {
     leisureCategories: LeisureCategory[];
-    selectedCategory: LeisureCategory;
+    selectedCategory: LeisureCategory | undefined;
 }
 
 const LeisureCategories = ({ leisureCategories, selectedCategory }: LeisureCategoriesProps) => {
@@ -15,9 +15,9 @@ const LeisureCategories = ({ leisureCategories, selectedCategory }: LeisureCateg
                     {leisureCategories.map((x: LeisureCategory) => (
                         <Link
                             key={x.id}
-                            href={'/category/' + x.id}
+                            href={'/category/' + x.code}
                             className={`${
-                                selectedCategory.id === x.id
+                                selectedCategory && selectedCategory.id === x.id
                                     ? 'text-[#0490C3] dark:text-white underline'
                                     : 'text-black dark:text-white'
                             } cursor-pointer`}

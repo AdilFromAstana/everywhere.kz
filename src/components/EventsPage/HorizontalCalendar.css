@@ -95,6 +95,7 @@
     .HorizontalCalendar .Kq.WP,
     .HorizontalCalendar .Kq.Ez {
         padding: 0;
+        display: none;
     }
 
     .HorizontalCalendar .Kq.Ez::after {

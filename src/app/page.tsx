@@ -10,21 +10,21 @@ import Link from 'next/link';
 
 import EmptyPoster from '@/assets/empty-poster.svg';
 import EventDateInfo from '@/components/EventDateInfo';
-import EventCard from '@/components/EventsPage/EventCard';
+import EventsByCategory from '@/components/EventsPage/EventsByCategory';
 import Title from '@/components/EventsPage/Title';
 import LeisureCategories from '@/components/LeisureCategories';
 import PageLayout from '@/components/PageLayout';
+import Recommendations from '@/components/Recommendations';
 // import Posters from '@/components/Posters';
-import SubscribeForm from '@/components/SubscribeForm';
 import Tickers from '@/components/Tickers';
+import categories from '@/constants/Categories';
 import { isEmpty } from '@/functions';
 import { CheckToken } from '@/functions/AxiosHandlers';
 import { City } from '@/types/City';
 import { EventInList } from '@/types/EventInList';
 import { LeisureCategory } from '@/types/LeisureCategory';
 
-async function GetEvents(startDate: string, period: string) {
-    console.log('period: ', period);
+async function GetEvents(startDate: string, period: string, categoryCode?: string) {
     const { NEXT_PUBLIC_EVENTS_URL = '' } = process.env;
     const token = await CheckToken();
 
@@ -38,19 +38,22 @@ async function GetEvents(startDate: string, period: string) {
             acceptLanguage = 'en-US';
             break;
     }
-    // process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
 
     const UserCityId = getCookie('UserCityId', { cookies });
-    const UserCategoryId = getCookie('UserCategoryId', { cookies });
 
     let url =
         NEXT_PUBLIC_EVENTS_URL +
         'commercial/Events' +
-        `?Top=100&CityId=${UserCityId ? (parseInt(UserCityId) === 0 ? '' : UserCityId) : ''}` +
-        `&LeisureCategoryId=${UserCategoryId ? (parseInt(UserCategoryId) === 0 ? '' : UserCategoryId) : ''}`;
+        `?Top=100&CityId=${UserCityId ? (parseInt(UserCityId) === 0 ? '' : UserCityId) : ''}`;
 
+    if (categoryCode && !isEmpty(categoryCode) && categoryCode !== 'all') {
+        url = url + `&LeisureCategoryCode=${categoryCode}`;
+    }
     if (startDate && !isEmpty(startDate)) {
-        url = url + `&BeginAt=${dayjs(startDate, 'YYYY-MM-DD').format()}`;
+        url = url + `&BeginAt=${dayjs(startDate, 'YYYY-MM-DD').toISOString()}`;
+    }
+    if (startDate && !isEmpty(startDate) && !isEmpty(period)) {
+        url = url + `&EndAt=${dayjs(startDate, 'YYYY-MM-DD').add(parseInt(period), 'd').endOf('D').toISOString()}`;
     }
 
     const res = await fetch(url, {
@@ -66,8 +69,9 @@ async function GetEvents(startDate: string, period: string) {
 
     if (!res.ok) {
         console.log('Error in GetEvents: ', res);
+        const empty: EventInList[] = [];
         // This will activate the closest `error.js` Error Boundary
-        return [];
+        return empty;
     }
 
     const data = await res.json();
@@ -75,7 +79,7 @@ async function GetEvents(startDate: string, period: string) {
     if (data.items) {
         const exclusiveEvents = ['alau-massskating', 'the-concert-my-angel', 'astana-irina-krug', 'pecha-kucha'];
 
-        const sortedData = data.items?.sort((eventA: any, eventB: any) => {
+        const sortedData: EventInList[] = data.items?.sort((eventA: any, eventB: any) => {
             const dateA = new Date(eventA?.beginDate) as any;
             const dateB = new Date(eventB?.beginDate) as any;
             return dateA - dateB;
@@ -121,21 +125,43 @@ async function GetEventumEvents() {
         return await res.json();
     } catch (error) {
         // Логирование ошибки
-        console.error('Fetch failed:', error);
+        console.error('GetEventumEvents failed:', error);
         // Возврат пустого массива или объекта ошибки
         return [];
     }
 }
 
 async function GetPosters() {
-    // const UserCityId = getCookie('UserCityId', { cookies });
-    // const UserCategoryId = getCookie('UserCategoryId', { cookies });
-
     process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
 
     const url = process.env.NEXT_PUBLIC_SERVICES_TEMP_URL + 'posters/forCommerce';
-    // `?CityId=${UserCityId ? (parseInt(UserCityId) === 0 ? '' : UserCityId) : ''}` +
-    // `&LeisureCategoryId=${UserCategoryId ? (parseInt(UserCategoryId) === 0 ? '' : UserCategoryId) : ''}`;
+    try {
+        const res = await fetch(url, {
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        });
+
+        if (!res.ok) {
+            console.log('res: ', res);
+            // This will activate the closest `error.js` Error Boundary
+            return [];
+        }
+
+        const data = await res.json();
+        return data;
+    } catch (error) {
+        // Логирование ошибки
+        console.error('GetPosters failed:', error);
+        // Возврат пустого массива или объекта ошибки
+        return [];
+    }
+}
+
+async function GetRecs() {
+    process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
+
+    const url = process.env.NEXT_PUBLIC_SERVICES_TEMP_URL + 'recommendations/forCommerce';
     try {
         const res = await fetch(url, {
             next: {
@@ -152,10 +178,11 @@ async function GetPosters() {
             return [];
         }
 
-        return res.json();
+        const data = await res.json();
+        return data;
     } catch (error) {
         // Логирование ошибки
-        console.error('Fetch failed:', error);
+        console.error('GetRecs failed:', error);
         // Возврат пустого массива или объекта ошибки
         return [];
     }
@@ -185,7 +212,7 @@ async function GetTickers() {
         return res.json();
     } catch (error) {
         // Логирование ошибки
-        console.error('Fetch failed:', error);
+        console.error('GetTickers failed:', error);
         // Возврат пустого массива или объекта ошибки
         return [];
     }
@@ -292,6 +319,17 @@ const HorizontalCalendar = dynamic(() => import('@/components/EventsPage/Horizon
     },
 });
 
+const SubscribeForm = dynamic(() => import('@/components/SubscribeForm'), {
+    ssr: false,
+    loading() {
+        return (
+            <div className="container mx-auto md:py-5 flex justify-between">
+                <div className="w-screen -mx-4 md:mx-0 min-h-[270px] 3xl:min-h-[382px] 2xl:min-h-[306px] xl:min-h-[251px] lg:min-h-[187px] md:min-h-[187px] md:rounded-2xl md:w-full animate-pulse bg-gray-200"></div>
+            </div>
+        );
+    },
+});
+
 type Props = {
     params: { code: string };
     searchParams: { [key: string]: string | string[] | undefined };
@@ -303,6 +341,7 @@ export default async function Home({ searchParams }: Props) {
     const period = typeof searchParams.period === 'string' ? searchParams.period : searchParams.period?.[0] || '';
     const EventsData = await GetEvents(startDate, period);
     const PostersData = await GetPosters();
+    const RecsData = await GetRecs();
     const TickersData = await GetTickers();
     const EventumEventsData = await GetEventumEvents();
     const leisureCategories = await GetLeisureCategories();
@@ -317,7 +356,7 @@ export default async function Home({ searchParams }: Props) {
         } else {
             return x.id === 0;
         }
-    }) ?? { id: 0, name: locale.EventListPage.All };
+    }) ?? { id: 0, name: locale.EventListPage.All, code: 'all' };
     const cities = await GetCities();
     const selectedCity = cities.find((x: City) => {
         if (UserCityId) {
@@ -333,10 +372,54 @@ export default async function Home({ searchParams }: Props) {
             <Posters UserLang={UserLang ?? 'Ru'} posters={PostersData} />
             <Title title="Афиша" cities={cities} selectedCity={selectedCity} locale={locale} />
             <HorizontalCalendar startDate={startDate} period={period} />
-            <div className="grid lg:grid-cols-3 md:grid-cols-2 lg:gap-5 gap-3 container mx-auto content-center justify-items-center">
-                {EventsData?.map((x: EventInList) => {
+            <EventsByCategory
+                GetEvents={GetEvents}
+                category={{
+                    name: (
+                        <div className="relative">
+                            Предстоящие события
+                            <svg
+                                width="13"
+                                height="13"
+                                className="absolute top-0 -right-3"
+                                viewBox="0 0 13 13"
+                                fill="none"
+                                xmlns="http://www.w3.org/2000/svg"
+                            >
+                                <path
+                                    fillRule="evenodd"
+                                    clipRule="evenodd"
+                                    d="M3.15909 0.709858C1.21301 1.31587 0.282671 3.68871 0.871615 6.52248C1.05939 7.41872 1.80198 7.44433 2.70673 6.881C3.66269 6.27493 4.78935 5.00317 5.61729 3.3729C6.50499 1.60607 5.11372 0.0953048 3.15909 0.709858ZM4.07237 1.49511C5.0369 2.06698 4.78935 3.04857 3.17618 4.93488L2.23728 6.03598L2.21169 5.20804C2.13487 2.58764 2.99693 0.854954 4.07237 1.49511ZM8.6986 2.29745C7.37562 2.91199 5.35274 5.54088 5.35274 6.65052C5.35274 7.37604 5.87338 7.35043 8.43397 6.49687C10.4569 5.82258 11.4299 5.43845 11.8652 4.90073C13.3077 3.13391 10.8666 1.29026 8.6986 2.29745ZM10.6959 3.09978C11.1483 3.79114 10.0386 5.21658 8.71567 5.65185C7.63164 6.01038 6.88905 6.20664 6.96588 6.09574C7.00856 6.04452 7.27318 5.69454 7.55481 5.31901C8.88632 3.55215 10.3289 2.53644 10.6959 3.09978ZM5.6429 8.39171C3.77364 8.71609 3.09935 9.99638 5.34413 10.7646C5.7368 10.9012 6.58182 11.2938 7.22197 11.6352C9.09119 12.6509 10.0216 12.6679 10.8068 11.712C11.4128 10.978 11.2592 9.80005 10.6788 8.92949C9.25338 6.7871 6.65011 8.21252 5.6429 8.39171ZM9.96182 9.27087C10.4484 9.51842 10.4313 10.0817 9.91914 10.6536C9.22777 11.4218 8.64738 11.3791 7.00002 10.4317L5.80509 9.7489C5.99282 9.71476 6.66718 9.60378 7.79382 9.33916C8.82664 9.08307 9.55215 9.066 9.96182 9.27087Z"
+                                    fill="#E2B33D"
+                                />
+                            </svg>
+                        </div>
+                    ),
+                    code: 'all',
+                }}
+                period={period}
+                startDate={startDate}
+                UserCityId={UserCityId}
+                UserLang={UserLang}
+            />
+            <Recommendations UserLang={UserLang} recs={RecsData} />
+            <div className="flex flex-col gap-8">
+                {categories().map((category: any) => (
+                    <EventsByCategory
+                        key={category.code}
+                        GetEvents={GetEvents}
+                        category={category}
+                        period={period}
+                        startDate={startDate}
+                        UserCityId={UserCityId}
+                        UserLang={UserLang}
+                    />
+                ))}
+            </div>
+            <div className="grid lg:grid-cols-3 grid-cols-2 lg:gap-5 gap-3 container mx-auto content-center justify-items-center">
+                {/* {EventsData?.map((x: EventInList) => {
                     return <EventCard UserLang={UserLang} key={x.id} data={x} UserCityId={UserCityId} />;
-                })}
+                })} */}
                 {EventumEventsData?.sort((eventA: any, eventB: any) => {
                     const dateA = new Date(eventA?.Date) as any;
                     const dateB = new Date(eventB?.Date) as any;

@@ -52,14 +52,19 @@ type Props = {
 };
 export default async function CategoryPage({ params }: Props) {
     const leisureCategories = await GetLeisureCategories();
-    const UserCategoryId = params.code;
-    const selectedCategory = leisureCategories.find((x: LeisureCategory) => {
-        if (UserCategoryId) {
-            return x.id === parseInt(UserCategoryId);
+    const UserCategoryCode = params.code;
+    let selectedCategory: any = {};
+
+    if (UserCategoryCode) {
+        if (UserCategoryCode.toLocaleLowerCase() === 'all') {
+            selectedCategory = { code: 'all', name: 'Предстоящие события' };
         } else {
-            return x.id === 0;
+            selectedCategory = leisureCategories.find((x: LeisureCategory) => {
+                return x.code === UserCategoryCode;
+            });
+            // return x.code === '';
         }
-    });
+    }
 
     if (selectedCategory && !isEmpty(selectedCategory)) {
         const TickersData = await GetTickers();
@@ -75,17 +80,23 @@ export default async function CategoryPage({ params }: Props) {
                 return x.id === 0;
             }
         }) ?? { id: 0, name: locale.Header.AllCities };
-        const EventsData = await GetEvents(selectedCategory.id);
+        const EventsData = await GetEvents(selectedCategory.code);
 
         return (
             <>
-                {/* <LeisureCategories leisureCategories={leisureCategories} selectedCategory={selectedCategory} />
-                <Posters UserLang={UserLang ?? 'Ru'} posters={PostersData} /> */}
-                <Title title={'Грандиозные концерты'} cities={cities} selectedCity={selectedCity} locale={locale} />
+                <Title title={selectedCategory.name} cities={cities} selectedCity={selectedCity} locale={locale} />
                 <HorizontalCalendar />
-                <div className="grid lg:grid-cols-3 md:grid-cols-2 lg:gap-5 gap-3 container mx-auto content-center justify-items-center">
+                <div className="grid lg:grid-cols-3 grid-cols-2 lg:gap-5 gap-3 container mx-auto content-center justify-items-center">
                     {EventsData?.map((x: EventInList) => {
-                        return <EventCard UserLang={UserLang} key={x.id} data={x} UserCityId={UserCityId} />;
+                        return (
+                            <EventCard
+                                cardType="full"
+                                UserLang={UserLang}
+                                key={x.id}
+                                data={x}
+                                UserCityId={UserCityId}
+                            />
+                        );
                     })}
                     {EventsData?.length === 0 && (
                         <div className="max-w-4xl mx-auto px-10 py-4 bg-white rounded-lg shadow-lg">
@@ -129,10 +140,11 @@ export default async function CategoryPage({ params }: Props) {
             </>
         );
     } else {
+        return <></>;
     }
 }
 
-async function GetEvents(UserCategoryId: number) {
+async function GetEvents(UserCategoryCode: string) {
     const { NEXT_PUBLIC_EVENTS_URL = '' } = process.env;
     const token = await CheckToken();
 
@@ -154,7 +166,7 @@ async function GetEvents(UserCategoryId: number) {
         NEXT_PUBLIC_EVENTS_URL +
         'commercial/Events' +
         `?Top=100&CityId=${UserCityId ? (parseInt(UserCityId) === 0 ? '' : UserCityId) : ''}` +
-        `&LeisureCategoryId=${UserCategoryId}`;
+        `&leisureCategoryCode=${UserCategoryCode === 'all' ? '' : UserCategoryCode}`;
 
     const res = await fetch(url, {
         headers: {
@@ -210,7 +222,7 @@ async function GetTickers() {
         return res.json();
     } catch (error) {
         // Логирование ошибки
-        console.error('Fetch failed:', error);
+        console.error('GetTickers failed:', error);
         // Возврат пустого массива или объекта ошибки
         return [];
     }

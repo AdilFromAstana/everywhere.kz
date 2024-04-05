@@ -12,8 +12,9 @@ import EventDateInfo from '../EventDateInfo';
 
 interface EventCardProps {
     UserLang: CookieValueTypes;
+    UserCityId?: CookieValueTypes;
     data: EventInList;
-    UserCityId: CookieValueTypes;
+    cardType?: 'full' | 'semi';
 }
 
 const EmptyPlaceholder =
@@ -26,9 +27,12 @@ const EmptyPlaceholder =
 //     },
 // });
 
-const EventCard = ({ UserLang, data, UserCityId }: EventCardProps) => {
+const EventCard = ({ UserLang, data, UserCityId, cardType = 'semi' }: EventCardProps) => {
     return (
-        <div key={data.id} className="w-full">
+        <div
+            key={data.id}
+            className={cardType === 'semi' ? 'lg:min-w-[20%] lg:max-w-[20%] min-w-[40%] max-w-[40%]' : 'w-full'}
+        >
             <Link href={'/event/' + data.code} title={data.name}>
                 <div className="flex flex-col gap-2 w-full cursor-pointer rounded-xl">
                     <div className="relative rounded-xl overflow-hidden md:hover:shadow-xl transition duration-200">
@@ -37,7 +41,7 @@ const EventCard = ({ UserLang, data, UserCityId }: EventCardProps) => {
                             width={380}
                             height={220}
                             placeholder={`data:image/webp;base64,${EmptyPlaceholder}`}
-                            className="data-[loaded=false]:animate-pulse data-[loaded=false]:bg-gray-100/10 w-full object-contain hover:scale-105 transition duration-200"
+                            className="bg-[#d9d9d9] w-full object-cover lg:min-h-[354px] min-h-[238px] hover:scale-105 transition duration-200"
                             src={
                                 isEmpty(data.posterFileUrl) || data.posterFileUrl === 'https://NOPOSTER.jpg'
                                     ? EmptyPoster
@@ -54,22 +58,24 @@ const EventCard = ({ UserLang, data, UserCityId }: EventCardProps) => {
                             />
                         )}
                         {/* <LikeButton eventId={data.id} /> */}
-                        <div className="bg-[#FFF] dark:bg-[#000000] shadow-md backdrop-blur-sm px-3 absolute left-3 bottom-3 rounded-md">
-                            <span className="text-lg font-medium text-black dark:text-white">
+                        <div className="bg-[#FFF] dark:bg-[#000000] shadow-md backdrop-blur-sm lg:px-3 px-2 absolute left-3 bottom-3 rounded-md">
+                            <span className="lg:text-lg text-xs font-medium text-black dark:text-white">
                                 от {data.minCost} тг.
                             </span>
                         </div>
-                        <div className="bg-[#FFF] dark:bg-[#000000] shadow-md backdrop-blur-sm px-3 absolute right-3 bottom-3 rounded-md">
-                            <span className="text-lg font-medium text-black dark:text-white">{data.ageLimit}+</span>
+                        <div className="bg-[#FFF] dark:bg-[#000000] shadow-md backdrop-blur-sm lg:px-3 px-2 absolute right-3 bottom-3 rounded-md">
+                            <span className="lg:text-lg text-xs font-medium text-black dark:text-white">
+                                {data.ageLimit}+
+                            </span>
                         </div>
                     </div>
                     <div>
-                        <h1 className="mb-1 md:text-2xl text-xl leading-tight font-bold text-[#2F2F38D9] dark:text-white">
+                        <h6 className="mb-1 md:text-2xl text-xl leading-tight line-clamp-2 font-bold text-[#2F2F38D9] dark:text-white text-ellipsis whitespace-break-spaces overflow-hidden">
                             {data.name}
-                        </h1>
-                        <h3 className="text-[#00000073] font-medium dark:text-white flex items-center">
+                        </h6>
+                        <h3 className="text-[#00000073] text-sm dark:text-white flex flex-col">
                             <EventDateInfo UserLang={UserLang} cityTimeZone={data.cityTimeZone} date={data.beginDate} />
-                            {isEmpty(UserCityId) || parseInt(UserCityId ?? '0') === 0 ? <> - {data.cityName}</> : ''}
+                            <span>{isEmpty(UserCityId) || parseInt(UserCityId ?? '0') === 0 ? data.cityName : ''}</span>
                         </h3>
                     </div>
                 </div>

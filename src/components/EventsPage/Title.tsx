@@ -26,30 +26,11 @@ const Title = ({ cities, selectedCity, title, locale }: TitleProps) => {
         }
     };
 
-    // useEffect(() => {
-    //     if (!UserLang) {
-    //         // setData(moment(date).locale('ru_Ru').format('Do MMMM HH:mm'));
-    //     } else {
-    //         switch (UserLang.toLocaleLowerCase()) {
-    //             case 'kk':
-    //                 // setData(`${moment(date).utc().add(cityTimeZone, 'h').locale('kk').format('Do MMMM HH:mm')}`);
-    //                 break;
-    //             case 'en':
-    //                 // setData(`${moment(date).utc().add(cityTimeZone, 'h').locale('en').format('Do MMMM HH:mm')}`);
-    //                 break;
-    //             case 'ru':
-    //             default:
-    //                 // setData(`${moment(date).utc().add(cityTimeZone, 'h').locale('ru_Ru').format('Do MMMM HH:mm')}`);
-    //                 break;
-    //         }
-    //     }
-    // }, []);
-
     return (
         <div className="relative container z-40 mx-auto">
-            <div className="flex lg:gap-4 gap-2 items-center lg:mt-0 mt-4">
+            <div className="flex lg:gap-4 gap-2 items-center lg:mt-0 mt-6 flex-wrap">
                 <svg
-                    className="lg:w-16 lg:h-16 w-10 h-10"
+                    className={`lg:w-16 lg:h-16 ${title.length > 6 ? 'w-10 h-10' : 'w-12 h-12'}`}
                     width="71"
                     height="71"
                     viewBox="0 0 71 71"
@@ -63,10 +44,14 @@ const Title = ({ cities, selectedCity, title, locale }: TitleProps) => {
                         fill="black"
                     />
                 </svg>
-                <h1 className="lg:text-4xl text-xl font-bold">{title}</h1>
+                <h1 className={`lg:text-4xl ${title.length > 6 ? 'text-base' : 'text-2xl'} font-bold`}>{title}</h1>
                 <Popover className="relative">
                     <Popover.Button className="flex items-center gap-x-1 text-base font-medium leading-6 text-gray-900 dark:text-white">
-                        <h1 className="lg:text-4xl text-xl font-bold underline text-[#0490C3]">
+                        <h1
+                            className={`lg:text-4xl ${
+                                title.length > 6 ? 'text-base' : 'text-2xl'
+                            } font-bold underline text-[#0490C3]`}
+                        >
                             {isEmpty(selectedCity) ? locale?.Header?.City : selectedCity?.name}
                         </h1>
                     </Popover.Button>
@@ -79,7 +64,7 @@ const Title = ({ cities, selectedCity, title, locale }: TitleProps) => {
                         leaveFrom="opacity-100 translate-y-0"
                         leaveTo="opacity-0 translate-y-1"
                     >
-                        <Popover.Panel className="absolute z-[99999] -right-8 top-full mt-3 w-screen max-w-xs max-h-96 overflow-auto rounded-2xl bg-white shadow-lg ring-1 ring-gray-900/5">
+                        <Popover.Panel className="absolute z-[99999] lg:-right-8 right-auto top-full mt-3 w-screen max-w-xs max-h-96 overflow-auto rounded-2xl bg-white shadow-lg ring-1 ring-gray-900/5">
                             <div className="p-2">
                                 {cities.map((city: City) => (
                                     <div

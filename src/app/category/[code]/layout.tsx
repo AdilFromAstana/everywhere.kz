@@ -45,13 +45,13 @@ async function GetLeisureCategories() {
 
 async function GetPosters() {
     // const UserCityId = getCookie('UserCityId', { cookies });
-    // const UserCategoryId = getCookie('UserCategoryId', { cookies });
+    // const UserCategoryCode = getCookie('UserCategoryCode', { cookies });
 
     process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
 
     const url = process.env.NEXT_PUBLIC_SERVICES_TEMP_URL + 'posters/forCommerce';
     // `?CityId=${UserCityId ? (parseInt(UserCityId) === 0 ? '' : UserCityId) : ''}` +
-    // `&LeisureCategoryId=${UserCategoryId ? (parseInt(UserCategoryId) === 0 ? '' : UserCategoryId) : ''}`;
+    // `&LeisureCategoryId=${UserCategoryCode ? (parseInt(UserCategoryCode) === 0 ? '' : UserCategoryCode) : ''}`;
     try {
         const res = await fetch(url, {
             headers: {
@@ -65,10 +65,12 @@ async function GetPosters() {
             return [];
         }
 
-        return res.json();
+        const data = await res.json();
+
+        return data;
     } catch (error) {
         // Логирование ошибки
-        console.error('Fetch failed:', error);
+        console.error('GetPosters failed:', error);
         // Возврат пустого массива или объекта ошибки
         return [];
     }
@@ -93,25 +95,23 @@ export default async function CategoryLayout({
     params: { code: string };
     // searchParams: { [key: string]: string | string[] | undefined };
 }) {
-    const UserCategoryId = params.code;
+    const UserCategoryCode = params.code;
     const leisureCategories = await GetLeisureCategories();
     const UserLang = getCookie('UserLang', { cookies });
     const PostersData = await GetPosters();
     const selectedCategory = leisureCategories.find((x: LeisureCategory) => {
-        if (UserCategoryId) {
-            return x.id === parseInt(UserCategoryId);
+        if (UserCategoryCode) {
+            return x.code === UserCategoryCode;
         } else {
-            return x.id === 0;
+            return x.code === '';
         }
     });
 
-    if (selectedCategory) {
-        return (
-            <Layout>
-                <LeisureCategories leisureCategories={leisureCategories} selectedCategory={selectedCategory} />
-                <Posters UserLang={UserLang ?? 'Ru'} posters={PostersData} />
-                {children}
-            </Layout>
-        );
-    }
+    return (
+        <Layout>
+            <LeisureCategories leisureCategories={leisureCategories} selectedCategory={selectedCategory} />
+            <Posters UserLang={UserLang ?? 'Ru'} posters={PostersData} />
+            {children}
+        </Layout>
+    );
 }

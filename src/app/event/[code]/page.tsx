@@ -49,7 +49,7 @@ async function GetLeisureCategories() {
         }
 
         const leisureCategories: LeisureCategory[] = await res.json();
-        const defaultCategory: LeisureCategory = { id: 0, name: locale.EventListPage.All };
+        const defaultCategory: LeisureCategory = { id: 0, name: locale.EventListPage.All, code: 'all' };
 
         return [defaultCategory, ...leisureCategories];
     } catch (error) {
@@ -136,7 +136,7 @@ export default async function EventPage({ params }: Props) {
         } else {
             return x.id === 0;
         }
-    }) ?? { id: 0, name: locale.EventListPage.All };
+    }) ?? { id: 0, name: locale.EventListPage.All, code: 'all' };
 
     if (!data) {
         return (

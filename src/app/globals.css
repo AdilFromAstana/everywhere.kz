@@ -266,3 +266,8 @@ svg.ProgressedButton path.Arrow {
     stroke-dashoffset: 0;
     stroke-dasharray: 0;
 }
+
+.SwiperRecs .swiper-slide a,
+.SwiperCategory .swiper-slide a {
+    pointer-events: all !important;
+}

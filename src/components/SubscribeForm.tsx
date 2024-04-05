@@ -9,7 +9,21 @@ import { isEmpty } from '@/functions';
 interface SubscribeFormProps {}
 
 const SubscribeForm = ({}: SubscribeFormProps) => {
-    const [EnteredData, setEnteredData] = useState<any>();
+    const [dataIsEntered, setDataIsEntered] = useState(false);
+    const [email, setEmail] = useState('');
+    const [isValid, setIsValid] = useState(false);
+
+    const validateEmail = (email: string) => {
+        const re =
+            /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        return re.test(String(email).toLowerCase());
+    };
+
+    const handleEmailChange = (e: any) => {
+        const { value } = e.target;
+        setEmail(value);
+        setIsValid(validateEmail(value));
+    };
 
     const sendData = async (e: any) => {
         const target = e.target;
@@ -27,7 +41,7 @@ const SubscribeForm = ({}: SubscribeFormProps) => {
         e.stopPropagation();
         e.preventDefault();
 
-        await fetch(process.env.NEXT_PUBLIC_SERVICES_TEMP_URL + 'commercial_offer_applications', {
+        await fetch(process.env.NEXT_PUBLIC_SERVICES_TEMP_URL + 'email_subscribers', {
             method: 'POST',
             body: JSON.stringify(data),
             headers: {
@@ -36,9 +50,9 @@ const SubscribeForm = ({}: SubscribeFormProps) => {
         })
             .then((res) => {
                 if (res.status === 200) {
-                    alert('Спасибо! Мы свяжемся с вами в ближайшее время');
+                    alert('Вы успешно подписались!');
                     // router.push('/');
-                    setEnteredData(data);
+                    setDataIsEntered(true);
                 } else {
                     alert('Произошла ошибка, попробуйте позже');
                 }
@@ -49,7 +63,7 @@ const SubscribeForm = ({}: SubscribeFormProps) => {
             });
     };
 
-    if (isEmpty(EnteredData)) {
+    if (!dataIsEntered) {
         return (
             <div className="container mx-auto">
                 <div className="bg-[#E8F5FF] rounded-2xl w-full flex lg:flex-row flex-col lg:py-16 lg:px-12 lg:gap-14 py-10 px-6 gap-6">
@@ -61,7 +75,9 @@ const SubscribeForm = ({}: SubscribeFormProps) => {
                         className="lg:mx-8 lg:w-3/5 flex lg:flex-row flex-col gap-5 bg-white rounded-2xl shadow-header justify-between p-10"
                     >
                         <input
-                            type="text"
+                            type="email"
+                            onChange={handleEmailChange}
+                            value={email}
                             name="Email"
                             placeholder="Ваша почта"
                             id="Email"
@@ -69,21 +85,22 @@ const SubscribeForm = ({}: SubscribeFormProps) => {
                         />
                         <button
                             type="submit"
+                            disabled={!isValid}
                             className="lg:py-0 py-1 rounded-2xl lg:w-1/3 bg-[#0490C3] disabled:bg-[#0490c3be] text-white disabled:text-gray-200"
                         >
                             Отправить
                         </button>
                     </form>
-                    {/* </div> */}
                 </div>
             </div>
         );
     } else {
         return (
-            <>
-                <div className="text-2xl text-center text-white">Спасибо, {EnteredData.Name}!</div>
-                <div className="text-2xl text-center text-white">Мы свяжемся с вами в ближайшее время</div>
-            </>
+            <div className="container mx-auto">
+                <div className="bg-[#E8F5FF] rounded-2xl w-full flex lg:flex-row flex-col lg:py-16 lg:px-12 lg:gap-14 py-10 px-6 gap-6">
+                    <span className="font-bold lg:text-3xl lg:w-2/5 w-full text-center ">Спасибо за подписку!</span>
+                </div>
+            </div>
         );
     }
 };

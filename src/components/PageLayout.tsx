@@ -10,6 +10,7 @@ import { City } from '@/types/City';
 import { Dropdown } from '@/types/Dropdown';
 import Footer from './Footer';
 import Header from './Header';
+import TabBar from './TabBar';
 
 async function GetCities() {
     try {
@@ -51,14 +52,14 @@ async function GetCities() {
 
 const langs = [
     {
-        key: 'Ru',
-        text: 'Русский',
-        value: 'Ru',
-    },
-    {
         key: 'Kk',
         text: 'Қазақша',
         value: 'Kk',
+    },
+    {
+        key: 'Ru',
+        text: 'Русский',
+        value: 'Ru',
     },
     {
         key: 'En',
@@ -162,6 +163,7 @@ const PageLayout: React.FC<PageLayoutProps> = async ({ children }) => {
             />
             <div className="px-4">{children}</div>
             <Footer locale={locale} pages={pages} />
+            <TabBar locale={locale} pages={pages} />
         </div>
     );
 };
