@@ -13,6 +13,7 @@ import EventDateInfo from '../EventDateInfo';
 interface EventCardProps {
     UserLang: CookieValueTypes;
     UserCityId?: CookieValueTypes;
+    isClientSide?: boolean;
     data: EventInList;
     cardType?: 'full' | 'semi';
 }
@@ -27,7 +28,7 @@ const EmptyPlaceholder =
 //     },
 // });
 
-const EventCard = ({ UserLang, data, UserCityId, cardType = 'semi' }: EventCardProps) => {
+const EventCard = ({ UserLang, data, UserCityId, cardType = 'semi', isClientSide = false }: EventCardProps) => {
     return (
         <div
             key={data.id}
@@ -74,7 +75,12 @@ const EventCard = ({ UserLang, data, UserCityId, cardType = 'semi' }: EventCardP
                             {data.name}
                         </h6>
                         <h3 className="text-[#00000073] text-sm dark:text-white flex flex-col">
-                            <EventDateInfo UserLang={UserLang} cityTimeZone={data.cityTimeZone} date={data.beginDate} />
+                            <EventDateInfo
+                                isClientSide={isClientSide}
+                                UserLang={UserLang}
+                                cityTimeZone={data.cityTimeZone}
+                                date={data.beginDate}
+                            />
                             <span>{isEmpty(UserCityId) || parseInt(UserCityId ?? '0') === 0 ? data.cityName : ''}</span>
                         </h3>
                     </div>
