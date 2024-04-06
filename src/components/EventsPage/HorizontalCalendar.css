@@ -1,28 +1,13 @@
-.HorizontalCalendar .Er {
-    flex-direction: row;
-    align-items: center;
+.HorizontalCalendar {
+    font-family: "Rubik", sans-serif;
 }
 
-.HorizontalCalendar .Er .jb {
-    font-family: "Rubik", sans-serif;
-    color: #00000040;
-    font-weight: 400;
-    transform: rotate(270deg);
-    align-self: auto;
-    margin: 0;
-    text-transform: uppercase;
-    border-bottom: 1px solid #00000040;
+.dark .HorizontalCalendar .Er .jb {
+    color: white !important;
 }
+
 .HorizontalCalendar .Er .Tx {
     margin: 0;
-}
-
-.HorizontalCalendar .Kq.WP,
-.HorizontalCalendar .Kq.Ez {
-    border-radius: 16px;
-    margin: 0;
-    padding: 0 0.25rem;
-    border: 1px solid #00000040;
 }
 
 .HorizontalCalendar .Kq.WP svg,
@@ -30,41 +15,31 @@
     fill: #000000;
 }
 
-.HorizontalCalendar .Kq.Ez::after {
-    background: linear-gradient(90deg, #fff, hsla(0deg, 0%, 100%, 0.95), hsla(0deg, 0%, 100%, 0.5));
-    left: calc(2rem + 1px);
-    width: 45px;
-}
-
-.HorizontalCalendar .Kq.WP::after {
-    right: calc(2rem + 1px);
-    width: 45px;
-}
-
 .SelectedDay {
     background: #2f2f3826 !important;
 }
-.RangeDays {
-}
+
 .DayItem {
     font-family: "Rubik", sans-serif !important;
     gap: 15px;
 }
+
 .DayLabel {
     color: #00000040 !important;
     margin: 0 !important;
     font-size: 16px !important;
     text-transform: uppercase !important;
 }
-.MonthLabel {
+
+.dark .DayLabel {
+    color: #fff !important;
 }
+
 .DateLabel {
     /* font-family: "Rubik", sans-serif; */
     background-color: transparent !important;
     font-size: 20px !important;
     font-weight: 400 !important;
-}
-.WeekendItem {
 }
 
 .WeekendItem .DayLabel {
@@ -74,8 +49,25 @@
 .WeekendItem.SelectedDay .DateLabel {
     color: #f93e3e !important;
 }
+
 .SelectedDay .DateLabel {
     color: #000000 !important;
+}
+
+.dark .SelectedDay {
+    background: #ffffff26 !important;
+}
+
+.dark .RangeDays {
+    background: #ffffff26 !important;
+}
+
+.dark .DateLabel {
+    color: #ffffff !important;
+}
+
+.dark .SelectedDay .DateLabel {
+    color: #0490c3 !important;
 }
 
 /* Mobile */

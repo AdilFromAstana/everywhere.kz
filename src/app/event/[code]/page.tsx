@@ -316,12 +316,12 @@ export default async function EventPage({ params }: Props) {
                     </div>
                     <div className="flex lg:flex-row flex-col lg:gap-8 gap-5">
                         <div className="flex flex-col">
-                            <span className="text-[#00000040]">Событие</span>
-                            <span>{data.name}</span>
+                            <span className="text-[#00000040] dark:text-white">Событие</span>
+                            <span className="dark:text-white">{data.name}</span>
                         </div>
                         <div className="flex flex-col">
-                            <span className="text-[#00000040]">Дата и время</span>
-                            <span>
+                            <span className="text-[#00000040] dark:text-white">Дата и время</span>
+                            <span className="dark:text-white">
                                 {dayjs(
                                     dayjs(data.beginDate)
                                         .format()
@@ -332,8 +332,8 @@ export default async function EventPage({ params }: Props) {
                             </span>
                         </div>
                         <div className="flex flex-col">
-                            <span className="text-[#00000040]">Возраст</span>
-                            <span>{data.ageLimit}+</span>
+                            <span className="text-[#00000040] dark:text-white">Возраст</span>
+                            <span className="dark:text-white">{data.ageLimit}+</span>
                         </div>
                     </div>
                     <div className="EventDescription my-6 w-full invert-0 dark:invert z-0">
