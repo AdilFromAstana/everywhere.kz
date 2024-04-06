@@ -10,7 +10,8 @@ import { City } from '@/types/City';
 import { Dropdown } from '@/types/Dropdown';
 import Footer from './Footer';
 import Header from './Header';
-import TabBar from './TabBar';
+
+// import TabBar from './TabBar';
 
 async function GetCities() {
     try {
@@ -163,7 +164,7 @@ const PageLayout: React.FC<PageLayoutProps> = async ({ children }) => {
             />
             <div className="px-4">{children}</div>
             <Footer locale={locale} pages={pages} />
-            <TabBar locale={locale} pages={pages} />
+            {/* <TabBar locale={locale} pages={pages} /> */}
         </div>
     );
 };
