@@ -26,7 +26,7 @@ const Tickers = ({ tickers, adsIsClosed }: TickersProps) => {
         return <></>;
     } else {
         return (
-            <div className="fixed bottom-0 left-0">
+            <div className="fixed z-10 lg:bottom-0 bottom-16 left-0">
                 <svg
                     className="absolute z-10 lg:-top-14 -top-10 right-0 m-3 p-1 h-7 w-7 bg-white rounded-full cursor-pointer"
                     xmlns="http://www.w3.org/2000/svg"
@@ -54,7 +54,7 @@ const Tickers = ({ tickers, adsIsClosed }: TickersProps) => {
                                                 height={80}
                                                 key={index}
                                                 alt={x.Name}
-                                                className="mt-2 cursor-pointer hover:scale-110 hover:shadow-lg w-[400px] h-[80px] rounded duration-200"
+                                                className="mt-2 cursor-pointer hover:scale-110 hover:shadow-lg w-full h-[80px] rounded duration-200"
                                                 src={x.ImageURL}
                                             />
                                         </Link>

@@ -1,42 +1,27 @@
-'use client';
+import dayjs from 'dayjs';
 
-import { getCookie } from 'cookies-next';
-import moment from 'moment';
+import 'dayjs/locale/ru';
+import 'dayjs/locale/kk';
+import 'dayjs/locale/en';
 
-import 'moment/locale/ru';
-import 'moment/locale/kk';
-
-import { useEffect, useState } from 'react';
+import { CookieValueTypes } from 'cookies-next';
 
 interface EventDateProps {
     cityTimeZone: number;
+    UserLang: CookieValueTypes;
     date: any;
 }
 
-const EventDateInfo = ({ date, cityTimeZone }: EventDateProps) => {
-    const [data, setData] = useState('');
-    const UserLang = getCookie('UserLang');
+const EventDateInfo = async ({ UserLang, date, cityTimeZone }: EventDateProps) => {
+    dayjs.locale(UserLang?.toLowerCase() ?? 'ru');
 
-    useEffect(() => {
-        if (!UserLang) {
-            setData(moment(date).locale('ru_Ru').format('Do MMMM HH:mm'));
-        } else {
-            switch (UserLang.toLocaleLowerCase()) {
-                case 'kz':
-                    setData(`${moment(date).utc().add(cityTimeZone, 'h').locale('kz').format('Do MMMM HH:mm')}`);
-                    break;
-                case 'en':
-                    setData(`${moment(date).utc().add(cityTimeZone, 'h').locale('en').format('Do MMMM HH:mm')}`);
-                    break;
-                case 'ru':
-                default:
-                    setData(`${moment(date).utc().add(cityTimeZone, 'h').locale('ru_Ru').format('Do MMMM HH:mm')}`);
-                    break;
-            }
-        }
-    }, []);
-
-    return <>{data}</>;
+    return `${dayjs(
+        dayjs(date)
+            .format()
+            .replace(/\+\d{2}:\d{2}$/, 'Z')
+    )
+        .add(cityTimeZone, 'h')
+        .format('D MMMM HH:mm')}`;
 };
 
 export default EventDateInfo;

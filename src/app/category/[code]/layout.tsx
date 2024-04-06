@@ -44,9 +44,14 @@ async function GetLeisureCategories() {
 }
 
 async function GetPosters() {
+    // const UserCityId = getCookie('UserCityId', { cookies });
+    // const UserCategoryCode = getCookie('UserCategoryCode', { cookies });
+
     process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
 
     const url = process.env.NEXT_PUBLIC_SERVICES_TEMP_URL + 'posters/forCommerce';
+    // `?CityId=${UserCityId ? (parseInt(UserCityId) === 0 ? '' : UserCityId) : ''}` +
+    // `&LeisureCategoryId=${UserCategoryCode ? (parseInt(UserCategoryCode) === 0 ? '' : UserCategoryCode) : ''}`;
     try {
         const res = await fetch(url, {
             headers: {
@@ -56,6 +61,7 @@ async function GetPosters() {
 
         if (!res.ok) {
             console.log('res: ', res);
+            // This will activate the closest `error.js` Error Boundary
             return [];
         }
 
@@ -63,7 +69,9 @@ async function GetPosters() {
 
         return data;
     } catch (error) {
+        // Логирование ошибки
         console.error('GetPosters failed:', error);
+        // Возврат пустого массива или объекта ошибки
         return [];
     }
 }
@@ -79,14 +87,29 @@ const Posters = dynamic(() => import('@/components/Posters'), {
     },
 });
 
-export default async function EventSelectionsLayout({ children }: { children: React.ReactNode }) {
+export default async function CategoryLayout({
+    children,
+    params, // searchParams,
+}: {
+    children: React.ReactNode;
+    params: { code: string };
+    // searchParams: { [key: string]: string | string[] | undefined };
+}) {
+    const UserCategoryCode = params.code;
     const leisureCategories = await GetLeisureCategories();
     const UserLang = getCookie('UserLang', { cookies });
     const PostersData = await GetPosters();
+    const selectedCategory = leisureCategories.find((x: LeisureCategory) => {
+        if (UserCategoryCode) {
+            return x.code === UserCategoryCode;
+        } else {
+            return x.code === '';
+        }
+    });
 
     return (
         <Layout>
-            <LeisureCategories leisureCategories={leisureCategories} />
+            <LeisureCategories leisureCategories={leisureCategories} selectedCategory={selectedCategory} />
             <Posters UserLang={UserLang ?? 'Ru'} posters={PostersData} />
             {children}
         </Layout>

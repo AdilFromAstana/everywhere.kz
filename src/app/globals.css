@@ -14,6 +14,27 @@ body {
     overflow-x: hidden;
 }
 
+/* width */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 5px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
 a {
     color: inherit;
     text-decoration: none;
@@ -62,6 +83,11 @@ a {
 html.dark .EventDescription iframe,
 html.dark .EventDescription img {
     filter: invert(1) !important;
+}
+
+.EventDescription a {
+    color: #0490c3 !important;
+    text-decoration-line: underline;
 }
 
 #left-arrow,
@@ -234,14 +260,19 @@ html.dark #left-arrow::after {
 svg.ProgressedButton {
     --progress: 0;
     z-index: 10;
-    stroke-width: 15px;
+    stroke-width: 22px;
     stroke: #0490c3;
     fill: none;
-    stroke-dashoffset: calc(660 * -1 * (1 - var(--progress)));
+    stroke-dashoffset: calc(660 * (1 - var(--progress)));
     stroke-dasharray: 660;
 }
 
 svg.ProgressedButton path.Arrow {
     stroke-dashoffset: 0;
     stroke-dasharray: 0;
+}
+
+.SwiperRecs .swiper-slide a,
+.SwiperCategory .swiper-slide a {
+    pointer-events: all !important;
 }

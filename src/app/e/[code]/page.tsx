@@ -106,7 +106,7 @@ export default async function EventPage({ params }: Props) {
                 <div className="-z-10 lg:text-6xl text-3xl text-black dark:text-white font-bold my-4">
                     {UserLang?.toLocaleLowerCase() === 'en'
                         ? data.NameEn
-                        : UserLang?.toLocaleLowerCase() === 'kz'
+                        : UserLang?.toLocaleLowerCase() === 'kk'
                           ? data.NameKz
                           : data.NameRu}
                 </div>
@@ -118,7 +118,7 @@ export default async function EventPage({ params }: Props) {
                             __html:
                                 UserLang?.toLocaleLowerCase() === 'en'
                                     ? data.DescriptionEn
-                                    : UserLang?.toLocaleLowerCase() === 'kz'
+                                    : UserLang?.toLocaleLowerCase() === 'kk'
                                       ? data.DescriptionKz
                                       : data.DescriptionRu,
                         }}

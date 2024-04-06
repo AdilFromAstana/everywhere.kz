@@ -9,6 +9,9 @@
     "starter",
     "typescript"
   ],
+  "engines": {
+    "node": ">=18.18.2"
+  },
   "scripts": {
     "dev": "next",
     "build:dev": "cp .env.development .env.local && next build",
@@ -37,6 +40,8 @@
     "@headlessui/react": "1.7.17",
     "@heroicons/react": "2.0.18",
     "@ianvs/prettier-plugin-sort-imports": "4.1.1",
+    "@meinefinsternis/react-horizontal-date-picker": "1.0.1",
+    "@next/bundle-analyzer": "14.1.4",
     "@types/group-array": "1.0.3",
     "@types/node": "20.9.0",
     "@types/qrcode": "1.5.5",
@@ -46,6 +51,9 @@
     "@typescript-eslint/parser": "6.11.0",
     "autoprefixer": "10.4.16",
     "cross-env": "7.0.3",
+    "cssnano": "6.1.2",
+    "date-fns": "3.6.0",
+    "dayjs": "1.11.10",
     "eslint": "8.53.0",
     "eslint-config-next": "14.0.2",
     "eslint-config-prettier": "9.0.0",
@@ -56,7 +64,6 @@
     "group-array": "1.0.0",
     "husky": "8.0.3",
     "lint-staged": "15.1.0",
-    "moment": "2.29.4",
     "postcss": "8.4.31",
     "prettier": "3.1.0",
     "prettier-plugin-sort-json": "3.1.0",
@@ -65,6 +72,7 @@
     "react-phone-number-input": "3.3.9",
     "react-snowfall": "1.2.1",
     "schema-dts": "1.1.2",
+    "sharp": "0.33.3",
     "swiper": "11.0.5",
     "tailwindcss": "^3.4.0",
     "typescript": "5.2.2"
