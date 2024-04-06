@@ -32,7 +32,7 @@ const EventCard = ({ UserLang, data, UserCityId, cardType = 'semi', isClientSide
     return (
         <div
             key={data.id}
-            className={cardType === 'semi' ? 'lg:min-w-[20%] lg:max-w-[20%] min-w-[37%] max-w-[37%]' : 'w-full'}
+            className={cardType === 'semi' ? 'lg:min-w-[20%] lg:max-w-[20%] min-w-[38%] max-w-[38%]' : 'w-full'}
         >
             <Link href={'/event/' + data.code} title={data.name}>
                 <div className="flex flex-col gap-2 w-full cursor-pointer rounded-xl">
@@ -42,7 +42,7 @@ const EventCard = ({ UserLang, data, UserCityId, cardType = 'semi', isClientSide
                             width={380}
                             height={220}
                             placeholder={`data:image/webp;base64,${EmptyPlaceholder}`}
-                            className="bg-[#d9d9d9] w-full object-cover lg:min-h-[354px] min-h-[238px] hover:scale-105 transition duration-200"
+                            className="bg-[#d9d9d9] w-full object-cover lg:min-h-[354px] min-h-[228px] hover:scale-105 transition duration-200"
                             src={
                                 isEmpty(data.previewFileUrl) || data.previewFileUrl === 'https://NOPOSTER.jpg'
                                     ? EmptyPoster
