@@ -32,7 +32,7 @@ const EventCard = ({ UserLang, data, UserCityId, cardType = 'semi', isClientSide
     return (
         <div
             key={data.id}
-            className={cardType === 'semi' ? 'lg:min-w-[20%] lg:max-w-[20%] min-w-[40%] max-w-[40%]' : 'w-full'}
+            className={cardType === 'semi' ? 'lg:min-w-[20%] lg:max-w-[20%] min-w-[37%] max-w-[37%]' : 'w-full'}
         >
             <Link href={'/event/' + data.code} title={data.name}>
                 <div className="flex flex-col gap-2 w-full cursor-pointer rounded-xl">
@@ -59,12 +59,12 @@ const EventCard = ({ UserLang, data, UserCityId, cardType = 'semi', isClientSide
                             />
                         )}
                         {/* <LikeButton eventId={data.id} /> */}
-                        <div className="bg-[#FFF] dark:bg-[#000000] shadow-md backdrop-blur-sm lg:px-3 px-2 absolute left-3 bottom-3 rounded-md">
+                        <div className="bg-[#FFF] dark:bg-[#000000] shadow-md backdrop-blur-sm lg:px-3 px-1 absolute left-2 bottom-2 rounded-md">
                             <span className="lg:text-lg text-xs font-medium text-black dark:text-white">
                                 от {data.minCost} тг.
                             </span>
                         </div>
-                        <div className="bg-[#FFF] dark:bg-[#000000] shadow-md backdrop-blur-sm lg:px-3 px-2 absolute right-3 bottom-3 rounded-md">
+                        <div className="bg-[#FFF] dark:bg-[#000000] shadow-md backdrop-blur-sm lg:px-3 px-1 absolute right-2 bottom-2 rounded-md">
                             <span className="lg:text-lg text-xs font-medium text-black dark:text-white">
                                 {data.ageLimit}+
                             </span>

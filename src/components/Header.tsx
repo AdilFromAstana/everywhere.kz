@@ -264,7 +264,10 @@ const Header = ({ locale, selectedCity, cities, langs, selectedLang, pages }: He
                                 }}
                             >
                                 <span className="sr-only">Open search</span>
-                                <MagnifyingGlassIcon className="h-6 w-6" aria-hidden="true" />
+                                <MagnifyingGlassIcon
+                                    className="h-6 w-6 text-[#2F2F38] dark:text-white"
+                                    aria-hidden="true"
+                                />
                             </button>
                         </div>
                         <button
@@ -277,7 +280,7 @@ const Header = ({ locale, selectedCity, cities, langs, selectedLang, pages }: He
                         >
                             <span className="sr-only">Open main menu</span>
                             <svg
-                                className="h-4 w-6"
+                                className="h-4 w-6 text-[#2F2F38] dark:text-white"
                                 width="16"
                                 height="16"
                                 viewBox="0 0 16 16"
@@ -287,7 +290,7 @@ const Header = ({ locale, selectedCity, cities, langs, selectedLang, pages }: He
                                 <g clipPath="url(#clip0_721_30841)">
                                     <path
                                         d="M0 1H16M0 8H8M0 15H16"
-                                        stroke="#2F2F38"
+                                        stroke="currentColor"
                                         strokeOpacity="0.85"
                                         strokeWidth="2"
                                         strokeLinecap="round"
@@ -305,7 +308,7 @@ const Header = ({ locale, selectedCity, cities, langs, selectedLang, pages }: He
                         <div className="flex flex-row justify-center ml-2">
                             <button
                                 type="button"
-                                className="-m-2.5 inline-flex items-center justify-center rounded-md pr-2.5 text-gray-700"
+                                className="-m-2.5 inline-flex items-center justify-center rounded-md pr-2.5 text-[#2F2F38] dark:text-white"
                                 onClick={() => {
                                     window.scrollTo({ top: 0 });
                                     setSupportMenuOpen(true);
@@ -322,7 +325,7 @@ const Header = ({ locale, selectedCity, cities, langs, selectedLang, pages }: He
                                 >
                                     <path
                                         d="M14.8544 6.72431C14.7943 6.69619 14.7556 6.63763 14.7541 6.57279C14.7541 2.94274 11.7296 0 7.99858 0C4.26759 0 1.24302 2.94274 1.24302 6.57279C1.24192 6.63788 1.20349 6.69691 1.14347 6.72569C0.465372 7.02014 0.0208316 7.66676 0 8.38895V10.4646C0.0702312 11.5767 1.04872 12.4259 2.19236 12.3672H3.85209C4.14664 12.3672 4.38542 12.1349 4.38542 11.8483V7.00521C4.38542 6.71862 4.14664 6.4863 3.85209 6.4863H2.86293C2.81359 6.48668 2.76636 6.46684 2.7328 6.43165C2.69949 6.39634 2.6823 6.34942 2.68516 6.30157C2.87387 3.58082 5.19724 1.46773 8 1.46773C10.8028 1.46773 13.1261 3.58082 13.3148 6.30157C13.3177 6.34942 13.3005 6.39634 13.2672 6.43165C13.2334 6.46656 13.1863 6.48634 13.1371 6.4863H12.1479C11.8534 6.4863 11.6146 6.71862 11.6146 7.00521V11.8483C11.6146 12.1349 11.8534 12.3672 12.1479 12.3672H12.8C12.8982 12.3672 12.9778 12.4447 12.9778 12.5402C12.9778 13.3044 12.341 13.9239 11.5556 13.9239H10.3893C10.3301 13.9239 10.2748 13.8954 10.2414 13.8478C9.89353 13.3408 9.24561 13.1151 8.646 13.2919C8.04639 13.4688 7.63636 14.0065 7.63636 14.6161C7.63636 15.2258 8.04639 15.7635 8.646 15.9404C9.24561 16.1172 9.89353 15.8915 10.2414 15.3845C10.2747 15.3367 10.33 15.308 10.3893 15.3077H11.5556C13.1265 15.3077 14.4 14.0686 14.4 12.5402V12.4191C14.3999 12.3433 14.4507 12.2762 14.5252 12.2537C15.3675 12.0376 15.966 11.3115 16 10.4646V8.38895C15.9788 7.66593 15.5334 7.01876 14.8544 6.72431Z"
-                                        fill="#2F2F38"
+                                        fill="currentColor"
                                         fillOpacity="0.85"
                                     />
                                 </svg>
@@ -346,7 +349,7 @@ const Header = ({ locale, selectedCity, cities, langs, selectedLang, pages }: He
                             <div className="flex flex-row w-full">
                                 <button
                                     type="button"
-                                    className="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-700"
+                                    className="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-700 dark:text-white"
                                     onClick={() => setMobileMenuOpen(false)}
                                 >
                                     <span className="sr-only">Open main menu</span>
@@ -359,14 +362,14 @@ const Header = ({ locale, selectedCity, cities, langs, selectedLang, pages }: He
                                     >
                                         <path
                                             d="M13.9998 6L8.70696 11.2929C8.31643 11.6834 8.31643 12.3166 8.70696 12.7071L13.9998 18"
-                                            stroke="black"
+                                            stroke="currentColor"
                                             strokeWidth="2"
                                             strokeLinecap="round"
                                         />
                                     </svg>
                                 </button>
                                 <div className="flex w-full -ml-2.5">
-                                    <span className="text-center w-full font-medium">Меню</span>
+                                    <span className="text-center w-full font-medium dark:text-white">Меню</span>
                                 </div>
                             </div>
                             <div className="flex flex-col gap-8 py-4">
@@ -376,8 +379,10 @@ const Header = ({ locale, selectedCity, cities, langs, selectedLang, pages }: He
                                             <div
                                                 key={lang.key}
                                                 onClick={() => handleSelectLang(lang)}
-                                                className={`group cursor-pointer relative flex items-center gap-x-6 rounded-lg p-3 text-sm leading-6 hover:bg-gray-50 ${
-                                                    lang.key === selectedLang?.key ? 'bg-[#F5F5F5] text-[#0490C3]' : ''
+                                                className={`group cursor-pointer relative flex items-center gap-x-6 rounded-lg p-3 text-sm leading-6 hover:bg-gray-50 dark:text-white ${
+                                                    lang.key === selectedLang?.key
+                                                        ? 'bg-[#F5F5F5] text-[#0490C3] dark:bg-[#F5F5F5] dark:text-black'
+                                                        : ''
                                                 }`}
                                             >
                                                 <div className="flex-auto">
@@ -433,7 +438,7 @@ const Header = ({ locale, selectedCity, cities, langs, selectedLang, pages }: He
                                     </Transition>
                                 </Popover>
                                 <div className="flex flex-col gap-4">
-                                    <span className="text-lg font-medium">KAZTICKET.KZ</span>
+                                    <span className="text-lg font-medium dark:text-white">KAZTICKET.KZ</span>
                                     <nav className="flex flex-col justify-start gap-3">
                                         {pages.map((x) => {
                                             return (
@@ -449,7 +454,7 @@ const Header = ({ locale, selectedCity, cities, langs, selectedLang, pages }: He
                                     </nav>
                                 </div>
                                 <div className="flex flex-col gap-4">
-                                    <span className="text-lg font-medium">Партнерам/организаторам</span>
+                                    <span className="text-lg font-medium dark:text-white">Партнерам/организаторам</span>
                                     <nav className="flex flex-col justify-start gap-3">
                                         <Link
                                             href={'/offer'}
@@ -467,11 +472,11 @@ const Header = ({ locale, selectedCity, cities, langs, selectedLang, pages }: He
                                     >
                                         <span className="sr-only">Telegram</span>
                                         <svg
-                                            className="w-6 h-6"
+                                            className="w-6 h-6 text-[#2F2F38] dark:text-white"
                                             width="24"
                                             height="24"
                                             viewBox="0 0 24 24"
-                                            fill="#2F2F38"
+                                            fill="currentColor"
                                             xmlns="http://www.w3.org/2000/svg"
                                         >
                                             <g clipPath="url(#clip0_213_1734)">
@@ -479,7 +484,7 @@ const Header = ({ locale, selectedCity, cities, langs, selectedLang, pages }: He
                                                     fillRule="evenodd"
                                                     clipRule="evenodd"
                                                     d="M24 12C24 18.6274 18.6274 24 12 24C5.37258 24 0 18.6274 0 12C0 5.37258 5.37258 0 12 0C18.6274 0 24 5.37258 24 12ZM12.43 8.85893C11.2628 9.3444 8.93014 10.3492 5.43189 11.8733C4.86383 12.0992 4.56626 12.3202 4.53917 12.5363C4.49339 12.9015 4.95071 13.0453 5.57347 13.2411C5.65818 13.2678 5.74595 13.2954 5.83594 13.3246C6.44864 13.5238 7.27283 13.7568 7.70129 13.766C8.08994 13.7744 8.52373 13.6142 9.00264 13.2853C12.2712 11.079 13.9584 9.96381 14.0643 9.93977C14.139 9.92281 14.2426 9.90148 14.3128 9.96385C14.3829 10.0262 14.376 10.1443 14.3686 10.176C14.3233 10.3691 12.5281 12.0381 11.5991 12.9018C11.3095 13.171 11.1041 13.362 11.0621 13.4056C10.968 13.5033 10.8721 13.5958 10.78 13.6846C10.2108 14.2333 9.78391 14.6448 10.8036 15.3168C11.2936 15.6397 11.6858 15.9067 12.077 16.1731C12.5042 16.4641 12.9303 16.7543 13.4816 17.1157C13.6221 17.2077 13.7562 17.3034 13.8869 17.3965C14.3841 17.751 14.8307 18.0694 15.3826 18.0186C15.7032 17.9891 16.0345 17.6876 16.2027 16.7884C16.6002 14.6631 17.3816 10.0585 17.5622 8.16097C17.578 7.99473 17.5581 7.78197 17.5422 7.68857C17.5262 7.59518 17.4928 7.46211 17.3714 7.3636C17.2276 7.24694 17.0056 7.22234 16.9064 7.22408C16.455 7.23203 15.7626 7.47282 12.43 8.85893Z"
-                                                    fill="#2F2F38"
+                                                    fill="currentColor"
                                                 />
                                             </g>
                                             <defs>
@@ -495,7 +500,12 @@ const Header = ({ locale, selectedCity, cities, langs, selectedLang, pages }: He
                                         target="_blank"
                                     >
                                         <span className="sr-only">Instagram</span>
-                                        <svg className="w-6 h-6" aria-hidden="true" fill="#2F2F38" viewBox="0 0 24 24">
+                                        <svg
+                                            className="w-6 h-6 text-[#2F2F38] dark:text-white"
+                                            aria-hidden="true"
+                                            fill="currentColor"
+                                            viewBox="0 0 24 24"
+                                        >
                                             <path
                                                 fillRule="evenodd"
                                                 d="M12.315 2c2.43 0 2.784.013 3.808.06 1.064.049 1.791.218 2.427.465a4.902 4.902 0 011.772 1.153 4.902 4.902 0 011.153 1.772c.247.636.416 1.363.465 2.427.048 1.067.06 1.407.06 4.123v.08c0 2.643-.012 2.987-.06 4.043-.049 1.064-.218 1.791-.465 2.427a4.902 4.902 0 01-1.153 1.772 4.902 4.902 0 01-1.772 1.153c-.636.247-1.363.416-2.427.465-1.067.048-1.407.06-4.123.06h-.08c-2.643 0-2.987-.012-4.043-.06-1.064-.049-1.791-.218-2.427-.465a4.902 4.902 0 01-1.772-1.153 4.902 4.902 0 01-1.153-1.772c-.247-.636-.416-1.363-.465-2.427-.047-1.024-.06-1.379-.06-3.808v-.63c0-2.43.013-2.784.06-3.808.049-1.064.218-1.791.465-2.427a4.902 4.902 0 011.153-1.772A4.902 4.902 0 015.45 2.525c.636-.247 1.363-.416 2.427-.465C8.901 2.013 9.256 2 11.685 2h.63zm-.081 1.802h-.468c-2.456 0-2.784.011-3.807.058-.975.045-1.504.207-1.857.344-.467.182-.8.398-1.15.748-.35.35-.566.683-.748 1.15-.137.353-.3.882-.344 1.857-.047 1.023-.058 1.351-.058 3.807v.468c0 2.456.011 2.784.058 3.807.045.975.207 1.504.344 1.857.182.466.399.8.748 1.15.35.35.683.566 1.15.748.353.137.882.3 1.857.344 1.054.048 1.37.058 4.041.058h.08c2.597 0 2.917-.01 3.96-.058.976-.045 1.505-.207 1.858-.344.466-.182.8-.398 1.15-.748.35-.35.566-.683.748-1.15.137-.353.3-.882.344-1.857.048-1.055.058-1.37.058-4.041v-.08c0-2.597-.01-2.917-.058-3.96-.045-.976-.207-1.505-.344-1.858a3.097 3.097 0 00-.748-1.15 3.098 3.098 0 00-1.15-.748c-.353-.137-.882-.3-1.857-.344-1.023-.047-1.351-.058-3.807-.058zM12 6.865a5.135 5.135 0 110 10.27 5.135 5.135 0 010-10.27zm0 1.802a3.333 3.333 0 100 6.666 3.333 3.333 0 000-6.666zm5.338-3.205a1.2 1.2 0 110 2.4 1.2 1.2 0 010-2.4z"
@@ -509,7 +519,12 @@ const Header = ({ locale, selectedCity, cities, langs, selectedLang, pages }: He
                                         target="_blank"
                                     >
                                         <span className="sr-only">TikTok</span>
-                                        <svg className="w-6 h-6" aria-hidden="true" fill="#2F2F38" viewBox="0 0 24 24">
+                                        <svg
+                                            className="w-6 h-6 text-[#2F2F38] dark:text-white"
+                                            aria-hidden="true"
+                                            fill="currentColor"
+                                            viewBox="0 0 24 24"
+                                        >
                                             <path
                                                 fillRule="evenodd"
                                                 clipRule="evenodd"
@@ -523,7 +538,12 @@ const Header = ({ locale, selectedCity, cities, langs, selectedLang, pages }: He
                                         target="_blank"
                                     >
                                         <span className="sr-only">LinkedIn</span>
-                                        <svg className="w-6 h-6" aria-hidden="true" fill="#2F2F38" viewBox="0 0 24 24">
+                                        <svg
+                                            className="w-6 h-6 text-[#2F2F38] dark:text-white"
+                                            aria-hidden="true"
+                                            fill="currentColor"
+                                            viewBox="0 0 24 24"
+                                        >
                                             <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
                                         </svg>
                                     </Link>
@@ -533,7 +553,11 @@ const Header = ({ locale, selectedCity, cities, langs, selectedLang, pages }: He
                                         target="_blank"
                                     >
                                         <span className="sr-only">ВКонтакте</span>
-                                        <svg className="w-6 h-6" fill="#2F2F38" viewBox="0 0 24 24">
+                                        <svg
+                                            className="w-6 h-6 text-[#2F2F38] dark:text-white"
+                                            fill="currentColor"
+                                            viewBox="0 0 24 24"
+                                        >
                                             <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm.25 16.996h-2.134c-1.205 0-1.409-.687-2.401-1.679-.897-.897-1.395-.209-1.374 1.068.006.339-.161.611-.566.611-1.264 0-3.08.178-4.918-1.806-1.883-2.033-3.857-6.111-3.857-6.513 0-.237.196-.344.524-.344h2.17c.574 0 .623.284.783.649.667 1.521 2.265 4.574 2.69 2.87.244-.978.344-3.245-.703-3.44-.594-.11.452-.746 1.968-.746.377 0 .786.041 1.205.137.769.179.771.523.761 1.026-.039 1.903-.269 3.184.233 3.507.479.31 1.739-1.717 2.403-3.281.183-.433.219-.722.734-.722h2.654c1.39 0-.182 1.997-1.383 3.557-.968 1.255-.916 1.28.209 2.324.803.744 1.75 1.76 1.75 2.336.002.272-.21.446-.748.446z" />
                                         </svg>
                                     </Link>
@@ -597,7 +621,7 @@ const Header = ({ locale, selectedCity, cities, langs, selectedLang, pages }: He
                                 <div className="flex flex-row w-full">
                                     <button
                                         type="button"
-                                        className="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-700"
+                                        className="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-700 dark:text-white"
                                         onClick={() => setSupportMenuOpen(false)}
                                     >
                                         <span className="sr-only">Open main menu</span>
@@ -610,14 +634,16 @@ const Header = ({ locale, selectedCity, cities, langs, selectedLang, pages }: He
                                         >
                                             <path
                                                 d="M13.9998 6L8.70696 11.2929C8.31643 11.6834 8.31643 12.3166 8.70696 12.7071L13.9998 18"
-                                                stroke="black"
+                                                stroke="currentColor"
                                                 strokeWidth="2"
                                                 strokeLinecap="round"
                                             />
                                         </svg>
                                     </button>
                                     <div className="flex w-full -ml-2.5">
-                                        <span className="text-center w-full font-medium">Служба поддержки</span>
+                                        <span className="text-center w-full font-medium text-gray-700 dark:text-white">
+                                            Служба поддержки
+                                        </span>
                                     </div>
                                 </div>
                                 <div className="flex flex-col w-full gap-2">
