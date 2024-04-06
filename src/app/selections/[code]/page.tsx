@@ -1,7 +1,7 @@
 'use server';
 
 import { getCookie } from 'cookies-next';
-import { getDictionary } from 'dictionaries';
+// import { getDictionary } from 'dictionaries';
 // import { getDictionary } from 'dictionaries';
 import { cookies } from 'next/headers';
 import Link from 'next/link';
