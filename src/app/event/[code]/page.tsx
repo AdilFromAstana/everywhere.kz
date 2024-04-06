@@ -197,7 +197,7 @@ export default async function EventPage({ params }: Props) {
                 <Script src={`${process.env.NEXT_PUBLIC_WIDGET_URL}?time=${new Date().getMilliseconds()}`} />
                 <LeisureCategories leisureCategories={leisureCategories} selectedCategory={selectedCategory} />
                 <div className="-mx-6 py-2">
-                    <div className="w-full h-full relative">
+                    <div className="w-full h-full relative transition duration-200">
                         <div className="bg-[#22182666] absolute w-full h-full top-0 left-0 z-20">
                             <div className="container mx-auto">
                                 <div className="absolute lg:bottom-10 bottom-5 lg:left-auto left-4 flex flex-col gap-3">
@@ -242,7 +242,13 @@ export default async function EventPage({ params }: Props) {
                                                 />
                                             </svg>
                                             <span className="relative text-white lg:text-base text-sm">
-                                                {dayjs(data.beginDate).format('DD.MM.YYYY HH:mm')}
+                                                {dayjs(
+                                                    dayjs(data.beginDate)
+                                                        .format()
+                                                        .replace(/\+\d{2}:\d{2}$/, 'Z')
+                                                )
+                                                    .add(data.cityTimeZone * -1, 'h')
+                                                    .format('DD.MM.YYYY HH:mm')}
                                             </span>
                                         </div>
                                     </div>
@@ -254,14 +260,14 @@ export default async function EventPage({ params }: Props) {
                             src={data.previewFileUrl ?? EmptyPoster}
                             height={600}
                             width={400}
-                            className="lg:hidden w-full object-contain max-h-[245px]"
+                            className="lg:hidden w-full object-contain max-h-[245px] transition duration-200"
                         />
                         <Image
                             alt={data.name}
                             src={data.posterFileUrl ?? EmptyPoster}
                             height={500}
                             width={1900}
-                            className="lg:block hidden w-full object-contain max-h-[550px]"
+                            className="lg:block hidden w-full object-contain max-h-[550px] transition duration-200"
                         />
                     </div>
                 </div>
@@ -315,7 +321,15 @@ export default async function EventPage({ params }: Props) {
                         </div>
                         <div className="flex flex-col">
                             <span className="text-[#00000040]">Дата и время</span>
-                            <span>{dayjs(data.beginDate).format('DD.MM.YYYY - HH:mm')}</span>
+                            <span>
+                                {dayjs(
+                                    dayjs(data.beginDate)
+                                        .format()
+                                        .replace(/\+\d{2}:\d{2}$/, 'Z')
+                                )
+                                    .add(data.cityTimeZone * -1, 'h')
+                                    .format('DD.MM.YYYY - HH:mm')}
+                            </span>
                         </div>
                         <div className="flex flex-col">
                             <span className="text-[#00000040]">Возраст</span>
