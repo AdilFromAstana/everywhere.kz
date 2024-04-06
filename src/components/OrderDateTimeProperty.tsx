@@ -25,7 +25,7 @@ const OrderDateTimeProperty = ({ UserLang, fieldName, date, cityTimeZone }: Orde
                         .format()
                         .replace(/\+\d{2}:\d{2}$/, 'Z')
                 )
-                    .add(cityTimeZone * -1, 'h')
+                    .add(cityTimeZone, 'h')
                     .format('D MMMM HH:mm')}
             </div>
         </div>

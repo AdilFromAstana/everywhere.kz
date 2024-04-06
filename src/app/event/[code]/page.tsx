@@ -170,7 +170,7 @@ export default async function EventPage({ params }: Props) {
                     .format()
                     .replace(/\+\d{2}:\d{2}$/, 'Z')
             )
-                .add(data.cityTimeZone * -1, 'h')
+                .add(data.cityTimeZone, 'h')
                 .format(), // Дата и время начала мероприятия
             offers: {
                 '@type': 'Offer',
@@ -247,7 +247,7 @@ export default async function EventPage({ params }: Props) {
                                                         .format()
                                                         .replace(/\+\d{2}:\d{2}$/, 'Z')
                                                 )
-                                                    .add(data.cityTimeZone * -1, 'h')
+                                                    .add(data.cityTimeZone, 'h')
                                                     .format('DD.MM.YYYY HH:mm')}
                                             </span>
                                         </div>
@@ -327,7 +327,7 @@ export default async function EventPage({ params }: Props) {
                                         .format()
                                         .replace(/\+\d{2}:\d{2}$/, 'Z')
                                 )
-                                    .add(data.cityTimeZone * -1, 'h')
+                                    .add(data.cityTimeZone, 'h')
                                     .format('DD.MM.YYYY - HH:mm')}
                             </span>
                         </div>

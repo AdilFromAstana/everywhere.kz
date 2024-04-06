@@ -20,7 +20,7 @@ const EventDateInfo = async ({ UserLang, date, cityTimeZone }: EventDateProps) =
             .format()
             .replace(/\+\d{2}:\d{2}$/, 'Z')
     )
-        .add(cityTimeZone * -1, 'h')
+        .add(cityTimeZone, 'h')
         .format('D MMMM HH:mm')}`;
 };
 
