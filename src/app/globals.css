@@ -85,6 +85,11 @@ html.dark .EventDescription img {
     filter: invert(1) !important;
 }
 
+.EventDescription a {
+    color: #0490c3 !important;
+    text-decoration-line: underline;
+}
+
 #left-arrow,
 #right-arrow {
     position: absolute;

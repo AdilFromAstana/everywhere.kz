@@ -3,12 +3,11 @@ import dayjs from 'dayjs';
 import { getDictionary } from 'dictionaries';
 import { cookies } from 'next/headers';
 import Image from 'next/image';
-// import Image from 'next/image';
 import Link from 'next/link';
 import Script from 'next/script';
 import { Event, WithContext } from 'schema-dts';
 
-// import EmptyPoster from '@/assets/empty-poster.svg';
+import EmptyPoster from '@/assets/empty-poster.svg';
 // import SoldOut from '@/assets/soldout.svg';
 import KazticketButton from '@/components/KazticketButton';
 import LeisureCategories from '@/components/LeisureCategories';
@@ -250,16 +249,16 @@ export default async function EventPage({ params }: Props) {
                                 </div>
                             </div>
                         </div>
-                        {/* <Image
-                            alt={data.name}
-                            src={data.previewFileUrl}
-                            height={500}
-                            width={1900}
-                            className="lg:hidden w-full object-contain"
-                        /> */}
                         <Image
                             alt={data.name}
-                            src={data.posterFileUrl}
+                            src={data.previewFileUrl ?? EmptyPoster}
+                            height={600}
+                            width={400}
+                            className="lg:hidden w-full object-contain max-h-[245px]"
+                        />
+                        <Image
+                            alt={data.name}
+                            src={data.posterFileUrl ?? EmptyPoster}
                             height={500}
                             width={1900}
                             className="lg:block hidden w-full object-contain max-h-[550px]"
@@ -293,7 +292,9 @@ export default async function EventPage({ params }: Props) {
                             <li aria-current="page">
                                 <div className="flex items-center gap-2">
                                     <span>/</span>
-                                    <h1 className="text-black dark:text-gray-400 lg:text-base text-sm">{data.name}</h1>
+                                    <h1 className="text-black dark:text-gray-400 lg:text-base text-sm line-clamp-2">
+                                        {data.name}
+                                    </h1>
                                 </div>
                             </li>
                         </ol>
@@ -325,7 +326,9 @@ export default async function EventPage({ params }: Props) {
                         <div dangerouslySetInnerHTML={{ __html: data.description }}></div>
                     </div>
                 </div>
-                <SubscribeForm />
+                <div className="my-20">
+                    <SubscribeForm />
+                </div>
             </div>
         );
     }

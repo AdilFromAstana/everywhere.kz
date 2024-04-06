@@ -219,13 +219,15 @@ const RecommendationsDesktop = ({ recs }: RecommendationsDesktopProps) => {
                                 <SwiperSlide key={i} className="overflow-hidden select-none">
                                     <Link href={x.URL} key={i}>
                                         <div className="flex flex-col gap-2">
-                                            <Image
-                                                className="w-full h-full rounded-xl"
-                                                width={400}
-                                                height={400}
-                                                alt={x.NameRu}
-                                                src={x.ImageURL}
-                                            />
+                                            <div className="overflow-hidden rounded-xl">
+                                                <Image
+                                                    className="w-full h-full transition duration-200 hover:scale-105"
+                                                    width={400}
+                                                    height={400}
+                                                    alt={x.NameRu}
+                                                    src={x.ImageURL}
+                                                />
+                                            </div>
                                             <h6 className="text-[#2F2F38D9] font-semibold text-2xl">{x.NameRu}</h6>
                                         </div>
                                     </Link>

@@ -43,9 +43,9 @@ const EventCard = ({ UserLang, data, UserCityId, cardType = 'semi' }: EventCardP
                             placeholder={`data:image/webp;base64,${EmptyPlaceholder}`}
                             className="bg-[#d9d9d9] w-full object-cover lg:min-h-[354px] min-h-[238px] hover:scale-105 transition duration-200"
                             src={
-                                isEmpty(data.posterFileUrl) || data.posterFileUrl === 'https://NOPOSTER.jpg'
+                                isEmpty(data.previewFileUrl) || data.previewFileUrl === 'https://NOPOSTER.jpg'
                                     ? EmptyPoster
-                                    : data.posterFileUrl
+                                    : data.previewFileUrl
                             }
                         />
                         {data.statusId === EventStatuses.SoldOut && (

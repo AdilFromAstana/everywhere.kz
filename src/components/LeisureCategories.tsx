@@ -4,7 +4,7 @@ import { LeisureCategory } from '@/types/LeisureCategory';
 
 interface LeisureCategoriesProps {
     leisureCategories: LeisureCategory[];
-    selectedCategory: LeisureCategory | undefined;
+    selectedCategory?: LeisureCategory | undefined;
 }
 
 const LeisureCategories = ({ leisureCategories, selectedCategory }: LeisureCategoriesProps) => {
