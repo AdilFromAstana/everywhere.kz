@@ -175,13 +175,7 @@ const EventsByCategoryDesktop = ({ UserLang, UserCityId, data, category }: Event
                     {data.map((event, index: number) => {
                         return (
                             <SwiperSlide key={index} className="rounded-xl">
-                                <EventCard
-                                    isClientSide={true}
-                                    cardType="full"
-                                    UserLang={UserLang}
-                                    UserCityId={UserCityId}
-                                    data={event}
-                                />
+                                <EventCard cardType="full" UserLang={UserLang} UserCityId={UserCityId} data={event} />
                             </SwiperSlide>
                         );
                     })}
