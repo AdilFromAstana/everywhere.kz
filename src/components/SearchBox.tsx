@@ -169,6 +169,7 @@ const SearchBox = ({ cities, locale }: SearchBoxProps) => {
                                                     </svg>
                                                     <span className="text-[#2F2F3873]">
                                                         <EventDateInfo
+                                                            isClientSide={true}
                                                             UserLang={UserLang}
                                                             cityTimeZone={event.isEventum ? 6 : event.cityTimeZone}
                                                             date={event.beginDate}
