@@ -1,5 +1,6 @@
 import { getCookie } from 'cookies-next';
 import dayjs from 'dayjs';
+import utc from 'dayjs/plugin/utc';
 import { getDictionary } from 'dictionaries';
 import { cookies } from 'next/headers';
 import Image from 'next/image';
@@ -19,6 +20,8 @@ import { Event as EventDto } from '@/types/Event';
 import { LeisureCategory } from '@/types/LeisureCategory';
 
 import type { Metadata, Viewport } from 'next';
+
+dayjs.extend(utc);
 
 async function GetLeisureCategories() {
     try {
@@ -165,13 +168,7 @@ export default async function EventPage({ params }: Props) {
                 ?.replace(/<[^>]*>?/gm, ' ')
                 ?.replace(/&nbsp;/gi, ' ')
                 ?.replace(/\s+/g, ' '),
-            startDate: dayjs(
-                dayjs(data.beginDate)
-                    .format()
-                    .replace(/\+\d{2}:\d{2}$/, 'Z')
-            )
-                .add(data.cityTimeZone, 'h')
-                .format(), // Дата и время начала мероприятия
+            startDate: dayjs(data.beginDate).utc().add(data.cityTimeZone, 'h').format(), // Дата и время начала мероприятия
             offers: {
                 '@type': 'Offer',
                 priceCurrency: 'KZT',
@@ -242,11 +239,8 @@ export default async function EventPage({ params }: Props) {
                                                 />
                                             </svg>
                                             <span className="relative text-white lg:text-base text-sm">
-                                                {dayjs(
-                                                    dayjs(data.beginDate)
-                                                        .format()
-                                                        .replace(/\+\d{2}:\d{2}$/, 'Z')
-                                                )
+                                                {dayjs(data.beginDate)
+                                                    .utc()
                                                     .add(data.cityTimeZone, 'h')
                                                     .format('DD.MM.YYYY HH:mm')}
                                             </span>
