@@ -45,7 +45,7 @@ const EventsByCategory = async ({
                             Показать все
                         </Link>
                     </div>
-                    <div className="flex w-full overflow-x-auto gap-6 px-4">
+                    <div className="flex w-full overflow-x-auto lg:gap-6 gap-3 px-4">
                         {data.map((event, i: number) => {
                             return <EventCard key={i} UserLang={UserLang} UserCityId={UserCityId} data={event} />;
                         })}

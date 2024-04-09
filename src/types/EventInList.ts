@@ -6,6 +6,7 @@ export interface EventInList {
     minCost: number;
     ageLimit: number;
     leisureCategoryId: number;
+    leisureCategoryCode: string;
     cityName: string;
     beginDate: string;
     cityTimeZone: number;
