@@ -77,7 +77,13 @@ async function GetEvents(startDate: string, period: string, categoryCode?: strin
     const data = await res.json();
 
     if (data.items) {
-        const exclusiveEvents = ['alau-massskating', 'the-concert-my-angel', 'astana-irina-krug', 'pecha-kucha'];
+        const exclusiveEvents = [
+            'alau-massskating',
+            'virtuozy-iakutii',
+            'kyys-dabiliia',
+            'astana-irina-krug',
+            'pecha-kucha',
+        ];
 
         const sortedData: EventInList[] = data.items?.sort((eventA: any, eventB: any) => {
             const dateA = new Date(eventA?.beginDate) as any;
@@ -85,11 +91,16 @@ async function GetEvents(startDate: string, period: string, categoryCode?: strin
             return dateA - dateB;
         });
 
-        return [
+        let result = [
             ...sortedData?.filter((x: EventInList) => exclusiveEvents.includes(x.code)),
-            ...sortedData?.filter((x: EventInList) => x.code === 'glavnaya-rol'),
             ...sortedData?.filter((x: EventInList) => !exclusiveEvents.includes(x.code)),
         ];
+
+        if (categoryCode === 'all') {
+            result = result.filter((x: EventInList) => x.leisureCategoryCode !== 'museums');
+        }
+
+        return result;
     }
 }
 

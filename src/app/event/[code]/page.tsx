@@ -254,14 +254,14 @@ export default async function EventPage({ params }: Props) {
                             src={data.previewFileUrl ?? EmptyPoster}
                             height={600}
                             width={400}
-                            className="lg:hidden w-full object-contain max-h-[245px] transition duration-200"
+                            className="lg:hidden w-full object-contain transition duration-200"
                         />
                         <Image
                             alt={data.name}
                             src={data.posterFileUrl ?? EmptyPoster}
                             height={500}
                             width={1900}
-                            className="lg:block hidden w-full object-contain max-h-[550px] transition duration-200"
+                            className="lg:block hidden w-full object-contain transition duration-200"
                         />
                     </div>
                 </div>
@@ -316,13 +316,7 @@ export default async function EventPage({ params }: Props) {
                         <div className="flex flex-col">
                             <span className="text-[#00000040] dark:text-white">Дата и время</span>
                             <span className="dark:text-white">
-                                {dayjs(
-                                    dayjs(data.beginDate)
-                                        .format()
-                                        .replace(/\+\d{2}:\d{2}$/, 'Z')
-                                )
-                                    .add(data.cityTimeZone, 'h')
-                                    .format('DD.MM.YYYY - HH:mm')}
+                                {dayjs(data.beginDate).utc().add(data.cityTimeZone, 'h').format('DD.MM.YYYY - HH:mm')}
                             </span>
                         </div>
                         <div className="flex flex-col">
