@@ -261,7 +261,7 @@ export default async function EventPage({ params }: Props) {
                             src={data.posterFileUrl ?? EmptyPoster}
                             height={500}
                             width={1900}
-                            className="lg:block hidden w-full object-contain transition duration-200"
+                            className="lg:block hidden w-full object-contain max-h-[600px] transition duration-200"
                         />
                     </div>
                 </div>
