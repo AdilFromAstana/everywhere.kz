@@ -192,6 +192,34 @@ export default async function EventPage({ params }: Props) {
                     dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdScript) }}
                 />
                 <Script src={`${process.env.NEXT_PUBLIC_WIDGET_URL}?time=${new Date().getMilliseconds()}`} />
+                {data.code === 'almaty-profiling-and-selling' && (
+                    <>
+                        <Script
+                            dangerouslySetInnerHTML={{
+                                __html: `
+                !function(f,b,e,v,n,t,s)
+                {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+                n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+                if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+                n.queue=[];t=b.createElement(e);t.async=!0;
+                t.src=v;s=b.getElementsByTagName(e)[0];
+                s.parentNode.insertBefore(t,s)}(window, document,'script',
+                'https://connect.facebook.net/en_US/fbevents.js');
+                fbq('init', '1007202987644044');
+                fbq('track', 'PageView');
+            `,
+                            }}
+                        />
+                        <noscript>
+                            <img
+                                height="1"
+                                width="1"
+                                style={{ display: 'none' }}
+                                src="https://www.facebook.com/tr?id=1007202987644044&ev=PageView&noscript=1"
+                            />
+                        </noscript>
+                    </>
+                )}
                 <LeisureCategories leisureCategories={leisureCategories} selectedCategory={selectedCategory} />
                 <div className="-mx-6 py-2">
                     <div className="w-full h-full relative transition duration-200">
