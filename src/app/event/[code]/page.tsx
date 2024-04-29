@@ -195,6 +195,7 @@ export default async function EventPage({ params }: Props) {
                 {data.code === 'almaty-profiling-and-selling' && (
                     <>
                         <Script
+                            id="metrikForProfilingEvent"
                             dangerouslySetInnerHTML={{
                                 __html: `
                 !function(f,b,e,v,n,t,s)
@@ -210,7 +211,7 @@ export default async function EventPage({ params }: Props) {
             `,
                             }}
                         />
-                        <noscript>
+                        <noscript id="imgForMetrikForProfilingEvent">
                             <img
                                 height="1"
                                 width="1"
