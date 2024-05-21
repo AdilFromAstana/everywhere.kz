@@ -14,6 +14,7 @@ import KazticketButton from '@/components/KazticketButton';
 import LeisureCategories from '@/components/LeisureCategories';
 import SubscribeForm from '@/components/SubscribeForm';
 import EventStatuses from '@/constants/EventStatuses.json';
+import { isEmpty } from '@/functions';
 // import { isEmpty } from '@/functions';
 import { CheckToken } from '@/functions/AxiosHandlers';
 import { Event as EventDto } from '@/types/Event';
@@ -252,28 +253,30 @@ export default async function EventPage({ params }: Props) {
                                                 {data.cityName}
                                             </span>
                                         </div>
-                                        <div className="flex flex-row gap-2 items-center">
-                                            <svg
-                                                width="20"
-                                                height="20"
-                                                viewBox="0 0 20 20"
-                                                fill="none"
-                                                xmlns="http://www.w3.org/2000/svg"
-                                            >
-                                                <path
-                                                    d="M2.5 8.33268H17.5M6.66667 4.99935V1.66602M13.3333 4.99935V1.66602M7.83333 18.3327H12.1667C14.0335 18.3327 14.9669 18.3327 15.68 17.9694C16.3072 17.6498 16.8171 17.1399 17.1367 16.5127C17.5 15.7996 17.5 14.8662 17.5 12.9993V8.66602C17.5 6.79917 17.5 5.86575 17.1367 5.15271C16.8171 4.52551 16.3072 4.01557 15.68 3.69599C14.9669 3.33268 14.0335 3.33268 12.1667 3.33268H7.83333C5.96649 3.33268 5.03307 3.33268 4.32003 3.69599C3.69282 4.01557 3.18289 4.52551 2.86331 5.15271C2.5 5.86575 2.5 6.79917 2.5 8.66602V12.9993C2.5 14.8662 2.5 15.7996 2.86331 16.5127C3.18289 17.1399 3.69282 17.6498 4.32003 17.9694C5.03307 18.3327 5.96649 18.3327 7.83333 18.3327Z"
-                                                    stroke="#DBDBDB"
-                                                    strokeWidth="2"
-                                                    strokeLinecap="round"
-                                                />
-                                            </svg>
-                                            <span className="relative text-white lg:text-base text-sm">
-                                                {dayjs(data.beginDate)
-                                                    .utc()
-                                                    .add(data.cityTimeZone, 'h')
-                                                    .format('DD.MM.YYYY HH:mm')}
-                                            </span>
-                                        </div>
+                                        {!isEmpty(data.beginDate) && (
+                                            <div className="flex flex-row gap-2 items-center">
+                                                <svg
+                                                    width="20"
+                                                    height="20"
+                                                    viewBox="0 0 20 20"
+                                                    fill="none"
+                                                    xmlns="http://www.w3.org/2000/svg"
+                                                >
+                                                    <path
+                                                        d="M2.5 8.33268H17.5M6.66667 4.99935V1.66602M13.3333 4.99935V1.66602M7.83333 18.3327H12.1667C14.0335 18.3327 14.9669 18.3327 15.68 17.9694C16.3072 17.6498 16.8171 17.1399 17.1367 16.5127C17.5 15.7996 17.5 14.8662 17.5 12.9993V8.66602C17.5 6.79917 17.5 5.86575 17.1367 5.15271C16.8171 4.52551 16.3072 4.01557 15.68 3.69599C14.9669 3.33268 14.0335 3.33268 12.1667 3.33268H7.83333C5.96649 3.33268 5.03307 3.33268 4.32003 3.69599C3.69282 4.01557 3.18289 4.52551 2.86331 5.15271C2.5 5.86575 2.5 6.79917 2.5 8.66602V12.9993C2.5 14.8662 2.5 15.7996 2.86331 16.5127C3.18289 17.1399 3.69282 17.6498 4.32003 17.9694C5.03307 18.3327 5.96649 18.3327 7.83333 18.3327Z"
+                                                        stroke="#DBDBDB"
+                                                        strokeWidth="2"
+                                                        strokeLinecap="round"
+                                                    />
+                                                </svg>
+                                                <span className="relative text-white lg:text-base text-sm">
+                                                    {dayjs(data.beginDate)
+                                                        .utc()
+                                                        .add(data.cityTimeZone, 'h')
+                                                        .format('DD.MM.YYYY HH:mm')}
+                                                </span>
+                                            </div>
+                                        )}
                                     </div>
                                 </div>
                             </div>
@@ -328,7 +331,7 @@ export default async function EventPage({ params }: Props) {
                             </li>
                         </ol>
                     </nav>
-                    {data.statusId !== EventStatuses.SoldOut && (
+                    {data.statusId !== EventStatuses.SoldOut && !isEmpty(data.beginDate) && (
                         <KazticketButton locale={locale} eventCode={data.code} eventId={data.id} />
                     )}
                 </div>
@@ -342,12 +345,17 @@ export default async function EventPage({ params }: Props) {
                             <span className="text-[#00000040] dark:text-white">Событие</span>
                             <span className="dark:text-white">{data.name}</span>
                         </div>
-                        <div className="flex flex-col">
-                            <span className="text-[#00000040] dark:text-white">Дата и время</span>
-                            <span className="dark:text-white">
-                                {dayjs(data.beginDate).utc().add(data.cityTimeZone, 'h').format('DD.MM.YYYY - HH:mm')}
-                            </span>
-                        </div>
+                        {!isEmpty(data.beginDate) && (
+                            <div className="flex flex-col">
+                                <span className="text-[#00000040] dark:text-white">Дата и время</span>
+                                <span className="dark:text-white">
+                                    {dayjs(data.beginDate)
+                                        .utc()
+                                        .add(data.cityTimeZone, 'h')
+                                        .format('DD.MM.YYYY - HH:mm')}
+                                </span>
+                            </div>
+                        )}
                         <div className="flex flex-col">
                             <span className="text-[#00000040] dark:text-white">Возраст</span>
                             <span className="dark:text-white">{data.ageLimit}+</span>
