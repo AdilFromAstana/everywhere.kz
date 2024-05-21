@@ -73,26 +73,35 @@ async function GetSelections() {
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     const staticPages = ['offer_contract', 'payment_security', 'security_policy', 'contacts', 'offer', 'about_us'];
 
-    return [
-        {
-            url: process.env.NEXT_PUBLIC_APP_URL,
-            priority: 1,
-        },
-        ...(await GetEvents()).items.map((x: EventInList) => ({
-            url: `${process.env.NEXT_PUBLIC_APP_URL}/event/${x.code}`,
-            lastModified: x.updatedAt,
-            priority: 1,
-        })),
-        ...(await GetEventumEvents()).map((x: any) => ({
-            url: `${process.env.NEXT_PUBLIC_APP_URL}/e/${x.Code}`,
-            lastModified: new Date(),
-        })),
-        ...(await GetSelections())?.eventSelections.map((x: any) => ({
-            url: `${process.env.NEXT_PUBLIC_APP_URL}/selections/${x.code}`,
-            lastModified: x.updatedAt,
-        })),
-        ...staticPages.map((x) => ({
-            url: `${process.env.NEXT_PUBLIC_APP_URL}/${x}`,
-        })),
-    ];
+    if (process.env.NODE_ENV === 'production') {
+        return [
+            {
+                url: process.env.NEXT_PUBLIC_APP_URL,
+                priority: 1,
+            },
+            ...(await GetEvents()).items.map((x: EventInList) => ({
+                url: `${process.env.NEXT_PUBLIC_APP_URL}/event/${x.code}`,
+                lastModified: x.updatedAt,
+                priority: 1,
+            })),
+            ...(await GetEventumEvents()).map((x: any) => ({
+                url: `${process.env.NEXT_PUBLIC_APP_URL}/e/${x.Code}`,
+                lastModified: new Date(),
+            })),
+            ...(await GetSelections())?.eventSelections.map((x: any) => ({
+                url: `${process.env.NEXT_PUBLIC_APP_URL}/selections/${x.code}`,
+                lastModified: x.updatedAt,
+            })),
+            ...staticPages.map((x) => ({
+                url: `${process.env.NEXT_PUBLIC_APP_URL}/${x}`,
+            })),
+        ];
+    } else {
+        return [
+            {
+                url: process.env.NEXT_PUBLIC_APP_URL ?? '',
+                priority: 0.1,
+            },
+        ];
+    }
 }
