@@ -77,13 +77,7 @@ async function GetEvents(startDate: string, period: string, categoryCode?: strin
     const data = await res.json();
 
     if (data.items) {
-        const exclusiveEvents = [
-            'alau-massskating',
-            'virtuozy-iakutii',
-            'kyys-dabiliia',
-            'astana-irina-krug',
-            'pecha-kucha',
-        ];
+        const exclusiveEvents = ['alau-massskating', 'oasis-beach-club', 'pecha-kucha'];
 
         const sortedData: EventInList[] = data.items?.sort((eventA: any, eventB: any) => {
             const dateA = new Date(eventA?.beginDate) as any;
