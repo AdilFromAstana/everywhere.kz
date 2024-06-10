@@ -73,7 +73,14 @@ async function GetSelections() {
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     const staticPages = ['offer_contract', 'payment_security', 'security_policy', 'contacts', 'offer', 'about_us'];
 
-    if (process.env.NODE_ENV === 'production') {
+    if (process.env.NEXT_PUBLIC_IS_DEV) {
+        return [
+            {
+                url: process.env.NEXT_PUBLIC_APP_URL ?? '',
+                priority: 0.1,
+            },
+        ];
+    } else {
         return [
             {
                 url: process.env.NEXT_PUBLIC_APP_URL,
@@ -95,13 +102,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
             ...staticPages.map((x) => ({
                 url: `${process.env.NEXT_PUBLIC_APP_URL}/${x}`,
             })),
-        ];
-    } else {
-        return [
-            {
-                url: process.env.NEXT_PUBLIC_APP_URL ?? '',
-                priority: 0.1,
-            },
         ];
     }
 }
