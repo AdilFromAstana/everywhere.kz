@@ -1,5 +1,4 @@
 import { getCookie } from 'cookies-next';
-import dayjs from 'dayjs';
 import { cookies } from 'next/headers';
 
 import { CheckToken } from '@/functions/AxiosHandlers';
@@ -24,7 +23,6 @@ async function GetVisitRule(code: string) {
             acceptLanguage = 'en-US';
             break;
     }
-    console.log('NEXT_PUBLIC_EVENTS_URL: ', NEXT_PUBLIC_EVENTS_URL + 'commercial/EventVisitRules/' + code);
 
     const res = await fetch(NEXT_PUBLIC_EVENTS_URL + 'commercial/EventVisitRules/code/' + code, {
         headers: {
