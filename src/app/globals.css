@@ -40,6 +40,11 @@ a {
     text-decoration: none;
 }
 
+.VisitRule table,
+.VisitRule table td {
+    border: 1px solid #e5e7eb;
+}
+
 .kazticket-buy-button,
 .buy-button {
     animation-name: blinker;
