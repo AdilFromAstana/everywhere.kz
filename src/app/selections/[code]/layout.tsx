@@ -3,7 +3,6 @@ import dynamic from 'next/dynamic';
 import { cookies } from 'next/headers';
 import React from 'react';
 
-import LeisureCategories from '@/components/LeisureCategories';
 import Layout from '@/components/PageLayout';
 import { CheckToken } from '@/functions/AxiosHandlers';
 import { LeisureCategory } from '@/types/LeisureCategory';
@@ -66,29 +65,4 @@ async function GetPosters() {
         console.error('GetPosters failed:', error);
         return [];
     }
-}
-
-const Posters = dynamic(() => import('@/components/Posters'), {
-    ssr: false,
-    loading() {
-        return (
-            <div className="container mx-auto py-5 flex justify-between">
-                <div className="3xl:min-h-[382px] 2xl:min-h-[306px] xl:min-h-[251px] md:min-h-[187px] md:min-h-[187px] rounded-2xl w-full animate-pulse bg-gray-200"></div>
-            </div>
-        );
-    },
-});
-
-export default async function EventSelectionsLayout({ children }: { children: React.ReactNode }) {
-    const leisureCategories = await GetLeisureCategories();
-    const UserLang = getCookie('UserLang', { cookies });
-    const PostersData = await GetPosters();
-
-    return (
-        <Layout>
-            <LeisureCategories leisureCategories={leisureCategories} />
-            <Posters UserLang={UserLang ?? 'Ru'} posters={PostersData} />
-            {children}
-        </Layout>
-    );
 }
