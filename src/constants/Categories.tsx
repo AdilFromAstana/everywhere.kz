@@ -9,7 +9,7 @@ const categories = () => {
             code: 'concerts',
             icon: (
                 <svg
-                    className="lg:w-14 lg:h-14 w-10 h-10 text-[#2F2F38] dark:text-white"
+                    className="md:w-14 md:h-14 w-10 h-10 text-[#2F2F38] dark:text-white"
                     width="77"
                     height="77"
                     viewBox="0 0 77 77"
@@ -32,7 +32,7 @@ const categories = () => {
             code: 'theater',
             icon: (
                 <svg
-                    className="lg:w-14 lg:h-14 w-10 h-10"
+                    className="md:w-14 md:h-14 w-10 h-10"
                     width="77"
                     height="77"
                     viewBox="0 0 77 77"
@@ -85,7 +85,7 @@ const categories = () => {
             code: 'entertainment',
             icon: (
                 <svg
-                    className="lg:w-14 lg:h-14 w-10 h-10 text-[#2F2F38] dark:text-white"
+                    className="md:w-14 md:h-14 w-10 h-10 text-[#2F2F38] dark:text-white"
                     width="70"
                     height="70"
                     viewBox="0 0 70 70"
@@ -170,7 +170,7 @@ const categories = () => {
             code: 'sport',
             icon: (
                 <svg
-                    className="lg:w-14 lg:h-14 w-10 h-10 text-[#2F2F38] dark:text-white"
+                    className="md:w-14 md:h-14 w-10 h-10 text-[#2F2F38] dark:text-white"
                     width="60"
                     height="60"
                     viewBox="0 0 60 60"

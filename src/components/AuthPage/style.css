@@ -1,0 +1,20 @@
+.code-input {
+    display: flex;
+    justify-content: space-between;
+    width: 200px; /* Регулируем ширину в зависимости от вашего дизайна */
+}
+
+.code-input-field {
+    width: 30px; /* Ширина одного инпута */
+    height: 30px; /* Высота одного инпута */
+    text-align: center;
+    font-size: 1.2rem;
+    margin-right: 5px; /* Между инпутами */
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    outline: none;
+}
+
+.code-input-field:last-child {
+    margin-right: 0; /* Убираем между последним инпутом и контейнером */
+}

@@ -1,7 +1,20 @@
 {
     "Errors": {
         "ToMain": "To the main page",
-        "PageNotFound": "Page not found"
+        "PageNotFound": "Page not found",
+        "PasswordLength": "The password must not be less than 8 characters long",
+        "NotSamePassword": "Passwords don't match",
+        "RegistrationError": "Registration error!",
+        "LoginError": "Login error!"
+    },
+    "Auth": {
+        "Enter": "Sign In",
+        "Registration": "Register",
+        "AlreadyHaveAccount": "Already have an account?",
+        "DontHaveAccount": "Don't have an account?",
+        "ForgotThePassword": "Forgot the password",
+        "ConfirmPassword": "Confirm the password",
+        "Password": "Password"
     },
     "Search": {
         "NotFound": "Nothing found"
@@ -11,14 +24,99 @@
         "Language": "Language",
         "Support": "Support",
         "AllCities": "All cities",
-        "City": "City"
+        "City": "City",
+        "MyProfile": "My profile",
+        "LookingForPromoter": "Looking for a promoter",
+        "LookingForAdvertiser": "Looking for an advertiser",
+        "Nav": {
+            "MyRealEstates": "My realEstates",
+            "Settings": "Settings",
+            "Reports": "Reports",
+            "Exit": "Exit",
+            "Enter": "Enter"
+        }
     },
     "EventListPage": {
-        "All": "All"
+        "All": "All",
+        "FoundRealEstate": "Ads found",
+        "SortButtons": {
+            "SortBy": "Sort by",
+            "SortFirstNewRealEstates": "New ones first",
+            "SortFirstCheapRealEstates": "Cheap ones first",
+            "SortFirstExpensiveRealEstates": "Expensive ones first"
+        },
+        "FilterColumn": {
+            "Industry": "The company's industry",
+            "MethodOfPlacement": "Method of placement",
+            "City": "City",
+            "Price": "Payment"
+        }
     },
     "EventPage": {
         "AboutDesc": "About the event",
-        "BuyTicket": "Buy ticket"
+        "BuyTicket": "Buy ticket",
+        "Report": {
+            "Title": "Submit a complaint",
+            "Reason": "Reason for complaint",
+            "Description": "Problem description",
+            "DescriptionPlaceholder": "Describe why you want to file a complaint",
+            "ContactNumber": "Phone number for feedback",
+            "SelectTheReason": "Select the reason",
+            "Error": {
+                "ShortContactNumber": "The number must contain 11 digits!",
+                "ShortDescription": "At least 10 characters!",
+                "NoReason": "Select a reason!"
+            },
+            "Success": {
+                "ReportSend": "The complaint has been successfully sent!",
+                "ContactYou": "We will contact you as soon as possible."
+            }
+        },
+        "EventInfo": {
+            "Payment": "Reward",
+            "Description": "Description",
+            "ShowNumber": "Show number",
+            "BewareOfScammers": "WARNING! Beware of scammers"
+        },
+        "EditRealEstate": "Edit an realEstate",
+        "Fields": {
+            "Title": "Title",
+            "TitlePlaceholder": "For example: 100k views on TikTok for a fitness gym ...",
+            "City": "City",
+            "SelectCity": "Select a city",
+            "BusinessField": "Category of product/service",
+            "SelectBusinessField": "Select a category",
+            "AdPlacement": "Placement method",
+            "SelectAdPlacement": "Select a placement method",
+            "SelectType": "Выберите тип недвижемости",
+            "Type": "Тип недвижемости",
+            "Price": "Payment",
+            "PaymentPlaceholder": "Price for the service",
+            "Description": "Description",
+            "DescriptionPlaceholder": "Description",
+            "Post": "Post",
+            "SaveChanges": "Save changes",
+            "Images": "Images",
+            "AddPhoto": "Add photo",
+            "ContactPhoneNumber": "Номер телефона",
+            "Square": "Номер телефона",
+            "Street": "Номер телефона",
+            "ConstructionYear": "Номер телефона",
+            "HouseNumber": "Номер телефона",
+            "Floor": "Номер телефона",
+            "Rooms": "Кол.во комнат",
+            "ApartmentNumber": "Номер квартиры",
+            "PricePerHour": "Номер телефона"
+        }
+    },
+    "MyRealEstates": {
+        "Title": "Your realEstates",
+        "RealEstateStatistics": "RealEstate statistics",
+        "ForToday": "Today",
+        "ForAllTime": "All time",
+        "RealEstateViews": "views",
+        "RealEstateNumberViews": "number views",
+        "SubmitArhivating": "Are you sure you want to archive your listings?"
     },
     "Contacts": {
         "ContactsAndDetails": "Contacts and details",
@@ -62,5 +160,14 @@
     "SelectionsPage": {
         "MainPage": "Main page",
         "SelectionOfEvents": "Selection of events"
+    },
+    "Common": {
+        "CreateRealEstate": "Create an realEstate",
+        "ToArhibve": "Archivate",
+        "ToPublic": "Publish",
+        "ToEdit": "Edit",
+        "Yes": "Yes",
+        "No": "No",
+        "Created": "Created"
     }
 }

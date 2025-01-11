@@ -73,7 +73,7 @@ const Posters = dynamic(() => import('@/components/Posters'), {
     loading() {
         return (
             <div className="container mx-auto py-5 flex justify-between">
-                <div className="3xl:min-h-[382px] 2xl:min-h-[306px] xl:min-h-[251px] lg:min-h-[187px] md:min-h-[187px] rounded-2xl w-full animate-pulse bg-gray-200"></div>
+                <div className="3xl:min-h-[382px] 2xl:min-h-[306px] xl:min-h-[251px] md:min-h-[187px] md:min-h-[187px] rounded-2xl w-full animate-pulse bg-gray-200"></div>
             </div>
         );
     },
