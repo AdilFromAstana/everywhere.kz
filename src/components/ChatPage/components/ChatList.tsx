@@ -34,7 +34,7 @@ const ChatList: React.FC<{
 
     useEffect(() => {
         const fetchAllData = async () => {
-            const fetchedContacts = await fetchData(NEXT_PUBLIC_EVENTS_URL + 'ats/');
+            const fetchedContacts = await fetchData(process.env.NEXT_PUBLIC_EVENTS_URL + 'ats/');
             setChats(fetchedContacts);
         };
 
