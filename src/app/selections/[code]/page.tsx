@@ -6,9 +6,6 @@ import { getCookie } from 'cookies-next';
 import { cookies } from 'next/headers';
 import Link from 'next/link';
 
-import EventCard from '@/components/EventsPage/EventCard';
-import SubscribeForm from '@/components/SubscribeForm';
-import Tickers from '@/components/Tickers';
 import { isEmpty } from '@/functions';
 import { CheckToken } from '@/functions/AxiosHandlers';
 import { EventInList } from '@/types/EventInList';
@@ -188,19 +185,6 @@ export default async function EventSelectionPage({ params }: Props) {
                         >
                             {GetSelectionName()}
                         </h1>
-                    </div>
-                    <div className="grid md:grid-cols-5 grid-cols-2 md:gap-5 gap-3 content-center justify-items-center">
-                        {EventsData?.map((x: EventInList) => {
-                            return (
-                                <EventCard
-                                    cardType="full"
-                                    UserLang={UserLang}
-                                    key={x.id}
-                                    data={x}
-                                    UserCity={UserCity}
-                                />
-                            );
-                        })}
                     </div>
                 </div>
             </>
