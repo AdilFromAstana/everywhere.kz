@@ -1,7 +1,20 @@
 {
     "Errors": {
         "ToMain": "To the main page",
-        "PageNotFound": "Page not found"
+        "PageNotFound": "Page not found",
+        "PasswordLength": "The password must not be less than 8 characters long",
+        "NotSamePassword": "Passwords don't match",
+        "RegistrationError": "Registration error!",
+        "LoginError": "Login error!"
+    },
+    "Auth": {
+        "Enter": "Sign In",
+        "Registration": "Register",
+        "AlreadyHaveAccount": "Already have an account?",
+        "DontHaveAccount": "Don't have an account?",
+        "ForgotThePassword": "Forgot the password",
+        "ConfirmPassword": "Confirm the password",
+        "Password": "Password"
     },
     "Search": {
         "NotFound": "Nothing found"
@@ -11,14 +24,88 @@
         "Language": "Language",
         "Support": "Support",
         "AllCities": "All cities",
-        "City": "City"
+        "City": "City",
+        "MyProfile": "My profile",
+        "LookingForPromoter": "Looking for a promoter",
+        "LookingForAdvertiser": "Looking for an advertiser",
+        "Nav": {
+            "MyAnnouncements": "My announcements",
+            "Settings": "Settings",
+            "Reports": "Reports",
+            "Exit": "Exit",
+            "Enter": "Enter"
+        }
     },
     "EventListPage": {
-        "All": "All"
+        "All": "All",
+        "FoundAnnouncement": "Ads found",
+        "SortButtons": {
+            "SortBy": "Sort by",
+            "SortFirstNewAnnouncements": "New ones first",
+            "SortFirstCheapAnnouncements": "Cheap ones first",
+            "SortFirstExpensiveAnnouncements": "Expensive ones first"
+        },
+        "FilterColumn": {
+            "Industry": "The company's industry",
+            "MethodOfPlacement": "Method of placement",
+            "City": "City",
+            "Payment": "Payment"
+        }
     },
     "EventPage": {
         "AboutDesc": "About the event",
-        "BuyTicket": "Buy ticket"
+        "BuyTicket": "Buy ticket",
+        "Report": {
+            "Title": "Submit a complaint",
+            "Reason": "Reason for complaint",
+            "Description": "Problem description",
+            "DescriptionPlaceholder": "Describe why you want to file a complaint",
+            "ContactNumber": "Phone number for feedback",
+            "SelectTheReason": "Select the reason",
+            "Error": {
+                "ShortContactNumber": "The number must contain 11 digits!",
+                "ShortDescription": "At least 10 characters!",
+                "NoReason": "Select a reason!"
+            },
+            "Success": {
+                "ReportSend": "The complaint has been successfully sent!",
+                "ContactYou": "We will contact you as soon as possible."
+            }
+        },
+        "EventInfo": {
+            "Payment": "Reward",
+            "Description": "Description",
+            "ShowNumber": "Show number",
+            "BewareOfScammers": "WARNING! Beware of scammers"
+        },
+        "EditAnnouncement": "Edit an announcement",
+        "Fields": {
+            "Title": "Title",
+            "TitlePlaceholder": "For example: 100k views on TikTok for a fitness gym ...",
+            "City": "City",
+            "SelectCity": "Select a city",
+            "BusinessField": "Category of product/service",
+            "SelectBusinessField": "Select a category",
+            "AdPlacement": "Placement method",
+            "SelectAdPlacement": "Select a placement method",
+            "Payment": "Payment",
+            "PaymentPlaceholder": "Price for the service",
+            "Descroption": "Description",
+            "DescroptionPlaceholder": "Description",
+            "Post": "Post",
+            "SaveChanges": "Save changes",
+            "Images": "Images",
+            "AddPhoto": "Add photo"
+        }
+    },
+    "MyAnnouncements": {
+        "Title": "Your announcements",
+        "AnnouncementStatistics": "Announcement statistics",
+        "ForToday": "Today",
+        "ForAllTime": "All time",
+        "AnnouncementViews": "views",
+        "AnnouncementNumberViews": "number views",
+        "SubmitArhivating": "Are you sure you want to archive your listings?"
     },
     "Contacts": {
         "ContactsAndDetails": "Contacts and details",
@@ -62,5 +149,14 @@
     "SelectionsPage": {
         "MainPage": "Main page",
         "SelectionOfEvents": "Selection of events"
+    },
+    "Common": {
+        "CreateAnnouncement": "Create an announcement",
+        "ToArhibve": "Archivate",
+        "ToPublic": "Publish",
+        "ToEdit": "Edit",
+        "Yes": "Yes",
+        "No": "No",
+        "Created": "Created"
     }
 }

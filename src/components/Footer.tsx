@@ -1,10 +1,14 @@
+'use client';
+
 import dayjs from 'dayjs';
 import Image from 'next/image';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import React from 'react';
 
-import WhiteMonoLogo from '@/assets/kazticket-logo-white-mono.svg';
-import Logo from '@/assets/kazticket-logo.svg';
+import Logo from '@/assets/logo.svg';
+// import WhiteMonoLogo from '@/assets/kazticket-logo-white-mono.svg';
+import WhiteMonoLogo from '@/assets/white-logo.svg';
 
 interface FooterProps {
     locale: any;
@@ -12,20 +16,21 @@ interface FooterProps {
 }
 
 const Footer = ({ pages, locale }: FooterProps) => {
+    const pathname = usePathname();
     return (
-        <footer id="footer" className="bg-white dark:bg-black shadow-footer mt-2">
-            <div className="container mx-auto flex lg:px-0 lg:flex-row px-4 py-10 flex-col justify-between lg:gap-0 gap-8">
+        <footer id="footer" className={`bg-white dark:bg-black shadow-footer mt-2 ${pathname === '/auth' && 'hidden'}`}>
+            <div className="container mx-auto flex md:px-0 md:flex-row px-4 py-10 flex-col justify-between md:gap-0 gap-8">
                 <div className="flex flex-col items-start gap-8">
                     <Image
                         src={WhiteMonoLogo}
                         alt="Kazticket.kz Logo"
-                        className="dark:block hidden h-8 w-auto cursor-pointer"
+                        className="dark:block hidden h-20 w-auto cursor-pointer"
                         priority
                     />
                     <Image
                         src={Logo}
                         alt="Kazticket.kz Logo"
-                        className="dark:hidden block h-8 w-auto cursor-pointer"
+                        className="dark:hidden block h-20 w-auto cursor-pointer"
                         priority
                     />
                     <div className="flex gap-8">

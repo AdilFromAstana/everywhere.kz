@@ -4,7 +4,7 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-    reactStrictMode: true,
+    reactStrictMode: false,
     images: {
         remotePatterns: [
             {
@@ -24,7 +24,18 @@ const nextConfig = {
         serverActions: {
             allowedOrigins: ['localhost', 'dev-v2.kazticket.kz', 'eventum.kazticket.kz', 'kazticket.kz', 'new.kazticket.kz', 'mc.yandex.ru']
         }
-    }
+    },
+    headers: () => [
+        {
+            source: '/:path*',
+            headers: [
+                {
+                    key: 'Cache-Control',
+                    value: 'no-store',
+                },
+            ],
+        },
+    ],
 };
 
 module.exports = withBundleAnalyzer(nextConfig)

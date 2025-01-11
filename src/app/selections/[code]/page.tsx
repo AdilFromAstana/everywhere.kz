@@ -147,10 +147,7 @@ export default async function EventSelectionPage({ params }: Props) {
     const TargetSelection = await GetSelectionData(params.code);
     const EventsData = await GetEvents(TargetSelection?.id);
     const UserLang = getCookie('UserLang', { cookies });
-    const UserCityId = getCookie('UserCityId', { cookies });
-    const AdsIsClosed = getCookie('AdsIsClosed', { cookies });
-    const TickersData = await GetTickers();
-    // const locale = await getDictionary(UserLang?.toLocaleLowerCase() ?? 'ru');
+    const UserCity = getCookie('UserCity', { cookies });
 
     const GetSelectionName = () => {
         switch (UserLang?.toLocaleLowerCase()) {
@@ -168,9 +165,9 @@ export default async function EventSelectionPage({ params }: Props) {
         return (
             <>
                 <div className="container mx-auto">
-                    <div className="flex lg:gap-4 gap-2 items-center lg:mt-0 my-6 flex-wrap">
+                    <div className="flex md:gap-4 gap-2 items-center md:mt-0 my-6 flex-wrap">
                         <svg
-                            className={`lg:w-16 lg:h-16 ${GetSelectionName().length > 12 ? 'w-10 h-10' : 'w-12 h-12'}`}
+                            className={`md:w-16 md:h-16 ${GetSelectionName().length > 12 ? 'w-10 h-10' : 'w-12 h-12'}`}
                             width="71"
                             height="71"
                             viewBox="0 0 71 71"
@@ -185,14 +182,14 @@ export default async function EventSelectionPage({ params }: Props) {
                             />
                         </svg>
                         <h1
-                            className={`lg:text-4xl ${
+                            className={`md:text-4xl ${
                                 GetSelectionName().length > 12 ? 'text-base' : 'text-2xl'
                             } font-bold`}
                         >
                             {GetSelectionName()}
                         </h1>
                     </div>
-                    <div className="grid lg:grid-cols-5 grid-cols-2 lg:gap-5 gap-3 content-center justify-items-center">
+                    <div className="grid md:grid-cols-5 grid-cols-2 md:gap-5 gap-3 content-center justify-items-center">
                         {EventsData?.map((x: EventInList) => {
                             return (
                                 <EventCard
@@ -200,16 +197,12 @@ export default async function EventSelectionPage({ params }: Props) {
                                     UserLang={UserLang}
                                     key={x.id}
                                     data={x}
-                                    UserCityId={UserCityId}
+                                    UserCity={UserCity}
                                 />
                             );
                         })}
                     </div>
                 </div>
-                <div className="my-20">
-                    <SubscribeForm />
-                </div>
-                <Tickers adsIsClosed={AdsIsClosed} tickers={TickersData} />
             </>
         );
     } else {

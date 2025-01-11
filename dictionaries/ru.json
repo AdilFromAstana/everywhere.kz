@@ -1,7 +1,20 @@
 {
     "Errors": {
         "ToMain": "На главную",
-        "PageNotFound": "Страница не найдена"
+        "PageNotFound": "Страница не найдена",
+        "PasswordLength": "Пароль не должен быть меньше чем 8 символов",
+        "NotSamePassword": "Пароли не совпадают",
+        "RegistrationError": "Ошибка при регистрации!",
+        "LoginError": "Ошибка при входе!"
+    },
+    "Auth": {
+        "Enter": "Войти",
+        "Registration": "Регистрация",
+        "AlreadyHaveAccount": "Уже есть аккаунт?",
+        "DontHaveAccount": "Нет аккаунта?",
+        "ForgotThePassword": "Забыл пароль",
+        "ConfirmPassword": "Подтвердить пароль",
+        "Password": "Пароль"
     },
     "Search": {
         "NotFound": "Ничего не найдено"
@@ -11,14 +24,87 @@
         "Language": "Язык",
         "Support": "Служба поддержки",
         "AllCities": "Все города",
-        "City": "Город"
+        "City": "Город",
+        "MyProfile": "Мой профиль",
+        "LookingForPromoter": "Ищу промоутера",
+        "LookingForAdvertiser": "Ищу рекламодателя",
+        "Nav": {
+            "MyAnnouncements": "Мои объявления",
+            "Settings": "Настройки",
+            "Reports": "Жалобы",
+            "Exit": "Выход",
+            "Enter": "Войти"
+        }
     },
     "EventListPage": {
-        "All": "Все"
+        "All": "Все",
+        "FoundAnnouncement": "Найдено объявлений",
+        "SortButtons": {
+            "SortBy": "Сортировка по",
+            "SortFirstNewAnnouncements": "Сначала новые",
+            "SortFirstCheapAnnouncements": "Сначала дешевые",
+            "SortFirstExpensiveAnnouncements": "Сначала дорогие"
+        },
+        "FilterColumn": {
+            "Industry": "Отрасль компании",
+            "MethodOfPlacement": "Способ размещения",
+            "City": "Город",
+            "Payment": "Вознаграждение"
+        }
     },
     "EventPage": {
         "AboutDesc": "О мероприятии",
-        "BuyTicket": "Купить билет"
+        "BuyTicket": "Купить билет",
+        "Report": {
+            "Title": "Подача жалобы",
+            "Reason": "Причина жалобы",
+            "Description": "Описание проблемы",
+            "DescriptionPlaceholder": "Опишите, почему вы хотите пожаловаться",
+            "ContactNumber": "Номер телефона для обратной связи",
+            "SelectTheReason": "Выберите причину",
+            "Error": {
+                "ShortContactNumber": "Номер должен содержать 11 чисел!",
+                "ShortDescription": "Не менее 10 символов!",
+                "NoReason": "Выберите причину!"
+            },
+            "Success": {
+                "ReportSend": "Жалоба успешно отправлена!",
+                "ContactYou": "Мы свяжемся с вами как можно быстрее."
+            }
+        },
+        "EventInfo": {
+            "Description": "Описание",
+            "ShowNumber": "Показать номер",
+            "BewareOfScammers": "ОСТОРОЖНО! Опосайтесь мошейников"
+        },
+        "EditAnnouncement": "Редактировать объявление",
+        "Fields": {
+            "Title": "Заголовок",
+            "TitlePlaceholder": "Например: 100k просмотров в TikTok для фитнес зала ...",
+            "City": "Город",
+            "SelectCity": "Выберите город",
+            "BusinessField": "Категория продукта/товара/услуги",
+            "SelectBusinessField": "Выберите категорию",
+            "AdPlacement": "Способ размещения",
+            "SelectAdPlacement": "Выберите способ размещения",
+            "Payment": "Оплата",
+            "PaymentPlaceholder": "Цена за услугу",
+            "Descroption": "Описание",
+            "DescroptionPlaceholder": "Нужен тикток с нашей рекламой на минимум 100к просмотров!",
+            "Post": "Опубликовать",
+            "SaveChanges": "Сохранить изменения",
+            "Images": "Изображения",
+            "AddPhoto": "Добавить фото"
+        }
+    },
+    "MyAnnouncements": {
+        "Title": "Ваши объявления",
+        "AnnouncementStatistics": "Статистика объявления",
+        "ForToday": "За сегодня",
+        "ForAllTime": "Всего",
+        "AnnouncementViews": "просмотров",
+        "AnnouncementNumberViews": "просмотров телефона",
+        "SubmitArhivating": "Вы действительно хотите переместить объявления в архив?"
     },
     "Contacts": {
         "ContactsAndDetails": "Контакты и реквизиты",
@@ -62,5 +148,14 @@
     "SelectionsPage": {
         "MainPage": "Главная страница",
         "SelectionOfEvents": "Подборка мероприятий"
+    },
+    "Common": {
+        "CreateAnnouncement": "Создать объявление",
+        "ToArhibve": "В архив",
+        "ToPublic": "Опубликовать",
+        "ToEdit": "Редактировать",
+        "Yes": "Да",
+        "No": "Нет",
+        "Created": "Создано"
     }
 }

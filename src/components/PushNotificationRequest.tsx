@@ -89,7 +89,7 @@ const PushNotificationRequest = ({}: PushNotificationProps) => {
 
     if (!IsCanceled && !IsSubcribed && isServiceWorkerRegistered && serviceWorker) {
         return (
-            <div className="fixed z-50 lg:right-4 lg:bottom-4 right-2 bottom-2 rounded-lg shadow-xl">
+            <div className="fixed z-50 md:right-4 md:bottom-4 right-2 bottom-2 rounded-lg shadow-xl">
                 <Transition
                     as={Fragment}
                     show={isServiceWorkerRegistered}
@@ -101,18 +101,18 @@ const PushNotificationRequest = ({}: PushNotificationProps) => {
                     leaveTo="opacity-0 translate-y-1"
                 >
                     <div className="flex flex-col gap-4 rounded-lg bg-[#0590C4] leading-6 p-4">
-                        <div className="text-white flex flex-col lg:max-w-md max-w-xs">
-                            <span className="lg:text-xl text-md">
+                        <div className="text-white flex flex-col md:max-w-md max-w-xs">
+                            <span className="md:text-xl text-md">
                                 Хотите быть в курсе самых интересных мероприятий?
                             </span>
-                            <span className="lg:text-md text-sm">
+                            <span className="md:text-md text-sm">
                                 Разрешите уведомления и узнавайте о новых событиях первыми!
                             </span>
                         </div>
                         <div className="flex justify-between">
                             <div
                                 onClick={() => requestNotificationPermission(serviceWorker)}
-                                className="text-black cursor-pointer bg-white px-5 lg:text-2xl text-lg rounded-lg"
+                                className="text-black cursor-pointer bg-white px-5 md:text-2xl text-lg rounded-lg"
                             >
                                 Разрешить
                             </div>
@@ -123,7 +123,7 @@ const PushNotificationRequest = ({}: PushNotificationProps) => {
                                         maxAge: 60 * 60 * 24 * 1,
                                     });
                                 }}
-                                className="text-white cursor-pointer lg:text-lg text-sm rounded-lg underline"
+                                className="text-white cursor-pointer md:text-lg text-sm rounded-lg underline"
                             >
                                 Нет, спасибо
                             </div>

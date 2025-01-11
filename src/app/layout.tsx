@@ -12,9 +12,9 @@ import { MetaScriptEvents } from '@/components/MetaScriptEvents';
 const rubik = Rubik({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-    metadataBase: new URL('https://kazticket.kz'),
-    title: `Kazticket.kz - Билеты на концерты и мероприятия онлайн: Покупайте билеты с уверенностью`,
-    description: `Kazticket.kz - Система онлайн покупки билетов. Купить билеты, концерт, мероприятия`,
+    metadataBase: new URL('https://everywhere.kz'),
+    title: `Everywheret.kz - Билеты на концерты и мероприятия онлайн: Покупайте билеты с уверенностью`,
+    description: `Everywhere.kz - Система онлайн покупки билетов. Купить билеты, концерт, мероприятия`,
     alternates: {
         canonical: '/',
     },

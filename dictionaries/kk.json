@@ -1,7 +1,20 @@
 {
     "Errors": {
         "ToMain": "Басты бетке",
-        "PageNotFound": "Бет табылмады"
+        "PageNotFound": "Бет табылмады",
+        "PasswordLength": "Құпия сөз 8 таңбадан кем болмауы керек",
+        "NotSamePassword": "Құпия сөздер бірдей емес",
+        "RegistrationError": "Тіркеу кезінде қате!",
+        "LoginError": "Кіру кезінде қате!"
+    },
+    "Auth": {
+        "Enter": "Кіру",
+        "Registration": "Тіркелу",
+        "AlreadyHaveAccount": "Аккаунтыңыз бар ма?",
+        "DontHaveAccount": "Аккаунтыңыз жоқ па?",
+        "ForgotThePassword": "Құпия сөзді ұмытып қалдым",
+        "ConfirmPassword": "Құпия сөзді растау",
+        "Password": "Құпия сөз"
     },
     "Search": {
         "NotFound": "Еш нәрсе табылмады"
@@ -11,14 +24,88 @@
         "Language": "Тіл",
         "Support": "Қолдау қызметі",
         "AllCities": "Барлық қалалар",
-        "City": "Қала"
+        "City": "Қала",
+        "MyProfile": "Менің профилім",
+        "LookingForPromoter": "Жарнамалаушыны іздеймін",
+        "LookingForAdvertiser": "Жарнама берушіні іздеймін",
+        "Nav": {
+            "MyAnnouncements": "Менің хабарландырулар",
+            "Settings": "Баптау",
+            "Reports": "Шағымдар",
+            "Exit": "Шыгу",
+            "Enter": "Кыру"
+        }
     },
     "EventListPage": {
-        "All": "All"
+        "All": "All",
+        "FoundAnnouncement": "Хабарландырулар табылды",
+        "SortButtons": {
+            "SortBy": "Сұрыптау",
+            "SortFirstNewAnnouncements": "Алдымен жаңа",
+            "SortFirstCheapAnnouncements": "Алдымен арзан",
+            "SortFirstExpensiveAnnouncements": "Алдымен қымбат"
+        },
+        "FilterColumn": {
+            "Industry": "Компания саласы",
+            "MethodOfPlacement": "Орналастыру әдісі",
+            "City": "Қала",
+            "Payment": "Төлемі"
+        }
     },
     "EventPage": {
         "AboutDesc": "Іс-шара туралы",
-        "BuyTicket": "Билет сатып алу"
+        "BuyTicket": "Билет сатып алу",
+        "Report": {
+            "Title": "Шағым беру",
+            "Reason": "Шағым себебі",
+            "Description": "Мәселенің сипаттамасы",
+            "DescriptionPlaceholder": "Неліктен шағым бергіңіз келетінін сипаттаңыз",
+            "ContactNumber": "Байланыс үшін телефон нөмірі",
+            "SelectTheReason": "Шағым себебін танданыз",
+            "Error": {
+                "ShortContactNumber": "Нөмір 11 цифрдан тұруы керек!",
+                "ShortDescription": "Кемінде 10 символ!",
+                "NoReason": "Себебін таңдаңыз!"
+            },
+            "Success": {
+                "ReportSend": "Шағым сәтті жіберілді!",
+                "ContactYou": "Біз сізбен мүмкіндігінше тезірек байланысамыз."
+            }
+        },
+        "EventInfo": {
+            "Payment": "Сыйақы",
+            "Description": "Сипаттама",
+            "ShowNumber": "Нөмірді көрсету",
+            "BewareOfScammers": "САҚ БОЛЫҢЫЗ! Алаяқтардан сақтаныңыз"
+        },
+        "EditAnnouncement": "Хабарландыруды өңдеу",
+        "Fields": {
+            "Title": "Тақырып",
+            "TitlePlaceholder": "Мысалы: Фитнес залы үшін TikTok-та 100k қаралым ...",
+            "City": "Қала",
+            "SelectCity": "Қаланы таңдаңыз",
+            "BusinessField": "Өнім/тауар/қызмет категориясы",
+            "SelectBusinessField": "Категорияны таңдаңыз",
+            "AdPlacement": "Орналастыру тәсілі",
+            "SelectAdPlacement": "Орналастыру тәсілін таңдаңыз",
+            "Payment": "Төлем",
+            "PaymentPlaceholder": "Қызмет бағасы",
+            "Descroption": "Сипаттама",
+            "DescroptionPlaceholder": "Сипаттама",
+            "Post": "Жариялау",
+            "SaveChanges": "Өзгерістерді сақтау",
+            "Images": "Суреттер",
+            "AddPhoto": "Сурет қосу"
+        }
+    },
+    "MyAnnouncements": {
+        "Title": "Сіздің жарнамаларыңыз",
+        "AnnouncementStatistics": "Хабарландыру статистикасы",
+        "ForToday": "Бүгінге",
+        "ForAllTime": "Барлығы",
+        "AnnouncementViews": "қаралымдар",
+        "AnnouncementNumberViews": "телефон қаралымдары",
+        "SubmitArhivating": "Жарнамаларды мұрағаттағыңыз келетініне сенімдісіз бе?"
     },
     "Contacts": {
         "ContactsAndDetails": "Байланыстар мен мәліметтер",
@@ -62,5 +149,14 @@
     "SelectionsPage": {
         "MainPage": "Басты бет",
         "SelectionOfEvents": "Оқиғалар таңдауы"
+    },
+    "Common": {
+        "CreateAnnouncement": "Жарнама жасаңыз",
+        "ToArhibve": "Мұрағаттау",
+        "ToPublic": "Жариялау",
+        "ToEdit": "Өңдеу",
+        "Yes": "Иә",
+        "No": "Жоқ",
+        "Created": "Құрылған"
     }
 }

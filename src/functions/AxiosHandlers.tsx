@@ -1,19 +1,19 @@
 'use server';
 
-import { getCookie } from 'cookies-next';
+import { getCookie, setCookie } from 'cookies-next';
 import { cookies } from 'next/headers';
 
 export const GetToken = async () => {
-    const { AUTH_URL = '', NEXT_PUBLIC_CLIENT_ID = '', NEXT_PUBLIC_CLIENT_SECRET = '' } = process.env;
+    const { NEXT_PUBLIC_API_URL = '', NEXT_PUBLIC_CLIENT_ID = '', NEXT_PUBLIC_CLIENT_SECRET = '' } = process.env;
     let token = '';
 
     const AuthData = `client_id=${encodeURIComponent(NEXT_PUBLIC_CLIENT_ID)}&client_secret=${encodeURIComponent(
         NEXT_PUBLIC_CLIENT_SECRET
     )}&grant_type=client_credentials&scope=MarketPlace`;
 
-    await fetch(`${AUTH_URL}/token`, {
+    await fetch(`${NEXT_PUBLIC_API_URL}`, {
         method: 'POST',
-        body: AuthData,
+        // body: AuthData,
         headers: {
             Accept: '*/*',
             'Content-Type': 'application/x-www-form-urlencoded',
@@ -21,8 +21,8 @@ export const GetToken = async () => {
     })
         .then((res) => res.json())
         .then((json) => {
-            // cookies().set({ name: 'token', value: json.access_token, maxAge: 60 * 60 * 24 * 365 });
-            // setCookie('token', json.access_token, { cookies, maxAge: 60 * 60 * 24 * 365 });
+            console.log('json: ', json);
+            setCookie('accessToken', json.access_token, { cookies, maxAge: 60 * 60 * 24 * 365 });
             token = json.access_token;
         });
 
@@ -30,11 +30,11 @@ export const GetToken = async () => {
 };
 
 export const CheckToken = async () => {
-    const { AUTH_URL = '' } = process.env;
+    const { API_URL = '' } = process.env;
 
-    let token = getCookie('token', { cookies });
+    let token = getCookie('accessToken', { cookies });
 
-    await fetch(`${AUTH_URL}/userinfo`, {
+    await fetch(`${API_URL}/userinfo`, {
         method: 'GET',
         headers: {
             Authorization: `Bearer ${token}`,

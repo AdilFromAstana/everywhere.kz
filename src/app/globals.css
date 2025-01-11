@@ -127,7 +127,7 @@ html.dark #right-arrow .scroll-arrow {
 #right-arrow::before {
     height: 100%;
     width: 25px;
-    content: "";
+    content: '';
     background: linear-gradient(to left, #fff 20%, rgba(255, 255, 255, 0) 80%);
 }
 
@@ -135,7 +135,7 @@ html.dark #right-arrow .scroll-arrow {
     z-index: 1;
     height: 100%;
     width: 25px;
-    content: "";
+    content: '';
     background: linear-gradient(to right, #fff 20%, rgba(255, 255, 255, 0) 80%);
 }
 
@@ -174,7 +174,7 @@ html.dark #left-arrow::after {
 
 .items-wrap:before,
 .items-wrap:after {
-    content: "";
+    content: '';
     height: 100%;
     top: 0;
     width: 10%;
@@ -265,7 +265,7 @@ html.dark #left-arrow::after {
 svg.ProgressedButton {
     --progress: 0;
     z-index: 10;
-    stroke-width: 22px;
+    strokewidth: 22px;
     stroke: #0490c3;
     fill: none;
     stroke-dashoffset: calc(660 * (1 - var(--progress)));
@@ -280,4 +280,58 @@ svg.ProgressedButton path.Arrow {
 .SwiperRecs .swiper-slide a,
 .SwiperCategory .swiper-slide a {
     pointer-events: all !important;
+}
+
+input[type='number']::-webkit-outer-spin-button,
+input[type='number']::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type='number'] {
+    -moz-appearance: textfield; /* Firefox */
+}
+
+.relative {
+    position: relative;
+}
+
+.dragging {
+    opacity: 0.5; /* Пример стиля для понижения неперетаскиваемых элементов */
+}
+
+.dragged-over {
+    transform: translateY(-10px); /* Пример стиля для анимации перемещения */
+    transition: transform 0.3s ease; /* Пример анимации с использованием transition */
+}
+
+.dragging {
+    cursor: move; /* Установка курсора при перетаскивании */
+}
+
+.spinner {
+    border: 4px solid rgba(255, 255, 255, 0.3);
+    border-left-color: #fff;
+    border-radius: 50%;
+    width: 16px;
+    height: 16px;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.scrollbar-hide {
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+}
+.scrollbar-hide::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, and Opera */
+}
+
+textarea {
+    resize: none;
 }
