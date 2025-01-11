@@ -166,7 +166,7 @@ const MyAnnouncementList: React.FC<any> = ({ locale }) => {
                 throw new Error(`Failed to fetch data. Status: ${res.status}`);
             }
 
-            const data = await res.json();
+            await res.json();
         } catch (error) {
             console.error(`Error while taking data:`, error);
             return [];

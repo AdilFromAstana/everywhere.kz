@@ -26,10 +26,6 @@ async function GetEmployeesData() {
     return res.json();
 }
 
-type Props = {
-    params: { id: string };
-};
-
 export default async function EmployeesPage() {
     const data = await GetEmployeesData();
 

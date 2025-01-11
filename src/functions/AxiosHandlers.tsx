@@ -4,7 +4,7 @@ import { getCookie, setCookie } from 'cookies-next';
 import { cookies } from 'next/headers';
 
 export const GetToken = async () => {
-    const { NEXT_PUBLIC_API_URL = '', NEXT_PUBLIC_CLIENT_ID = '', NEXT_PUBLIC_CLIENT_SECRET = '' } = process.env;
+    const { NEXT_PUBLIC_API_URL = '' } = process.env;
     let token = '';
 
     await fetch(`${NEXT_PUBLIC_API_URL}`, {

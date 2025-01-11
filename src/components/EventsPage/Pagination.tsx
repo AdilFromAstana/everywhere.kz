@@ -8,11 +8,9 @@ interface PaginationComponentProps {
 }
 
 const Pagination: React.FC<PaginationComponentProps> = ({
-    setAvailablePages,
     availablePages,
     setCurrentPage,
     currentPage,
-    setPagesCount,
     pagesCount,
 }) => {
     const changePage = (page: number) => {

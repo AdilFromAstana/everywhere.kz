@@ -5,18 +5,18 @@ import { useState } from 'react';
 import ChatList from './components/ChatList';
 import ChatWindow from './components/ChatWindow';
 
-interface Contact {
-    id: number;
-    name: string;
-}
+// interface Contact {
+//     id: number;
+//     name: string;
+// }
 
-interface Message {
-    id: number;
-    text: string;
-    sender: string;
-    timestamp: number; // Добавляем поле timestamp для хранения времени сообщения
-    read: boolean; // Добавляем поле read для отображения статуса прочтения
-}
+// interface Message {
+//     id: number;
+//     text: string;
+//     sender: string;
+//     timestamp: number; // Добавляем поле timestamp для хранения времени сообщения
+//     read: boolean; // Добавляем поле read для отображения статуса прочтения
+// }
 
 // const contacts: Contact[] = [
 //     { id: 1, name: 'Контакт 1' },

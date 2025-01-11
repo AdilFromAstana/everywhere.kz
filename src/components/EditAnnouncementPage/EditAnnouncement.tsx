@@ -137,7 +137,7 @@ const EditAnnouncement: React.FC<EditAnnouncementProps> = ({
                 formData.append(key, requestData[key]);
             }
         }
-        images.forEach((image: any, index: any) => {
+        images.forEach((image: any) => {
             if (image.file) {
                 formData.append('image', image.file);
             }
@@ -168,6 +168,10 @@ const EditAnnouncement: React.FC<EditAnnouncementProps> = ({
             setIsLoading(false);
         }
     };
+
+    useEffect(() => {
+        setAnnouncementTypeCode(announcement?.announcementTypeCode);
+    }, [announcement]);
 
     return (
         <div className="flex flex-col">
