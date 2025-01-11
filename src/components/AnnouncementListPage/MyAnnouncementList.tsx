@@ -10,7 +10,7 @@ import { IMyAnnouncement } from '@/interfaces/Announcement';
 import ConfirmModal from './ConfirmModal';
 import MyAnnouncementItem from './MyAnnouncementItem';
 
-const MyAnnouncementList: React.FC<any> = ({ locale, lookingFor }) => {
+const MyAnnouncementList: React.FC<any> = ({ locale }) => {
     const [announcements, setAnnouncements] = useState<IMyAnnouncement[]>([]);
     const [selectedAnnouncement, setSelectedAnnouncement] = useState<any>({});
     const [statuses, setStatuses] = useState<any[]>([]);
@@ -97,7 +97,7 @@ const MyAnnouncementList: React.FC<any> = ({ locale, lookingFor }) => {
     };
 
     const createStatusArray = (announcementList: any[]) => {
-        let statusList: any[] = [];
+        const statusList: any[] = [];
         announcementList.forEach((announcement, i) => {
             if (i === 0) setSelectedStatusCode(announcement.AnnouncementStatus.code);
             const status = statusList?.find((s) => s?.code === announcement?.statusCode);
@@ -192,8 +192,7 @@ const MyAnnouncementList: React.FC<any> = ({ locale, lookingFor }) => {
             if (!res.ok) {
                 throw new Error(`Failed to fetch data. Status: ${res.status}`);
             }
-
-            const data = await res.json();
+            await res.json();
         } catch (error) {
             console.error(`Error while taking data:`, error);
             return [];

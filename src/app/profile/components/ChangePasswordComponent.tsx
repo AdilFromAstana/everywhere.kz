@@ -1,7 +1,6 @@
 'use client';
 
 import { getCookie } from 'cookies-next';
-import { cookies } from 'next/headers';
 import React, { Dispatch, SetStateAction, useState } from 'react';
 
 interface PasswordToggleProps {

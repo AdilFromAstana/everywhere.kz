@@ -116,7 +116,7 @@ const CreateAnnouncement: React.FC<CreateAnnouncementProps> = ({
                 formData.append(key, requestData[key]);
             }
         }
-        images.forEach((image: any, index: any) => {
+        images.forEach((image: any) => {
             formData.append('image', image.file);
         });
 

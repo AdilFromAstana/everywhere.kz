@@ -15,7 +15,7 @@ interface AnnouncementItemComponentProps {
     userLang: any;
 }
 
-const AnnouncementItem: React.FC<AnnouncementItemComponentProps> = ({ announcement, locale, lookingFor }) => {
+const AnnouncementItem: React.FC<AnnouncementItemComponentProps> = ({ announcement, locale }) => {
     const image = announcement.AnnouncementImages[0]?.imageUrl ?? notFoundImage.src;
     return (
         <Link

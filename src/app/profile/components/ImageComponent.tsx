@@ -20,7 +20,7 @@ const ImageComponent: React.FC<UploadImageComponentProps> = ({ imageUrl }) => {
             setSelectedFile(file);
             const fileUrl = URL.createObjectURL(file);
             setImageData(fileUrl);
-            setHovered(false)
+            setHovered(false);
         }
     };
 

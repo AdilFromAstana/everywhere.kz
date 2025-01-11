@@ -31,7 +31,6 @@ interface EditAnnouncementProps {
 }
 
 const EditAnnouncement: React.FC<EditAnnouncementProps> = ({
-    announcementTypes,
     cities,
     businessFields,
     adPlacements,
@@ -41,7 +40,6 @@ const EditAnnouncement: React.FC<EditAnnouncementProps> = ({
     accessToken,
 }) => {
     const { id } = useParams();
-    const [userId, setUserId] = useState(null);
     const [images, setImages] = useState<ImageFile[]>(announcement?.AnnouncementImages ?? []);
     const [title, setTitle] = useState(announcement?.title);
     const [modalText, setModalText] = useState('');
@@ -159,7 +157,7 @@ const EditAnnouncement: React.FC<EditAnnouncementProps> = ({
                 throw new Error(`Failed to fetch data. Status: ${res.status}`);
             }
 
-            const data = await res.json();
+            await res.json();
             setModalText('Данные успешно обновлены!');
             setIsModalVisible(true);
             document.documentElement.classList.toggle('overflow-hidden', true);

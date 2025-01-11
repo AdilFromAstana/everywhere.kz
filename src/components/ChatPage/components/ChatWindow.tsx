@@ -24,14 +24,14 @@ const ChatWindow: React.FC<{
     const [newMessage, setNewMessage] = useState('');
     const [messages, setMessages] = useState<Message[]>([]);
     const [loading, setLoading] = useState(false);
-    const [hasMore, setHasMore] = useState(true);
+    // const [hasMore, setHasMore] = useState(true);
     const [page, setPage] = useState(1);
     const messagesEndRef = useRef<HTMLDivElement | null>(null);
     const messagesContainerRef = useRef<HTMLDivElement | null>(null);
     const accessToken = getCookie('accessToken');
     const decodedToken: any = accessToken ? jwtDecode(accessToken) : null;
 
-    const fetchMessages = async (page: number) => {
+    const fetchMessages = async () => {
         setLoading(true);
         try {
             const response = await fetch(
@@ -56,13 +56,13 @@ const ChatWindow: React.FC<{
 
     useEffect(() => {
         if (!isNewChat && selectedChatId) {
-            fetchMessages(page);
+            fetchMessages();
         }
     }, [selectedChatId, isNewChat, page]);
 
     const handleScroll = () => {
         if (messagesContainerRef.current) {
-            if (messagesContainerRef.current.scrollTop === 0 && hasMore && !loading) {
+            if (messagesContainerRef.current.scrollTop === 0 && !loading) {
                 setPage((prevPage) => prevPage + 1);
             }
         }

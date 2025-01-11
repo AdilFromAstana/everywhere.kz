@@ -113,7 +113,7 @@ const MobileSearchFilter: React.FC<MobileSearchFilterComponentProps> = ({
             </div>
         ) : (
             <div className="flex flex-col gap-4">
-                <div className='block md:hidden'>
+                <div className="block md:hidden">
                     <div className="text-lg font-bold mb-2 dark:text-white text-black">
                         {locale.EventListPage.SortButtons.SortBy}
                     </div>

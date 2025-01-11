@@ -2,11 +2,6 @@
 
 import moment from 'moment';
 import { useEffect, useState } from 'react';
-import ReactQuill from 'react-quill';
-
-type ImageFile = File & {
-    preview: string;
-};
 
 const fetchData = async (url: any) => {
     try {
@@ -47,7 +42,7 @@ const ConfirmAnnouncement = () => {
             <div className="flex flex-col gap-4">
                 {announcements.map((announcement) => {
                     return (
-                        <div className="border-y-2 p-4">
+                        <div className="border-y-2 p-4" key={announcement.id}>
                             <h2 className="text-xl">{announcement.title}</h2>
                             <div>{moment(announcement.createdAt).calendar()}</div>
                         </div>

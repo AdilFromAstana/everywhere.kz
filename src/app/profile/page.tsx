@@ -29,10 +29,6 @@ async function GetProfileData() {
     return res.json();
 }
 
-type Props = {
-    params: { id: string };
-};
-
 export default async function ProfilePage() {
     const data = await GetProfileData();
 

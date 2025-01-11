@@ -7,10 +7,6 @@ export const GetToken = async () => {
     const { NEXT_PUBLIC_API_URL = '', NEXT_PUBLIC_CLIENT_ID = '', NEXT_PUBLIC_CLIENT_SECRET = '' } = process.env;
     let token = '';
 
-    const AuthData = `client_id=${encodeURIComponent(NEXT_PUBLIC_CLIENT_ID)}&client_secret=${encodeURIComponent(
-        NEXT_PUBLIC_CLIENT_SECRET
-    )}&grant_type=client_credentials&scope=MarketPlace`;
-
     await fetch(`${NEXT_PUBLIC_API_URL}`, {
         method: 'POST',
         // body: AuthData,

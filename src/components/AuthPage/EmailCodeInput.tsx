@@ -1,4 +1,4 @@
-import { ChangeEvent, KeyboardEvent, useRef, useState } from 'react';
+import { ChangeEvent, KeyboardEvent } from 'react';
 
 import './style.css'; // Подключаем файл стилей
 

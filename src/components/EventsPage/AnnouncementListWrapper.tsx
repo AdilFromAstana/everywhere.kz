@@ -68,7 +68,7 @@ const AnnouncementListWrapper: React.FC<AnnouncementListWrapperProps> = ({ looki
         let api = process.env.NEXT_PUBLIC_EVENTS_URL + 'announcements/getAll';
         const params = new URLSearchParams();
         params.append('announcementTypeCode', lookingFor);
-        let pFitlers: {
+        const pFitlers: {
             selectedAdPlacements: string[];
             selectedBusinessFields: string[];
             selectedCities: string[];

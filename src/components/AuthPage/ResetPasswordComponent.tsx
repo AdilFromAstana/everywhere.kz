@@ -1,6 +1,4 @@
-import { Dispatch, SetStateAction, useEffect, useState } from 'react';
-
-import EmailCodeInput from './EmailCodeInput';
+import { Dispatch, SetStateAction, useState } from 'react';
 
 interface ResetPasswordComponentProps {
     setIsLogin: Dispatch<SetStateAction<boolean>>;

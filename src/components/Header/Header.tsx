@@ -1,7 +1,7 @@
 'use client';
 
-import { Dialog, Popover, Transition } from '@headlessui/react';
-import { ChevronDownIcon, MapPinIcon, MoonIcon, SunIcon, UserCircleIcon } from '@heroicons/react/24/outline';
+import { Popover, Transition } from '@headlessui/react';
+import { ChevronDownIcon, MapPinIcon, UserCircleIcon } from '@heroicons/react/24/outline';
 import { getCookie, setCookie } from 'cookies-next';
 import Image from 'next/image';
 import Link from 'next/link';

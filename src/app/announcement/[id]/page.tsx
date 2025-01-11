@@ -8,7 +8,6 @@ import { cookies } from 'next/headers';
 import Image from 'next/image';
 import Link from 'next/link';
 import Script from 'next/script';
-import { Service, WithContext } from 'schema-dts';
 
 import DescriptionComponent from '@/components/DescriptionConponent';
 import { ViewContactPhoneButton } from '@/components/EventsPage/ViewContactPhoneButton';

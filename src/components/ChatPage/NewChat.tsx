@@ -5,24 +5,24 @@ import { useEffect, useState } from 'react';
 
 import ChatWindow from './components/ChatWindow';
 
-interface Contact {
-    id: number;
-    name: string;
-}
+// interface Contact {
+//     id: number;
+//     name: string;
+// }
 
-interface Message {
-    id: number;
-    text: string;
-    sender: string;
-    timestamp: number;
-    read: boolean;
-}
+// interface Message {
+//     id: number;
+//     text: string;
+//     sender: string;
+//     timestamp: number;
+//     read: boolean;
+// }
 
-const contacts: Contact[] = [
-    { id: 1, name: 'Контакт 1' },
-    { id: 2, name: 'Контакт 2' },
-    { id: 3, name: 'Контакт 3' },
-];
+// const contacts: Contact[] = [
+//     { id: 1, name: 'Контакт 1' },
+//     { id: 2, name: 'Контакт 2' },
+//     { id: 3, name: 'Контакт 3' },
+// ];
 
 const fetchData = async (url: any) => {
     try {

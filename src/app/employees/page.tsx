@@ -30,7 +30,7 @@ type Props = {
     params: { id: string };
 };
 
-export default async function EmployeesPage({ params }: Props) {
+export default async function EmployeesPage() {
     const data = await GetEmployeesData();
 
     return (
